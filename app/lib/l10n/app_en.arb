@@ -12,5 +12,18 @@
   "timeZoneLabel": "IST",
   "sampleWatermark": "নমুনা · SAMPLE",
   "languageSetting": "Language",
-  "comingSoon": "Coming soon"
+  "comingSoon": "Coming soon",
+  "labelNakshatra": "Nakshatra",
+  "labelYoga": "Yoga",
+  "labelKarana": "Karana",
+  "labelSunrise": "Sunrise",
+  "labelSunset": "Sunset",
+  "labelMoonrise": "Moonrise",
+  "labelMoonset": "Moonset",
+  "timeNone": "None",
+  "todayDataMissing": "Today's data isn't available",
+  "retry": "Try again",
+  "provenance": "{tradition} · {city} · {timeZone}",
+  "tithiSealSemantics": "Tithi {tithi}, {until}, {then}",
+  "nameWithUntil": "{name} · {until}"
 }

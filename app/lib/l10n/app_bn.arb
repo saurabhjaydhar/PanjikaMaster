@@ -79,5 +79,95 @@
   "comingSoon": "শীঘ্রই আসছে",
   "@comingSoon": {
     "description": "Placeholder body for a tab whose screen is not built yet (Phase 1 only)."
+  },
+  "labelNakshatra": "নক্ষত্র",
+  "@labelNakshatra": {
+    "description": "Row label on Today/Day: the lunar mansion (nakshatra)."
+  },
+  "labelYoga": "যোগ",
+  "@labelYoga": {
+    "description": "Row label: the yoga (sum of Sun and Moon longitudes)."
+  },
+  "labelKarana": "করণ",
+  "@labelKarana": {
+    "description": "Row label: the karana (half-tithi)."
+  },
+  "labelSunrise": "সূর্যোদয়",
+  "@labelSunrise": {
+    "description": "Timing strip label: sunrise for the selected city."
+  },
+  "labelSunset": "সূর্যাস্ত",
+  "@labelSunset": {
+    "description": "Timing strip label: sunset."
+  },
+  "labelMoonrise": "চন্দ্রোদয়",
+  "@labelMoonrise": {
+    "description": "Timing strip label: moonrise."
+  },
+  "labelMoonset": "চন্দ্রাস্ত",
+  "@labelMoonset": {
+    "description": "Timing strip label: moonset."
+  },
+  "timeNone": "নেই",
+  "@timeNone": {
+    "description": "Shown instead of a time when there is no moonrise/moonset that day (spec §16)."
+  },
+  "todayDataMissing": "আজকের তথ্য পাওয়া যায়নি",
+  "@todayDataMissing": {
+    "description": "Shown on Today when no data covers today (US-01). Never show numbers in this state."
+  },
+  "retry": "আবার চেষ্টা করুন",
+  "@retry": {
+    "description": "Button: try loading the data again."
+  },
+  "provenance": "{tradition} · {city} · {timeZone}",
+  "@provenance": {
+    "description": "Footer on every date screen (spec §6.8, FR-DAY-04).",
+    "placeholders": {
+      "tradition": {
+        "type": "String",
+        "example": "দৃক (বিশুদ্ধ)"
+      },
+      "city": {
+        "type": "String",
+        "example": "কলকাতা"
+      },
+      "timeZone": {
+        "type": "String",
+        "example": "IST"
+      }
+    }
+  },
+  "tithiSealSemantics": "তিথি {tithi}, {until}, {then}",
+  "@tithiSealSemantics": {
+    "description": "Screen-reader sentence for the tithi seal (spec §13.7).",
+    "placeholders": {
+      "tithi": {
+        "type": "String",
+        "example": "শুক্লা সপ্তমী"
+      },
+      "until": {
+        "type": "String",
+        "example": "দুপুর ২:৩২ পর্যন্ত"
+      },
+      "then": {
+        "type": "String",
+        "example": "তারপর অষ্টমী"
+      }
+    }
+  },
+  "nameWithUntil": "{name} · {until}",
+  "@nameWithUntil": {
+    "description": "A name followed by how long it lasts, e.g. 'মূলা · বিকেল ৪:১০ পর্যন্ত'.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "মূলা"
+      },
+      "until": {
+        "type": "String",
+        "example": "বিকেল ৪:১০ পর্যন্ত"
+      }
+    }
   }
 }

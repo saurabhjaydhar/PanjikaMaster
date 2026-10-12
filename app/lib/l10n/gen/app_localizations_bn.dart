@@ -62,4 +62,49 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get comingSoon => 'শীঘ্রই আসছে';
+
+  @override
+  String get labelNakshatra => 'নক্ষত্র';
+
+  @override
+  String get labelYoga => 'যোগ';
+
+  @override
+  String get labelKarana => 'করণ';
+
+  @override
+  String get labelSunrise => 'সূর্যোদয়';
+
+  @override
+  String get labelSunset => 'সূর্যাস্ত';
+
+  @override
+  String get labelMoonrise => 'চন্দ্রোদয়';
+
+  @override
+  String get labelMoonset => 'চন্দ্রাস্ত';
+
+  @override
+  String get timeNone => 'নেই';
+
+  @override
+  String get todayDataMissing => 'আজকের তথ্য পাওয়া যায়নি';
+
+  @override
+  String get retry => 'আবার চেষ্টা করুন';
+
+  @override
+  String provenance(String tradition, String city, String timeZone) {
+    return '$tradition · $city · $timeZone';
+  }
+
+  @override
+  String tithiSealSemantics(String tithi, String until, String then) {
+    return 'তিথি $tithi, $until, $then';
+  }
+
+  @override
+  String nameWithUntil(String name, String until) {
+    return '$name · $until';
+  }
 }

@@ -175,6 +175,84 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'শীঘ্রই আসছে'**
   String get comingSoon;
+
+  /// Row label on Today/Day: the lunar mansion (nakshatra).
+  ///
+  /// In bn, this message translates to:
+  /// **'নক্ষত্র'**
+  String get labelNakshatra;
+
+  /// Row label: the yoga (sum of Sun and Moon longitudes).
+  ///
+  /// In bn, this message translates to:
+  /// **'যোগ'**
+  String get labelYoga;
+
+  /// Row label: the karana (half-tithi).
+  ///
+  /// In bn, this message translates to:
+  /// **'করণ'**
+  String get labelKarana;
+
+  /// Timing strip label: sunrise for the selected city.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয়'**
+  String get labelSunrise;
+
+  /// Timing strip label: sunset.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যাস্ত'**
+  String get labelSunset;
+
+  /// Timing strip label: moonrise.
+  ///
+  /// In bn, this message translates to:
+  /// **'চন্দ্রোদয়'**
+  String get labelMoonrise;
+
+  /// Timing strip label: moonset.
+  ///
+  /// In bn, this message translates to:
+  /// **'চন্দ্রাস্ত'**
+  String get labelMoonset;
+
+  /// Shown instead of a time when there is no moonrise/moonset that day (spec §16).
+  ///
+  /// In bn, this message translates to:
+  /// **'নেই'**
+  String get timeNone;
+
+  /// Shown on Today when no data covers today (US-01). Never show numbers in this state.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজকের তথ্য পাওয়া যায়নি'**
+  String get todayDataMissing;
+
+  /// Button: try loading the data again.
+  ///
+  /// In bn, this message translates to:
+  /// **'আবার চেষ্টা করুন'**
+  String get retry;
+
+  /// Footer on every date screen (spec §6.8, FR-DAY-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} · {city} · {timeZone}'**
+  String provenance(String tradition, String city, String timeZone);
+
+  /// Screen-reader sentence for the tithi seal (spec §13.7).
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি {tithi}, {until}, {then}'**
+  String tithiSealSemantics(String tithi, String until, String then);
+
+  /// A name followed by how long it lasts, e.g. 'মূলা · বিকেল ৪:১০ পর্যন্ত'.
+  ///
+  /// In bn, this message translates to:
+  /// **'{name} · {until}'**
+  String nameWithUntil(String name, String until);
 }
 
 class _AppLocalizationsDelegate

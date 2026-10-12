@@ -4,7 +4,8 @@
 1. app_bn.arb (source) and app_en.arb have identical message keys.
 2. Every message uses the same placeholders in both languages.
 3. Every source message has an @description; no message is empty.
-4. No English message is identical to its Bengali one, unless whitelisted.
+4. No English message is identical to its Bengali one, unless whitelisted or it has no
+   words at all (a pure layout pattern such as '{name} · {until}').
 5. No hard-coded UI strings in Dart widgets (Text('...'), label: '...', …).
    A deliberate exception is marked with `// l10n-ok: <reason>` on that line.
 """
@@ -32,6 +33,11 @@ LITERAL_PATTERNS = [
 ]
 
 
+def has_words(message: str) -> bool:
+    """False for pure layout patterns like '{name} · {until}' (nothing to translate)."""
+    return any(ch.isalpha() for ch in re.sub(r"\{[^{}]*\}", "", message))
+
+
 def messages(path: Path) -> dict[str, str]:
     data = json.loads(path.read_text(encoding="utf-8"))
     return {k: v for k, v in data.items() if not k.startswith("@")}
@@ -51,7 +57,7 @@ def check_arb() -> list[str]:
             errors.append(f"placeholders differ for {key}: {bn[key]!r} vs {en[key]!r}")
         if not bn_raw.get(f"@{key}", {}).get("description"):
             errors.append(f"no @description in app_bn.arb: {key}")
-        if bn[key] == en[key] and key not in SAME_IN_BOTH:
+        if bn[key] == en[key] and key not in SAME_IN_BOTH and has_words(bn[key]):
             errors.append(f"English copy identical to Bengali (untranslated?): {key}")
     return errors
 

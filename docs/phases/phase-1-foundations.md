@@ -26,7 +26,7 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-111 ✅ | App shell: go_router, 4-tab bottom navigation with labels in both languages (placeholder screens for Calendar, Festivals, More), system text scaling respected | Navigation works; tabs labelled; back handled with `PopScope` |
-| T-112 | Basic Today: date header, tithi, nakshatra/yoga/karana rows, sunrise/sunset, provenance footer, from the sample pack; `SampleWatermark` | Golden bn/en × light/dark; no hard-coded strings |
+| T-112 ✅ | Basic Today: date header, tithi, nakshatra/yoga/karana rows, sunrise/sunset, provenance footer, from the sample pack; `SampleWatermark` | Golden bn/en × light/dark; no hard-coded strings |
 
 ### DevOps (CI/CD, builds)
 | ID | Task | Done when |

@@ -62,4 +62,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comingSoon => 'Coming soon';
+
+  @override
+  String get labelNakshatra => 'Nakshatra';
+
+  @override
+  String get labelYoga => 'Yoga';
+
+  @override
+  String get labelKarana => 'Karana';
+
+  @override
+  String get labelSunrise => 'Sunrise';
+
+  @override
+  String get labelSunset => 'Sunset';
+
+  @override
+  String get labelMoonrise => 'Moonrise';
+
+  @override
+  String get labelMoonset => 'Moonset';
+
+  @override
+  String get timeNone => 'None';
+
+  @override
+  String get todayDataMissing => 'Today\'s data isn\'t available';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String provenance(String tradition, String city, String timeZone) {
+    return '$tradition · $city · $timeZone';
+  }
+
+  @override
+  String tithiSealSemantics(String tithi, String until, String then) {
+    return 'Tithi $tithi, $until, $then';
+  }
+
+  @override
+  String nameWithUntil(String name, String until) {
+    return '$name · $until';
+  }
 }
