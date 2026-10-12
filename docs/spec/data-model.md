@@ -6,8 +6,11 @@
 
 ### 15.1 Drift tables (device)
 
+The executable version of the pack tables is `data/pack/schema.sql` (STRICT tables, foreign keys and CHECK constraints for index ranges, statuses and both-language text). If this sketch and `schema.sql` ever disagree, `schema.sql` wins and this section is fixed.
+
 ```
 packs(id TEXT PK, tradition TEXT, kind TEXT,           -- 'global' | 'cities' | 'observances'
+      is_sample INT,                                    -- 1 = fixture pack (debug/test only, §6.8)
       covers_from DATE, covers_to DATE, version INT,
       generated_at DATETIME, engine_version TEXT, ephemeris_sha256 TEXT,
       validation_summary TEXT, installed_at DATETIME, sha256 TEXT)
@@ -58,7 +61,8 @@ observance_windows(observance_id TEXT, tradition TEXT, date DATE,
 period_rules(tradition TEXT, name_idx INT,              -- names(kind='period')
              kind TEXT,                                 -- shubh|ashubh
              weekday INT, basis TEXT,                   -- day|night
-             divisions INT, part INT, enabled INT, pack_id TEXT)
+             divisions INT, part INT, enabled INT, pack_id TEXT,
+             PRIMARY KEY(tradition, name_idx, weekday, basis))   -- part is 1-based, as in §6.5.8
 
 reminders(id INT PK, target_kind TEXT, target_id TEXT, offset_minutes INT,
           time_of_day TEXT NULL, enabled INT, created_at DATETIME)

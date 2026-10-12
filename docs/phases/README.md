@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101, T-114 done)
+**Current phase: 1 — Foundations** (T-101, T-102, T-114 done)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -55,3 +55,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | Docs v2.0: PRD slimmed, details moved to `docs/spec/`, build plan reorganised into phases. |
 | 2026-10-12 | T-101 done: `data/` scaffold (Python 3.12 via uv, ruff, pytest, hypothesis), `ci-data.yml`. Checks green. |
 | 2026-10-12 | Phases expanded to every track (frontend, app core, backend, DevOps, design & content, QA, human gates) and Phase 8 added: 117 tasks. T-114 done: `scripts/check_docs.py` + `ci-docs.yml`; all FR/US requirements mapped. |
+| 2026-10-12 | T-102 done: `data/pack/schema.sql` (STRICT tables, FKs, CHECKs for index ranges, statuses, both languages; `packs.is_sample`; PK on `period_rules`) + `pack/schema.py`; 25 schema tests. |

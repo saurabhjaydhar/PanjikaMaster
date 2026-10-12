@@ -8,7 +8,7 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-101 ✅ | Scaffold Python project (3.12, uv, ruff, pytest, hypothesis) | `ruff check`, `pytest` green |
-| T-102 | `data/pack/schema.sql`: the single schema from §15.1 | A test creates an empty DB from it; every non-user table has `pack_id` |
+| T-102 ✅ | `data/pack/schema.sql`: the single schema from §15.1 | A test creates an empty DB from it; every non-user table has `pack_id` |
 | T-103 | Sample-pack generator: a few months of fixture rows, all `status = sample`, names in both languages, `packs.kind` marked sample | Test asserts every row is `sample`; generator refuses release mode |
 
 ### App core (state, data, platform)
