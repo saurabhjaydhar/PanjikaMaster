@@ -3,9 +3,9 @@ name: ci-app
 on:
   push:
     branches: [main]
-    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", ".github/workflows/ci-app.yml"]
+    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", "scripts/check_l10n.py", ".github/workflows/ci-app.yml"]
   pull_request:
-    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", ".github/workflows/ci-app.yml"]
+    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", "scripts/check_l10n.py", ".github/workflows/ci-app.yml"]
 
 permissions:
   contents: read
@@ -34,6 +34,8 @@ jobs:
           dart run build_runner build
           git diff --exit-code -- lib/
       - run: dart format --output=none --set-exit-if-changed lib test
+      # Both languages complete and no hard-coded UI strings (spec §13.5).
+      - run: python3 ../scripts/check_l10n.py
       - run: flutter analyze
       - run: flutter test
       - run: flutter build apk --release

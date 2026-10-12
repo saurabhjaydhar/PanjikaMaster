@@ -16,6 +16,11 @@ android {
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
+    // Only Bengali and English resources ship (FR-L10N-03 lists only these two).
+    androidResources {
+        localeFilters += listOf("en", "bn")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

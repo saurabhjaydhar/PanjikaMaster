@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101–T-103, T-105, T-106, T-114 done; T-104 built, launch check pending)
+**Current phase: 1 — Foundations** (T-101–T-103, T-105–T-107, T-114 done; T-113 awaiting first CI run; T-104 built, launch check pending)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -61,3 +61,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | T-105 done: flutter_riverpod 3.4.3, drift 2.35.2 + drift_flutter 0.3.1, go_router 18.0.2, flutter_localizations, intl; dev: drift_dev, build_runner. `sqlite3_flutter_libs` is end-of-life, replaced by `sqlite3` 3.x via drift_flutter. 98 transitive packages licence-checked, no GPL/AGPL. |
 | 2026-10-12 | T-106 done: Drift `AppDatabase` with pack tables generated from `schema.sql` (`scripts/sync_drift_schema.py`, `--check` in `ci-data.yml`), device tables, named queries for Today, migration strategy, foreign keys on. 16 tests incl. per-table parity with `schema.sql` (columns, types, keys, FKs, indexes, STRICT). `libsqlite3.so` confirmed in the release APK for all ABIs. |
 | 2026-10-12 | T-113 (pending first CI run): `ci-app.yml` runs generated-code freshness, `dart format`, `flutter analyze`, `flutter test`, release APK build and `scripts/check_release_bundle.sh` (fails if the sample marker is anywhere in the APK; tested both ways). CI jobs renamed `app`/`data`/`docs`. |
+| 2026-10-12 | T-107 done: gen-l10n with `app_bn.arb` (source) + `app_en.arb`; `PanjikaFormatter` (IST times with Bengali day parts, ranges, dates, Indian grouping, numerals independent of language, Q5 ordinal flag); language controller with device default (Q15 fallback, primary locale only), instant switching, two-way Android 13+ per-app language sync (Kotlin channel, `locales_config.xml`); only bn/en resources ship. `scripts/check_l10n.py` in `ci-app.yml` (ARB parity, placeholders, descriptions, untranslated copies, hard-coded strings; negative-tested). 28 new tests (46 total). Per-app sync verified with a mocked channel only; on-device check comes with T-115. |

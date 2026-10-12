@@ -1,0 +1,45 @@
+{
+  "@@locale": "bn",
+
+  "appTitle": "বাংলা পঞ্জিকা",
+  "@appTitle": {"description": "App name in the task switcher and app bar. Placeholder until Q11."},
+
+  "navToday": "আজ",
+  "@navToday": {"description": "Bottom navigation tab: today's panjika. Max ~8 characters."},
+  "navCalendar": "পঞ্জিকা",
+  "@navCalendar": {"description": "Bottom navigation tab: month calendar. Max ~8 characters."},
+  "navFestivals": "পার্বণ",
+  "@navFestivals": {"description": "Bottom navigation tab: festival list. Max ~8 characters."},
+  "navMore": "আরও",
+  "@navMore": {"description": "Bottom navigation tab: more options. Max ~8 characters."},
+
+  "untilTime": "{time} পর্যন্ত",
+  "@untilTime": {
+    "description": "How long a tithi/nakshatra/period lasts, e.g. 'দুপুর ২:৩২ পর্যন্ত'. The time is already formatted.",
+    "placeholders": {"time": {"type": "String", "example": "দুপুর ২:৩২"}}
+  },
+  "thenName": "তারপর {name}",
+  "@thenName": {
+    "description": "The next tithi after the current one ends, e.g. 'তারপর অষ্টমী'.",
+    "placeholders": {"name": {"type": "String", "example": "অষ্টমী"}}
+  },
+  "nextDayTime": "{time} (পরদিন)",
+  "@nextDayTime": {
+    "description": "A time after midnight that still belongs to this panjika day (spec §12.4).",
+    "placeholders": {"time": {"type": "String", "example": "রাত ১:১০"}}
+  },
+  "countdownDays": "{count, plural, =0{আজ} =1{আগামীকাল} other{{countText} দিন বাকি}}",
+  "@countdownDays": {
+    "description": "Days until an observance. count picks the form; countText is count formatted with the user's numerals.",
+    "placeholders": {
+      "count": {"type": "int", "example": "3"},
+      "countText": {"type": "String", "example": "৩"}
+    }
+  },
+  "timeZoneLabel": "IST",
+  "@timeZoneLabel": {"description": "Label shown with every panjika time (Indian Standard Time). Same in both languages."},
+  "sampleWatermark": "নমুনা · SAMPLE",
+  "@sampleWatermark": {"description": "Diagonal watermark on sample (fixture) data, debug builds only. Same in both languages on purpose."},
+  "languageSetting": "ভাষা",
+  "@languageSetting": {"description": "Settings row label for choosing the app language."}
+}

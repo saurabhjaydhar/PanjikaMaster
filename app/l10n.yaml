@@ -1,0 +1,8 @@
+# gen-l10n (spec §13.5). Bengali is the source language.
+arb-dir: lib/l10n
+template-arb-file: app_bn.arb
+output-dir: lib/l10n/gen
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
+required-resource-attributes: true
