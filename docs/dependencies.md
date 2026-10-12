@@ -8,4 +8,6 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | hypothesis | data (dev) | 6.169.0 | MPL-2.0 (file-level copyleft; dev-only, not shipped) | 2026-10-11 | Python ≥ 3.11 | Property tests for transitions (PRD §22.1) | 2026-10-12 |
 | ruff | data (dev) | 0.17.0 | MIT | 2026-10-09 | Prebuilt wheels for all major platforms | Lint + format | 2026-10-12 |
 
+| flutter_lints | app (dev) | 6.0.0 | BSD-3-Clause | 2025-05-27 | All Flutter platforms | Lint rules (T-104) | 2026-10-12 |
+
 Transitive dev dependencies (pinned in `data/uv.lock`): iniconfig, packaging, pluggy, pygments, colorama (pytest), sortedcontainers (hypothesis). All permissive (MIT/BSD/Apache-2.0).

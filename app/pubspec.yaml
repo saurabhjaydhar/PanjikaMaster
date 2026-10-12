@@ -1,0 +1,21 @@
+name: panjika
+description: "Bangla Panjika: Bengali calendar app (Bengali and English)"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+  flutter: ">=3.47.7"
+
+# Every package is recorded in ../docs/dependencies.md before it is added (CLAUDE.md).
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

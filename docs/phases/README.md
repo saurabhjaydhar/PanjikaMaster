@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101–T-103, T-114 done)
+**Current phase: 1 — Foundations** (T-101–T-103, T-114 done; T-104 built, launch check pending)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -57,3 +57,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | Phases expanded to every track (frontend, app core, backend, DevOps, design & content, QA, human gates) and Phase 8 added: 117 tasks. T-114 done: `scripts/check_docs.py` + `ci-docs.yml`; all FR/US requirements mapped. |
 | 2026-10-12 | T-102 done: `data/pack/schema.sql` (STRICT tables, FKs, CHECKs for index ranges, statuses, both languages; `packs.is_sample`; PK on `period_rules`) + `pack/schema.py`; 25 schema tests. |
 | 2026-10-12 | T-103 done: `pack/sample.py` writes three sample packs (global, cities, observances) from synthetic series, marked `is_sample`, `status = sample` and a marker string; refuses release builds. Draft names in both languages in `data/content/names.toml` (Q5, Q14 pending). 18 tests. |
+| 2026-10-12 | T-104 (partial): Flutter 3.47.7 app in `app/`: placeholder app ID `dev.panjika.placeholder` overridable with `-P panjikaAppId=` (Q11), compile/target 36, minSdk 24 (ADR-001), edge-to-edge, predictive back, launcher name in bn + en, strict analyzer. Debug and release APKs build; `flutter analyze` and `flutter test` green. Emulator launch pending (CI, T-115). |

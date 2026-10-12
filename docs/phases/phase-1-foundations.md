@@ -14,7 +14,7 @@
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
-| T-104 | `flutter create` in `app/` with placeholder app ID (`TODO(Q11)`), targetSdk 36, edge-to-edge; minSdk recorded as an ADR in `docs/decisions/` | Debug and release builds start on an emulator |
+| T-104 🟡 | `flutter create` in `app/` with placeholder app ID (`TODO(Q11)`), targetSdk 36, edge-to-edge; minSdk recorded as an ADR in `docs/decisions/` | Debug and release builds start on an emulator — *builds verified (placeholder ID, targetSdk 36, minSdk 24); emulator launch runs in CI with T-115 (no KVM in the agent container)* |
 | T-105 | Add the packages needed now (Riverpod 3, Drift + sqlite3_flutter_libs, go_router, flutter_localizations, intl) | Each in `docs/dependencies.md` |
 | T-106 | Drift database mirroring `schema.sql`, migration framework, DAOs for the tables Today needs | Test: Drift columns == `schema.sql` columns; in-memory DB tests |
 | T-107 | Localisation foundation: `app_bn.arb`/`app_en.arb`, locale controller (in-app setting + Android per-app language `locales_config.xml`), device-locale default, `PanjikaFormatter` (dates, times, ranges, numerals, plurals), independent numeral setting, ARB parity + no-literal checks wired into `ci-app.yml` (FR-L10N-01..04, FR-L10N-06) | Language switch re-renders without restart; formatter tests for both languages × both numeral styles; CI fails on a missing key |

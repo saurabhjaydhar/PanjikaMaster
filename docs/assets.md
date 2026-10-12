@@ -8,3 +8,4 @@ Source and licence of every font, icon, image and illustration (PRD §19.1 L6, L
 | Noto Sans Bengali | Google (Noto) | SIL OFL 1.1 | Bengali body/label | Same as above |
 | Noto Sans | Google (Noto) | SIL OFL 1.1 | English body/label | Same as above |
 | Material Symbols Rounded | Google | Apache-2.0 | UI icons | Planned (PRD §12.9) |
+| Launcher icons (`app/android/app/src/main/res/mipmap-*`) | Flutter project template | BSD-3-Clause (Flutter) | Android launcher | **Placeholder** until the real icon (T-216) |
