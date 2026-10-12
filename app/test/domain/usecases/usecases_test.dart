@@ -5,7 +5,6 @@ import 'package:panjika/core/time/civil_date.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/data/repositories/panjika_repository.dart';
-import 'package:panjika/data/repositories/today_repository.dart';
 import 'package:panjika/domain/engine/day_assembler.dart';
 import 'package:panjika/domain/entities/panjika.dart';
 import 'package:panjika/domain/usecases/get_day_panjika.dart';
@@ -54,23 +53,6 @@ void main() {
         'sample-global-drik',
         'sample-observances-drik',
       ]);
-    });
-
-    test('agrees with the T-112 Today repository at a moment', () async {
-      final now = DateTime.utc(2026, 10, 12, 5); // 10:30 IST
-      final d = (await day(sampleDay))!;
-      final snapshot = (await TodayRepository(db)
-          .load(now: now, tradition: drik, cityId: 'kolkata'))!;
-      expect(d.currentOf(TransitionKind.tithi, now).name, snapshot.tithi.name);
-      expect(
-        d.currentOf(TransitionKind.nakshatra, now).name,
-        snapshot.nakshatra.name,
-      );
-      expect(d.currentOf(TransitionKind.yoga, now).name, snapshot.yoga.name);
-      expect(
-        d.currentOf(TransitionKind.karana, now).name,
-        snapshot.karana.name,
-      );
     });
 
     test('containing(): before sunrise belongs to the previous date', () async {

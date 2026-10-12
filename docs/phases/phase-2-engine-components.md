@@ -22,7 +22,7 @@
 | T-209 ✅ | `PeriodCalculator` with the §6.5.8 table | Unit tests for all weekdays |
 | T-210 ✅ | `DayAssembler` incl. udaya tithi, kshaya/vriddhi, after-midnight times, IST conversion | Unit tests incl. a device in another time zone |
 | T-211 ✅ | Repositories on Drift + use cases `GetDayPanjika`, `GetMonthGrid`, `GetUpcomingObservances` | Tests on the sample pack |
-| T-212 | `clockProvider`: ticks each minute and at the next transition/sunrise/midnight | Test with a fake clock: provider fires at the transition |
+| T-212 ✅ | `clockProvider`: ticks each minute and at the next transition/sunrise/midnight | Test with a fake clock: provider fires at the transition |
 
 ### Frontend (screens & UI)
 | ID | Task | Done when |

@@ -1,5 +1,5 @@
 // T-112: basic Today screen — both languages, watermark, missing-data state, US-01
-// visibility at 130 % text, and goldens (bn/en × light/dark).
+// visibility at 130 % text, and goldens (bn/en × light/dark). T-212: live updates.
 // Update goldens intentionally with: flutter test --update-goldens test/features/today
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,9 @@ import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
+import 'package:panjika/data/repositories/panjika_repository.dart';
+import 'package:panjika/domain/engine/day_assembler.dart';
+import 'package:panjika/domain/usecases/get_day_panjika.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
 import '../../helpers/fakes.dart';
@@ -24,9 +27,15 @@ void main() {
   setUpAll(loadAppFonts);
 
   late AppDatabase db;
+  late DayPanjika sampleDay;
   setUp(() async {
     db = AppDatabase(NativeDatabase.memory());
     await loadSamplePackIfEmpty(db);
+    final repo = DriftPanjikaRepository(db);
+    sampleDay = (await GetDayPanjika(
+      repo,
+      repo,
+    ).containing(sampleNow, tradition: 'drik_bishuddha', cityId: 'kolkata'))!;
   });
   tearDown(() => db.close());
 
@@ -36,6 +45,7 @@ void main() {
     ThemeMode theme = ThemeMode.light,
     double textScale = 1.0,
     DateTime? now,
+    DateTime Function()? clock,
   }) async {
     tester.view
       ..physicalSize = const Size(360, 640) * 2
@@ -52,7 +62,7 @@ void main() {
             MemorySettings({SettingKey.theme: theme.name}),
           ),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
-          clockProvider.overrideWithValue(() => now ?? sampleNow),
+          clockProvider.overrideWithValue(clock ?? () => now ?? sampleNow),
         ],
         child: const PanjikaApp(),
       ),
@@ -110,6 +120,43 @@ void main() {
         reason: 'no numbers: ${t.data}',
       );
     }
+  });
+
+  testWidgets('T-212: the tithi changes exactly at its end', (tester) async {
+    final ending = sampleDay.tithis
+        .map((t) => t.span)
+        .firstWhere((s) => s.endUtc.isBefore(sampleDay.nextSunrise));
+    final following = sampleDay.nextAfter(ending)!;
+    var now = ending.endUtc.subtract(const Duration(seconds: 30));
+    await pump(tester, language: 'en', clock: () => now);
+    expect(find.text(ending.name.en), findsOneWidget);
+
+    now = ending.endUtc.subtract(const Duration(milliseconds: 1));
+    await tester.pump(
+      const Duration(seconds: 30) - const Duration(milliseconds: 1),
+    );
+    expect(find.text(ending.name.en), findsOneWidget, reason: 'not yet');
+
+    now = ending.endUtc;
+    await tester.pump(const Duration(milliseconds: 1));
+    expect(find.text(following.name.en), findsOneWidget);
+    expect(find.text(ending.name.en), findsNothing);
+  });
+
+  testWidgets('T-212: the day rolls over at sunrise', (tester) async {
+    var now = sampleDay.nextSunrise.subtract(const Duration(seconds: 10));
+    await pump(tester, language: 'en', clock: () => now);
+    expect(
+      find.text('25 Ashwin 1433'),
+      findsOneWidget,
+      reason: 'before sunrise',
+    );
+
+    now = sampleDay.nextSunrise;
+    await tester.pump(const Duration(seconds: 10));
+    await tester.pumpAndSettle();
+    expect(find.text('26 Ashwin 1433'), findsOneWidget);
+    expect(find.text('13 October 2026'), findsOneWidget);
   });
 
   testWidgets(

@@ -54,6 +54,7 @@ class DaySpan {
     required this.name,
     required this.startUtc,
     required this.endUtc,
+    required this.next,
   });
 
   final TransitionKind kind;
@@ -61,6 +62,10 @@ class DaySpan {
   final NameRef name;
   final DateTime startUtc;
   final DateTime endUtc;
+
+  /// The element that follows when this one ends ("তারপর অষ্টমী"). Every kind runs in
+  /// a fixed cycle, so this holds even past the end of the day.
+  final NameRef next;
 
   bool contains(DateTime instant) =>
       !instant.isBefore(startUtc) && instant.isBefore(endUtc);
@@ -145,21 +150,22 @@ class DayPanjika {
   bool _inDay(DateTime instant) =>
       !instant.isBefore(sun.sunrise) && instant.isBefore(nextSunrise);
 
+  /// The spans of [kind] touching this panjika day, in order.
+  List<DaySpan> spansOf(TransitionKind kind) => kind == TransitionKind.tithi
+      ? [for (final t in tithis) t.span]
+      : spans[kind]!;
+
   /// The element of [kind] at [now] if now is within this panjika day, else the one at
   /// sunrise (what Day detail shows for other dates).
   DaySpan currentOf(TransitionKind kind, DateTime now) {
-    final list = kind == TransitionKind.tithi
-        ? [for (final t in tithis) t.span]
-        : spans[kind]!;
+    final list = spansOf(kind);
     final at = _inDay(now.toUtc()) ? now.toUtc() : sun.sunrise;
     return list.firstWhere((s) => s.contains(at), orElse: () => list.first);
   }
 
-  /// The span that follows [span] within this day, if any ("তারপর অষ্টমী").
+  /// The span that follows [span] within this day, if any.
   DaySpan? nextAfter(DaySpan span) {
-    final list = span.kind == TransitionKind.tithi
-        ? [for (final t in tithis) t.span]
-        : spans[span.kind]!;
+    final list = spansOf(span.kind);
     final i = list.indexOf(span);
     return (i >= 0 && i + 1 < list.length) ? list[i + 1] : null;
   }
@@ -172,6 +178,14 @@ class DayPanjika {
     return null;
   }
 }
+
+/// Indices per cycle (spec §15.1).
+const _cycle = {
+  TransitionKind.tithi: 30,
+  TransitionKind.nakshatra: 27,
+  TransitionKind.yoga: 27,
+  TransitionKind.karana: 60,
+};
 
 abstract interface class DayAssembler {
   DayPanjika assemble(DayInputs inputs);
@@ -194,13 +208,15 @@ class StandardDayAssembler implements DayAssembler {
     }
 
     // Karana k (0–59) maps onto 11 names; other kinds use their index directly.
-    NameRef nameOf(Transition t) => t.kind == TransitionKind.karana
-        ? inputs.names('karana', karanaNameIndex(t.idx))
-        : inputs.names(t.kind.name, t.idx);
+    NameRef nameOf(TransitionKind kind, int idx) =>
+        kind == TransitionKind.karana
+        ? inputs.names('karana', karanaNameIndex(idx))
+        : inputs.names(kind.name, idx);
     DaySpan span(Transition t) => DaySpan(
       kind: t.kind,
       idx: t.idx,
-      name: nameOf(t),
+      name: nameOf(t.kind, t.idx),
+      next: nameOf(t.kind, (t.idx + 1) % _cycle[t.kind]!),
       startUtc: t.startUtc.toUtc(),
       endUtc: t.endUtc.toUtc(),
     );
