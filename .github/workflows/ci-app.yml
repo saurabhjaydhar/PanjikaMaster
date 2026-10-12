@@ -38,6 +38,11 @@ jobs:
       - run: python3 ../scripts/check_l10n.py
       - run: flutter analyze
       - run: flutter test
+      # Domain logic must not depend on the device time zone (spec §16): UTC+14 and UTC−10.
+      - name: Domain tests in other time zones
+        run: |
+          TZ=Pacific/Kiritimati flutter test test/domain
+          TZ=Pacific/Honolulu flutter test test/domain
       - run: flutter build apk --release
       - name: Release APK contains no sample data
         run: ../scripts/check_release_bundle.sh build/app/outputs/flutter-apk/app-release.apk

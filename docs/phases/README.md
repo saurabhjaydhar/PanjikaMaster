@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 2 — Engine & components** (Phase 1 complete; T-208, T-209 done; T-201 partial — ephemeris hosts blocked here)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-208–T-210 done; T-201 partial — ephemeris hosts blocked here)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -72,3 +72,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | T-208 done: domain entities in `domain/entities/panjika.dart` (Weekday with 0 = Sunday, Transition, VerificationStatus ↔ DB values, BengaliDate, SunMoonTimes, LunarMonth, City, Observance/ObservanceDate, PeriodRule/TimePeriod, Provenance with IST label, sealed DataCoverage) and `PanjikaSource` / `PeriodCalculator` interfaces; T-112's `Element` renamed `ElementSpan` (clashed with Flutter's `Element`). 6 tests; 159 app tests. |
 | 2026-10-12 | T-209 done: `DivisionPeriodCalculator` (day or night divided into equal parts, microsecond-exact tiling) and the spec §6.5.8 Rahu Kaal / Yamaganda / Gulika table (flagged to verify against the reference before release). 13 tests: all 7 weekdays × 3 periods, ordering, no coincidences, uneven days, night basis, invalid input. |
 | 2026-10-12 | **Phase 1 complete.** PR #2 green on all four CI jobs: docs, data, app (incl. release APK and sample-data check) and integration (app launched on an Android 14 emulator; Bengali → English switch; per-app language channel; system back). T-104, T-113, T-115 confirmed. |
+| 2026-10-12 | T-210 done: `StandardDayAssembler` builds a `DayPanjika` (sunrise → next sunrise) from UTC transitions: udaya tithi, kshaya and vriddhi flags, per-kind spans, karana names via `karanaNameIndex` (moved to `domain/engine/karana.dart`), periods in time order, `currentOf` / `nextAfter` / `activePeriod` / `isAfterMidnight` for "(পরদিন)". 21 tests on synthetic inputs; CI also runs domain tests under UTC+14 and UTC−10. 193 app tests. |

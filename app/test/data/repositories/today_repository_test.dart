@@ -5,6 +5,7 @@ import 'package:panjika/core/time/civil_date.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/data/repositories/today_repository.dart';
+import 'package:panjika/domain/engine/karana.dart';
 
 void main() {
   late AppDatabase db;
