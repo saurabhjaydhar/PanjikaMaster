@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101–T-103, T-105–T-112, T-114 done; T-104, T-113, T-115 written and verified locally, awaiting their first GitHub CI run)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-208, T-209 done; T-201 partial — ephemeris hosts blocked here)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -71,3 +71,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | Phase 1 PR opened (#2, stacked on #1) so CI incl. the emulator job runs. Phase 2 started. T-201 (partial): `ephem/fetch.py` downloads DE440s (NAIF, then SSD mirror) atomically, pins size + SHA-256 in `ephem/ephemeris.lock.json`, fails on mismatch or partial file, `--require-confirmed` for production. 9 tests (no network). Both JPL hosts are blocked by this environment's network policy; ci-data now fetches it (cached) and prints the checksum for the human to confirm. |
 | 2026-10-12 | T-208 done: domain entities in `domain/entities/panjika.dart` (Weekday with 0 = Sunday, Transition, VerificationStatus ↔ DB values, BengaliDate, SunMoonTimes, LunarMonth, City, Observance/ObservanceDate, PeriodRule/TimePeriod, Provenance with IST label, sealed DataCoverage) and `PanjikaSource` / `PeriodCalculator` interfaces; T-112's `Element` renamed `ElementSpan` (clashed with Flutter's `Element`). 6 tests; 159 app tests. |
 | 2026-10-12 | T-209 done: `DivisionPeriodCalculator` (day or night divided into equal parts, microsecond-exact tiling) and the spec §6.5.8 Rahu Kaal / Yamaganda / Gulika table (flagged to verify against the reference before release). 13 tests: all 7 weekdays × 3 periods, ordering, no coincidences, uneven days, night basis, invalid input. |
+| 2026-10-12 | **Phase 1 complete.** PR #2 green on all four CI jobs: docs, data, app (incl. release APK and sample-data check) and integration (app launched on an Android 14 emulator; Bengali → English switch; per-app language channel; system back). T-104, T-113, T-115 confirmed. |
