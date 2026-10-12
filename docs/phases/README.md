@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101–T-103, T-105, T-114 done; T-104 built, launch check pending)
+**Current phase: 1 — Foundations** (T-101–T-103, T-105, T-106, T-114 done; T-104 built, launch check pending)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -59,3 +59,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | T-103 done: `pack/sample.py` writes three sample packs (global, cities, observances) from synthetic series, marked `is_sample`, `status = sample` and a marker string; refuses release builds. Draft names in both languages in `data/content/names.toml` (Q5, Q14 pending). 18 tests. |
 | 2026-10-12 | T-104 (partial): Flutter 3.47.7 app in `app/`: placeholder app ID `dev.panjika.placeholder` overridable with `-P panjikaAppId=` (Q11), compile/target 36, minSdk 24 (ADR-001), edge-to-edge, predictive back, launcher name in bn + en, strict analyzer. Debug and release APKs build; `flutter analyze` and `flutter test` green. Emulator launch pending (CI, T-115). |
 | 2026-10-12 | T-105 done: flutter_riverpod 3.4.3, drift 2.35.2 + drift_flutter 0.3.1, go_router 18.0.2, flutter_localizations, intl; dev: drift_dev, build_runner. `sqlite3_flutter_libs` is end-of-life, replaced by `sqlite3` 3.x via drift_flutter. 98 transitive packages licence-checked, no GPL/AGPL. |
+| 2026-10-12 | T-106 done: Drift `AppDatabase` with pack tables generated from `schema.sql` (`scripts/sync_drift_schema.py`, `--check` in `ci-data.yml`), device tables, named queries for Today, migration strategy, foreign keys on. 16 tests incl. per-table parity with `schema.sql` (columns, types, keys, FKs, indexes, STRICT). `libsqlite3.so` confirmed in the release APK for all ABIs. |

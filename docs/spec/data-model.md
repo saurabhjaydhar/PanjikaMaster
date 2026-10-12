@@ -6,7 +6,7 @@
 
 ### 15.1 Drift tables (device)
 
-The executable version of the pack tables is `data/pack/schema.sql` (STRICT tables, foreign keys and CHECK constraints for index ranges, statuses and both-language text). If this sketch and `schema.sql` ever disagree, `schema.sql` wins and this section is fixed.
+The executable version of the pack tables is `data/pack/schema.sql` (STRICT tables, foreign keys and CHECK constraints for index ranges, statuses and both-language text). If this sketch and `schema.sql` ever disagree, `schema.sql` wins and this section is fixed. The app's Drift tables are generated from it (`scripts/sync_drift_schema.py` → `app/lib/data/db/pack_tables.drift`, checked in CI) and a test compares the live Drift database with `schema.sql` column by column.
 
 ```
 packs(id TEXT PK, tradition TEXT, kind TEXT,           -- 'global' | 'cities' | 'observances'

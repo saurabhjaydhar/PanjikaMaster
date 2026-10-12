@@ -3,9 +3,9 @@ name: ci-data
 on:
   push:
     branches: [main]
-    paths: ["data/**", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "scripts/sync_drift_schema.py", ".github/workflows/ci-data.yml"]
   pull_request:
-    paths: ["data/**", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "scripts/sync_drift_schema.py", ".github/workflows/ci-data.yml"]
 
 permissions:
   contents: read
@@ -23,3 +23,5 @@ jobs:
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run pytest
+      # The app's Drift tables are generated from data/pack/schema.sql (T-106).
+      - run: python ../scripts/sync_drift_schema.py --check
