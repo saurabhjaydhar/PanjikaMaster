@@ -8,15 +8,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:panjika/app/panjika_app.dart';
 import 'package:panjika/core/l10n/app_language.dart';
 import 'package:panjika/core/l10n/l10n_providers.dart';
+import 'package:panjika/core/settings/settings.dart';
 
 const channel = MethodChannel('panjika/app_locale');
 
 Future<ProviderContainer> pumpApp(
   WidgetTester tester, {
   required List<Locale> device,
+  SettingsSource? settings,
 }) async {
   final container = ProviderContainer(
-    overrides: [deviceLocalesProvider.overrideWithValue(device)],
+    overrides: [
+      deviceLocalesProvider.overrideWithValue(device),
+      settingsSourceProvider.overrideWithValue(settings ?? MemorySettings()),
+    ],
   );
   addTearDown(container.dispose);
   await tester.pumpWidget(
@@ -94,7 +99,9 @@ void main() {
     await container.read(appLanguageProvider.notifier).select(AppLanguage.en);
     expect(container.read(formatterProvider).digits('12'), '12');
 
-    container.read(numeralOverrideProvider.notifier).set(NumeralStyle.bengali);
+    await container
+        .read(numeralOverrideProvider.notifier)
+        .set(NumeralStyle.bengali);
     expect(container.read(formatterProvider).digits('12'), '১২');
   });
 }
