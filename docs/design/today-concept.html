@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panjika — Today screen concept (sample data)</title>
+<!--
+  Visual concept for PRD §11.2 / §12, for T-300 review. NOT production code.
+  Every value on the phone screens is SAMPLE (নমুনা) data copied from the PRD wireframes;
+  none of it is a real tithi, time or festival date.
+  Fonts: Tiro Bangla, Noto Sans Bengali, Noto Sans (all SIL OFL 1.1), loaded from Google Fonts for preview only.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style>
+  /* ---- Tokens: PRD §12.2 ---- */
+  :root {
+    --ink:#1F1A3D; --ink-muted:#5B567A; --paper:#FFFFFF; --paper-raised:#F6F4FB;
+    --alta:#B4232C; --haldi:#E3A21A; --haldi-strong:#B07607; --durba:#2E7A4E; --rule:#E2DFEE;
+    --alta-container:#FBE9EA; --haldi-container:#FCF1D6; --on-haldi-container:#5C3D00; --durba-container:#E3F2E9;
+    --neel:#3949AB; --padma:#AD1457;
+    --page:#ECEAF3;
+    --ts:1; /* text scale */
+  }
+  [data-theme="dark"] {
+    --ink:#ECEAF7; --ink-muted:#A9A5C4; --paper:#15132B; --paper-raised:#1E1C38;
+    --alta:#F0707A; --haldi:#F2BE4E; --haldi-strong:#F2BE4E; --durba:#6CC596; --rule:#2E2B4D;
+    --alta-container:#4A1D26; --haldi-container:#3D3014; --on-haldi-container:#FFE3A3; --durba-container:#173A2A;
+    --neel:#9FA8DA; --padma:#F48FB1;
+    --page:#0C0B1A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--ink); font-family:"Noto Sans","Noto Sans Bengali",sans-serif;
+         transition:background .25s; }
+  header.controls { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center;
+         padding:14px 24px; background:var(--paper); border-bottom:1px solid var(--rule); }
+  header.controls h1 { font:500 15px/1.3 "Noto Sans",sans-serif; margin:0 12px 0 0; }
+  header.controls h1 small { display:block; color:var(--ink-muted); font-weight:400; font-size:12px; }
+  .seg { display:inline-flex; border:1px solid var(--rule); border-radius:999px; overflow:hidden; }
+  .seg button { border:0; background:transparent; color:var(--ink); padding:7px 14px; font:500 13px "Noto Sans","Noto Sans Bengali",sans-serif; cursor:pointer; min-height:36px; }
+  .seg button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+  .label { font-size:12px; color:var(--ink-muted); margin-right:6px; }
+
+  main { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; padding:32px 16px 64px; }
+  figure { margin:0; }
+  figcaption { text-align:center; font-size:13px; color:var(--ink-muted); margin-top:12px; }
+
+  /* ---- Phone (360 dp wide, PRD §11) ---- */
+  .phone { width:360px; height:780px; background:var(--paper); border-radius:36px; position:relative; overflow:hidden;
+           box-shadow:0 0 0 10px #000, 0 24px 60px rgba(20,16,50,.28); display:flex; flex-direction:column; }
+  .statusbar { height:28px; flex:none; display:flex; justify-content:space-between; align-items:center; padding:0 22px;
+               font:500 12px "Noto Sans",sans-serif; color:var(--ink); }
+  .scroll { flex:1; overflow-y:auto; padding:4px 16px 24px; scrollbar-width:none; }
+  .scroll::-webkit-scrollbar { display:none; }
+
+  /* ---- Type scale per script: PRD §12.3 (sizes × text scale) ---- */
+  .bn { --f-display:34px; --lh-display:48px; --f-title:22px; --lh-title:30px; --f-body:16px; --lh-body:26px;
+        --f-label:14px; --lh-label:22px; --f-cap:13px; --lh-cap:20px;
+        --sans:"Noto Sans Bengali","Noto Sans",sans-serif; }
+  .en { --f-display:32px; --lh-display:40px; --f-title:20px; --lh-title:28px; --f-body:16px; --lh-body:24px;
+        --f-label:14px; --lh-label:20px; --f-cap:12px; --lh-cap:16px;
+        --sans:"Noto Sans","Noto Sans Bengali",sans-serif; }
+  .phone { font-family:var(--sans); }
+  .display { font-family:"Tiro Bangla",serif; font-size:calc(var(--f-display)*var(--ts)); line-height:calc(var(--lh-display)*var(--ts)); font-weight:400; }
+  .title   { font-family:"Tiro Bangla",serif; font-size:calc(var(--f-title)*var(--ts)); line-height:calc(var(--lh-title)*var(--ts)); }
+  .body    { font-size:calc(var(--f-body)*var(--ts)); line-height:calc(var(--lh-body)*var(--ts)); }
+  .lbl     { font-size:calc(var(--f-label)*var(--ts)); line-height:calc(var(--lh-label)*var(--ts)); font-weight:500; }
+  .cap     { font-size:calc(var(--f-cap)*var(--ts)); line-height:calc(var(--lh-cap)*var(--ts)); }
+  .muted   { color:var(--ink-muted); }
+  .second  { color:var(--ink-muted); display:none; }
+  .both .second { display:block; }
+  .tnum { font-variant-numeric:tabular-nums; }
+
+  /* ---- DateHeader ---- */
+  .topbar { display:flex; justify-content:space-between; align-items:center; min-height:48px; }
+  .citychip { display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 14px; border-radius:999px;
+              background:var(--paper-raised); color:var(--ink); border:1px solid var(--rule); }
+  .citychip svg { width:16px; height:16px; }
+
+  /* ---- TithiSeal ---- */
+  .seal { margin:16px 0 8px; padding:18px; border-radius:20px; background:var(--haldi-container);
+          display:flex; gap:16px; align-items:center; }
+  .ring { flex:none; width:72px; height:72px; position:relative; }
+  .ring > svg { width:72px; height:72px; transform:rotate(-90deg); }
+  .ring .track { stroke:color-mix(in srgb, var(--haldi-strong) 22%, transparent); }
+  .ring .prog { stroke:var(--haldi-strong); stroke-linecap:round; transition:stroke-dashoffset .5s cubic-bezier(.05,.7,.1,1); }
+  .ring .moon { position:absolute; inset:0; display:grid; place-items:center; }
+  .seal .until { color:var(--on-haldi-container); }
+  .bn .seal-name { font-size:calc(30px*var(--ts)); line-height:calc(42px*var(--ts)); }
+  .en .seal-name { font-size:calc(28px*var(--ts)); line-height:calc(36px*var(--ts)); }
+  .seal .then { color:var(--ink-muted); }
+
+  /* ---- Sections ---- */
+  .section { margin-top:24px; }
+  .shead { color:var(--ink-muted); margin-bottom:4px; }
+  .row { display:flex; flex-wrap:wrap; gap:0 12px; align-items:baseline; min-height:48px; padding:11px 0; }
+  .row .k { min-width:84px; flex:none; color:var(--ink-muted); }
+  .row .v { flex:1; min-width:150px; }
+  .rule { height:1px; background:var(--rule); margin:16px 0 0; }
+
+  .timing { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .tcell { background:var(--paper-raised); border-radius:12px; padding:10px 12px; display:flex; gap:10px; align-items:center; min-height:56px; }
+  .tcell svg { width:22px; height:22px; flex:none; color:var(--haldi-strong); }
+  .tcell.moonc svg { color:var(--ink-muted); }
+
+  .period { display:flex; justify-content:space-between; align-items:center; gap:8px; min-height:48px; padding:8px 12px; border-radius:12px; margin-top:6px; }
+  .period.active { background:var(--alta-container); }
+  .period .now { display:inline-flex; align-items:center; gap:6px; color:var(--alta); font-weight:600; margin-right:6px; }
+  .period .now::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--alta); }
+
+  .obs { display:flex; align-items:center; gap:12px; min-height:56px; padding:8px 12px 8px 0; border-radius:12px; background:var(--paper-raised); margin-top:8px; overflow:hidden; }
+  .bar { width:4px; align-self:stretch; border-radius:0 4px 4px 0; flex:none; }
+  .bar.puja { background:var(--alta); } .bar.vrata { background:var(--neel); }
+  .obs .grow { flex:1; }
+  .badge { display:inline-flex; align-items:center; gap:2px; color:var(--durba); font-weight:600; }
+  .days { color:var(--ink-muted); white-space:nowrap; }
+
+  .prov { margin-top:24px; padding-top:12px; border-top:1px solid var(--rule); color:var(--ink-muted); }
+
+  /* ---- Bottom navigation ---- */
+  .nav { flex:none; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--rule); background:var(--paper); padding:6px 4px 14px; }
+  .nav a { display:flex; flex-direction:column; align-items:center; gap:4px; min-height:56px; justify-content:center; color:var(--ink-muted); text-decoration:none; }
+  .nav a svg { width:24px; height:24px; }
+  .nav a .pill { padding:4px 18px; border-radius:999px; display:grid; place-items:center; }
+  .nav a.cur { color:var(--ink); }
+  .nav a.cur .pill { background:var(--haldi-container); color:var(--on-haldi-container); }
+
+  /* ---- Sample watermark (PRD §6.8) ---- */
+  .watermark { position:absolute; inset:0; pointer-events:none; display:grid; place-items:center; z-index:3; }
+  .watermark span { transform:rotate(-32deg); font:600 44px "Noto Sans Bengali","Noto Sans",sans-serif; letter-spacing:0;
+                    color:var(--alta); opacity:.10; white-space:nowrap; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+</head>
+<body>
+<header class="controls">
+  <h1>Today, concept for T-300 review <small>PRD v1.2 §11.2 · §12 · all values are sample (নমুনা)</small></h1>
+  <div><span class="label">Theme</span><span class="seg" id="theme">
+    <button aria-pressed="true" data-v="light">Light</button><button aria-pressed="false" data-v="dark">Dark</button></span></div>
+  <div><span class="label">Text size</span><span class="seg" id="scale">
+    <button aria-pressed="true" data-v="1">100%</button><button aria-pressed="false" data-v="1.3">130%</button></span></div>
+  <div><span class="label">Names in both scripts</span><span class="seg" id="both">
+    <button aria-pressed="false" data-v="off">Off</button><button aria-pressed="true" data-v="on">On</button></span></div>
+</header>
+
+<main id="phones"></main>
+
+<template id="phone-tpl">
+  <figure>
+    <div class="phone">
+      <div class="watermark" aria-hidden="true"><span>নমুনা · SAMPLE</span></div>
+      <div class="statusbar"><span class="tnum" data-t="clock"></span><span>▾ ▴ ▮</span></div>
+      <div class="scroll">
+        <div class="topbar">
+          <span class="lbl muted" data-t="weekday"></span>
+          <span class="citychip lbl">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            <span data-t="city"></span> ▾
+          </span>
+        </div>
+        <div class="display" data-t="bnDate"></div>
+        <div class="cap second" data-t="bnDate2"></div>
+        <div class="body muted" data-t="gregDate"></div>
+
+        <div class="seal" role="group" data-aria="sealAria">
+          <div class="ring" aria-hidden="true">
+            <svg viewBox="0 0 84 84"><circle class="track" cx="42" cy="42" r="36" fill="none" stroke-width="6"/>
+              <circle class="prog" cx="42" cy="42" r="36" fill="none" stroke-width="6" stroke-dasharray="226.2" stroke-dashoffset="226.2"/></svg>
+            <div class="moon">
+              <svg viewBox="0 0 32 32" width="26" height="26"><circle cx="16" cy="16" r="11" fill="color-mix(in srgb, var(--haldi-strong) 18%, var(--paper))"/>
+                <path d="M16 5A11 11 0 0 1 16 27A4 11 0 0 1 16 5Z" fill="var(--haldi-strong)"/></svg>
+            </div>
+          </div>
+          <div>
+            <div class="display seal-name" data-t="tithi"></div>
+            <div class="cap second" data-t="tithi2"></div>
+            <div class="body until tnum" data-t="tithiUntil"></div>
+            <div class="lbl then" data-t="tithiThen"></div>
+          </div>
+        </div>
+
+        <div class="row"><span class="k lbl" data-t="kNak"></span><span class="v body"><span data-t="nak"></span> <span class="muted tnum" data-t="nakUntil"></span></span></div>
+        <div class="row"><span class="k lbl" data-t="kYoga"></span><span class="v body"><span data-t="yoga"></span> <span class="muted tnum" data-t="yogaUntil"></span></span></div>
+        <div class="row"><span class="k lbl" data-t="kKarana"></span><span class="v body"><span data-t="karana"></span> <span class="muted tnum" data-t="karanaUntil"></span></span></div>
+
+        <div class="section">
+          <div class="timing">
+            <div class="tcell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M5.6 7.6l1.8 1.8M18.4 7.6l-1.8 1.8"/><path d="M12 4l-2 2M12 4l2 2"/></svg>
+              <div><div class="cap muted" data-t="sunrise"></div><div class="body tnum" data-t="sunriseT"></div></div></div>
+            <div class="tcell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18h16M7 14a5 5 0 0 1 10 0M12 4v4M5.6 7.6l1.8 1.8M18.4 7.6l-1.8 1.8"/><path d="M12 8l-2-2M12 8l2-2"/></svg>
+              <div><div class="cap muted" data-t="sunset"></div><div class="body tnum" data-t="sunsetT"></div></div></div>
+            <div class="tcell moonc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 4a7 7 0 1 0 5 12 6 6 0 0 1-5-12Z"/><path d="M5 21l2-2 2 2"/></svg>
+              <div><div class="cap muted" data-t="moonrise"></div><div class="body tnum" data-t="moonriseT"></div></div></div>
+            <div class="tcell moonc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 4a7 7 0 1 0 5 12 6 6 0 0 1-5-12Z"/><path d="M5 19l2 2 2-2"/></svg>
+              <div><div class="cap muted" data-t="moonset"></div><div class="body tnum" data-t="moonsetT"></div></div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="shead lbl" data-t="hPeriods"></div>
+          <div class="period active"><span class="body"><span class="now lbl" data-t="now"></span><span data-t="rahu"></span></span><span class="body tnum" data-t="rahuT"></span></div>
+          <div class="period"><span class="body" data-t="barabela"></span><span class="body tnum" data-t="barabelaT"></span></div>
+        </div>
+
+        <div class="section">
+          <div class="shead lbl" data-t="hToday"></div>
+          <div class="obs"><span class="bar puja"></span><div class="grow"><div class="body" data-t="obsToday"></div><div class="cap second" data-t="obsToday2"></div></div>
+            <span class="badge lbl" data-aria="badgeAria">✓✓</span></div>
+        </div>
+
+        <div class="section">
+          <div class="shead lbl" data-t="hUpcoming"></div>
+          <div class="obs"><span class="bar puja"></span><div class="grow"><div class="body" data-t="up1"></div><div class="cap second" data-t="up1b"></div></div><span class="lbl days" data-t="up1d"></span></div>
+          <div class="obs"><span class="bar puja"></span><div class="grow"><div class="body" data-t="up2"></div><div class="cap second" data-t="up2b"></div></div><span class="lbl days" data-t="up2d"></span></div>
+        </div>
+
+        <div class="prov cap" data-t="prov"></div>
+      </div>
+      <nav class="nav cap">
+        <a class="cur" href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16 4 8 0 0 0 0-16Z" fill="currentColor"/></svg></span><span data-t="nav0"></span></a>
+        <a href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><span data-t="nav1"></span></a>
+        <a href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c2 3 5 4 5 8a5 5 0 0 1-10 0c0-4 3-5 5-8Z"/><path d="M8 21h8"/></svg></span><span data-t="nav2"></span></a>
+        <a href="#"><span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></svg></span><span data-t="nav3"></span></a>
+      </nav>
+    </div>
+    <figcaption data-t="caption"></figcaption>
+  </figure>
+</template>
+
+<script>
+// SAMPLE strings only (PRD §11.2 wireframe). In the app these come from ARB files and the pack's `names` table.
+const S = {
+  bn: {
+    caption:"বাংলা UI", clock:"৯:৪১", weekday:"সোমবার", city:"কলকাতা",
+    bnDate:"২৫ আশ্বিন ১৪৩৩", bnDate2:"25 Ashwin 1433", gregDate:"১২ অক্টোবর ২০২৬",
+    tithi:"শুক্লা সপ্তমী", tithi2:"Shukla Saptami", tithiUntil:"দুপুর ২:৩২ পর্যন্ত", tithiThen:"তারপর অষ্টমী",
+    sealAria:"তিথি শুক্লা সপ্তমী, দুপুর ২:৩২ পর্যন্ত, তারপর অষ্টমী",
+    kNak:"নক্ষত্র", nak:"মূলা", nakUntil:"· বিকেল ৪:১০ পর্যন্ত",
+    kYoga:"যোগ", yoga:"শোভন", yogaUntil:"· রাত ৮:০৫ পর্যন্ত",
+    kKarana:"করণ", karana:"গর", karanaUntil:"· দুপুর ২:৩২ পর্যন্ত",
+    sunrise:"সূর্যোদয়", sunriseT:"ভোর ৫:৩৮", sunset:"সূর্যাস্ত", sunsetT:"বিকেল ৫:১৪",
+    moonrise:"চন্দ্রোদয়", moonriseT:"সকাল ১১:৫২", moonset:"চন্দ্রাস্ত", moonsetT:"রাত ১০:৪০",
+    hPeriods:"আজকের সময়", now:"এখন", rahu:"রাহুকাল", rahuT:"৭:৩২–৯:০০", barabela:"বারবেলা", barabelaT:"১০:৩০–১১:৫৮",
+    hToday:"আজ", obsToday:"দুর্গাষষ্ঠী", obsToday2:"Durga Shashthi", badgeAria:"বিশেষজ্ঞ যাচাইকৃত",
+    hUpcoming:"আসছে", up1:"মহাষ্টমী", up1b:"Maha Ashtami", up1d:"২ দিন বাকি", up2:"লক্ষ্মীপূজা", up2b:"Lakshmi Puja", up2d:"৮ দিন বাকি",
+    prov:"দৃক (বিশুদ্ধ) · কলকাতা · IST · তথ্য v৩ (নমুনা)",
+    nav0:"আজ", nav1:"পঞ্জিকা", nav2:"পার্বণ", nav3:"আরও"
+  },
+  en: {
+    caption:"English UI", clock:"9:41", weekday:"Monday", city:"Kolkata",
+    bnDate:"25 Ashwin 1433", bnDate2:"২৫ আশ্বিন ১৪৩৩", gregDate:"12 October 2026",
+    tithi:"Shukla Saptami", tithi2:"শুক্লা সপ্তমী", tithiUntil:"until 2:32 PM", tithiThen:"then Ashtami",
+    sealAria:"Tithi Shukla Saptami until 2:32 PM, then Ashtami",
+    kNak:"Nakshatra", nak:"Mula", nakUntil:"· until 4:10 PM",
+    kYoga:"Yoga", yoga:"Shobhana", yogaUntil:"· until 8:05 PM",
+    kKarana:"Karana", karana:"Gara", karanaUntil:"· until 2:32 PM",
+    sunrise:"Sunrise", sunriseT:"5:38 AM", sunset:"Sunset", sunsetT:"5:14 PM",
+    moonrise:"Moonrise", moonriseT:"11:52 AM", moonset:"Moonset", moonsetT:"10:40 PM",
+    hPeriods:"Today's periods", now:"Now", rahu:"Rahu Kaal", rahuT:"7:32–9:00 AM", barabela:"Barabela", barabelaT:"10:30–11:58 AM",
+    hToday:"Today", obsToday:"Durga Shashthi", obsToday2:"দুর্গাষষ্ঠী", badgeAria:"Expert reviewed",
+    hUpcoming:"Coming up", up1:"Maha Ashtami", up1b:"মহাষ্টমী", up1d:"in 2 days", up2:"Lakshmi Puja", up2b:"লক্ষ্মীপূজা", up2d:"in 8 days",
+    prov:"Drik (Bishuddha) · Kolkata · IST · Data v3 (sample)",
+    nav0:"Today", nav1:"Calendar", nav2:"Festivals", nav3:"More"
+  }
+};
+const PROGRESS = 0.62; // sample: share of the tithi elapsed
+
+const main = document.getElementById('phones');
+const tpl = document.getElementById('phone-tpl');
+for (const lang of ['bn','en']) {
+  const node = tpl.content.cloneNode(true);
+  const fig = node.querySelector('figure');
+  const phone = node.querySelector('.phone');
+  phone.classList.add(lang); phone.lang = lang; phone.classList.add('both');
+  node.querySelectorAll('[data-t]').forEach(el => el.textContent = S[lang][el.dataset.t]);
+  node.querySelectorAll('[data-aria]').forEach(el => el.setAttribute('aria-label', S[lang][el.dataset.aria]));
+  node.querySelectorAll('.second').forEach(el => el.lang = lang === 'bn' ? 'en' : 'bn');
+  main.appendChild(node);
+}
+requestAnimationFrame(() => setTimeout(() => {
+  document.querySelectorAll('.prog').forEach(c => c.style.strokeDashoffset = 226.2 * (1 - PROGRESS));
+}, 80));
+
+function seg(id, fn) {
+  const el = document.getElementById(id);
+  el.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    fn(b.dataset.v);
+  });
+}
+seg('theme', v => document.documentElement.dataset.theme = v);
+seg('scale', v => document.documentElement.style.setProperty('--ts', v));
+seg('both',  v => document.querySelectorAll('.phone').forEach(p => p.classList.toggle('both', v === 'on')));
+</script>
+</body>
+</html>
