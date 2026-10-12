@@ -61,7 +61,7 @@ Bengali and Latin need different metrics. Matras, reph and conjuncts take more v
 | Label | Noto Sans Bengali Medium | 14/22 | Noto Sans Medium | 14/20 | Row labels, chips, buttons, nav |
 | Caption | Noto Sans Bengali | 13/20 | Noto Sans | 12/16 | Provenance footer, second-script line. **Bengali never below 13 sp.** |
 
-- Tiro Bangla includes Latin, so the display voice is the same in both languages. Check during T-108 (Phase 1) that its Latin covers the romanisation diacritics we use (Q14); if not, fall back to Noto Serif for display Latin.
+- Tiro Bangla includes Latin, so the display voice is the same in both languages. Check during T-109 (Phase 1) that its Latin covers the romanisation diacritics we use (Q14); if not, fall back to Noto Serif for display Latin.
 - Fallback chains: Bengali styles → `NotoSansBengali`, then `NotoSans`; English styles → `NotoSans`, then `NotoSansBengali` (needed for "Names in both scripts"). Mixed strings (a Bengali name with Latin digits) must render without tofu in either theme.
 - Weights: Noto Sans Bengali 400 body, 500 label, 600 emphasis. Avoid 700+ below 18 sp in Bengali (counters fill in on low-DPI screens). Tiro Bangla is regular-only; do not synthesise bold.
 - Times in columns use tabular figures (`FontFeature.tabularFigures()`) where the font supports them; check by eye that Bengali digits align in the period list.
@@ -153,4 +153,4 @@ A screen is not done until all of these hold:
 - **Smooth:** no frames over 16 ms while swiping the calendar or flinging the festival list, measured in profile mode on the low-end reference phone (§22.2).
 - **Tokens only:** no hex colours, raw font sizes or string literals in widget code (CI grep/lint check).
 - **Feedback everywhere:** every tappable element shows a pressed state; every async action shows progress within 100 ms.
-- **Visual sign-off:** each screen is compared with the approved design (Phase 2, T-209) before merge; the human signs off. Starting concept for that review: `docs/design/today-concept.html` (sample data, watermarked).
+- **Visual sign-off:** each screen is compared with the approved design (Phase 2, T-215) before merge; the human signs off. Starting concept for that review: `docs/design/today-concept.html` (sample data, watermarked).

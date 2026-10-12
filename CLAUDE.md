@@ -17,7 +17,7 @@ A Bengali calendar app (Flutter, `app/`) fed by an offline astronomy pipeline (P
 ## Every task
 - One task per branch and commit. Checks must pass: app `flutter analyze && flutter test`; data `ruff check . && pytest`.
 - New package → `docs/dependencies.md` (licence, last release, platforms). New font/icon/image → `docs/assets.md`.
-- Tick the task in its phase file and add a line to the log in `docs/phases/README.md`.
+- Tick the task in its phase file and add a line to the log in `docs/phases/README.md`. Run `python scripts/check_docs.py` after changing docs.
 - Secrets come from env/CI only; AdMob test IDs in debug.
 
 ## Code conventions
