@@ -37,7 +37,7 @@
 ### QA
 | ID | Task | Done when |
 |---|---|---|
-| T-115 | Integration smoke test: launch → Today in Bengali, switch to English, back | Passes on an emulator in CI or locally |
+| T-115 🟡 | Integration smoke test: launch → Today in Bengali, switch to English, back | Passes on an emulator in CI or locally — *written and compiled for Android; runs in the `integration` job of ci-app.yml (Android 14 emulator) on the first PR* |
 
 ### Human gates
 None required. Optional: look at the Today skeleton on a phone; protect `main` in GitHub settings (require CI).
