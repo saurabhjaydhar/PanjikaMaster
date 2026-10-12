@@ -62,7 +62,7 @@ integration_test/
 |---|---|---|---|
 | State | `flutter_riverpod` | Testable, no BuildContext coupling, good for derived state (now → active period) | 3.x is the stable line (released Sep 2025); start on 3.x unless a code generator we need lags behind |
 | Localisation | `flutter_localizations` (SDK) + `intl` + `gen-l10n` | Official ARB pipeline, ICU plural/select, type-safe accessors | `intl` version is pinned by the Flutter SDK; use `intl` for plural rules only, formatting goes through `PanjikaFormatter` (§13.3) |
-| Local DB | `drift` + `sqlite3_flutter_libs` | Typed SQL, migrations, reactive queries, packs are already SQLite | One project reported Android release builds missing `libsqlite3.so` after drift 2.32 — verify the release APK on a device before shipping |
+| Local DB | `drift` + `drift_flutter` (pulls `sqlite3` 3.x, which bundles SQLite) | Typed SQL, migrations, reactive queries, packs are already SQLite | `sqlite3_flutter_libs` is end-of-life (replaced by `sqlite3` 3.x). One project reported Android release builds missing `libsqlite3.so` after drift 2.32 — verify the release APK on a device before shipping |
 | Routing | `go_router` | Declarative, deep links for festival share links | — |
 | Notifications | `flutter_local_notifications` + `timezone` | Mature, local scheduling | Android 13+ runtime permission; exact alarms restricted on Android 14+ (§17) |
 | Location | `geolocator` (coarse) | Permission flow helpers | Request only on tap |
