@@ -31,7 +31,7 @@
 ### DevOps (CI/CD, builds)
 | ID | Task | Done when |
 |---|---|---|
-| T-113 | `ci-app.yml`: `flutter analyze`, `flutter test`, build release APK; fail if the release bundle contains a sample marker | Green on PR |
+| T-113 🟡 | `ci-app.yml`: `flutter analyze`, `flutter test`, build release APK; fail if the release bundle contains a sample marker | Green on PR — *all steps pass locally; green on PR pending* |
 | T-114 ✅ | `ci-docs.yml`: run `scripts/check_docs.py` (every FR/US mapped to a task, every § reference resolves) | Green on PR; fails on an unmapped requirement or broken § reference |
 
 ### QA

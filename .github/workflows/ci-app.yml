@@ -1,0 +1,41 @@
+name: ci-app
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", ".github/workflows/ci-app.yml"]
+  pull_request:
+    paths: ["app/**", "data/pack/schema.sql", "scripts/check_release_bundle.sh", ".github/workflows/ci-app.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.7"
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      # Generated Drift code must be committed and current.
+      - name: Generated code is up to date
+        run: |
+          dart run build_runner build
+          git diff --exit-code -- lib/
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build apk --release
+      - name: Release APK contains no sample data
+        run: ../scripts/check_release_bundle.sh build/app/outputs/flutter-apk/app-release.apk
