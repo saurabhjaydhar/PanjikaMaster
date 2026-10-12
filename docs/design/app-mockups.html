@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bangla Panjika — app mockups (sample data)</title>
+<!--
+  Mockups of the finished MVP, built from the PRD (§10–§13). NOT production code.
+  EVERY date, time, tithi and festival here is SAMPLE (নমুনা) data taken from or derived from the
+  PRD wireframes. None of it is a verified religious date.
+  Fonts: Tiro Bangla, Noto Sans Bengali, Noto Sans (SIL OFL 1.1), loaded from Google Fonts for preview only.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Sans:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens (§12.2) ---------- */
+  :root {
+    --ink:#1F1A3D; --ink-muted:#5B567A; --paper:#FFFFFF; --paper-raised:#F6F4FB;
+    --alta:#B4232C; --haldi:#E3A21A; --haldi-strong:#B07607; --durba:#2E7A4E; --rule:#E2DFEE;
+    --alta-container:#FBE9EA; --haldi-container:#FCF1D6; --on-haldi-container:#5C3D00; --durba-container:#E3F2E9;
+    --neel:#3949AB; --padma:#AD1457; --page:#E9E7F1; --ts:1;
+  }
+  [data-theme="dark"] {
+    --ink:#ECEAF7; --ink-muted:#A9A5C4; --paper:#15132B; --paper-raised:#1E1C38;
+    --alta:#F0707A; --haldi:#F2BE4E; --haldi-strong:#F2BE4E; --durba:#6CC596; --rule:#2E2B4D;
+    --alta-container:#4A1D26; --haldi-container:#3D3014; --on-haldi-container:#FFE3A3; --durba-container:#173A2A;
+    --neel:#9FA8DA; --padma:#F48FB1; --page:#0B0A18;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--ink); font-family:"Noto Sans","Noto Sans Bengali",sans-serif; }
+  button { font:inherit; color:inherit; }
+
+  header.controls { position:sticky; top:0; z-index:20; display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center;
+    padding:12px 24px; background:var(--paper); border-bottom:1px solid var(--rule); }
+  header.controls h1 { font:600 15px/1.3 "Noto Sans",sans-serif; margin:0 10px 0 0; }
+  header.controls h1 small { display:block; font-weight:400; font-size:12px; color:var(--ink-muted); }
+  .seg { display:inline-flex; border:1px solid var(--rule); border-radius:999px; overflow:hidden; vertical-align:middle; }
+  .seg button { border:0; background:transparent; padding:7px 14px; font-size:13px; font-weight:500; cursor:pointer; min-height:36px;
+    font-family:"Noto Sans","Noto Sans Bengali",sans-serif; }
+  .seg button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+  .clabel { font-size:12px; color:var(--ink-muted); margin-right:6px; }
+
+  .group-title { max-width:1500px; margin:34px auto 6px; padding:0 24px; font:600 13px "Noto Sans",sans-serif;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink-muted); }
+  .gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:36px 32px; padding:14px 16px 10px; max-width:1500px; margin:0 auto; }
+  figure { margin:0; }
+  figcaption { text-align:center; font-size:13px; color:var(--ink-muted); margin-top:12px; max-width:320px; }
+  figcaption b { color:var(--ink); font-weight:600; display:block; }
+
+  /* ---------- Phone ---------- */
+  .phone { width:320px; height:690px; background:var(--paper); border-radius:34px; position:relative; overflow:hidden;
+    box-shadow:0 0 0 9px #07060f, 0 22px 50px rgba(20,16,50,.25); display:flex; flex-direction:column; }
+  .sb { height:26px; flex:none; display:flex; justify-content:space-between; align-items:center; padding:0 20px;
+    font:500 11px "Noto Sans",sans-serif; }
+  .scroll { flex:1; overflow-y:auto; padding:2px 16px 20px; scrollbar-width:none; position:relative; }
+  .scroll::-webkit-scrollbar { display:none; }
+  .wm { position:absolute; inset:0; pointer-events:none; display:grid; place-items:center; z-index:9; }
+  .wm span { transform:rotate(-32deg); font:600 40px "Noto Sans Bengali","Noto Sans",sans-serif; color:var(--alta); opacity:.09; white-space:nowrap; }
+
+  /* ---------- Type per script (§12.3) ---------- */
+  .bn { --fd:34px; --ld:48px; --fh:26px; --lh:36px; --ft:22px; --lt:30px; --fb:16px; --lb:26px; --fl:14px; --ll:22px; --fc:13px; --lc:20px;
+        font-family:"Noto Sans Bengali","Noto Sans",sans-serif; }
+  .en { --fd:32px; --ld:40px; --fh:24px; --lh:32px; --ft:20px; --lt:28px; --fb:16px; --lb:24px; --fl:14px; --ll:20px; --fc:12px; --lc:16px;
+        font-family:"Noto Sans","Noto Sans Bengali",sans-serif; }
+  .display { font-family:"Tiro Bangla",serif; font-size:calc(var(--fd)*var(--ts)); line-height:calc(var(--ld)*var(--ts)); }
+  .headline{ font-family:"Tiro Bangla",serif; font-size:calc(var(--fh)*var(--ts)); line-height:calc(var(--lh)*var(--ts)); }
+  .title   { font-family:"Tiro Bangla",serif; font-size:calc(var(--ft)*var(--ts)); line-height:calc(var(--lt)*var(--ts)); }
+  .body    { font-size:calc(var(--fb)*var(--ts)); line-height:calc(var(--lb)*var(--ts)); }
+  .lbl     { font-size:calc(var(--fl)*var(--ts)); line-height:calc(var(--ll)*var(--ts)); font-weight:500; }
+  .cap     { font-size:calc(var(--fc)*var(--ts)); line-height:calc(var(--lc)*var(--ts)); }
+  .muted { color:var(--ink-muted); } .alta { color:var(--alta); } .durba { color:var(--durba); }
+  .second { display:none; color:var(--ink-muted); }
+  .both .second { display:block; }
+  .tnum { font-variant-numeric:tabular-nums; }
+
+  /* ---------- Common parts ---------- */
+  .appbar { display:flex; align-items:center; gap:6px; min-height:52px; margin:0 -6px; }
+  .appbar .ib { width:44px; height:44px; display:grid; place-items:center; border-radius:50%; flex:none; }
+  .appbar .grow { flex:1; }
+  .ib svg, .ico { width:22px; height:22px; }
+  .chip { display:inline-flex; align-items:center; gap:6px; min-height:38px; padding:0 13px; border-radius:999px;
+    background:var(--paper-raised); border:1px solid var(--rule); white-space:nowrap; }
+  .chip svg { width:15px; height:15px; }
+  .chip.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .chips { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:2px 0 6px; margin:0 -16px; padding-left:16px; padding-right:16px; }
+  .chips::-webkit-scrollbar { display:none; }
+  .section { margin-top:22px; }
+  .shead { color:var(--ink-muted); margin:0 0 4px; display:flex; align-items:center; gap:10px; }
+  .shead::after { content:""; flex:1; height:1px; background:var(--rule); }
+  .row { display:flex; flex-wrap:wrap; align-items:baseline; gap:0 12px; min-height:46px; padding:10px 0; }
+  .row .k { min-width:78px; flex:none; color:var(--ink-muted); }
+  .row .v { flex:1; min-width:140px; }
+  .list-row { display:flex; align-items:center; gap:12px; min-height:56px; padding:8px 0; border-bottom:1px solid var(--rule); }
+  .list-row:last-child { border-bottom:0; }
+  .list-row .grow { flex:1; min-width:0; }
+  .card { background:var(--paper-raised); border-radius:14px; padding:12px 14px; }
+  .btn { display:flex; align-items:center; justify-content:center; gap:8px; min-height:48px; border-radius:999px; border:0; padding:0 20px;
+    background:var(--ink); color:var(--paper); font-weight:600; width:100%; }
+  .btn.ghost { background:transparent; color:var(--ink); border:1px solid var(--rule); }
+  .btnrow { display:flex; gap:10px; } .btnrow .btn { flex:1; }
+  .toggle { width:46px; height:28px; border-radius:999px; background:var(--rule); position:relative; flex:none; }
+  .toggle::after { content:""; position:absolute; top:4px; left:4px; width:20px; height:20px; border-radius:50%; background:var(--paper); box-shadow:0 1px 2px rgba(0,0,0,.2); }
+  .toggle.on { background:var(--durba); } .toggle.on::after { left:22px; }
+  .badge { color:var(--durba); font-weight:600; white-space:nowrap; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--ink-muted); display:inline-block; }
+  .bar { width:4px; align-self:stretch; border-radius:0 4px 4px 0; flex:none; }
+  .c-puja { background:var(--alta); } .c-vrata { background:var(--neel); } .c-tithi { background:var(--haldi-strong); } .c-utsav { background:var(--padma); } .c-jayanti { background:var(--ink-muted); }
+  .obs { display:flex; align-items:center; gap:12px; min-height:56px; padding:8px 12px 8px 0; border-radius:12px; background:var(--paper-raised); margin-top:8px; overflow:hidden; }
+  .obs .grow { flex:1; min-width:0; }
+  .search { display:flex; align-items:center; gap:10px; min-height:48px; padding:0 14px; border-radius:999px; background:var(--paper-raised); border:1px solid var(--rule); }
+  .search svg { width:20px; height:20px; color:var(--ink-muted); flex:none; }
+  .prov { margin-top:22px; padding-top:10px; border-top:1px solid var(--rule); color:var(--ink-muted); }
+
+  .nav { flex:none; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--rule); background:var(--paper); padding:5px 2px 12px; }
+  .nav a { display:flex; flex-direction:column; align-items:center; gap:3px; min-height:54px; justify-content:center; color:var(--ink-muted); text-decoration:none; text-align:center; }
+  .nav a svg { width:22px; height:22px; }
+  .nav .pill { padding:4px 18px; border-radius:999px; display:grid; place-items:center; }
+  .nav a.cur { color:var(--ink); } .nav a.cur .pill { background:var(--haldi-container); color:var(--on-haldi-container); }
+
+  /* ---------- Today ---------- */
+  .seal { margin:14px 0 6px; padding:16px; border-radius:20px; background:var(--haldi-container); display:flex; gap:14px; align-items:center; }
+  .ring { flex:none; width:68px; height:68px; position:relative; }
+  .ring > svg { width:68px; height:68px; transform:rotate(-90deg); }
+  .ring .trk { stroke:color-mix(in srgb, var(--haldi-strong) 22%, transparent); }
+  .ring .prg { stroke:var(--haldi-strong); stroke-linecap:round; }
+  .ring .moon { position:absolute; inset:0; display:grid; place-items:center; }
+  .seal .until { color:var(--on-haldi-container); }
+  .bn .sealname { font-size:calc(28px*var(--ts)); line-height:calc(40px*var(--ts)); }
+  .en .sealname { font-size:calc(26px*var(--ts)); line-height:calc(34px*var(--ts)); }
+  .timing { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .tcell { background:var(--paper-raised); border-radius:12px; padding:9px 11px; display:flex; gap:9px; align-items:center; min-height:54px; }
+  .tcell svg { width:20px; height:20px; flex:none; color:var(--haldi-strong); }
+  .tcell.m svg { color:var(--ink-muted); }
+  .period { display:flex; justify-content:space-between; align-items:center; gap:8px; min-height:46px; padding:6px 12px; border-radius:12px; margin-top:6px; }
+  .period.active { background:var(--alta-container); }
+  .period.good.active { background:var(--durba-container); }
+  .now { display:inline-flex; align-items:center; gap:5px; color:var(--alta); font-weight:600; margin-right:6px; }
+  .now::before { content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+  .adslot { margin-top:20px; border:1px dashed var(--rule); border-radius:14px; padding:14px; text-align:center; color:var(--ink-muted); }
+
+  /* ---------- Calendar ---------- */
+  .calhead { display:flex; align-items:center; justify-content:space-between; gap:4px; min-height:52px; }
+  .calhead .ttl { display:flex; align-items:center; gap:4px; }
+  .seg.full { display:flex; width:100%; } .seg.full button { flex:1; }
+  .wk { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; margin-top:12px; color:var(--ink-muted); }
+  .grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; margin-top:4px; }
+  .cell { min-height:58px; border-radius:10px; display:flex; flex-direction:column; align-items:center; padding:5px 0 4px; position:relative; }
+  .cell .b { font-size:calc(16px*var(--ts)); line-height:1.25; font-weight:500; }
+  .cell .g { font-size:calc(10.5px*var(--ts)); color:var(--ink-muted); line-height:1.3; }
+  .cell .mk { height:12px; display:flex; align-items:center; gap:3px; margin-top:1px; font-size:10px; font-weight:600; }
+  .cell .fbar { position:absolute; left:8px; right:8px; bottom:2px; height:3px; border-radius:2px; background:var(--alta); }
+  .cell.sun .b { color:var(--alta); }
+  .cell.today { box-shadow:inset 0 0 0 2px var(--haldi-strong); }
+  .cell.sel { background:var(--haldi-container); }
+  .m-full { width:8px; height:8px; border-radius:50%; background:var(--ink); }
+  .m-hollow { width:8px; height:8px; border-radius:50%; border:1.5px solid var(--ink); }
+  .m-ek { color:var(--neel); }
+  .selstrip { margin-top:14px; padding:12px 14px; border-radius:14px; background:var(--paper-raised); display:flex; align-items:center; gap:10px; }
+  .selstrip .grow { flex:1; }
+  .linkbtn { color:var(--ink); font-weight:600; padding:8px 12px; border-radius:999px; border:1px solid var(--rule); white-space:nowrap; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px; color:var(--ink-muted); }
+  .legend span { display:inline-flex; align-items:center; gap:5px; }
+
+  /* ---------- Festival detail ---------- */
+  .band { margin:0 -16px; padding:18px 16px 18px; background:var(--alta); color:#fff; }
+  [data-theme="dark"] .band { background:#7A1820; }
+  .band .muted2 { color:rgba(255,255,255,.85); }
+  .daysel { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin:12px -16px 0; padding:0 16px; }
+  .daysel::-webkit-scrollbar { display:none; }
+  .daysel span { padding:8px 13px; border-radius:999px; border:1px solid var(--rule); white-space:nowrap; min-height:38px; display:inline-flex; align-items:center; }
+  .daysel span.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .vcard { margin-top:18px; padding:12px 14px; border-radius:14px; background:var(--durba-container); display:flex; gap:10px; }
+
+  /* ---------- Onboarding ---------- */
+  .dots { display:flex; justify-content:center; gap:7px; margin:14px 0 10px; }
+  .dots i { width:8px; height:8px; border-radius:50%; background:var(--rule); } .dots i.on { background:var(--ink); width:22px; border-radius:4px; }
+  .opt { border:1.5px solid var(--rule); border-radius:16px; padding:14px; margin-top:12px; display:flex; gap:12px; }
+  .opt.on { border-color:var(--ink); background:var(--paper-raised); }
+  .radio { width:20px; height:20px; border-radius:50%; border:2px solid var(--ink-muted); flex:none; margin-top:3px; }
+  .opt.on .radio { border-color:var(--ink); box-shadow:inset 0 0 0 4px var(--paper-raised), inset 0 0 0 10px var(--ink); }
+  .soon { display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--haldi-container); color:var(--on-haldi-container); margin-left:4px; }
+  .onb-foot { position:absolute; left:16px; right:16px; bottom:20px; }
+
+  /* ---------- Share card ---------- */
+  .sharecard { width:300px; height:375px; border-radius:18px; overflow:hidden; position:relative; background:#FFF8EE; color:#1F1A3D;
+    box-shadow:0 18px 40px rgba(20,16,50,.22); display:flex; flex-direction:column; align-items:center; text-align:center; padding:26px 22px; }
+  [data-theme="dark"] .sharecard { background:#1E1C38; color:#ECEAF7; }
+  .sharecard .alp { position:absolute; inset:0; opacity:.9; }
+  .sharecard .inner { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; height:100%; }
+</style>
+</head>
+<body>
+<header class="controls">
+  <h1>Bangla Panjika: app mockups <small>Built from the PRD · every value is sample data (নমুনা), not a verified date</small></h1>
+  <div><span class="clabel">Language</span><span class="seg" id="c-lang"><button aria-pressed="true" data-v="bn">বাংলা</button><button aria-pressed="false" data-v="en">English</button></span></div>
+  <div><span class="clabel">Theme</span><span class="seg" id="c-theme"><button aria-pressed="true" data-v="light">Light</button><button aria-pressed="false" data-v="dark">Dark</button></span></div>
+  <div><span class="clabel">Text</span><span class="seg" id="c-ts"><button aria-pressed="true" data-v="1">100%</button><button aria-pressed="false" data-v="1.3">130%</button></span></div>
+  <div><span class="clabel">Names in both scripts</span><span class="seg" id="c-both"><button aria-pressed="true" data-v="off">Off</button><button aria-pressed="false" data-v="on">On</button></span></div>
+</header>
+<div id="root"></div>
+
+<script>
+/* ------------------------------------------------------------------
+   SAMPLE strings. In the app, UI text comes from app_bn.arb / app_en.arb and
+   panchanga/festival names from the pack's `names` / `observances` tables.
+------------------------------------------------------------------- */
+const T = {
+bn: {
+  sb:"৯:৪১", city:"কলকাতা", weekday:"সোমবার", bnDate:"২৫ আশ্বিন ১৪৩৩", gDate:"১২ অক্টোবর ২০২৬",
+  tithi:"শুক্লা সপ্তমী", tUntil:"দুপুর ২:৩২ পর্যন্ত", tThen:"তারপর অষ্টমী",
+  kNak:"নক্ষত্র", nak:"মূলা", nakU:"বিকেল ৪:১০ পর্যন্ত", kYoga:"যোগ", yoga:"শোভন", yogaU:"রাত ৮:০৫ পর্যন্ত", kKarana:"করণ", karana:"গর", karanaU:"দুপুর ২:৩২ পর্যন্ত",
+  sunrise:"সূর্যোদয়", sunriseT:"ভোর ৫:৩৮", sunset:"সূর্যাস্ত", sunsetT:"বিকেল ৫:১৪", moonrise:"চন্দ্রোদয়", moonriseT:"সকাল ১১:৫২", moonset:"চন্দ্রাস্ত", moonsetT:"রাত ১০:৪০",
+  hPeriods:"আজকের সময়", now:"এখন", rahu:"রাহুকাল", rahuT:"৭:৩২–৯:০০", barabela:"বারবেলা", barabelaT:"১০:৩০–১১:৫৮",
+  hToday:"আজ", fShashthi:"দুর্গাষষ্ঠী", hUp:"আসছে", fAshtami:"মহাষ্টমী", in2:"২ দিন বাকি", fLakshmi:"লক্ষ্মীপূজা", in8:"৮ দিন বাকি", fKali:"কালীপূজা", in27:"২৭ দিন বাকি",
+  prov:"দৃক (বিশুদ্ধ) · কলকাতা · IST", ad:"বিজ্ঞাপন (নেটিভ কার্ড, শুধু এখানে)",
+  nav:["আজ","পঞ্জিকা","পার্বণ","আরও"],
+  // onboarding
+  appName:"বাংলা পঞ্জিকা", appName2:"Bangla Panjika", chooseLang:"ভাষা বেছে নিন", chooseLang2:"Choose your language",
+  previewBn:"আজ শুক্লা সপ্তমী", previewEn:"Today is Shukla Saptami", laterBoth:"পরে সেটিংসে বদলানো যাবে · You can change this later",
+  contBoth:"এগিয়ে যান · Continue", trQ:"কোন পঞ্জিকা মেনে চলেন?", trDrik:"বিশুদ্ধ সিদ্ধান্ত (দৃক)", trDrikD:"আধুনিক জ্যোতির্বিজ্ঞান মতে। বেলুড় মঠ এই মত মানে।",
+  trSurya:"গুপ্তপ্রেস (সূর্যসিদ্ধান্ত)", trSuryaD:"প্রাচীন পদ্ধতি।", soon:"শীঘ্রই আসছে", trNote:"দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।", cont:"এগিয়ে যান",
+  // calendar
+  calTitle:"আশ্বিন ১৪৩৩", modeBn:"বাংলা মাস", modeEn:"ইংরেজি মাস", todayBtn:"আজ",
+  wk:["রবি","সোম","মঙ্গল","বুধ","বৃহ","শুক্র","শনি"], ekMark:"এ",
+  selected:"নির্বাচিত: ২৫ আশ্বিন", selInfo:"শুক্লা সপ্তমী · দুর্গাষষ্ঠী", view:"দেখুন",
+  lgFull:"পূর্ণিমা", lgHollow:"অমাবস্যা", lgEk:"একাদশী", lgFest:"উৎসব", banner:"ব্যানার বিজ্ঞাপন",
+  // day detail
+  back:"পঞ্জিকা", share:"শেয়ার", dWeekday:"মঙ্গলবার", dBn:"২৬ আশ্বিন ১৪৩৩", dG:"১৩ অক্টোবর ২০২৬",
+  hTithi:"তিথি", kTithi:"তিথি", dTithi:"শুক্লা অষ্টমী", dTithiU:"দুপুর ১:০৫ পর্যন্ত, তারপর নবমী", kPaksha:"পক্ষ", paksha:"শুক্লপক্ষ",
+  dNak:"পূর্বাষাঢ়া · বিকেল ৩:৪০ পর্যন্ত", dYoga:"অতিগণ্ড · রাত ৯:১২ পর্যন্ত", dKarana:"বিষ্টি · দুপুর ১:০৫ পর্যন্ত",
+  hSunMoon:"সূর্য ও চন্দ্র", kSun:"সূর্যোদয় / সূর্যাস্ত", vSun:"৫:৩৮ / ৫:১৩", kMoon:"চন্দ্রোদয় / চন্দ্রাস্ত", vMoon:"১২:৪০ / রাত ১১:৩৫",
+  hGood:"শুভ সময়", amrita:"অমৃতযোগ", amritaT:"৬:১৫–৮:৪০", mahendra:"মাহেন্দ্রযোগ", mahendraT:"১০:২০–১১:৫৫",
+  hBad:"অশুভ সময়", yama:"যমগণ্ড", yamaT:"৯:০০–১০:৩০", gulika:"গুলিক", gulikaT:"১২:০০–১:৩০", dRahuT:"৩:০০–৪:৩০", kalabela:"কালবেলা", kalabelaT:"১:৩০–৩:০০", kalaratri:"কালরাত্রি", kalaratriT:"রাত ১:১০–২:৪৫ (পরদিন)",
+  hObs:"উৎসব ও ব্রত", fSaptami:"মহাসপ্তমী", dProv1:"বিশুদ্ধ সিদ্ধান্ত · কলকাতা (২২.৫৭° উ, ৮৮.৩৬° পূ) · IST", dProv2:"তথ্য v৩ · যাচাই: পঞ্জিকা মিলিয়ে দেখা",
+  // festivals
+  festTitle:"পার্বণ ১৪৩৩", fAll:"সব", fPuja:"পূজা", fVrata:"ব্রত", fTithiC:"তিথি", fUtsav:"উৎসব", fJayanti:"জয়ন্তী",
+  mAshwin:"আশ্বিন", mKartik:"কার্তিক", fMahalaya:"মহালয়া", fNavami:"মহানবমী", fDashami:"বিজয়া দশমী", fBhai:"ভাইফোঁটা", fJagad:"জগদ্ধাত্রী পূজা", fEkadashi:"পাপাঙ্কুশা একাদশী",
+  d6:"মঙ্গল, ৬ অক্টো", d12:"সোম, ১২ অক্টো", d13:"মঙ্গল, ১৩ অক্টো", d14:"বুধ, ১৪ অক্টো", d15:"বৃহ, ১৫ অক্টো", d16:"শুক্র, ১৬ অক্টো", d18:"রবি, ১৮ অক্টো", d20:"মঙ্গল, ২০ অক্টো", d8n:"রবি, ৮ নভে", d10n:"মঙ্গল, ১০ নভে", d17n:"মঙ্গল, ১৭ নভে",
+  // festival detail
+  fdBack:"পার্বণ", fdDate:"বুধবার, ২৭ আশ্বিন ১৪৩৩", fdDate2:"১৪ অক্টোবর ২০২৬",
+  days:["ষষ্ঠী","সপ্তমী","অষ্টমী","নবমী","দশমী"], fdTithiV:"অষ্টমী · সকাল ১১:২০ পর্যন্ত", kSandhi:"সন্ধিপূজা", sandhiT:"সকাল ১০:৫৬–১১:৪৪", sandhiNote:"অষ্টমীর শেষ ২৪ মিনিট ও নবমীর প্রথম ২৪ মিনিট",
+  fdDesc:"মহাষ্টমী দুর্গাপূজার সবচেয়ে গুরুত্বপূর্ণ দিন। সকালে মণ্ডপে মণ্ডপে পুষ্পাঞ্জলি দেওয়া হয়, অনেকে এদিন উপবাস রাখেন। অষ্টমী ও নবমী তিথির সন্ধিক্ষণে হয় সন্ধিপূজা, যেখানে ১০৮টি প্রদীপ জ্বালানো ও ১০৮টি পদ্ম নিবেদন করা হয়। (নমুনা বিবরণ)",
+  vcard:"বিশুদ্ধ সিদ্ধান্ত পঞ্জিকার সঙ্গে মিলিয়ে দেখা ও বিশেষজ্ঞ যাচাইকৃত।", vcard2:"যাচাই: চৈত্র ১৪৩২", remind:"মনে করিয়ে দিন", shareBtn:"শেয়ার করুন",
+  // city
+  cityTitle:"শহর বেছে নিন", citySearch:"শহরের নাম লিখুন", useLoc:"আমার অবস্থান ব্যবহার করুন", hRecent:"সাম্প্রতিক", hWB:"পশ্চিমবঙ্গ", hOther:"অন্যান্য শহর", sr:"সূর্যোদয়",
+  cities:[["কলকাতা","কলকাতা","৫:৩৮"],["হাওড়া","হাওড়া","৫:৩৯"],["বর্ধমান","পূর্ব বর্ধমান","৫:৪২"],["দুর্গাপুর","পশ্চিম বর্ধমান","৫:৪৪"],["শিলিগুড়ি","দার্জিলিং","৫:৩৪"],["খড়্গপুর","পশ্চিম মেদিনীপুর","৫:৪১"]],
+  others:["দিল্লি","মুম্বই","বেঙ্গালুরু","চেন্নাই","হায়দরাবাদ","পুনে"],
+  // reminders
+  remTitle:"অনুস্মারক", hRegular:"নিয়মিত", ekadashi:"একাদশী", purnima:"পূর্ণিমা", amavasya:"অমাবস্যা", dayBefore8:"আগের দিন রাত ৮টা", hFestRem:"উৎসব", morning6:"সেদিন সকাল ৬টা", addFest:"উৎসব যোগ করুন",
+  // settings
+  setTitle:"সেটিংস", sLang:"ভাষা", sBoth:"নাম দুই লিপিতে", sBothPrev:"শুক্লা সপ্তমী / Shukla Saptami", sTrad:"পঞ্জিকার মত", sTradV:"বিশুদ্ধ সিদ্ধান্ত", sCity:"শহর", sTheme:"থিম", tAuto:"স্বয়ংক্রিয়", tLight:"হালকা", tDark:"গাঢ়",
+  sSize:"লেখার আকার", sSizePrev:"আজ শুক্লা সপ্তমী", sTime:"সময়ের ধরন", sTimeV:"১২ ঘণ্টা", sNum:"সংখ্যা", sNumV:"বাংলা (১২৩)", hData:"তথ্য", sUpdate:"তথ্য হালনাগাদ", sUpdateV:"এখন দেখুন", sYears:"ডাউনলোড করা বছর", sYearsV:"১৪৩২–১৪৩৫",
+  hOtherS:"অন্যান্য", sAds:"বিজ্ঞাপন সরান", sPrivacy:"গোপনীয়তা", sLicence:"লাইসেন্স", sAbout:"সম্পর্কে",
+  // more
+  moreTitle:"আরও", moreItems:[["bell","অনুস্মারক"],["search","খুঁজুন"],["pin","শহর"],["book","শব্দকোষ"],["gear","সেটিংস"],["check","তথ্যসূত্র ও যাচাই"],["flag","ভুল জানান"],["star","বিজ্ঞাপন সরান"],["info","সম্পর্কে / গোপনীয়তা"]],
+  // sources
+  srcTitle:"তথ্যসূত্র ও যাচাই", srcHow:"আমরা কীভাবে হিসাব করি", srcSteps:["জ্যোতির্বিজ্ঞানের হিসাব (NASA JPL)","রাষ্ট্রীয় পঞ্চাঙ্গের সঙ্গে মিলানো","মুদ্রিত পঞ্জিকার সঙ্গে মিলানো","প্রধান উৎসব বিশেষজ্ঞের যাচাই"],
+  srcMarks:"চিহ্নের অর্থ", mExpert:"বিশেষজ্ঞ যাচাইকৃত", mRef:"পঞ্জিকা মিলিয়ে দেখা", mComp:"শুধু গণনাকৃত", srcPhone:"এই ফোনের তথ্য", srcPacks:"গ্লোবাল v৩ · শহর v২ · উৎসব v৪", srcLast:"শেষ যাচাই: চৈত্র ১৪৩২", srcWhy:"দুই মত কেন আলাদা?", report:"ভুল জানান",
+  // search
+  sQuery:"কালী", sEx:"উদাহরণ: ২৫ আশ্বিন ১৪৩৩ · 12/10/2026 · কালীপূজা", hRes:"ফলাফল", resDate:"২৫ আশ্বিন ১৪৩৩ = ১২ অক্টোবর ২০২৬", resK1:"কালীপূজা ১৪৩৩", resK1d:"রবি, ৮ নভেম্বর ২০২৬", resK2:"কালীপূজা ১৪৩৪", resK2d:"বুধ, ২৭ অক্টোবর ২০২৭",
+  // share
+  scBy:"বিশুদ্ধ সিদ্ধান্ত মতে", scDate:"বুধবার, ২৭ আশ্বিন ১৪৩৩", scDate2:"১৪ অক্টোবর ২০২৬", scApp:"বাংলা পঞ্জিকা",
+  // glossary sheet
+  gTerm:"বারবেলা", gText:"দিনের একটি অংশ, যা পঞ্জিকা মতে নতুন কাজ শুরু বা যাত্রার জন্য অশুভ ধরা হয়। কোন অংশ, তা বার অনুযায়ী বদলায়।", gMore:"শব্দকোষে দেখুন",
+},
+en: {
+  sb:"9:41", city:"Kolkata", weekday:"Monday", bnDate:"25 Ashwin 1433", gDate:"12 October 2026",
+  tithi:"Shukla Saptami", tUntil:"until 2:32 PM", tThen:"then Ashtami",
+  kNak:"Nakshatra", nak:"Mula", nakU:"until 4:10 PM", kYoga:"Yoga", yoga:"Shobhana", yogaU:"until 8:05 PM", kKarana:"Karana", karana:"Gara", karanaU:"until 2:32 PM",
+  sunrise:"Sunrise", sunriseT:"5:38 AM", sunset:"Sunset", sunsetT:"5:14 PM", moonrise:"Moonrise", moonriseT:"11:52 AM", moonset:"Moonset", moonsetT:"10:40 PM",
+  hPeriods:"Today's periods", now:"Now", rahu:"Rahu Kaal", rahuT:"7:32–9:00 AM", barabela:"Barabela", barabelaT:"10:30–11:58 AM",
+  hToday:"Today", fShashthi:"Durga Shashthi", hUp:"Coming up", fAshtami:"Maha Ashtami", in2:"in 2 days", fLakshmi:"Lakshmi Puja", in8:"in 8 days", fKali:"Kali Puja", in27:"in 27 days",
+  prov:"Drik (Bishuddha) · Kolkata · IST", ad:"Ad (native card, only here)",
+  nav:["Today","Calendar","Festivals","More"],
+  appName:"বাংলা পঞ্জিকা", appName2:"Bangla Panjika", chooseLang:"ভাষা বেছে নিন", chooseLang2:"Choose your language",
+  previewBn:"আজ শুক্লা সপ্তমী", previewEn:"Today is Shukla Saptami", laterBoth:"পরে সেটিংসে বদলানো যাবে · You can change this later",
+  contBoth:"এগিয়ে যান · Continue", trQ:"Which panjika do you follow?", trDrik:"Bishuddha Siddhanta (Drik)", trDrikD:"Based on modern astronomy. Followed by Belur Math.",
+  trSurya:"Gupta Press (Surya Siddhanta)", trSuryaD:"The traditional method.", soon:"Coming soon", trNote:"The two can put a festival on different days. You can change this in Settings.", cont:"Continue",
+  calTitle:"Ashwin 1433", modeBn:"Bengali month", modeEn:"English month", todayBtn:"Today",
+  wk:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], ekMark:"E",
+  selected:"Selected: 25 Ashwin", selInfo:"Shukla Saptami · Durga Shashthi", view:"View",
+  lgFull:"Purnima", lgHollow:"Amavasya", lgEk:"Ekadashi", lgFest:"Festival", banner:"Banner ad",
+  back:"Calendar", share:"Share", dWeekday:"Tuesday", dBn:"26 Ashwin 1433", dG:"13 October 2026",
+  hTithi:"Tithi", kTithi:"Tithi", dTithi:"Shukla Ashtami", dTithiU:"until 1:05 PM, then Navami", kPaksha:"Paksha", paksha:"Shukla Paksha",
+  dNak:"Purva Ashadha · until 3:40 PM", dYoga:"Atiganda · until 9:12 PM", dKarana:"Vishti · until 1:05 PM",
+  hSunMoon:"Sun & Moon", kSun:"Sunrise / Sunset", vSun:"5:38 AM / 5:13 PM", kMoon:"Moonrise / Moonset", vMoon:"12:40 PM / 11:35 PM",
+  hGood:"Auspicious times", amrita:"Amrita Yoga", amritaT:"6:15–8:40 AM", mahendra:"Mahendra Yoga", mahendraT:"10:20–11:55 AM",
+  hBad:"Inauspicious times", yama:"Yamaganda", yamaT:"9:00–10:30 AM", gulika:"Gulika Kaal", gulikaT:"12:00–1:30 PM", dRahuT:"3:00–4:30 PM", kalabela:"Kalabela", kalabelaT:"1:30–3:00 PM", kalaratri:"Kalaratri", kalaratriT:"1:10–2:45 AM (next day)",
+  hObs:"Festivals & vratas", fSaptami:"Maha Saptami", dProv1:"Bishuddha Siddhanta · Kolkata (22.57° N, 88.36° E) · IST", dProv2:"Data v3 · Checked with panjika",
+  festTitle:"Festivals 1433", fAll:"All", fPuja:"Puja", fVrata:"Vrata", fTithiC:"Tithi", fUtsav:"Festival", fJayanti:"Jayanti",
+  mAshwin:"Ashwin", mKartik:"Kartik", fMahalaya:"Mahalaya", fNavami:"Maha Navami", fDashami:"Vijaya Dashami", fBhai:"Bhai Phonta", fJagad:"Jagaddhatri Puja", fEkadashi:"Papankusha Ekadashi",
+  d6:"Tue, 6 Oct", d12:"Mon, 12 Oct", d13:"Tue, 13 Oct", d14:"Wed, 14 Oct", d15:"Thu, 15 Oct", d16:"Fri, 16 Oct", d18:"Sun, 18 Oct", d20:"Tue, 20 Oct", d8n:"Sun, 8 Nov", d10n:"Tue, 10 Nov", d17n:"Tue, 17 Nov",
+  fdBack:"Festivals", fdDate:"Wednesday, 27 Ashwin 1433", fdDate2:"14 October 2026",
+  days:["Shashthi","Saptami","Ashtami","Navami","Dashami"], fdTithiV:"Ashtami · until 11:20 AM", kSandhi:"Sandhi Puja", sandhiT:"10:56–11:44 AM", sandhiNote:"Last 24 minutes of Ashtami and first 24 minutes of Navami",
+  fdDesc:"Maha Ashtami is the most important day of Durga Puja. In the morning, families gather at the pandal to offer pushpanjali, and many keep a fast. Sandhi Puja is performed at the meeting point of the Ashtami and Navami tithis, with 108 lamps lit and 108 lotuses offered. (Sample description)",
+  vcard:"Checked against the Bishuddha Siddhanta panjika and reviewed by an expert.", vcard2:"Verified: Chaitra 1432", remind:"Remind me", shareBtn:"Share",
+  cityTitle:"Choose city", citySearch:"Type a city name", useLoc:"Use my location", hRecent:"Recent", hWB:"West Bengal", hOther:"Other cities", sr:"Sunrise",
+  cities:[["Kolkata","Kolkata","5:38 AM"],["Howrah","Howrah","5:39 AM"],["Bardhaman","Purba Bardhaman","5:42 AM"],["Durgapur","Paschim Bardhaman","5:44 AM"],["Siliguri","Darjeeling","5:34 AM"],["Kharagpur","Paschim Medinipur","5:41 AM"]],
+  others:["Delhi","Mumbai","Bengaluru","Chennai","Hyderabad","Pune"],
+  remTitle:"Reminders", hRegular:"Regular", ekadashi:"Ekadashi", purnima:"Purnima", amavasya:"Amavasya", dayBefore8:"Day before, 8:00 PM", hFestRem:"Festivals", morning6:"Same day, 6:00 AM", addFest:"Add a festival",
+  setTitle:"Settings", sLang:"Language", sBoth:"Names in both scripts", sBothPrev:"Shukla Saptami / শুক্লা সপ্তমী", sTrad:"Panjika tradition", sTradV:"Bishuddha Siddhanta", sCity:"City", sTheme:"Theme", tAuto:"Auto", tLight:"Light", tDark:"Dark",
+  sSize:"Text size", sSizePrev:"Today is Shukla Saptami", sTime:"Time format", sTimeV:"12-hour", sNum:"Numerals", sNumV:"Latin (123)", hData:"Data", sUpdate:"Data updates", sUpdateV:"Check now", sYears:"Downloaded years", sYearsV:"1432–1435",
+  hOtherS:"Other", sAds:"Remove ads", sPrivacy:"Privacy", sLicence:"Licences", sAbout:"About",
+  moreTitle:"More", moreItems:[["bell","Reminders"],["search","Search"],["pin","City"],["book","Glossary"],["gear","Settings"],["check","Sources & verification"],["flag","Report an error"],["star","Remove ads"],["info","About / Privacy"]],
+  srcTitle:"Sources & verification", srcHow:"How we calculate", srcSteps:["Astronomical calculation (NASA JPL)","Checked against the Rashtriya Panchang","Checked against the printed panjika","Major festivals reviewed by an expert"],
+  srcMarks:"What the marks mean", mExpert:"Expert reviewed", mRef:"Checked with panjika", mComp:"Computed only", srcPhone:"Data on this phone", srcPacks:"Global v3 · Cities v2 · Festivals v4", srcLast:"Last verified: Chaitra 1432", srcWhy:"Why do the two schools differ?", report:"Report an error",
+  sQuery:"Kali", sEx:"Examples: 25 Ashwin 1433 · 12/10/2026 · Kali Puja", hRes:"Results", resDate:"25 Ashwin 1433 = 12 October 2026", resK1:"Kali Puja 1433", resK1d:"Sun, 8 November 2026", resK2:"Kali Puja 1434", resK2d:"Wed, 27 October 2027",
+  scBy:"As per Bishuddha Siddhanta", scDate:"Wednesday, 27 Ashwin 1433", scDate2:"14 October 2026", scApp:"Bangla Panjika",
+  gTerm:"Barabela", gText:"A part of the day that the panjika considers inauspicious for starting new work or travel. Which part it is depends on the weekday.", gMore:"Open in Glossary",
+}};
+
+/* ---------- state ---------- */
+const S = { lang:"bn", both:false };
+const t = k => T[S.lang][k];
+const o = k => T[S.lang === "bn" ? "en" : "bn"][k];            // other script, for "names in both scripts"
+const nm = (k, cls="body") => `<div class="${cls}">${t(k)}</div><div class="cap second">${o(k)}</div>`;
+const BN = "০১২৩৪৫৬৭৮৯";
+const num = n => S.lang === "bn" ? String(n).replace(/\d/g, d => BN[d]) : String(n);
+
+/* ---------- icons ---------- */
+const I = {
+  back:'<path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  share:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></g>',
+  search:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g>',
+  pin:'<path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/>',
+  loc:'<g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></g>',
+  bell:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15Z"/><path d="M10 20a2 2 0 0 0 4 0"/></g>',
+  book:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></g>',
+  gear:'<g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></g>',
+  check:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5Z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></g>',
+  flag:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></g>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+  info:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></g>',
+  chev:'<path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  left:'<path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  right:'<path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  down:'<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  plus:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  sunup:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18h16M7 15a5 5 0 0 1 10 0M12 4v5M9.5 6.5L12 4l2.5 2.5"/></g>',
+  sundown:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18h16M7 15a5 5 0 0 1 10 0M12 4v5M9.5 6.5L12 9l2.5-2.5"/></g>',
+  moonup:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 4a7 7 0 1 0 5 12 6 6 0 0 1-5-12Z"/><path d="M4 21l2-2 2 2"/></g>',
+  moondown:'<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 4a7 7 0 1 0 5 12 6 6 0 0 1-5-12Z"/><path d="M4 19l2 2 2-2"/></g>',
+  navToday:'<g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16 4 8 0 0 0 0-16Z" fill="currentColor"/></g>',
+  navCal:'<g fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></g>',
+  navFest:'<g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c2 3 5 4 5 8a5 5 0 0 1-10 0c0-4 3-5 5-8Z"/><path d="M8 21h8"/></g>',
+  navMore:'<g fill="currentColor"><circle cx="6" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18" cy="12" r="1.8"/></g>',
+};
+const ic = (n, cls="ico") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+
+/* ---------- shared pieces ---------- */
+const nav = cur => `<nav class="nav cap">${["navToday","navCal","navFest","navMore"].map((n,i) =>
+  `<a class="${i===cur?"cur":""}"><span class="pill">${ic(n)}</span><span>${t("nav")[i]}</span></a>`).join("")}</nav>`;
+const appbar = (title, right="") => `<div class="appbar"><span class="ib">${ic("back")}</span><span class="grow title" style="font-size:calc(20px*var(--ts))">${title}</span>${right}</div>`;
+const cityChip = () => `<span class="chip lbl">${ic("pin")}${t("city")} ${ic("down")}</span>`;
+const badge = s => s===2 ? `<span class="badge lbl">✓✓</span>` : s===1 ? `<span class="badge lbl">✓</span>` : `<span class="dot"></span>`;
+const ring = (p=.62) => `<div class="ring" aria-hidden="true"><svg viewBox="0 0 68 68"><circle class="trk" cx="34" cy="34" r="29" fill="none" stroke-width="5"/>
+  <circle class="prg" cx="34" cy="34" r="29" fill="none" stroke-width="5" stroke-dasharray="182.2" stroke-dashoffset="${182.2*(1-p)}"/></svg>
+  <div class="moon"><svg viewBox="0 0 32 32" width="24" height="24"><circle cx="16" cy="16" r="11" fill="color-mix(in srgb, var(--haldi-strong) 18%, var(--paper))"/><path d="M16 5A11 11 0 0 1 16 27A4 11 0 0 1 16 5Z" fill="var(--haldi-strong)"/></svg></div></div>`;
+const obs = (k, right, cat="c-puja") => `<div class="obs"><span class="bar ${cat}"></span><div class="grow">${nm(k)}</div>${right}</div>`;
+const shead = k => `<div class="shead lbl">${t(k)}</div>`;
+
+/* ---------- screens ---------- */
+const screens = {
+onbLang: () => `<div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+  <div style="display:flex;justify-content:center;margin-top:18px">${ring(.66)}</div>
+  <div style="text-align:center;margin-top:10px"><div class="title">${t("appName")}</div><div class="cap muted">${t("appName2")}</div></div>
+  <div style="margin-top:22px"><div class="lbl">${t("chooseLang")}</div><div class="cap muted">${t("chooseLang2")}</div></div>
+  <div class="opt ${S.lang==="bn"?"on":""}" lang="bn"><span class="radio"></span><div><div class="body" style="font-family:'Noto Sans Bengali'">বাংলা</div><div class="cap muted" style="font-family:'Noto Sans Bengali'">${t("previewBn")}</div></div></div>
+  <div class="opt ${S.lang==="en"?"on":""}" lang="en"><span class="radio"></span><div><div class="body" style="font-family:'Noto Sans'">English</div><div class="cap muted" style="font-family:'Noto Sans'">${t("previewEn")}</div></div></div>
+  <div class="onb-foot"><div class="cap muted" style="text-align:center;margin-bottom:10px">${t("laterBoth")}</div><button class="btn">${t("contBoth")}</button></div>`,
+
+onbTrad: () => `<div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+  <div class="headline" style="margin-top:16px">${t("trQ")}</div>
+  <div class="opt on"><span class="radio"></span><div><div class="body" style="font-weight:600">${t("trDrik")}</div><div class="cap muted">${t("trDrikD")}</div></div></div>
+  <div class="opt"><span class="radio"></span><div><div class="body" style="font-weight:600">${t("trSurya")}</div><div class="cap muted">${t("trSuryaD")} <span class="soon">${t("soon")}</span></div></div></div>
+  <div class="cap muted" style="margin-top:16px">${t("trNote")}</div>
+  <div class="onb-foot"><button class="btn">${t("cont")}</button></div>`,
+
+today: () => `<div class="appbar" style="margin:0"><span class="lbl muted grow">${t("weekday")}</span>${cityChip()}</div>
+  <div class="display">${t("bnDate")}</div><div class="cap second">${o("bnDate")}</div>
+  <div class="body muted">${t("gDate")}</div>
+  <div class="seal">${ring()}<div><div class="sealname" style="font-family:'Tiro Bangla',serif">${t("tithi")}</div><div class="cap second">${o("tithi")}</div>
+    <div class="body until tnum">${t("tUntil")}</div><div class="lbl muted">${t("tThen")}</div></div></div>
+  <div class="row"><span class="k lbl">${t("kNak")}</span><span class="v body">${t("nak")} <span class="muted">· ${t("nakU")}</span></span></div>
+  <div class="row"><span class="k lbl">${t("kYoga")}</span><span class="v body">${t("yoga")} <span class="muted">· ${t("yogaU")}</span></span></div>
+  <div class="row"><span class="k lbl">${t("kKarana")}</span><span class="v body">${t("karana")} <span class="muted">· ${t("karanaU")}</span></span></div>
+  <div class="section timing">
+    <div class="tcell">${ic("sunup")}<div><div class="cap muted">${t("sunrise")}</div><div class="body tnum">${t("sunriseT")}</div></div></div>
+    <div class="tcell">${ic("sundown")}<div><div class="cap muted">${t("sunset")}</div><div class="body tnum">${t("sunsetT")}</div></div></div>
+    <div class="tcell m">${ic("moonup")}<div><div class="cap muted">${t("moonrise")}</div><div class="body tnum">${t("moonriseT")}</div></div></div>
+    <div class="tcell m">${ic("moondown")}<div><div class="cap muted">${t("moonset")}</div><div class="body tnum">${t("moonsetT")}</div></div></div>
+  </div>
+  <div class="section">${shead("hPeriods")}
+    <div class="period active"><span class="body"><span class="now lbl">${t("now")}</span>${t("rahu")}</span><span class="body tnum">${t("rahuT")}</span></div>
+    <div class="period"><span class="body">${t("barabela")}</span><span class="body tnum">${t("barabelaT")}</span></div></div>
+  <div class="section">${shead("hToday")}${obs("fShashthi", badge(2))}</div>
+  <div class="section">${shead("hUp")}${obs("fAshtami", `<span class="lbl muted">${t("in2")}</span>`)}${obs("fLakshmi", `<span class="lbl muted">${t("in8")}</span>`)}${obs("fKali", `<span class="lbl muted">${t("in27")}</span>`)}</div>
+  <div class="adslot cap">${t("ad")}</div>
+  <div class="prov cap">${t("prov")}</div>`,
+
+calendar: () => {
+  // SAMPLE month: 30 days, 1 Ashwin = Fri 18 Sep 2026 (derived from the PRD's sample "25 Ashwin = 12 Oct").
+  const start = 5, len = 30, today = 25;
+  const marks = {4:"full", 19:"hollow", 15:"ek", 30:"ek"}, fest = new Set([19,25,26,27,28,29]);
+  let cells = "";
+  for (let i = 0; i < start; i++) cells += `<div></div>`;
+  for (let d = 1; d <= len; d++) {
+    const g = 17 + d, gd = g > 30 ? g - 30 : g, wd = (start + d - 1) % 7;
+    const m = marks[d] === "full" ? `<span class="m-full"></span>` : marks[d] === "hollow" ? `<span class="m-hollow"></span>` : marks[d] === "ek" ? `<span class="m-ek">${t("ekMark")}</span>` : "";
+    cells += `<div class="cell ${wd===0?"sun":""} ${d===today?"today sel":""}"><span class="b">${num(d)}</span><span class="g">${num(gd)}</span><span class="mk">${m}</span>${fest.has(d)?'<span class="fbar"></span>':""}</div>`;
+  }
+  return `<div class="calhead"><span class="ib">${ic("left")}</span><span class="ttl title">${t("calTitle")} ${ic("down")}</span><span class="ib">${ic("right")}</span><span class="chip lbl">${t("todayBtn")}</span></div>
+  <div style="display:flex;gap:8px;align-items:center"><span class="seg full cap"><button aria-pressed="true">${t("modeBn")}</button><button aria-pressed="false">${t("modeEn")}</button></span><span class="ib" style="width:40px;height:40px;display:grid;place-items:center">${ic("info")}</span></div>
+  <div class="wk cap">${t("wk").map((w,i)=>`<span class="${i===0?"alta":""}">${w}</span>`).join("")}</div>
+  <div class="grid">${cells}</div>
+  <div class="legend cap"><span><span class="m-full"></span>${t("lgFull")}</span><span><span class="m-hollow"></span>${t("lgHollow")}</span><span><b class="m-ek">${t("ekMark")}</b>${t("lgEk")}</span><span><span style="width:14px;height:3px;background:var(--alta);border-radius:2px;display:inline-block"></span>${t("lgFest")}</span></div>
+  <div class="selstrip"><div class="grow"><div class="lbl">${t("selected")}</div><div class="cap muted">${t("selInfo")}</div></div><span class="linkbtn lbl">${t("view")}</span></div>`;
+},
+
+day: () => `${appbar(t("back"), `<span class="ib">${ic("share")}</span>`)}
+  <div class="lbl muted">${t("dWeekday")}</div><div class="display">${t("dBn")}</div><div class="cap second">${o("dBn")}</div><div class="body muted">${t("dG")}</div>
+  <div class="section">${shead("hTithi")}
+    <div class="row"><span class="k lbl">${t("kTithi")}</span><span class="v">${nm("dTithi")}<div class="cap muted">${t("dTithiU")}</div></span></div>
+    <div class="row"><span class="k lbl">${t("kPaksha")}</span><span class="v body">${t("paksha")}</span></div>
+    <div class="row"><span class="k lbl">${t("kNak")}</span><span class="v body">${t("dNak")}</span></div>
+    <div class="row"><span class="k lbl">${t("kYoga")}</span><span class="v body">${t("dYoga")}</span></div>
+    <div class="row"><span class="k lbl">${t("kKarana")}</span><span class="v body">${t("dKarana")}</span></div></div>
+  <div class="section">${shead("hSunMoon")}
+    <div class="row"><span class="k lbl" style="min-width:150px">${t("kSun")}</span><span class="v body tnum" style="min-width:0">${t("vSun")}</span></div>
+    <div class="row"><span class="k lbl" style="min-width:150px">${t("kMoon")}</span><span class="v body tnum" style="min-width:0">${t("vMoon")}</span></div></div>
+  <div class="section">${shead("hGood")}
+    <div class="period good active"><span class="body"><span class="now lbl" style="color:var(--durba)">${t("now")}</span>${t("amrita")}</span><span class="body tnum">${t("amritaT")}</span></div>
+    <div class="period"><span class="body">${t("mahendra")}</span><span class="body tnum">${t("mahendraT")}</span></div></div>
+  <div class="section">${shead("hBad")}
+    ${[["rahu","dRahuT"],["yama","yamaT"],["gulika","gulikaT"],["barabela","barabelaT"],["kalabela","kalabelaT"],["kalaratri","kalaratriT"]].map(([a,b])=>`<div class="period"><span class="body">${t(a)}</span><span class="body tnum" style="text-align:right">${t(b)}</span></div>`).join("")}</div>
+  <div class="section">${shead("hObs")}${obs("fSaptami", badge(2))}</div>
+  <div class="prov cap">${t("dProv1")}<br>${t("dProv2")}</div>`,
+
+festivals: () => {
+  const r = (k, d, s, bell, cat="c-puja") => `<div class="list-row"><span class="bar ${cat}" style="height:40px"></span><div class="grow">${nm(k)}<div class="cap muted">${t(d)}</div></div>${badge(s)}${bell?`<span class="ib" style="width:36px;height:36px;display:grid;place-items:center;color:var(--haldi-strong)">${ic("bell")}</span>`:'<span style="width:36px"></span>'}</div>`;
+  return `<div class="appbar" style="margin:0"><span class="grow title">${t("festTitle")}</span><span class="ib">${ic("search")}</span></div>
+  <div class="chips cap">${["fAll","fPuja","fVrata","fTithiC","fUtsav","fJayanti"].map((k,i)=>`<span class="chip ${i===0?"on":""}">${t(k)}</span>`).join("")}</div>
+  <div class="section" style="margin-top:12px">${shead("mAshwin")}
+    ${r("fMahalaya","d6",2,false,"c-tithi")}${r("fShashthi","d12",2,true)}${r("fSaptami","d13",2,false)}${r("fAshtami","d14",2,true)}${r("fNavami","d15",2,false)}${r("fDashami","d16",2,false)}</div>
+  <div class="section">${shead("mKartik")}${r("fEkadashi","d18",1,true,"c-vrata")}${r("fLakshmi","d20",2,true)}${r("fKali","d8n",2,true)}${r("fBhai","d10n",1,false,"c-utsav")}${r("fJagad","d17n",1,false)}</div>`;
+},
+
+festDetail: () => `<div class="band">
+    <div class="appbar" style="color:#fff"><span class="ib">${ic("back")}</span><span class="grow lbl">${t("fdBack")}</span><span class="ib">${ic("share")}</span></div>
+    <div class="headline">${t("fAshtami")}</div><div class="cap muted2">${o("fAshtami")}</div>
+    <div class="body muted2" style="margin-top:4px">${t("fdDate")}</div><div class="cap muted2">${t("fdDate2")}</div></div>
+  <div class="daysel lbl">${t("days").map((d,i)=>`<span class="${i===2?"on":""}">${d}</span>`).join("")}</div>
+  <div class="row" style="margin-top:8px"><span class="k lbl">${t("kTithi")}</span><span class="v body">${t("fdTithiV")}</span></div>
+  <div class="row"><span class="k lbl">${t("kSandhi")}</span><span class="v"><div class="body tnum">${t("sandhiT")}</div><div class="cap muted">${t("sandhiNote")}</div></span></div>
+  <div class="body" style="margin-top:12px">${t("fdDesc")}</div>
+  <div class="vcard"><span class="badge body">✓✓</span><div><div class="lbl">${t("vcard")}</div><div class="cap muted">${t("vcard2")}</div></div></div>
+  <div class="btnrow" style="margin-top:18px"><button class="btn">${ic("bell")} ${t("remind")}</button><button class="btn ghost">${ic("share")} ${t("shareBtn")}</button></div>`,
+
+city: () => `${appbar(t("cityTitle"))}
+  <div class="search body">${ic("search")}<span class="muted">${t("citySearch")}</span></div>
+  <div class="list-row" style="margin-top:6px">${ic("loc")}<span class="grow body" style="font-weight:500">${t("useLoc")}</span></div>
+  <div class="section" style="margin-top:12px">${shead("hRecent")}
+    <div class="list-row"><div class="grow">${nmCity(0)}</div><span class="cap muted tnum">${t("sr")} ${t("cities")[0][2]}</span><span class="badge lbl">✓</span></div></div>
+  <div class="section">${shead("hWB")}${t("cities").slice(1).map((c,i)=>`<div class="list-row"><div class="grow">${nmCity(i+1)}</div><span class="cap muted tnum">${t("sr")} ${c[2]}</span></div>`).join("")}</div>
+  <div class="section">${shead("hOther")}<div class="chips lbl" style="flex-wrap:wrap;margin:0;padding:4px 0">${t("others").map(c=>`<span class="chip">${c}</span>`).join("")}</div></div>`,
+
+reminders: () => `${appbar(t("remTitle"))}
+  <div class="section" style="margin-top:6px">${shead("hRegular")}
+    <div class="list-row"><div class="grow">${nm("ekadashi")}<div class="cap muted">${t("dayBefore8")} ▾</div></div><span class="toggle on"></span></div>
+    <div class="list-row"><div class="grow">${nm("purnima")}</div><span class="toggle"></span></div>
+    <div class="list-row"><div class="grow">${nm("amavasya")}</div><span class="toggle"></span></div></div>
+  <div class="section">${shead("hFestRem")}
+    <div class="list-row"><span class="bar c-puja" style="height:40px"></span><div class="grow">${nm("fKali")}<div class="cap muted">${t("dayBefore8")}</div></div><span class="toggle on"></span></div>
+    <div class="list-row"><span class="bar c-puja" style="height:40px"></span><div class="grow">${nm("fLakshmi")}<div class="cap muted">${t("morning6")}</div></div><span class="toggle on"></span></div>
+    <div class="list-row"><span class="bar c-puja" style="height:40px"></span><div class="grow">${nm("fAshtami")}<div class="cap muted">${t("morning6")}</div></div><span class="toggle on"></span></div></div>
+  <button class="btn ghost" style="margin-top:16px">${ic("plus")} ${t("addFest")}</button>`,
+
+settings: () => {
+  const r = (k, v, extra="") => `<div class="list-row"><span class="grow body">${t(k)}</span>${v}${extra}</div>`;
+  return `${appbar(t("setTitle"))}
+  ${r("sLang", `<span class="seg cap"><button aria-pressed="${S.lang==="bn"}" style="font-family:'Noto Sans Bengali'">বাংলা</button><button aria-pressed="${S.lang==="en"}" style="font-family:'Noto Sans'">English</button></span>`)}
+  <div class="list-row"><div class="grow"><div class="body">${t("sBoth")}</div><div class="cap muted">${t("sBothPrev")}</div></div><span class="toggle ${S.both?"on":""}"></span></div>
+  ${r("sTrad", `<span class="lbl muted">${t("sTradV")}</span>`, ic("chev"))}
+  ${r("sCity", `<span class="lbl muted">${t("city")}</span>`, ic("chev"))}
+  <div class="list-row" style="flex-wrap:wrap"><span class="grow body">${t("sTheme")}</span><span class="seg cap"><button aria-pressed="true">${t("tAuto")}</button><button aria-pressed="false">${t("tLight")}</button><button aria-pressed="false">${t("tDark")}</button></span></div>
+  <div class="list-row" style="display:block;padding:10px 0"><div class="body">${t("sSize")}</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:6px"><span class="cap">${S.lang==="bn"?"অ":"A"}</span><span style="flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ink) 35%,var(--rule) 35%);position:relative"><span style="position:absolute;left:35%;top:-8px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--ink)"></span></span><span class="title">${S.lang==="bn"?"অ":"A"}</span></div>
+    <div class="cap muted" style="margin-top:6px">${t("sSizePrev")}</div></div>
+  ${r("sTime", `<span class="lbl muted">${t("sTimeV")}</span>`, ic("down"))}
+  ${r("sNum", `<span class="lbl muted">${t("sNumV")}</span>`, ic("down"))}
+  <div class="section">${shead("hData")}${r("sUpdate", `<span class="lbl muted">${t("sUpdateV")}</span>`, ic("chev"))}${r("sYears", `<span class="lbl muted">${t("sYearsV")}</span>`, ic("chev"))}</div>
+  <div class="section">${shead("hOtherS")}${["sAds","sPrivacy","sLicence","sAbout"].map(k=>r(k,"",ic("chev"))).join("")}</div>`;
+},
+
+more: () => `<div class="appbar" style="margin:0"><span class="grow title">${t("moreTitle")}</span></div>
+  <div class="card" style="display:flex;align-items:center;gap:10px"><span class="grow lbl">${t("sLang")}</span><span class="seg cap"><button aria-pressed="${S.lang==="bn"}" style="font-family:'Noto Sans Bengali'">বাংলা</button><button aria-pressed="${S.lang==="en"}" style="font-family:'Noto Sans'">English</button></span></div>
+  <div style="margin-top:10px">${t("moreItems").map(([i,l])=>`<div class="list-row"><span style="color:var(--ink-muted)">${ic(i)}</span><span class="grow body">${l}</span>${ic("chev")}</div>`).join("")}</div>`,
+
+sources: () => `${appbar(t("srcTitle"))}
+  <div class="lbl" style="margin-top:6px">${t("srcHow")}</div>
+  ${t("srcSteps").map((s,i)=>`<div class="list-row"><span style="width:30px;height:30px;border-radius:50%;background:var(--haldi-container);color:var(--on-haldi-container);display:grid;place-items:center;font-weight:600;flex:none" class="cap">${num(i+1)}</span><span class="grow body">${s}</span></div>`).join("")}
+  <div class="section">${shead("srcMarks")}
+    <div class="list-row"><span class="badge body" style="width:30px">✓✓</span><span class="body">${t("mExpert")}</span></div>
+    <div class="list-row"><span class="badge body" style="width:30px">✓</span><span class="body">${t("mRef")}</span></div>
+    <div class="list-row"><span style="width:30px"><span class="dot"></span></span><span class="body">${t("mComp")}</span></div></div>
+  <div class="section">${shead("srcPhone")}<div class="body">${t("srcPacks")}</div><div class="cap muted">${t("srcLast")}</div>
+    <div class="list-row" style="margin-top:6px"><span class="grow body" style="font-weight:500">${t("srcWhy")}</span>${ic("chev")}</div></div>
+  <button class="btn ghost" style="margin-top:14px">${ic("flag")} ${t("report")}</button>`,
+
+search: () => `<div class="appbar"><span class="ib">${ic("back")}</span><div class="search body grow" style="flex:1">${ic("search")}<span>${t("sQuery")}</span><span style="width:2px;height:20px;background:var(--ink);margin-left:-8px"></span></div></div>
+  <div class="cap muted" style="margin-top:6px">${t("sEx")}</div>
+  <div class="section">${shead("hRes")}
+    <div class="list-row">${ic("navCal")}<span class="grow body">${t("resDate")}</span>${ic("chev")}</div>
+    <div class="list-row"><span class="bar c-puja" style="height:40px"></span><div class="grow"><div class="body">${t("resK1")}</div><div class="cap muted">${t("resK1d")}</div></div>${badge(2)}</div>
+    <div class="list-row"><span class="bar c-puja" style="height:40px"></span><div class="grow"><div class="body">${t("resK2")}</div><div class="cap muted">${t("resK2d")}</div></div>${badge(2)}</div></div>`,
+
+glossary: () => screens.today() + `<div style="position:absolute;inset:0;background:rgba(10,8,30,.42);z-index:5"></div>`,
+};
+function nmCity(i){ const a=T[S.lang].cities[i], b=T[S.lang==="bn"?"en":"bn"].cities[i]; return `<div class="body">${a[0]} <span class="muted cap">· ${a[1]}</span></div><div class="cap second">${b[0]}</div>`; }
+
+/* ---------- gallery ---------- */
+const GROUPS = [
+  ["First run", [["onbLang","Onboarding · language","Shown in both scripts until the user chooses (§11.1)", false],["onbTrad","Onboarding · tradition","Two schools explained in one line each (US-02)", false]]],
+  ["Daily use", [["today","Today","Tithi seal is the one bold element; active period highlighted; ad only below “Coming up” (§11.2, §20.2)", true],
+                 ["calendar","Calendar","Bengali + Gregorian numbers per cell; markers by shape, not just colour (§11.3, US-06)", true],
+                 ["day","Day detail","All periods; times after midnight marked “next day” (§11.4)", false],
+                 ["glossary","Glossary sheet","Long-press any term for a plain explanation (FR-SET-07)", true]]],
+  ["Festivals & reminders", [["festivals","Festival list","Grouped by Bengali month; ✓✓ expert-reviewed, ✓ checked (§11.5)", true],
+                 ["festDetail","Festival detail","Multi-day selector and Sandhi Puja window (§11.6)", false],
+                 ["reminders","Reminders","Recurring tithis and per-festival reminders (§11.13)", false],
+                 ["share","Share card","1080×1350 image; Bengali, English or both (§11.8)", null]]],
+  ["Settings & trust", [["more","More","Quick language switch at the top (§10)", true],["settings","Settings","Language, names in both scripts, theme, text size, numerals (§11.15)", false],
+                 ["city","City picker","Search in both scripts; today's sunrise per city (§11.7)", false],["sources","Sources & verification","How the data is checked (§11.16)", false],["search","Search","Dates and festivals in either script (§11.14)", false]]],
+];
+const NAVIDX = { today:0, calendar:1, festivals:2, more:3, glossary:0 };
+
+function phone(key){
+  const body = screens[key]();
+  const hasNav = key in NAVIDX;
+  const sheet = key === "glossary" ? `<div style="position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--paper);border-radius:20px 20px 0 0;padding:10px 18px 26px;box-shadow:0 -8px 30px rgba(0,0,0,.25)">
+      <div style="width:36px;height:4px;border-radius:2px;background:var(--rule);margin:0 auto 14px"></div>
+      <div class="title">${t("gTerm")}</div><div class="cap second">${o("gTerm")}</div>
+      <div class="body" style="margin-top:8px">${t("gText")}</div>
+      <button class="btn ghost" style="margin-top:14px">${ic("book")} ${t("gMore")}</button></div>` : "";
+  return `<div class="phone ${S.lang} ${S.both?"both":""}" lang="${S.lang}">
+    <div class="wm" aria-hidden="true"><span>নমুনা · SAMPLE</span></div>
+    <div class="sb"><span class="tnum">${t("sb")}</span><span>▾ ▴ ▮</span></div>
+    <div class="scroll" ${key==="glossary"?'style="overflow:hidden"':""}>${body}</div>${sheet}
+    ${hasNav ? nav(NAVIDX[key]) : ""}</div>`;
+}
+function shareCard(){
+  return `<div class="sharecard ${S.lang} ${S.both?"both":""}" lang="${S.lang}">
+    <svg class="alp" viewBox="0 0 300 375" aria-hidden="true" fill="none" stroke="var(--alta)" stroke-width="1.4" opacity=".55">
+      <rect x="12" y="12" width="276" height="351" rx="12"/><rect x="20" y="20" width="260" height="335" rx="9" stroke-dasharray="2 5"/>
+      <g transform="translate(150 300)">${[0,45,90,135,180,225,270,315].map(a=>`<path transform="rotate(${a})" d="M0 0 C 8 -10 8 -22 0 -32 C -8 -22 -8 -10 0 0Z"/>`).join("")}<circle r="5"/></g>
+      <g stroke="var(--haldi-strong)">${[40,260].map(x=>`<circle cx="${x}" cy="40" r="6"/><circle cx="${x}" cy="40" r="11" stroke-dasharray="2 3"/>`).join("")}</g></svg>
+    <div class="inner">
+      <div class="cap" style="color:var(--alta);font-weight:600;margin-top:28px">${t("scBy")}</div>
+      <div class="display" style="margin-top:14px;font-size:calc(40px)">${t("fAshtami")}</div><div class="cap second">${o("fAshtami")}</div>
+      <div class="body" style="margin-top:10px">${t("scDate")}</div><div class="cap" style="opacity:.75">${t("scDate2")}</div>
+      <div style="flex:1"></div>
+      <div class="lbl" style="margin-bottom:84px;opacity:.85">${t("scApp")}</div>
+    </div></div>`;
+}
+function render(){
+  document.documentElement.lang = S.lang;
+  document.getElementById("root").innerHTML = GROUPS.map(([g, items]) =>
+    `<div class="group-title">${g}</div><div class="gallery">${items.map(([k,title,cap]) =>
+      `<figure>${k==="share"?shareCard():phone(k)}<figcaption><b>${title}</b>${cap}</figcaption></figure>`).join("")}</div>`).join("") +
+    `<p style="text-align:center;color:var(--ink-muted);font-size:12px;padding:30px 16px 60px">All values are sample data from the PRD wireframes. Layout and tokens follow spec/design-system.md; final designs need sign-off (Phase 2, T-215).</p>`;
+}
+function seg(id, fn){
+  const el = document.getElementById(id);
+  el.addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); });
+}
+seg("c-lang", v => { S.lang = v; render(); });
+seg("c-theme", v => document.documentElement.dataset.theme = v);
+seg("c-ts", v => document.documentElement.style.setProperty("--ts", v));
+seg("c-both", v => { S.both = v === "on"; render(); });
+render();
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 
 | File | What it is | Status |
 |---|---|---|
+| `app-mockups.html` | Mockups of the finished MVP: 15 screens (onboarding, Today, Calendar, Day detail, glossary sheet, festival list and detail, reminders, share card, More, Settings, City picker, Sources, Search). Switch Bengali/English, light/dark, 100/130 % text and names in both scripts. **All values are sample (নমুনা) data.** | Awaiting visual sign-off (T-215) |
 | `today-concept.html` | Today screen concept (PRD §11.2, §12) in Bengali and English side by side, with light/dark, 100%/130% text and "Names in both scripts" toggles. Open it in a browser. **All values are sample (নমুনা) data.** | Awaiting visual sign-off (T-215) |
 
 ## Sign-off log (T-215 and Phase 4 screen sign-offs)
