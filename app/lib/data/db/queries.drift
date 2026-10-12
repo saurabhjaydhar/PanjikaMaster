@@ -28,3 +28,33 @@ SELECT * FROM observance_windows WHERE tradition = :tradition AND date = :date O
 
 packById:
 SELECT * FROM packs WHERE id = :id;
+
+-- Range reads for the month grid (spec §11.3).
+cityDaysBetween:
+SELECT * FROM city_days WHERE city_id = :city_id AND date BETWEEN :from_date AND :to_date ORDER BY date;
+
+bengaliDatesBetween:
+SELECT * FROM bengali_dates WHERE tradition = :tradition AND date BETWEEN :from_date AND :to_date ORDER BY date;
+
+bengaliMonthDates:
+SELECT * FROM bengali_dates
+ WHERE tradition = :tradition AND bn_year = :bn_year AND bn_month_idx = :bn_month_idx
+ ORDER BY date;
+
+lunarMonthsOverlapping:
+SELECT * FROM lunar_months
+ WHERE tradition = :tradition AND ends_utc > :from_utc AND starts_utc < :to_utc
+ ORDER BY starts_utc;
+
+-- Only validated Bengal periods are enabled (spec §6.5.9); the standard table is in code.
+enabledPeriodRules:
+SELECT * FROM period_rules WHERE tradition = :tradition AND enabled = 1;
+
+cityById:
+SELECT * FROM cities WHERE id = :id;
+
+allNames:
+SELECT * FROM names ORDER BY kind, idx;
+
+packsOfTradition:
+SELECT * FROM packs WHERE tradition = :tradition AND kind = :kind;

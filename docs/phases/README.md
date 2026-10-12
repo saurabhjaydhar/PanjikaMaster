@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 2 — Engine & components** (Phase 1 complete; T-208–T-210 done; T-201 partial — ephemeris hosts blocked here)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-208–T-211 done; T-201 partial — ephemeris hosts blocked here)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -73,3 +73,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | T-209 done: `DivisionPeriodCalculator` (day or night divided into equal parts, microsecond-exact tiling) and the spec §6.5.8 Rahu Kaal / Yamaganda / Gulika table (flagged to verify against the reference before release). 13 tests: all 7 weekdays × 3 periods, ordering, no coincidences, uneven days, night basis, invalid input. |
 | 2026-10-12 | **Phase 1 complete.** PR #2 green on all four CI jobs: docs, data, app (incl. release APK and sample-data check) and integration (app launched on an Android 14 emulator; Bengali → English switch; per-app language channel; system back). T-104, T-113, T-115 confirmed. |
 | 2026-10-12 | T-210 done: `StandardDayAssembler` builds a `DayPanjika` (sunrise → next sunrise) from UTC transitions: udaya tithi, kshaya and vriddhi flags, per-kind spans, karana names via `karanaNameIndex` (moved to `domain/engine/karana.dart`), periods in time order, `currentOf` / `nextAfter` / `activePeriod` / `isAfterMidnight` for "(পরদিন)". 21 tests on synthetic inputs; CI also runs domain tests under UTC+14 and UTC−10. 193 app tests. |
+| 2026-10-12 | T-211 done: `DriftPanjikaRepository` implements `PanjikaSource` + new `CatalogSource` (names, cities, enabled period rules, sample flag); `PanjikaSource.transitions` now takes the tradition (it was missing). Use cases `GetDayPanjika` (by date, or `containing(instant)` = sunrise-to-sunrise day), `GetMonthGrid` (Bengali or Gregorian month; ●/○/এ markers from the udaya tithi; null unless the whole month is installed) and `GetUpcomingObservances` (limit, tier filter); all carry provenance. `DayPanjika` now has the day's observances. Riverpod providers in `data/repositories/panjika_providers.dart`. 20 tests on the sample pack, incl. every day Sep–Dec: tithis tile, vriddhi pairs agree, every tithi named or kshaya. Today still reads `TodaySnapshot`; it moves to `DayPanjika` with the full Today screen. For design sign-off (T-215): between midnight and sunrise, should Today show the civil date's panjika day or the one in progress? 213 app tests. |

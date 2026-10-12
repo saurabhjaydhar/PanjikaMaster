@@ -21,6 +21,7 @@ class DayInputs {
     required this.periodRules,
     required this.names,
     required this.provenance,
+    this.observances = const [],
   });
 
   /// The civil date (IST) whose sunrise starts this panjika day.
@@ -40,6 +41,9 @@ class DayInputs {
   final List<PeriodRule> periodRules;
   final NameLookup names;
   final Provenance provenance;
+
+  /// Observances dated to [date], in display order.
+  final List<ObservanceDate> observances;
 }
 
 /// One element within the panjika day, with its display name.
@@ -98,6 +102,7 @@ class DayPanjika {
     required this.spans,
     required this.periods,
     required this.provenance,
+    this.observances = const [],
   });
 
   final CivilDate date;
@@ -123,6 +128,9 @@ class DayPanjika {
   /// Rahu Kaal etc. for this day, in time order.
   final List<TimePeriod> periods;
   final Provenance provenance;
+
+  /// Observances on this date, by tier then id (spec §11.4).
+  final List<ObservanceDate> observances;
 
   List<TithiOnDay> get kshayaTithis => [
     for (final t in tithis)
@@ -254,6 +262,7 @@ class StandardDayAssembler implements DayAssembler {
         ),
       ]..sort((a, b) => a.startUtc.compareTo(b.startUtc)),
       provenance: inputs.provenance,
+      observances: List.unmodifiable(inputs.observances),
     );
   }
 }

@@ -1,0 +1,251 @@
+import 'package:drift/drift.dart';
+
+import '../../core/time/civil_date.dart';
+import '../../domain/engine/interfaces.dart';
+import '../../domain/entities/name_ref.dart';
+import '../../domain/entities/name_table.dart';
+import '../../domain/entities/panjika.dart';
+import '../db/app_database.dart';
+
+DateTime _utc(int seconds) =>
+    DateTime.fromMillisecondsSinceEpoch(seconds * 1000, isUtc: true);
+
+int _seconds(DateTime instant) =>
+    instant.toUtc().millisecondsSinceEpoch ~/ 1000;
+
+/// Panjika and reference data from the installed packs in Drift (spec §14.4). Every
+/// returned datum keeps the id of the pack it came from.
+class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
+  DriftPanjikaRepository(this._db);
+
+  final AppDatabase _db;
+
+  // ------------------------------------------------------------- PanjikaSource
+
+  @override
+  Future<List<Transition>> transitions(
+    String tradition,
+    TransitionKind kind,
+    DateTime fromUtc,
+    DateTime toUtc,
+  ) async {
+    final rows = await _db
+        .transitionsOverlapping(
+          tradition,
+          kind.name,
+          _seconds(fromUtc),
+          _seconds(toUtc),
+        )
+        .get();
+    return [
+      for (final r in rows)
+        Transition(
+          kind: kind,
+          idx: r.idx,
+          startUtc: _utc(r.startsUtc),
+          endUtc: _utc(r.endsUtc),
+          packId: r.packId,
+        ),
+    ];
+  }
+
+  @override
+  Future<SunMoonTimes?> sunMoonTimes(String cityId, CivilDate date) async {
+    final row = await _db.cityDay(cityId, date.toIso()).getSingleOrNull();
+    return row == null ? null : _sunMoon(row);
+  }
+
+  @override
+  Future<Map<CivilDate, SunMoonTimes>> sunMoonTimesBetween(
+    String cityId,
+    CivilDate from,
+    CivilDate to,
+  ) async {
+    final rows = await _db
+        .cityDaysBetween(cityId, from.toIso(), to.toIso())
+        .get();
+    return {for (final r in rows) CivilDate.parse(r.date): _sunMoon(r)};
+  }
+
+  SunMoonTimes _sunMoon(CityDayRow r) => SunMoonTimes(
+    sunrise: _utc(r.sunriseUtc),
+    sunset: _utc(r.sunsetUtc),
+    moonrise: r.moonriseUtc == null ? null : _utc(r.moonriseUtc!),
+    moonset: r.moonsetUtc == null ? null : _utc(r.moonsetUtc!),
+    packId: r.packId,
+  );
+
+  @override
+  Future<BengaliDate?> bengaliDate(String tradition, CivilDate date) async {
+    final row = await _db
+        .bengaliDateOn(tradition, date.toIso())
+        .getSingleOrNull();
+    return row == null ? null : _bengali(row);
+  }
+
+  @override
+  Future<Map<CivilDate, BengaliDate>> bengaliDatesBetween(
+    String tradition,
+    CivilDate from,
+    CivilDate to,
+  ) async {
+    final rows = await _db
+        .bengaliDatesBetween(tradition, from.toIso(), to.toIso())
+        .get();
+    return {for (final r in rows) CivilDate.parse(r.date): _bengali(r)};
+  }
+
+  @override
+  Future<List<CivilDate>> bengaliMonthDates(
+    String tradition,
+    int year,
+    int monthIdx,
+  ) async {
+    final rows = await _db.bengaliMonthDates(tradition, year, monthIdx).get();
+    return [for (final r in rows) CivilDate.parse(r.date)];
+  }
+
+  BengaliDate _bengali(BengaliDateRow r) => BengaliDate(
+    day: r.bnDay,
+    monthIdx: r.bnMonthIdx,
+    year: r.bnYear,
+    packId: r.packId,
+  );
+
+  @override
+  Future<List<LunarMonth>> lunarMonths(
+    String tradition,
+    DateTime fromUtc,
+    DateTime toUtc,
+  ) async {
+    final rows = await _db
+        .lunarMonthsOverlapping(tradition, _seconds(fromUtc), _seconds(toUtc))
+        .get();
+    return [
+      for (final r in rows)
+        LunarMonth(
+          monthIdx: r.monthIdx,
+          isAdhik: r.isAdhik == 1,
+          startUtc: _utc(r.startsUtc),
+          endUtc: _utc(r.endsUtc),
+          packId: r.packId,
+        ),
+    ];
+  }
+
+  @override
+  Future<List<ObservanceDate>> observances(
+    String tradition,
+    CivilDate from,
+    CivilDate to,
+  ) async {
+    final rows = await _db
+        .observancesBetween(tradition, from.toIso(), to.toIso())
+        .get();
+    return [
+      for (final ObservancesBetweenResult(:o, :d) in rows)
+        ObservanceDate(
+          observance: Observance(
+            id: o.id,
+            name: NameRef(o.nameBn, o.nameEn),
+            category: ObservanceCategory.values.byName(o.category),
+            tier: o.tier,
+            description: NameRef(o.descriptionBn, o.descriptionEn),
+          ),
+          date: CivilDate.parse(d.date),
+          dayIndex: d.dayIndex,
+          status: VerificationStatus.parse(d.status),
+          packId: d.packId,
+          reviewedBy: d.reviewedBy,
+          reviewedOn: d.reviewedOn == null
+              ? null
+              : CivilDate.parse(d.reviewedOn!),
+          note: d.noteBn == null ? null : NameRef(d.noteBn!, d.noteEn!),
+        ),
+    ];
+  }
+
+  /// The dates both the global pack(s) of [tradition] and [cityId]'s pack cover.
+  /// Contiguous global packs (one per year) count as one range. Staleness needs the
+  /// manifest and comes with the pack updater (Phase 3).
+  @override
+  Future<DataCoverage> coverage(String tradition, String cityId) async {
+    final city = await _db.cityById(cityId).getSingleOrNull();
+    if (city == null) return const NotDownloaded();
+    final cityPack = await _db.packById(city.packId).getSingleOrNull();
+    final globals = await _db.packsOfTradition(tradition, 'global').get();
+    if (cityPack == null || globals.isEmpty) return const NotDownloaded();
+
+    final ranges = [
+      for (final p in globals)
+        (CivilDate.parse(p.coversFrom), CivilDate.parse(p.coversTo)),
+    ]..sort((a, b) => a.$1.compareTo(b.$1));
+    var (from, to) = ranges.first;
+    for (final (f, t) in ranges.skip(1)) {
+      if (f.compareTo(to.addDays(1)) > 0) break; // a gap ends the range
+      if (t.compareTo(to) > 0) to = t;
+    }
+
+    final cityFrom = CivilDate.parse(cityPack.coversFrom);
+    final cityTo = CivilDate.parse(cityPack.coversTo);
+    if (cityFrom.compareTo(from) > 0) from = cityFrom;
+    if (cityTo.compareTo(to) < 0) to = cityTo;
+    return from.compareTo(to) > 0 ? const NotDownloaded() : Covered(from, to);
+  }
+
+  // ------------------------------------------------------------- CatalogSource
+
+  /// names(kind='tradition') rows carry the tradition id in `translit` (names.toml).
+  @override
+  Future<NameTable> names() async {
+    final rows = await _db.allNames().get();
+    final byKind = <String, List<NameRef>>{};
+    final traditions = <String, NameRef>{};
+    for (final r in rows) {
+      final name = NameRef(r.nameBn, r.nameEn);
+      (byKind[r.kind] ??= []).add(name);
+      if (r.kind == 'tradition') traditions[r.translit] = name;
+    }
+    return NameTable(byKind, traditions);
+  }
+
+  @override
+  Future<City?> city(String id) async {
+    final r = await _db.cityById(id).getSingleOrNull();
+    if (r == null) return null;
+    return City(
+      id: r.id,
+      name: NameRef(r.nameBn, r.nameEn),
+      district: NameRef(r.districtBn, r.districtEn),
+      lat: r.lat,
+      lon: r.lon,
+      timeZone: r.tz,
+      popular: r.popular == 1,
+    );
+  }
+
+  @override
+  Future<List<PeriodRule>> enabledPeriodRules(String tradition) async {
+    final rows = await _db.enabledPeriodRules(tradition).get();
+    return [
+      for (final r in rows)
+        PeriodRule(
+          periodId: r.nameIdx,
+          kind: PeriodKind.values.byName(r.kind),
+          weekday: Weekday.values[r.weekday],
+          basis: PeriodBasis.values.byName(r.basis),
+          divisions: r.divisions,
+          part: r.part,
+        ),
+    ];
+  }
+
+  @override
+  Future<bool> anySample(Iterable<String> packIds) async {
+    final ids = packIds.toSet();
+    if (ids.isEmpty) return false;
+    final query = _db.select(_db.packs)
+      ..where((p) => p.id.isIn(ids) & p.isSample.equals(1));
+    return (await query.get()).isNotEmpty;
+  }
+}
