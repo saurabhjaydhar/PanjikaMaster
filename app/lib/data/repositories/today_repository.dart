@@ -55,7 +55,7 @@ class TodayRepository {
     // Every pack that contributes a datum goes into the provenance (CLAUDE.md).
     final packIds = <String>{bn.packId, day.packId, city.packId};
     final at = now.toUtc().millisecondsSinceEpoch ~/ 1000;
-    Future<Element?> element(
+    Future<ElementSpan?> element(
       String kind,
       NameRef Function(int idx) name, {
       int? cycle,
@@ -66,7 +66,7 @@ class TodayRepository {
       if (rows.isEmpty) return null;
       final r = rows.first;
       packIds.add(r.packId);
-      return Element(
+      return ElementSpan(
         name: name(r.idx),
         start: _utc(r.startsUtc),
         end: _utc(r.endsUtc),

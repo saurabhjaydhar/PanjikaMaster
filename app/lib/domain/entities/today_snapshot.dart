@@ -1,9 +1,12 @@
 import '../../core/time/civil_date.dart';
 import 'name_ref.dart';
+import 'panjika.dart';
+
+export 'panjika.dart' show Provenance;
 
 /// One panchanga element at a moment: what it is, when it started and ends (UTC).
-class Element {
-  const Element({
+class ElementSpan {
+  const ElementSpan({
     required this.name,
     required this.start,
     required this.end,
@@ -23,23 +26,6 @@ class Element {
     if (total <= 0) return 0;
     return (now.difference(start).inSeconds / total).clamp(0.0, 1.0);
   }
-}
-
-/// Where the data came from: shown on every date screen (spec §6.8, CLAUDE.md).
-class Provenance {
-  const Provenance({
-    required this.tradition,
-    required this.city,
-    required this.packIds,
-    required this.isSample,
-  });
-
-  final NameRef tradition;
-  final NameRef city;
-  final List<String> packIds;
-
-  /// True if any contributing pack is a fixture: the UI must show the watermark.
-  final bool isSample;
 }
 
 /// Everything the basic Today screen shows (FR-HOME-01..04). Phase 2 replaces the
@@ -65,10 +51,10 @@ class TodaySnapshot {
   final int bnDay;
   final NameRef bnMonth;
   final int bnYear;
-  final Element tithi;
-  final Element nakshatra;
-  final Element yoga;
-  final Element karana;
+  final ElementSpan tithi;
+  final ElementSpan nakshatra;
+  final ElementSpan yoga;
+  final ElementSpan karana;
   final DateTime sunrise;
   final DateTime sunset;
 

@@ -18,7 +18,7 @@
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
-| T-208 | Domain entities + interfaces (§15.4): `BengaliDate`, `Transition`, `DayPanjika`, `Observance`, `City`, `Provenance`, `DataCoverage` | Compile-time: no UI type without `Provenance` |
+| T-208 ✅ | Domain entities + interfaces (§15.4): `BengaliDate`, `Transition`, `DayPanjika`, `Observance`, `City`, `Provenance`, `DataCoverage` | Compile-time: no UI type without `Provenance` |
 | T-209 | `PeriodCalculator` with the §6.5.8 table | Unit tests for all weekdays |
 | T-210 | `DayAssembler` incl. udaya tithi, kshaya/vriddhi, after-midnight times, IST conversion | Unit tests incl. a device in another time zone |
 | T-211 | Repositories on Drift + use cases `GetDayPanjika`, `GetMonthGrid`, `GetUpcomingObservances` | Tests on the sample pack |

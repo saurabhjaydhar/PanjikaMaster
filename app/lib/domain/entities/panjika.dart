@@ -1,0 +1,266 @@
+/// Domain entities (spec §15.4). Plain, immutable and free of Flutter, Drift and I/O.
+/// Every datum that reaches the UI carries the pack it came from (CLAUDE.md).
+library;
+
+import '../../core/time/civil_date.dart';
+import 'name_ref.dart';
+
+/// Weekday with the spec's index convention: 0 = Sunday (spec §15.1).
+enum Weekday {
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday;
+
+  /// From [DateTime.weekday] / [CivilDate.weekday] (1 = Monday … 7 = Sunday).
+  static Weekday fromIso(int isoWeekday) => values[isoWeekday % 7];
+
+  static Weekday of(CivilDate date) => fromIso(date.weekday);
+}
+
+enum TransitionKind { tithi, nakshatra, yoga, karana, sankranti }
+
+/// One panchanga element's span (spec §6.5). Instants are UTC.
+class Transition {
+  const Transition({
+    required this.kind,
+    required this.idx,
+    required this.startUtc,
+    required this.endUtc,
+    required this.packId,
+  });
+
+  final TransitionKind kind;
+
+  /// 0-based (spec §15.1): tithi 0–29, nakshatra/yoga 0–26, karana k 0–59, sankranti 0–11.
+  final int idx;
+  final DateTime startUtc;
+  final DateTime endUtc;
+  final String packId;
+
+  bool contains(DateTime instant) =>
+      !instant.isBefore(startUtc) && instant.isBefore(endUtc);
+}
+
+/// Verification status shown to users (spec §6.8). `stale` is a pack-level state,
+/// modelled by [DataCoverage], not a row status.
+enum VerificationStatus {
+  computed('computed'),
+  referenceMatched('reference_matched'),
+  expertReviewed('expert_reviewed'),
+  sample('sample');
+
+  const VerificationStatus(this.dbValue);
+
+  final String dbValue;
+
+  static VerificationStatus parse(String value) => values.firstWhere(
+    (s) => s.dbValue == value,
+    orElse: () => throw FormatException(value),
+  );
+}
+
+class BengaliDate {
+  const BengaliDate({
+    required this.day,
+    required this.monthIdx,
+    required this.year,
+    required this.packId,
+  });
+
+  final int day;
+
+  /// 0 = বৈশাখ.
+  final int monthIdx;
+  final int year;
+  final String packId;
+}
+
+class SunMoonTimes {
+  const SunMoonTimes({
+    required this.sunrise,
+    required this.sunset,
+    required this.moonrise,
+    required this.moonset,
+    required this.packId,
+  });
+
+  final DateTime sunrise;
+  final DateTime sunset;
+
+  /// null when there is no moonrise / moonset that day (spec §16).
+  final DateTime? moonrise;
+  final DateTime? moonset;
+  final String packId;
+}
+
+class LunarMonth {
+  const LunarMonth({
+    required this.monthIdx,
+    required this.isAdhik,
+    required this.startUtc,
+    required this.endUtc,
+    required this.packId,
+  });
+
+  final int monthIdx;
+
+  /// মলমাস: no festivals are placed in it (spec §6.5.7).
+  final bool isAdhik;
+  final DateTime startUtc;
+  final DateTime endUtc;
+  final String packId;
+}
+
+class City {
+  const City({
+    required this.id,
+    required this.name,
+    required this.district,
+    required this.lat,
+    required this.lon,
+    required this.timeZone,
+    required this.popular,
+  });
+
+  final String id;
+  final NameRef name;
+  final NameRef district;
+  final double lat;
+  final double lon;
+  final String timeZone;
+  final bool popular;
+}
+
+enum ObservanceCategory { puja, vrata, tithi, utsav, jayanti }
+
+class Observance {
+  const Observance({
+    required this.id,
+    required this.name,
+    required this.category,
+    required this.tier,
+    required this.description,
+  });
+
+  final String id;
+  final NameRef name;
+  final ObservanceCategory category;
+  final int tier;
+  final NameRef description;
+}
+
+class ObservanceDate {
+  const ObservanceDate({
+    required this.observance,
+    required this.date,
+    required this.dayIndex,
+    required this.status,
+    required this.packId,
+    this.reviewedBy,
+    this.reviewedOn,
+    this.note,
+  });
+
+  final Observance observance;
+  final CivilDate date;
+  final int dayIndex;
+  final VerificationStatus status;
+  final String packId;
+  final String? reviewedBy;
+  final CivilDate? reviewedOn;
+  final NameRef? note;
+}
+
+enum PeriodKind { shubh, ashubh }
+
+enum PeriodBasis { day, night }
+
+/// Which division of day or night a named period occupies on a weekday (spec §6.5.8–9).
+class PeriodRule {
+  const PeriodRule({
+    required this.periodId,
+    required this.kind,
+    required this.weekday,
+    required this.basis,
+    required this.divisions,
+    required this.part,
+  }) : assert(part >= 1 && part <= divisions);
+
+  /// Index into `names(kind='period')`.
+  final int periodId;
+  final PeriodKind kind;
+  final Weekday weekday;
+  final PeriodBasis basis;
+  final int divisions;
+
+  /// 1-based, as in the spec's table.
+  final int part;
+}
+
+/// A computed period on one day, e.g. Rahu Kaal 7:32–9:00.
+class TimePeriod {
+  const TimePeriod({
+    required this.periodId,
+    required this.kind,
+    required this.startUtc,
+    required this.endUtc,
+  });
+
+  final int periodId;
+  final PeriodKind kind;
+  final DateTime startUtc;
+  final DateTime endUtc;
+
+  bool isActiveAt(DateTime instant) =>
+      !instant.isBefore(startUtc) && instant.isBefore(endUtc);
+}
+
+/// Where a displayed datum came from (spec §6.8, US-02).
+class Provenance {
+  const Provenance({
+    required this.tradition,
+    required this.city,
+    required this.packIds,
+    required this.isSample,
+    this.timeZoneLabel = 'IST',
+  });
+
+  final NameRef tradition;
+  final NameRef city;
+  final List<String> packIds;
+
+  /// True if any contributing pack is a fixture: the UI must show the watermark.
+  final bool isSample;
+
+  /// Panjika times are always shown in IST (spec §5.3).
+  final String timeZoneLabel;
+}
+
+/// Whether data exists for a tradition and city (spec §15.4, §11.9).
+sealed class DataCoverage {
+  const DataCoverage();
+}
+
+final class Covered extends DataCoverage {
+  const Covered(this.from, this.to);
+
+  final CivilDate from;
+  final CivilDate to;
+
+  bool includes(CivilDate date) =>
+      date.compareTo(from) >= 0 && date.compareTo(to) <= 0;
+}
+
+final class NotDownloaded extends DataCoverage {
+  const NotDownloaded();
+}
+
+final class Stale extends DataCoverage {
+  const Stale(this.reason);
+
+  final String reason;
+}
