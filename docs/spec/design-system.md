@@ -61,7 +61,7 @@ Bengali and Latin need different metrics. Matras, reph and conjuncts take more v
 | Label | Noto Sans Bengali Medium | 14/22 | Noto Sans Medium | 14/20 | Row labels, chips, buttons, nav |
 | Caption | Noto Sans Bengali | 13/20 | Noto Sans | 12/16 | Provenance footer, second-script line. **Bengali never below 13 sp.** |
 
-- Tiro Bangla includes Latin, so the display voice is the same in both languages. Check during T-109 (Phase 1) that its Latin covers the romanisation diacritics we use (Q14); if not, fall back to Noto Serif for display Latin.
+- Tiro Bangla includes Latin, so the display voice is the same in both languages. Verified in T-109: it covers basic Latin, ₹, typographic punctuation and every IAST diacritic, so whatever Q14 decides, no Noto Serif fallback is needed.
 - Fallback chains: Bengali styles → `NotoSansBengali`, then `NotoSans`; English styles → `NotoSans`, then `NotoSansBengali` (needed for "Names in both scripts"). Mixed strings (a Bengali name with Latin digits) must render without tofu in either theme.
 - Weights: Noto Sans Bengali 400 body, 500 label, 600 emphasis. Avoid 700+ below 18 sp in Bengali (counters fill in on low-DPI screens). Tiro Bangla is regular-only; do not synthesise bold.
 - Times in columns use tabular figures (`FontFeature.tabularFigures()`) where the font supports them; check by eye that Bengali digits align in the period list.

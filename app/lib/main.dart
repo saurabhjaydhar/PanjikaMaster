@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,8 @@ Future<void> main() async {
   // targetSdk 36; enabling it everywhere keeps older devices consistent.
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+  _registerFontLicences();
+
   final db = AppDatabase.open();
   // Settings are read before the first frame, so the first screen is already in the
   // user's language and theme (no flicker).
@@ -28,4 +31,20 @@ Future<void> main() async {
       child: const PanjikaApp(),
     ),
   );
+}
+
+/// Adds the bundled fonts' SIL OFL texts to the licences page (spec §19.1 L6, L7).
+void _registerFontLicences() {
+  const fonts = {
+    'Tiro Bangla': 'assets/fonts/OFL-TiroBangla.txt',
+    'Noto Sans Bengali': 'assets/fonts/OFL-NotoSansBengali.txt',
+    'Noto Sans': 'assets/fonts/OFL-NotoSans.txt',
+  };
+  LicenseRegistry.addLicense(() async* {
+    for (final MapEntry(key: name, value: path) in fonts.entries) {
+      yield LicenseEntryWithLineBreaks([
+        name,
+      ], await rootBundle.loadString(path));
+    }
+  });
 }

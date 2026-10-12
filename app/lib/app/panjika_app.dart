@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/l10n/app_language.dart';
 import '../core/l10n/l10n_providers.dart';
+import '../core/settings/settings.dart';
 import '../l10n/gen/app_localizations.dart';
+import 'theme/app_theme.dart';
 
-/// Root widget. Theme arrives in T-109 and routing in T-111.
+/// Root widget. Routing arrives in T-111.
 class PanjikaApp extends ConsumerStatefulWidget {
   const PanjikaApp({super.key});
 
@@ -38,8 +40,24 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final userScale = ref.watch(textScaleProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: buildPanjikaTheme(Brightness.light, language),
+      darkTheme: buildPanjikaTheme(Brightness.dark, language),
+      themeMode: ref.watch(themeModeProvider),
+      // The in-app text size multiplies the system setting (incl. Android 14+ nonlinear
+      // scaling); it is never clamped (spec §12.6).
+      builder: (context, child) {
+        if (userScale == null || userScale == 1.0) return child!;
+        final media = MediaQuery.of(context);
+        return MediaQuery(
+          data: media.copyWith(
+            textScaler: _MultipliedTextScaler(media.textScaler, userScale),
+          ),
+          child: child!,
+        );
+      },
       locale: language.locale,
       supportedLocales: [for (final l in AppLanguage.values) l.locale],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -62,4 +80,28 @@ class _Placeholder extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Applies the user's in-app multiplier on top of the system [TextScaler].
+class _MultipliedTextScaler extends TextScaler {
+  const _MultipliedTextScaler(this.system, this.factor);
+
+  final TextScaler system;
+  final double factor;
+
+  @override
+  double scale(double fontSize) => system.scale(fontSize) * factor;
+
+  @override
+  // ignore: deprecated_member_use
+  double get textScaleFactor => system.textScaleFactor * factor;
+
+  @override
+  bool operator ==(Object other) =>
+      other is _MultipliedTextScaler &&
+      other.system == system &&
+      other.factor == factor;
+
+  @override
+  int get hashCode => Object.hash(system, factor);
 }
