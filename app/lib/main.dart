@@ -7,6 +7,7 @@ import 'app/panjika_app.dart';
 import 'core/settings/settings.dart';
 import 'data/db/app_database.dart';
 import 'data/db/database_provider.dart';
+import 'data/fixtures/sample_loader.dart';
 import 'data/repositories/settings_store.dart';
 
 Future<void> main() async {
@@ -18,6 +19,11 @@ Future<void> main() async {
   _registerFontLicences();
 
   final db = AppDatabase.open();
+  // Debug builds only: kDebugMode is a compile-time constant, so release builds contain
+  // neither this call nor the sample data (checked in CI by check_release_bundle.sh).
+  if (kDebugMode) {
+    await loadSamplePackIfEmpty(db);
+  }
   // Settings are read before the first frame, so the first screen is already in the
   // user's language and theme (no flicker).
   final settings = await DbSettings.load(db);
