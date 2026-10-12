@@ -1,0 +1,30 @@
+[project]
+name = "panjika-data"
+version = "0.1.0"
+description = "Build pipeline for Bangla Panjika data packs (PRD §6.4)"
+requires-python = ">=3.12"
+# Runtime dependencies are added per task (e.g. skyfield in T-103), each recorded in docs/dependencies.md.
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1,<10",
+    "hypothesis>=6.169,<7",
+    "ruff>=0.17,<0.18",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+# Ambiguous-unicode rules would flag the en dashes, primes (13°20′) and Bengali text this project uses on purpose.
+ignore = ["RUF001", "RUF002", "RUF003"]
