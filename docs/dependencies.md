@@ -25,3 +25,9 @@ Transitive dev dependencies (pinned in `data/uv.lock`): iniconfig, packaging, pl
 **App transitive dependencies** (checked 2026-10-12, `flutter pub deps`): 98 packages, all MIT, BSD-2/3-Clause or Apache-2.0, except `sqlcipher_flutter_libs` 0.7.0+eol (Pixar/MIT/BSD-style, permissive), an empty end-of-life shim still listed by `drift_flutter`. No GPL/AGPL.
 
 **Note:** `sqlite3_flutter_libs` (named in spec §14.3) is end-of-life; `sqlite3` 3.x bundles SQLite itself via build hooks. Verify `libsqlite3.so` is in the release APK once Drift is used (T-106; spec §14.3 watch-out).
+
+## Datasets (pipeline only, never shipped in the app)
+
+| Dataset | Source | Terms | Used for | Pinned by | Status |
+|---|---|---|---|---|---|
+| JPL DE440s planetary ephemeris (`de440s.bsp`, ~32 MB) | NASA JPL: naif.jpl.nasa.gov (`generic_kernels/spk/planets`), mirror ssd.jpl.nasa.gov (`ftp/eph/planets/bsp`) | JPL ephemerides are generally treated as public domain; **confirm JPL's terms before release** (spec §19.1 L2) | Sun/Moon positions for every computed value (spec §6.4) | SHA-256 in `data/ephem/ephemeris.lock.json`; human-confirmed (T-201) | Checksum not yet recorded: both hosts are blocked by the agent environment's network policy; recorded by the first CI run |

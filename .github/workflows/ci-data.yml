@@ -20,6 +20,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - run: uv sync --locked
+      # JPL DE440s (~32 MB), cached by the lock file. The first run records its SHA-256
+      # as UNCONFIRMED and prints it here; a human then confirms it (T-201 gate).
+      - uses: actions/cache@v4
+        with:
+          path: data/ephem/de440s.bsp
+          key: ephemeris-${{ hashFiles('data/ephem/ephemeris.lock.json') }}
+      - name: Fetch and verify the ephemeris
+        run: |
+          uv run python -m ephem.fetch
+          echo "### Ephemeris lock" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat ephem/ephemeris.lock.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run pytest
