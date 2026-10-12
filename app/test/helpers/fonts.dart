@@ -26,4 +26,18 @@ Future<void> loadAppFonts() async {
     }
     await loader.load();
   }
+  await _loadMaterialIcons();
+}
+
+/// The Material icon font ships with the Flutter SDK (the app bundles it via
+/// `uses-material-design`), but tests don't load it, so icons would render as boxes.
+/// flutter_tester lives in `<sdk>/bin/cache/artifacts/engine/<platform>/`.
+Future<void> _loadMaterialIcons() async {
+  final cache = File(Platform.resolvedExecutable).parent.parent.parent;
+  final font = File('${cache.path}/material_fonts/MaterialIcons-Regular.otf');
+  // Without it goldens would show boxes; behaviour tests are unaffected.
+  if (!font.existsSync()) return;
+  final loader = FontLoader('MaterialIcons')
+    ..addFont(Future.value(ByteData.sublistView(font.readAsBytesSync())));
+  await loader.load();
 }

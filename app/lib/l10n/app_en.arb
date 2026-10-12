@@ -11,5 +11,6 @@
   "countdownDays": "{count, plural, =0{Today} =1{Tomorrow} other{in {countText} days}}",
   "timeZoneLabel": "IST",
   "sampleWatermark": "নমুনা · SAMPLE",
-  "languageSetting": "Language"
+  "languageSetting": "Language",
+  "comingSoon": "Coming soon"
 }

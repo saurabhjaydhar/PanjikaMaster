@@ -5,9 +5,10 @@ import '../core/l10n/app_language.dart';
 import '../core/l10n/l10n_providers.dart';
 import '../core/settings/settings.dart';
 import '../l10n/gen/app_localizations.dart';
+import 'router.dart';
 import 'theme/app_theme.dart';
 
-/// Root widget. Routing arrives in T-111.
+/// Root widget: theme, localisation and routing.
 class PanjikaApp extends ConsumerStatefulWidget {
   const PanjikaApp({super.key});
 
@@ -41,8 +42,9 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final userScale = ref.watch(textScaleProvider);
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: ref.watch(routerProvider),
       theme: buildPanjikaTheme(Brightness.light, language),
       darkTheme: buildPanjikaTheme(Brightness.dark, language),
       themeMode: ref.watch(themeModeProvider),
@@ -62,22 +64,6 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
       supportedLocales: [for (final l in AppLanguage.values) l.locale],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-      home: const _Placeholder(),
-    );
-  }
-}
-
-/// Stand-in home until the app shell (T-111): shows the app title so language
-/// switching is visible and testable.
-class _Placeholder extends StatelessWidget {
-  const _Placeholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(child: Text(AppLocalizations.of(context).appTitle)),
-      ),
     );
   }
 }

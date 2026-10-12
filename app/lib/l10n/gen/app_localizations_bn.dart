@@ -59,4 +59,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get languageSetting => 'ভাষা';
+
+  @override
+  String get comingSoon => 'শীঘ্রই আসছে';
 }

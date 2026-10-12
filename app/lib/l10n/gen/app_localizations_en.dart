@@ -59,4 +59,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageSetting => 'Language';
+
+  @override
+  String get comingSoon => 'Coming soon';
 }

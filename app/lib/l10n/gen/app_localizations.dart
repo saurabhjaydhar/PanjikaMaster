@@ -169,6 +169,12 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'ভাষা'**
   String get languageSetting;
+
+  /// Placeholder body for a tab whose screen is not built yet (Phase 1 only).
+  ///
+  /// In bn, this message translates to:
+  /// **'শীঘ্রই আসছে'**
+  String get comingSoon;
 }
 
 class _AppLocalizationsDelegate

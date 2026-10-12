@@ -56,12 +56,12 @@ void main() {
 
   testWidgets('Bengali device starts in Bengali', (tester) async {
     await pumpApp(tester, device: const [Locale('bn', 'IN')]);
-    expect(find.text('বাংলা পঞ্জিকা'), findsOneWidget);
+    expect(find.text('পঞ্জিকা'), findsOneWidget); // Calendar tab label
   });
 
   testWidgets('English device starts in English', (tester) async {
     await pumpApp(tester, device: const [Locale('en', 'GB')]);
-    expect(find.text('Bangla Panjika'), findsOneWidget);
+    expect(find.text('Calendar'), findsOneWidget);
   });
 
   testWidgets(
@@ -73,8 +73,8 @@ void main() {
       await container.read(appLanguageProvider.notifier).select(AppLanguage.en);
       await tester.pump();
 
-      expect(find.text('Bangla Panjika'), findsOneWidget);
-      expect(find.text('বাংলা পঞ্জিকা'), findsNothing);
+      expect(find.text('Calendar'), findsOneWidget);
+      expect(find.text('পঞ্জিকা'), findsNothing);
       expect(
         tester.state(find.byType(PanjikaApp)),
         same(stateBefore),
@@ -89,7 +89,7 @@ void main() {
   ) async {
     systemTag = 'en';
     await pumpApp(tester, device: const [Locale('bn')]);
-    expect(find.text('Bangla Panjika'), findsOneWidget);
+    expect(find.text('Calendar'), findsOneWidget);
   });
 
   testWidgets('numerals follow the language unless overridden', (tester) async {

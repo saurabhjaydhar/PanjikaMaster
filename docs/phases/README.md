@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 1 — Foundations** (T-101–T-103, T-105–T-110, T-114 done; T-113 awaiting first CI run; T-104 built, launch check pending)
+**Current phase: 1 — Foundations** (T-101–T-103, T-105–T-111, T-114 done; T-113 awaiting first CI run; T-104 built, launch check pending)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -65,3 +65,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-12 | T-108 done: `SettingsSource` (core) + `DbSettings` (data, `settings` table): loaded before the first frame, written through on change; persisted providers for language, numerals, time format, theme, text scale, tradition, city (default Kolkata), names in both scripts (null = Q15 default), onboarding. Values stored in spec §15.1 formats. 6 tests incl. restart across two DB sessions. 52 app tests green; release APK builds. |
 | 2026-10-12 | T-109 done: colour tokens (`PanjikaColors`), per-script type scale (Tiro Bangla display; Noto Sans Bengali / Noto Sans text; fallbacks to the other script; no letter spacing; no synthetic bold), spacing/shape/motion tokens, Material 3 theme, light/dark/system switching, in-app text size on top of system scaling, font licences on the licences page. Fonts: 788 KB, subset by `scripts/build_fonts.sh`, Bengali shaping verified identical to the originals (44 HarfBuzz comparisons). Contrast test over every token pair; 4 golden specimens (bn/en × light/dark). 129 app tests green. |
 | 2026-10-12 | T-110 done: sample packs become SQL in `app/lib/data/fixtures/sample_pack.g.dart` (`scripts/gen_sample_fixture.py`, self-verifying, `--check` in ci-data), loaded by `loadSamplePackIfEmpty` behind `kDebugMode`. Verified: release APK contains no sample marker, sample strings or loader; debug APK does. **Fixed a T-113 bug:** `check_release_bundle.sh` used `grep -q` under `pipefail`, so on real-size APKs a match became a false "OK"; it now counts matches (debug APK now correctly fails, release passes). 134 app tests. |
+| 2026-10-12 | T-111 done: go_router `StatefulShellRoute` with four tabs (labels from ARB, always visible), one router for the app's lifetime so language/theme changes keep the current tab, `PopScope` back handling (other tab → Today, Today → app closes), placeholder Calendar/Festivals/More screens. 6 shell tests incl. 200 % text on 360 dp in both languages; test font helper now loads the Material icon font for goldens. 140 app tests. |
