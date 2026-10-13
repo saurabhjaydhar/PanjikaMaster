@@ -58,3 +58,6 @@ SELECT * FROM names ORDER BY kind, idx;
 
 packsOfTradition:
 SELECT * FROM packs WHERE tradition = :tradition AND kind = :kind;
+
+allCities:
+SELECT * FROM cities ORDER BY name_en;

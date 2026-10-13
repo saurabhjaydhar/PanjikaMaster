@@ -365,5 +365,205 @@
   "appUpdateRequired": "নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।",
   "@appUpdateRequired": {
     "description": "The data server needs a newer app version (min_app_version)."
+  },
+  "labelTithi": "তিথি",
+  "@labelTithi": {
+    "description": "Row label: tithi."
+  },
+  "labelPaksha": "পক্ষ",
+  "@labelPaksha": {
+    "description": "Row label: paksha (fortnight)."
+  },
+  "sectionSunMoon": "সূর্য ও চন্দ্র",
+  "@sectionSunMoon": {
+    "description": "Day detail section title."
+  },
+  "sectionObservances": "উৎসব ও ব্রত",
+  "@sectionObservances": {
+    "description": "Day detail section title."
+  },
+  "dayTitle": "দিনের পঞ্জিকা",
+  "@dayTitle": {
+    "description": "Title of the Day detail screen."
+  },
+  "previousDay": "আগের দিন",
+  "@previousDay": {
+    "description": "Button / screen-reader label: go to the previous day."
+  },
+  "nextDay": "পরের দিন",
+  "@nextDay": {
+    "description": "Button / screen-reader label: go to the next day."
+  },
+  "coordinates": "{lat}° উ, {lon}° পূ",
+  "@coordinates": {
+    "description": "A city's latitude (north) and longitude (east), numbers already formatted.",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
+  "footerDetail": "{coordinates} · তথ্য: {packs} · {status}",
+  "@footerDetail": {
+    "description": "Second provenance line on Day detail: coordinates, data packs, verification status.",
+    "placeholders": {
+      "coordinates": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionUpcoming": "আসছে",
+  "@sectionUpcoming": {
+    "description": "Today: section with the next festivals."
+  },
+  "sectionToday": "আজ",
+  "@sectionToday": {
+    "description": "Today: section with today's festivals."
+  },
+  "openDay": "দিনের পুরো পঞ্জিকা দেখুন",
+  "@openDay": {
+    "description": "Screen-reader hint on the tithi seal: opens Day detail."
+  },
+  "calendarModeBengali": "বাংলা মাস",
+  "@calendarModeBengali": {
+    "description": "Calendar mode: months of the Bengali calendar."
+  },
+  "calendarModeGregorian": "ইংরেজি মাস",
+  "@calendarModeGregorian": {
+    "description": "Calendar mode: Gregorian months."
+  },
+  "monthTitle": "{month} {year}",
+  "@monthTitle": {
+    "description": "Calendar title, e.g. আশ্বিন ১৪৩৩. Layout only.",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "previousMonth": "আগের মাস",
+  "@previousMonth": {
+    "description": "Button: previous month."
+  },
+  "nextMonth": "পরের মাস",
+  "@nextMonth": {
+    "description": "Button: next month."
+  },
+  "previousYear": "আগের বছর",
+  "@previousYear": {
+    "description": "Button in the month chooser."
+  },
+  "nextYear": "পরের বছর",
+  "@nextYear": {
+    "description": "Button in the month chooser."
+  },
+  "chooseMonth": "মাস বেছে নিন",
+  "@chooseMonth": {
+    "description": "Title of the jump-to-month sheet; also the hint on the calendar title."
+  },
+  "legendTitle": "চিহ্নের অর্থ",
+  "@legendTitle": {
+    "description": "Title of the calendar legend sheet."
+  },
+  "legendFestival": "উৎসব (রং বিভাগ অনুযায়ী)",
+  "@legendFestival": {
+    "description": "Legend: the coloured bar under a day."
+  },
+  "legendSelected": "নির্বাচিত দিন",
+  "@legendSelected": {
+    "description": "Legend: the filled day."
+  },
+  "legendEither": "{first} / {second}",
+  "@legendEither": {
+    "description": "Two names for one mark, e.g. both Ekadashis. Layout only.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "selectedDay": "নির্বাচিত: {date}",
+  "@selectedDay": {
+    "description": "Calendar strip under the grid.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "actionView": "দেখুন",
+  "@actionView": {
+    "description": "Button: open the day."
+  },
+  "cityPickerTitle": "শহর বেছে নিন",
+  "@cityPickerTitle": {
+    "description": "Title of the city picker."
+  },
+  "citySearchHint": "শহরের নাম লিখুন",
+  "@citySearchHint": {
+    "description": "Hint in the city search field (Bengali or English)."
+  },
+  "sectionRecent": "সাম্প্রতিক",
+  "@sectionRecent": {
+    "description": "City picker section: recently chosen cities."
+  },
+  "sectionWestBengal": "পশ্চিমবঙ্গ",
+  "@sectionWestBengal": {
+    "description": "City picker section: cities in West Bengal."
+  },
+  "sectionOtherCities": "অন্যান্য শহর",
+  "@sectionOtherCities": {
+    "description": "City picker section: cities outside West Bengal."
+  },
+  "sunriseAt": "সূর্যোদয় {time}",
+  "@sunriseAt": {
+    "description": "Today's sunrise in a city row.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "cityRowSemantics": "{city}, {district}, {sunrise}",
+  "@cityRowSemantics": {
+    "description": "Screen-reader label of a city row. Layout only.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "district": {
+        "type": "String"
+      },
+      "sunrise": {
+        "type": "String"
+      }
+    }
+  },
+  "currentCity": "বর্তমান শহর",
+  "@currentCity": {
+    "description": "Screen-reader state of the chosen city's row."
+  },
+  "noCityMatches": "এই নামে কোনো শহর পাওয়া যায়নি",
+  "@noCityMatches": {
+    "description": "City search with no results."
+  },
+  "cityChanged": "সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই",
+  "@cityChanged": {
+    "description": "Toast after changing the city (FR-LOC-05)."
   }
 }

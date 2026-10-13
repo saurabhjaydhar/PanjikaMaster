@@ -240,4 +240,127 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appUpdateRequired => 'Update the app to get new data.';
+
+  @override
+  String get labelTithi => 'Tithi';
+
+  @override
+  String get labelPaksha => 'Paksha';
+
+  @override
+  String get sectionSunMoon => 'Sun and moon';
+
+  @override
+  String get sectionObservances => 'Festivals and vratas';
+
+  @override
+  String get dayTitle => 'Day';
+
+  @override
+  String get previousDay => 'Previous day';
+
+  @override
+  String get nextDay => 'Next day';
+
+  @override
+  String coordinates(String lat, String lon) {
+    return '$lat° N, $lon° E';
+  }
+
+  @override
+  String footerDetail(String coordinates, String packs, String status) {
+    return '$coordinates · data: $packs · $status';
+  }
+
+  @override
+  String get sectionUpcoming => 'Coming up';
+
+  @override
+  String get sectionToday => 'Today';
+
+  @override
+  String get openDay => 'Open the full day';
+
+  @override
+  String get calendarModeBengali => 'Bengali month';
+
+  @override
+  String get calendarModeGregorian => 'Gregorian month';
+
+  @override
+  String monthTitle(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get previousMonth => 'Previous month';
+
+  @override
+  String get nextMonth => 'Next month';
+
+  @override
+  String get previousYear => 'Previous year';
+
+  @override
+  String get nextYear => 'Next year';
+
+  @override
+  String get chooseMonth => 'Choose a month';
+
+  @override
+  String get legendTitle => 'What the marks mean';
+
+  @override
+  String get legendFestival => 'Festival (colour by category)';
+
+  @override
+  String get legendSelected => 'Selected day';
+
+  @override
+  String legendEither(String first, String second) {
+    return '$first / $second';
+  }
+
+  @override
+  String selectedDay(String date) {
+    return 'Selected: $date';
+  }
+
+  @override
+  String get actionView => 'View';
+
+  @override
+  String get cityPickerTitle => 'Choose a city';
+
+  @override
+  String get citySearchHint => 'Type a city name';
+
+  @override
+  String get sectionRecent => 'Recent';
+
+  @override
+  String get sectionWestBengal => 'West Bengal';
+
+  @override
+  String get sectionOtherCities => 'Other cities';
+
+  @override
+  String sunriseAt(String time) {
+    return 'Sunrise $time';
+  }
+
+  @override
+  String cityRowSemantics(String city, String district, String sunrise) {
+    return '$city, $district, $sunrise';
+  }
+
+  @override
+  String get currentCity => 'Current city';
+
+  @override
+  String get noCityMatches => 'No city matches that name';
+
+  @override
+  String get cityChanged =>
+      'Sunrise and Rahu Kaal times changed; tithi and festival dates stay the same';
 }

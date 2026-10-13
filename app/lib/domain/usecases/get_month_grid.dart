@@ -135,13 +135,21 @@ class GetMonthGrid {
 
     final (suns, bengali, observances, city, names) = await (
       _source.sunMoonTimesBetween(cityId, from, to),
-      _source.bengaliDatesBetween(tradition, from, to),
+      // One day either side, to prove a Bengali month is whole (below).
+      _source.bengaliDatesBetween(tradition, from.addDays(-1), to.addDays(1)),
       _source.observances(tradition, from, to),
       _catalog.city(cityId),
       _catalog.names(),
     ).wait;
     if (city == null ||
         dates.any((d) => suns[d] == null || bengali[d] == null)) {
+      return null;
+    }
+    // A Bengali month is only shown whole: its first day is day 1 and the next day
+    // starts the following month. A pack edge inside the month would otherwise make a
+    // part of it look like all of it.
+    if (month is BengaliMonthRef &&
+        (bengali[from]!.day != 1 || bengali[to.addDays(1)]?.day != 1)) {
       return null;
     }
 

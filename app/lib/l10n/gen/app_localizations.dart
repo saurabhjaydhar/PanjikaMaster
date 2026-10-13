@@ -460,6 +460,222 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।'**
   String get appUpdateRequired;
+
+  /// Row label: tithi.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি'**
+  String get labelTithi;
+
+  /// Row label: paksha (fortnight).
+  ///
+  /// In bn, this message translates to:
+  /// **'পক্ষ'**
+  String get labelPaksha;
+
+  /// Day detail section title.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্য ও চন্দ্র'**
+  String get sectionSunMoon;
+
+  /// Day detail section title.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব ও ব্রত'**
+  String get sectionObservances;
+
+  /// Title of the Day detail screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের পঞ্জিকা'**
+  String get dayTitle;
+
+  /// Button / screen-reader label: go to the previous day.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের দিন'**
+  String get previousDay;
+
+  /// Button / screen-reader label: go to the next day.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের দিন'**
+  String get nextDay;
+
+  /// A city's latitude (north) and longitude (east), numbers already formatted.
+  ///
+  /// In bn, this message translates to:
+  /// **'{lat}° উ, {lon}° পূ'**
+  String coordinates(String lat, String lon);
+
+  /// Second provenance line on Day detail: coordinates, data packs, verification status.
+  ///
+  /// In bn, this message translates to:
+  /// **'{coordinates} · তথ্য: {packs} · {status}'**
+  String footerDetail(String coordinates, String packs, String status);
+
+  /// Today: section with the next festivals.
+  ///
+  /// In bn, this message translates to:
+  /// **'আসছে'**
+  String get sectionUpcoming;
+
+  /// Today: section with today's festivals.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজ'**
+  String get sectionToday;
+
+  /// Screen-reader hint on the tithi seal: opens Day detail.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের পুরো পঞ্জিকা দেখুন'**
+  String get openDay;
+
+  /// Calendar mode: months of the Bengali calendar.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা মাস'**
+  String get calendarModeBengali;
+
+  /// Calendar mode: Gregorian months.
+  ///
+  /// In bn, this message translates to:
+  /// **'ইংরেজি মাস'**
+  String get calendarModeGregorian;
+
+  /// Calendar title, e.g. আশ্বিন ১৪৩৩. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{month} {year}'**
+  String monthTitle(String month, String year);
+
+  /// Button: previous month.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের মাস'**
+  String get previousMonth;
+
+  /// Button: next month.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের মাস'**
+  String get nextMonth;
+
+  /// Button in the month chooser.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের বছর'**
+  String get previousYear;
+
+  /// Button in the month chooser.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের বছর'**
+  String get nextYear;
+
+  /// Title of the jump-to-month sheet; also the hint on the calendar title.
+  ///
+  /// In bn, this message translates to:
+  /// **'মাস বেছে নিন'**
+  String get chooseMonth;
+
+  /// Title of the calendar legend sheet.
+  ///
+  /// In bn, this message translates to:
+  /// **'চিহ্নের অর্থ'**
+  String get legendTitle;
+
+  /// Legend: the coloured bar under a day.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব (রং বিভাগ অনুযায়ী)'**
+  String get legendFestival;
+
+  /// Legend: the filled day.
+  ///
+  /// In bn, this message translates to:
+  /// **'নির্বাচিত দিন'**
+  String get legendSelected;
+
+  /// Two names for one mark, e.g. both Ekadashis. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{first} / {second}'**
+  String legendEither(String first, String second);
+
+  /// Calendar strip under the grid.
+  ///
+  /// In bn, this message translates to:
+  /// **'নির্বাচিত: {date}'**
+  String selectedDay(String date);
+
+  /// Button: open the day.
+  ///
+  /// In bn, this message translates to:
+  /// **'দেখুন'**
+  String get actionView;
+
+  /// Title of the city picker.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর বেছে নিন'**
+  String get cityPickerTitle;
+
+  /// Hint in the city search field (Bengali or English).
+  ///
+  /// In bn, this message translates to:
+  /// **'শহরের নাম লিখুন'**
+  String get citySearchHint;
+
+  /// City picker section: recently chosen cities.
+  ///
+  /// In bn, this message translates to:
+  /// **'সাম্প্রতিক'**
+  String get sectionRecent;
+
+  /// City picker section: cities in West Bengal.
+  ///
+  /// In bn, this message translates to:
+  /// **'পশ্চিমবঙ্গ'**
+  String get sectionWestBengal;
+
+  /// City picker section: cities outside West Bengal.
+  ///
+  /// In bn, this message translates to:
+  /// **'অন্যান্য শহর'**
+  String get sectionOtherCities;
+
+  /// Today's sunrise in a city row.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয় {time}'**
+  String sunriseAt(String time);
+
+  /// Screen-reader label of a city row. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{city}, {district}, {sunrise}'**
+  String cityRowSemantics(String city, String district, String sunrise);
+
+  /// Screen-reader state of the chosen city's row.
+  ///
+  /// In bn, this message translates to:
+  /// **'বর্তমান শহর'**
+  String get currentCity;
+
+  /// City search with no results.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই নামে কোনো শহর পাওয়া যায়নি'**
+  String get noCityMatches;
+
+  /// Toast after changing the city (FR-LOC-05).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই'**
+  String get cityChanged;
 }
 
 class _AppLocalizationsDelegate

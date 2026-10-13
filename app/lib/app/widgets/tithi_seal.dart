@@ -20,6 +20,8 @@ class TithiSeal extends StatelessWidget {
     required this.progress,
     this.notes = const [],
     this.animateFill = false,
+    this.onTap,
+    this.tapHint,
   });
 
   final NameRef name;
@@ -36,6 +38,10 @@ class TithiSeal extends StatelessWidget {
   /// Fill the ring from empty: once per day, on first view (spec §12.8).
   final bool animateFill;
 
+  /// Opens Day detail (spec §11.2); [tapHint] tells screen readers so.
+  final VoidCallback? onTap;
+  final String? tapHint;
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -44,57 +50,63 @@ class TithiSeal extends StatelessWidget {
     // The sentence is the container's label; notes stay separate nodes, read after it.
     return Semantics(
       container: true,
+      button: onTap != null,
       label: l.tithiSealSemantics(nameText, until, then),
-      child: Container(
-        padding: const EdgeInsets.all(Space.l),
-        decoration: BoxDecoration(
-          color: c.haldiContainer,
-          borderRadius: BorderRadius.circular(Radii.large),
-        ),
-        child: Row(
-          children: [
-            TithiRing(progress: progress, animateFill: animateFill),
-            const SizedBox(width: Space.l),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ExcludeSemantics(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // The name never moves; old and new cross-fade (§12.8).
-                        AnimatedSwitcher(
-                          duration: context.motion(Motion.standard),
-                          layoutBuilder: (current, previous) => Stack(
-                            alignment: AlignmentDirectional.topStart,
-                            children: [...previous, ?current],
-                          ),
-                          child: NameText(
-                            name,
-                            key: ValueKey(name),
-                            style: t.headlineSmall,
-                          ),
+      hint: tapHint,
+      child: Material(
+        color: c.haldiContainer,
+        borderRadius: BorderRadius.circular(Radii.large),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(Space.l),
+            child: Row(
+              children: [
+                TithiRing(progress: progress, animateFill: animateFill),
+                const SizedBox(width: Space.l),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ExcludeSemantics(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // The name never moves; old and new cross-fade (§12.8).
+                            AnimatedSwitcher(
+                              duration: context.motion(Motion.standard),
+                              layoutBuilder: (current, previous) => Stack(
+                                alignment: AlignmentDirectional.topStart,
+                                children: [...previous, ?current],
+                              ),
+                              child: NameText(
+                                name,
+                                key: ValueKey(name),
+                                style: t.headlineSmall,
+                              ),
+                            ),
+                            Text(
+                              until,
+                              style: t.bodyLarge?.copyWith(
+                                color: c.onHaldiContainer,
+                              ),
+                            ),
+                            Text(
+                              then,
+                              style: t.labelLarge?.copyWith(color: c.inkMuted),
+                            ),
+                          ],
                         ),
-                        Text(
-                          until,
-                          style: t.bodyLarge?.copyWith(
-                            color: c.onHaldiContainer,
-                          ),
-                        ),
-                        Text(
-                          then,
-                          style: t.labelLarge?.copyWith(color: c.inkMuted),
-                        ),
-                      ],
-                    ),
+                      ),
+                      for (final note in notes)
+                        Text(note, style: t.bodyMedium?.copyWith(color: c.ink)),
+                    ],
                   ),
-                  for (final note in notes)
-                    Text(note, style: t.bodyMedium?.copyWith(color: c.ink)),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

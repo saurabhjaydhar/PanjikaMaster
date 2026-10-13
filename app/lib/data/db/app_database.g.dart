@@ -7178,6 +7178,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ).asyncMap(this.packs.mapFromRow);
   }
 
+  Selectable<CityRow> allCities() {
+    return customSelect(
+      'SELECT * FROM cities ORDER BY name_en',
+      variables: [],
+      readsFrom: {this.cities},
+    ).asyncMap(this.cities.mapFromRow);
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();

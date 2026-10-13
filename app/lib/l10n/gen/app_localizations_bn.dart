@@ -238,4 +238,127 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get appUpdateRequired => 'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।';
+
+  @override
+  String get labelTithi => 'তিথি';
+
+  @override
+  String get labelPaksha => 'পক্ষ';
+
+  @override
+  String get sectionSunMoon => 'সূর্য ও চন্দ্র';
+
+  @override
+  String get sectionObservances => 'উৎসব ও ব্রত';
+
+  @override
+  String get dayTitle => 'দিনের পঞ্জিকা';
+
+  @override
+  String get previousDay => 'আগের দিন';
+
+  @override
+  String get nextDay => 'পরের দিন';
+
+  @override
+  String coordinates(String lat, String lon) {
+    return '$lat° উ, $lon° পূ';
+  }
+
+  @override
+  String footerDetail(String coordinates, String packs, String status) {
+    return '$coordinates · তথ্য: $packs · $status';
+  }
+
+  @override
+  String get sectionUpcoming => 'আসছে';
+
+  @override
+  String get sectionToday => 'আজ';
+
+  @override
+  String get openDay => 'দিনের পুরো পঞ্জিকা দেখুন';
+
+  @override
+  String get calendarModeBengali => 'বাংলা মাস';
+
+  @override
+  String get calendarModeGregorian => 'ইংরেজি মাস';
+
+  @override
+  String monthTitle(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get previousMonth => 'আগের মাস';
+
+  @override
+  String get nextMonth => 'পরের মাস';
+
+  @override
+  String get previousYear => 'আগের বছর';
+
+  @override
+  String get nextYear => 'পরের বছর';
+
+  @override
+  String get chooseMonth => 'মাস বেছে নিন';
+
+  @override
+  String get legendTitle => 'চিহ্নের অর্থ';
+
+  @override
+  String get legendFestival => 'উৎসব (রং বিভাগ অনুযায়ী)';
+
+  @override
+  String get legendSelected => 'নির্বাচিত দিন';
+
+  @override
+  String legendEither(String first, String second) {
+    return '$first / $second';
+  }
+
+  @override
+  String selectedDay(String date) {
+    return 'নির্বাচিত: $date';
+  }
+
+  @override
+  String get actionView => 'দেখুন';
+
+  @override
+  String get cityPickerTitle => 'শহর বেছে নিন';
+
+  @override
+  String get citySearchHint => 'শহরের নাম লিখুন';
+
+  @override
+  String get sectionRecent => 'সাম্প্রতিক';
+
+  @override
+  String get sectionWestBengal => 'পশ্চিমবঙ্গ';
+
+  @override
+  String get sectionOtherCities => 'অন্যান্য শহর';
+
+  @override
+  String sunriseAt(String time) {
+    return 'সূর্যোদয় $time';
+  }
+
+  @override
+  String cityRowSemantics(String city, String district, String sunrise) {
+    return '$city, $district, $sunrise';
+  }
+
+  @override
+  String get currentCity => 'বর্তমান শহর';
+
+  @override
+  String get noCityMatches => 'এই নামে কোনো শহর পাওয়া যায়নি';
+
+  @override
+  String get cityChanged =>
+      'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই';
 }

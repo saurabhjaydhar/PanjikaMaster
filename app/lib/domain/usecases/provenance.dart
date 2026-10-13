@@ -15,4 +15,6 @@ Future<Provenance> provenanceFor(
   city: city.name,
   packIds: List.unmodifiable(packIds.toList()..sort()),
   isSample: await catalog.anySample(packIds),
+  latitude: city.lat,
+  longitude: city.lon,
 );

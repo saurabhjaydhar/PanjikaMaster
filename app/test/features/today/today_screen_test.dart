@@ -24,6 +24,8 @@ import 'package:panjika/data/packs/update_providers.dart';
 import 'package:panjika/data/repositories/panjika_repository.dart';
 import 'package:panjika/domain/engine/day_assembler.dart';
 import 'package:panjika/domain/usecases/get_day_panjika.dart';
+import 'package:panjika/app/widgets/tithi_seal.dart';
+import 'package:panjika/features/day/day_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
 import '../../helpers/fakes.dart';
@@ -112,10 +114,13 @@ void main() {
     expect(find.text('25 Ashwin 1433'), findsOneWidget);
     expect(find.text('12 October 2026'), findsOneWidget);
     expect(find.text('Monday'), findsOneWidget);
-    expect(
-      find.text('Bishuddha Siddhanta (Drik) · Kolkata · IST'),
-      findsOneWidget,
+    final footer = find.text('Bishuddha Siddhanta (Drik) · Kolkata · IST');
+    await tester.scrollUntilVisible(
+      footer,
+      200,
+      scrollable: find.byType(Scrollable).first,
     );
+    expect(footer, findsOneWidget);
   });
 
   void expectNoNumbers(WidgetTester tester) {
@@ -280,6 +285,32 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Download'), findsNothing);
+  });
+
+  testWidgets('T-402: periods, today\'s festival and the next three', (
+    tester,
+  ) async {
+    await pump(tester);
+    final scrollable = find.byType(Scrollable).first;
+    Future<void> see(Finder f) =>
+        tester.scrollUntilVisible(f, 200, scrollable: scrollable);
+    await see(find.text('রাহুকাল'));
+    expect(find.text('অশুভ সময়'), findsOneWidget);
+    await see(find.text('দুর্গাষষ্ঠী'));
+    await see(find.text('আসছে'));
+    // Sample observances after 12 Oct: Maha Saptami (13th), Ashtami, Navami.
+    await see(find.text('মহাসপ্তমী'));
+    expect(find.text('আগামীকাল'), findsOneWidget);
+    await see(find.text('মহানবমী'));
+    expect(find.text('বিজয়া দশমী'), findsNothing, reason: 'only three');
+  });
+
+  testWidgets('T-402: tapping the tithi seal opens Day detail', (tester) async {
+    await pump(tester);
+    await tester.tap(find.byType(TithiSeal));
+    await tester.pumpAndSettle();
+    expect(find.byType(DayScreen), findsOneWidget);
+    expect(find.text('দিনের পঞ্জিকা'), findsOneWidget);
   });
 
   testWidgets('T-212: the tithi changes exactly at its end', (tester) async {

@@ -124,11 +124,19 @@ class City {
     required this.lon,
     required this.timeZone,
     required this.popular,
+    this.state = '',
+    this.aliases = const [],
   });
 
   final String id;
   final NameRef name;
   final NameRef district;
+
+  /// As stored in the pack (e.g. `West Bengal`); groups the city picker.
+  final String state;
+
+  /// Other spellings in either script, for search (spec §13.6).
+  final List<String> aliases;
   final double lat;
   final double lon;
   final String timeZone;
@@ -227,10 +235,16 @@ class Provenance {
     required this.packIds,
     required this.isSample,
     this.timeZoneLabel = 'IST',
+    this.latitude,
+    this.longitude,
   });
 
   final NameRef tradition;
   final NameRef city;
+
+  /// The city's coordinates, for the Day detail footer (FR-DAY-04).
+  final double? latitude;
+  final double? longitude;
   final List<String> packIds;
 
   /// True if any contributing pack is a fixture: the UI must show the watermark.

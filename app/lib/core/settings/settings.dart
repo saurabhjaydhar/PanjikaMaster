@@ -17,7 +17,8 @@ enum SettingKey {
   onboardingDone('onboarding_done'),
   lastManifestCheck('last_manifest_check'),
   lastManifest('last_manifest'),
-  dismissedNotices('dismissed_notices');
+  dismissedNotices('dismissed_notices'),
+  recentCities('recent_cities');
 
   const SettingKey(this.key);
 

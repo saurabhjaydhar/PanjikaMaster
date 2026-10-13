@@ -12,6 +12,7 @@ import '../../domain/engine/day_assembler.dart';
 import '../../domain/entities/panjika.dart';
 import '../../domain/usecases/assess_coverage.dart';
 import '../../domain/usecases/get_day_panjika.dart';
+import '../../domain/usecases/get_upcoming_observances.dart';
 
 /// The panjika day in progress (sunrise to sunrise) for the chosen tradition and city.
 /// It holds every span of the day, so it reloads only when the next sunrise passes;
@@ -107,4 +108,19 @@ final todayCoverageProvider = FutureProvider<DataCoverage>((ref) async {
     installed: await repo.installedPacks(),
     available: ref.watch(availablePacksProvider),
   );
+});
+
+/// The next three tier-1/2 observances after today (FR-HOME-06).
+final upcomingProvider = FutureProvider<ObservanceList?>((ref) {
+  final today = ref.watch(nowProvider.select(CivilDate.ofInstant));
+  return ref
+      .watch(getUpcomingObservancesProvider)
+      .call(
+        tradition: ref.watch(traditionProvider),
+        cityId: ref.watch(cityIdProvider),
+        from: today.addDays(1),
+        to: today.addDays(366),
+        limit: 3,
+        maxTier: 2,
+      );
 });
