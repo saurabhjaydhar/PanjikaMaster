@@ -509,5 +509,61 @@
   "actionView": "দেখুন",
   "@actionView": {
     "description": "Button: open the day."
+  },
+  "cityPickerTitle": "শহর বেছে নিন",
+  "@cityPickerTitle": {
+    "description": "Title of the city picker."
+  },
+  "citySearchHint": "শহরের নাম লিখুন",
+  "@citySearchHint": {
+    "description": "Hint in the city search field (Bengali or English)."
+  },
+  "sectionRecent": "সাম্প্রতিক",
+  "@sectionRecent": {
+    "description": "City picker section: recently chosen cities."
+  },
+  "sectionWestBengal": "পশ্চিমবঙ্গ",
+  "@sectionWestBengal": {
+    "description": "City picker section: cities in West Bengal."
+  },
+  "sectionOtherCities": "অন্যান্য শহর",
+  "@sectionOtherCities": {
+    "description": "City picker section: cities outside West Bengal."
+  },
+  "sunriseAt": "সূর্যোদয় {time}",
+  "@sunriseAt": {
+    "description": "Today's sunrise in a city row.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "cityRowSemantics": "{city}, {district}, {sunrise}",
+  "@cityRowSemantics": {
+    "description": "Screen-reader label of a city row. Layout only.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "district": {
+        "type": "String"
+      },
+      "sunrise": {
+        "type": "String"
+      }
+    }
+  },
+  "currentCity": "বর্তমান শহর",
+  "@currentCity": {
+    "description": "Screen-reader state of the chosen city's row."
+  },
+  "noCityMatches": "এই নামে কোনো শহর পাওয়া যায়নি",
+  "@noCityMatches": {
+    "description": "City search with no results."
+  },
+  "cityChanged": "সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই",
+  "@cityChanged": {
+    "description": "Toast after changing the city (FR-LOC-05)."
   }
 }

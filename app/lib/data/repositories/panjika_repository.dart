@@ -217,17 +217,28 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
   @override
   Future<City?> city(String id) async {
     final r = await _db.cityById(id).getSingleOrNull();
-    if (r == null) return null;
-    return City(
-      id: r.id,
-      name: NameRef(r.nameBn, r.nameEn),
-      district: NameRef(r.districtBn, r.districtEn),
-      lat: r.lat,
-      lon: r.lon,
-      timeZone: r.tz,
-      popular: r.popular == 1,
-    );
+    return r == null ? null : _city(r);
   }
+
+  /// Every installed city (the city picker).
+  Future<List<City>> cities() async => [
+    for (final r in await _db.allCities().get()) _city(r),
+  ];
+
+  City _city(CityRow r) => City(
+    id: r.id,
+    name: NameRef(r.nameBn, r.nameEn),
+    district: NameRef(r.districtBn, r.districtEn),
+    lat: r.lat,
+    lon: r.lon,
+    timeZone: r.tz,
+    popular: r.popular == 1,
+    state: r.state,
+    aliases: [
+      for (final a in r.aliases.split('|'))
+        if (a.trim().isNotEmpty) a.trim(),
+    ],
+  );
 
   @override
   Future<List<PeriodRule>> enabledPeriodRules(String tradition) async {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/tokens.dart';
 import '../../app/widgets/date_header.dart';
 import '../../app/widgets/glossary.dart';
@@ -68,6 +70,7 @@ class DaySections extends ConsumerWidget {
           bengaliMonth: d.bengaliMonth,
           bengaliYear: d.bengaliDate.year,
           city: d.provenance.city,
+          onCityTap: () => context.push(Routes.city),
         ),
         const SizedBox(height: Space.l),
         SectionHeader(title: l.labelTithi),

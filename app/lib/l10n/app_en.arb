@@ -84,5 +84,15 @@
   "legendSelected": "Selected day",
   "legendEither": "{first} / {second}",
   "selectedDay": "Selected: {date}",
-  "actionView": "View"
+  "actionView": "View",
+  "cityPickerTitle": "Choose a city",
+  "citySearchHint": "Type a city name",
+  "sectionRecent": "Recent",
+  "sectionWestBengal": "West Bengal",
+  "sectionOtherCities": "Other cities",
+  "sunriseAt": "Sunrise {time}",
+  "cityRowSemantics": "{city}, {district}, {sunrise}",
+  "currentCity": "Current city",
+  "noCityMatches": "No city matches that name",
+  "cityChanged": "Sunrise and Rahu Kaal times changed; tithi and festival dates stay the same"
 }

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/time/civil_date.dart';
 import '../features/calendar/calendar_screen.dart';
+import '../features/city/city_picker_screen.dart';
 import '../features/day/day_screen.dart';
 import '../features/festivals/festivals_screen.dart';
 import '../features/more/more_screen.dart';
@@ -17,6 +18,8 @@ abstract final class Routes {
 
   /// Day detail for a date, e.g. `/day/2026-10-12` (also the share-link form, T-411).
   static String day(CivilDate date) => '/day/${date.toIso()}';
+
+  static const city = '/city';
 }
 
 /// One router for the app's lifetime, so a language or theme change never resets
@@ -33,6 +36,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           return date == null ? const TodayScreen() : DayScreen(date: date);
         },
       ),
+      GoRoute(path: Routes.city, builder: (_, _) => const CityPickerScreen()),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(navigationShell: shell),
         branches: [

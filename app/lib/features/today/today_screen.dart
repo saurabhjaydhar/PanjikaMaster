@@ -168,6 +168,7 @@ class _TodayContent extends ConsumerWidget {
                 bengaliMonth: d.bengaliMonth,
                 bengaliYear: d.bengaliDate.year,
                 city: d.provenance.city,
+                onCityTap: () => context.push(Routes.city),
               ),
               const SizedBox(height: Space.l),
 

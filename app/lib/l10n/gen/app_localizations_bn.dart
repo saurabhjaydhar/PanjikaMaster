@@ -326,4 +326,39 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get actionView => 'দেখুন';
+
+  @override
+  String get cityPickerTitle => 'শহর বেছে নিন';
+
+  @override
+  String get citySearchHint => 'শহরের নাম লিখুন';
+
+  @override
+  String get sectionRecent => 'সাম্প্রতিক';
+
+  @override
+  String get sectionWestBengal => 'পশ্চিমবঙ্গ';
+
+  @override
+  String get sectionOtherCities => 'অন্যান্য শহর';
+
+  @override
+  String sunriseAt(String time) {
+    return 'সূর্যোদয় $time';
+  }
+
+  @override
+  String cityRowSemantics(String city, String district, String sunrise) {
+    return '$city, $district, $sunrise';
+  }
+
+  @override
+  String get currentCity => 'বর্তমান শহর';
+
+  @override
+  String get noCityMatches => 'এই নামে কোনো শহর পাওয়া যায়নি';
+
+  @override
+  String get cityChanged =>
+      'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই';
 }

@@ -328,4 +328,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionView => 'View';
+
+  @override
+  String get cityPickerTitle => 'Choose a city';
+
+  @override
+  String get citySearchHint => 'Type a city name';
+
+  @override
+  String get sectionRecent => 'Recent';
+
+  @override
+  String get sectionWestBengal => 'West Bengal';
+
+  @override
+  String get sectionOtherCities => 'Other cities';
+
+  @override
+  String sunriseAt(String time) {
+    return 'Sunrise $time';
+  }
+
+  @override
+  String cityRowSemantics(String city, String district, String sunrise) {
+    return '$city, $district, $sunrise';
+  }
+
+  @override
+  String get currentCity => 'Current city';
+
+  @override
+  String get noCityMatches => 'No city matches that name';
+
+  @override
+  String get cityChanged =>
+      'Sunrise and Rahu Kaal times changed; tithi and festival dates stay the same';
 }

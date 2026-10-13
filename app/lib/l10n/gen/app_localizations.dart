@@ -616,6 +616,66 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দেখুন'**
   String get actionView;
+
+  /// Title of the city picker.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর বেছে নিন'**
+  String get cityPickerTitle;
+
+  /// Hint in the city search field (Bengali or English).
+  ///
+  /// In bn, this message translates to:
+  /// **'শহরের নাম লিখুন'**
+  String get citySearchHint;
+
+  /// City picker section: recently chosen cities.
+  ///
+  /// In bn, this message translates to:
+  /// **'সাম্প্রতিক'**
+  String get sectionRecent;
+
+  /// City picker section: cities in West Bengal.
+  ///
+  /// In bn, this message translates to:
+  /// **'পশ্চিমবঙ্গ'**
+  String get sectionWestBengal;
+
+  /// City picker section: cities outside West Bengal.
+  ///
+  /// In bn, this message translates to:
+  /// **'অন্যান্য শহর'**
+  String get sectionOtherCities;
+
+  /// Today's sunrise in a city row.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয় {time}'**
+  String sunriseAt(String time);
+
+  /// Screen-reader label of a city row. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{city}, {district}, {sunrise}'**
+  String cityRowSemantics(String city, String district, String sunrise);
+
+  /// Screen-reader state of the chosen city's row.
+  ///
+  /// In bn, this message translates to:
+  /// **'বর্তমান শহর'**
+  String get currentCity;
+
+  /// City search with no results.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই নামে কোনো শহর পাওয়া যায়নি'**
+  String get noCityMatches;
+
+  /// Toast after changing the city (FR-LOC-05).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই'**
+  String get cityChanged;
 }
 
 class _AppLocalizationsDelegate
