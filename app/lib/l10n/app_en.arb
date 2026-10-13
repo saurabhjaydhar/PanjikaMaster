@@ -202,5 +202,6 @@
   "channelFestival": "Festival reminders",
   "channelFestivalDescription": "Reminders before the festivals you chose.",
   "channelTithi": "Tithi reminders",
-  "channelTithiDescription": "Ekadashi, Purnima and Amavasya reminders."
+  "channelTithiDescription": "Ekadashi, Purnima and Amavasya reminders.",
+  "notificationsOff": "Notifications are off, so reminders can't be shown. Turn on notifications for this app in your phone's settings."
 }

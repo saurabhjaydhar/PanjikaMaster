@@ -1329,6 +1329,12 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।'**
   String get channelTithiDescription;
+
+  /// Inline help after the notification permission is refused (US-03, T-507).
+  ///
+  /// In bn, this message translates to:
+  /// **'বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।'**
+  String get notificationsOff;
 }
 
 class _AppLocalizationsDelegate

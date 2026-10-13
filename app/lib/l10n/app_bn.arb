@@ -1143,5 +1143,9 @@
   "channelTithiDescription": "একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।",
   "@channelTithiDescription": {
     "description": "Android notification channel description."
+  },
+  "notificationsOff": "বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।",
+  "@notificationsOff": {
+    "description": "Inline help after the notification permission is refused (US-03, T-507)."
   }
 }

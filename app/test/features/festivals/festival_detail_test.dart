@@ -17,6 +17,7 @@ import 'package:panjika/core/settings/settings.dart';
 import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
+import 'package:panjika/data/notifications/notification_permission.dart';
 import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/features/festivals/festival_detail_screen.dart';
@@ -31,8 +32,10 @@ void main() {
   late AppDatabase db;
   late MemorySettings settings;
   late FakeNotificationScheduler scheduler;
+  late FakeNotificationPermission permission;
   setUp(() async {
     scheduler = FakeNotificationScheduler();
+    permission = FakeNotificationPermission();
     db = AppDatabase(NativeDatabase.memory());
     await loadSamplePackIfEmpty(db);
   });
@@ -66,6 +69,7 @@ void main() {
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
           clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),
           notificationSchedulerProvider.overrideWithValue(scheduler),
+          notificationPermissionProvider.overrideWithValue(permission),
         ],
         child: const PanjikaApp(),
       ),
@@ -119,6 +123,39 @@ void main() {
     expect(settings.read(SettingKey.reminders), isNull);
   });
 
+  testWidgets(
+    'T-507: asks only when turning a reminder on, and only if needed',
+    (tester) async {
+      permission.isGranted = false;
+      await open(tester, '/festival/kali_puja', language: 'en');
+      await tester.tap(find.text('Remind me'));
+      await tester.pumpAndSettle();
+      expect(permission.requests, 1);
+      expect(find.text('Reminder on'), findsOneWidget);
+      // Turning it off never asks.
+      await tester.tap(find.text('Reminder on'));
+      await tester.pumpAndSettle();
+      expect(permission.requests, 1);
+    },
+  );
+
+  testWidgets('T-507: refused — the toggle stays off and says how to fix it', (
+    tester,
+  ) async {
+    permission
+      ..isGranted = false
+      ..grantOnRequest = false;
+    await open(tester, '/festival/kali_puja', language: 'en');
+    await tester.tap(find.text('Remind me'));
+    await tester.pumpAndSettle();
+    expect(find.text('Remind me'), findsOneWidget, reason: 'still off');
+    expect(settings.read(SettingKey.reminders), isNull);
+    expect(find.textContaining('Notifications are off'), findsOneWidget);
+    await tester.tap(find.text('Open settings'));
+    await tester.pumpAndSettle();
+    expect(permission.settingsOpened, 1);
+  });
+
   testWidgets('a multi-day festival has a day selector', (tester) async {
     await db.customStatement(
       "INSERT INTO observances VALUES ('durga_puja', 'দুর্গাপূজা', 'Durga Puja',"
@@ -146,6 +183,35 @@ void main() {
     await open(tester, '/festival/no_such_festival');
     expect(find.text('এই উৎসবের তথ্য এই ফোনে নেই।'), findsOneWidget);
   });
+
+  for (final language in ['bn', 'en']) {
+    for (final theme in [ThemeMode.light, ThemeMode.dark]) {
+      for (final scale in [1.0, 2.0]) {
+        final id =
+            'notifications_off_${language}_${theme.name}_${(scale * 100).round()}';
+        testWidgets('golden $id', (tester) async {
+          permission
+            ..isGranted = false
+            ..grantOnRequest = false;
+          await open(
+            tester,
+            '/festival/kali_puja',
+            language: language,
+            theme: theme,
+            textScale: scale,
+            size: Size(360, scale > 1.5 ? 2600 : 1400),
+          );
+          await tester.tap(find.byIcon(Icons.notifications_none));
+          await tester.pumpAndSettle();
+          expect(tester.takeException(), isNull);
+          await expectLater(
+            find.byType(PanjikaApp),
+            matchesGoldenFile('goldens/$id.png'),
+          );
+        });
+      }
+    }
+  }
 
   for (final language in ['bn', 'en']) {
     for (final theme in [ThemeMode.light, ThemeMode.dark]) {

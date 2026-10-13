@@ -751,4 +751,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get channelTithiDescription =>
       'Ekadashi, Purnima and Amavasya reminders.';
+
+  @override
+  String get notificationsOff =>
+      'Notifications are off, so reminders can\'t be shown. Turn on notifications for this app in your phone\'s settings.';
 }

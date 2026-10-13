@@ -747,4 +747,8 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get channelTithiDescription =>
       'একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।';
+
+  @override
+  String get notificationsOff =>
+      'বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।';
 }
