@@ -20,6 +20,7 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | flutter_riverpod | app | 3.4.3 | MIT | 2026-09-03 | Android, iOS, desktop | State management (spec §14.3) | 2026-10-12 |
 | drift | app | 2.35.2 | MIT | 2026-10-07 | All | Typed SQLite DB mirroring `schema.sql` | 2026-10-12 |
 | drift_flutter | app | 0.3.1 | MIT | 2026-07-11 | All | Opens the Drift DB on device; pulls `sqlite3` 3.x, which bundles SQLite natively | 2026-10-12 |
+| cryptography (Dart) | app | 2.9.0 | Apache-2.0 | 2025-11-21 | All (pure Dart Ed25519 and SHA-256) | Verify pack signatures and hashes on import (spec §14.3, T-306) | 2026-10-13 |
 | go_router | app | 18.0.2 | BSD-3-Clause | 2026-09-28 | All | Routing + deep links | 2026-10-12 |
 | flutter_localizations | app | SDK | BSD-3-Clause | with Flutter 3.47.7 | All | Material/Cupertino strings for bn + en, gen-l10n | 2026-10-12 |
 | intl | app | 0.20.3 (pinned by SDK) | BSD-3-Clause | 2026-06-25 | All | ICU plural/select for ARB messages; formatting goes through `PanjikaFormatter` | 2026-10-12 |

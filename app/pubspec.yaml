@@ -9,6 +9,7 @@ environment:
 
 # Every package is recorded in ../docs/dependencies.md before it is added (CLAUDE.md).
 dependencies:
+  cryptography: ^2.9.0
   drift: ^2.35.2
   drift_flutter: ^0.3.1
   flutter:
