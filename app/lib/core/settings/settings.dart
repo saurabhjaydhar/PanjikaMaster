@@ -20,7 +20,7 @@ enum SettingKey {
   dismissedNotices('dismissed_notices'),
   recentCities('recent_cities'),
   remindersOptIn('reminders_opt_in'),
-  festivalReminders('festival_reminders');
+  reminders('reminders');
 
   const SettingKey(this.key);
 

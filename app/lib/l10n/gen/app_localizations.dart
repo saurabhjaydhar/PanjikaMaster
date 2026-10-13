@@ -1275,6 +1275,60 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দিনগুলি'**
   String get festivalDaysLabel;
+
+  /// Reminder title the evening before (FR-REM-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'আগামীকাল {name}'**
+  String reminderTomorrow(String name);
+
+  /// Reminder title on the morning of the day.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজ {name}'**
+  String reminderToday(String name);
+
+  /// Reminder title at tithi start.
+  ///
+  /// In bn, this message translates to:
+  /// **'{name} শুরু হলো'**
+  String reminderTithiBegun(String name);
+
+  /// Reminder detail: when the tithi begins, e.g. 'তিথি শুরু রাত ৯:১৪'.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি শুরু {time}'**
+  String reminderTithiBegins(String time);
+
+  /// Reminder body: the detail, then its provenance (tradition, IST).
+  ///
+  /// In bn, this message translates to:
+  /// **'{detail} · {tradition} · {timeZone}'**
+  String reminderBody(String detail, String tradition, String timeZone);
+
+  /// Android notification channel name (spec §17).
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব অনুস্মারক'**
+  String get channelFestival;
+
+  /// Android notification channel description.
+  ///
+  /// In bn, this message translates to:
+  /// **'আপনার বেছে নেওয়া পার্বণের আগে মনে করিয়ে দেয়।'**
+  String get channelFestivalDescription;
+
+  /// Android notification channel name (spec §17).
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি অনুস্মারক'**
+  String get channelTithi;
+
+  /// Android notification channel description.
+  ///
+  /// In bn, this message translates to:
+  /// **'একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।'**
+  String get channelTithiDescription;
 }
 
 class _AppLocalizationsDelegate
