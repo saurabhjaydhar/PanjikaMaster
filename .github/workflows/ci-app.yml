@@ -87,4 +87,4 @@ jobs:
           profile: pixel_6
           disable-animations: true
           working-directory: app
-          script: flutter test integration_test/app_smoke_test.dart
+          script: flutter test integration_test

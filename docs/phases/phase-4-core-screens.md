@@ -27,7 +27,7 @@
 ### QA
 | ID | Task | Done when |
 |---|---|---|
-| T-413 | Integration: onboarding → Today in both languages; language switch keeps screen and back stack | Passes on emulator |
+| T-413 ✅ | Integration: onboarding → Today in both languages; language switch keeps screen and back stack | Passes on emulator |
 
 ### Human gates
 - Answer Q15
