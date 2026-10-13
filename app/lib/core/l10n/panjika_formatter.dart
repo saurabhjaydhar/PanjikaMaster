@@ -201,6 +201,10 @@ class PanjikaFormatter {
   String bengaliDate(int day, String monthName, int year) =>
       '${_day(day)} $monthName ${digits('$year')}';
 
+  /// "২৫ আশ্বিন" / "25 Ashwin": a Bengali date where the year is already shown.
+  String bengaliDayMonth(int day, String monthName) =>
+      '${_day(day)} $monthName';
+
   /// Count as shown inside the `countdownDays` message.
   String countText(int count) => number(count);
 

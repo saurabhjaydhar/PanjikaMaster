@@ -621,4 +621,49 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get numeralsLatinSemantics => 'ইংরেজি সংখ্যা';
+
+  @override
+  String festivalsTitle(String year) {
+    return 'পার্বণ $year';
+  }
+
+  @override
+  String get filterAll => 'সব';
+
+  @override
+  String get filterTitle => 'বাছাই';
+
+  @override
+  String get filterMonth => 'মাস';
+
+  @override
+  String get filterImportance => 'গুরুত্ব';
+
+  @override
+  String get tierMajor => 'প্রধান উৎসব';
+
+  @override
+  String get tierOther => 'অন্যান্য পার্বণ ও তিথি';
+
+  @override
+  String get tierCivic => 'জয়ন্তী ও স্মরণীয় দিন';
+
+  @override
+  String get showAll => 'সব দেখান';
+
+  @override
+  String get noFestivalsMatch => 'এই বাছাইয়ে কোনো পার্বণ নেই।';
+
+  @override
+  String get festivalYearPartial => 'এই বছরের কয়েকটি মাসের তথ্য এই ফোনে নেই।';
+
+  @override
+  String festivalRowDates(String gregorian, String bengali) {
+    return '$gregorian · $bengali';
+  }
+
+  @override
+  String festivalDayOf(String day) {
+    return 'দিন $day';
+  }
 }

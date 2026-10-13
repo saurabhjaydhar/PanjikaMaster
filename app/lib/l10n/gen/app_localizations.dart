@@ -1125,6 +1125,84 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'ইংরেজি সংখ্যা'**
   String get numeralsLatinSemantics;
+
+  /// Festivals tab title with the Bengali year (formatted with the user's numerals), spec §11.5.
+  ///
+  /// In bn, this message translates to:
+  /// **'পার্বণ {year}'**
+  String festivalsTitle(String year);
+
+  /// Filter chip that shows every category.
+  ///
+  /// In bn, this message translates to:
+  /// **'সব'**
+  String get filterAll;
+
+  /// Festivals filter sheet title and button tooltip (FR-FEST-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'বাছাই'**
+  String get filterTitle;
+
+  /// Filter sheet section: Bengali month.
+  ///
+  /// In bn, this message translates to:
+  /// **'মাস'**
+  String get filterMonth;
+
+  /// Filter sheet section: observance tier.
+  ///
+  /// In bn, this message translates to:
+  /// **'গুরুত্ব'**
+  String get filterImportance;
+
+  /// Tier 1 observances (spec §6.6).
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রধান উৎসব'**
+  String get tierMajor;
+
+  /// Tier 2 observances.
+  ///
+  /// In bn, this message translates to:
+  /// **'অন্যান্য পার্বণ ও তিথি'**
+  String get tierOther;
+
+  /// Tier 3 observances.
+  ///
+  /// In bn, this message translates to:
+  /// **'জয়ন্তী ও স্মরণীয় দিন'**
+  String get tierCivic;
+
+  /// Clears every festival filter.
+  ///
+  /// In bn, this message translates to:
+  /// **'সব দেখান'**
+  String get showAll;
+
+  /// Festival list empty after filtering.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই বাছাইয়ে কোনো পার্বণ নেই।'**
+  String get noFestivalsMatch;
+
+  /// Festival list note when only part of the Bengali year is installed.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই বছরের কয়েকটি মাসের তথ্য এই ফোনে নেই।'**
+  String get festivalYearPartial;
+
+  /// Festival row: Gregorian date, then Bengali date (FR-FEST-01).
+  ///
+  /// In bn, this message translates to:
+  /// **'{gregorian} · {bengali}'**
+  String festivalRowDates(String gregorian, String bengali);
+
+  /// Which day of a multi-day festival a row is (FR-FEST-04); day is formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিন {day}'**
+  String festivalDayOf(String day);
 }
 
 class _AppLocalizationsDelegate

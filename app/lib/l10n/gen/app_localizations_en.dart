@@ -624,4 +624,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get numeralsLatinSemantics => 'Latin numerals';
+
+  @override
+  String festivalsTitle(String year) {
+    return 'Festivals $year';
+  }
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterTitle => 'Filter';
+
+  @override
+  String get filterMonth => 'Month';
+
+  @override
+  String get filterImportance => 'Importance';
+
+  @override
+  String get tierMajor => 'Major festivals';
+
+  @override
+  String get tierOther => 'Other observances';
+
+  @override
+  String get tierCivic => 'Anniversaries and civic days';
+
+  @override
+  String get showAll => 'Show all';
+
+  @override
+  String get noFestivalsMatch => 'No observances match these filters.';
+
+  @override
+  String get festivalYearPartial =>
+      'Some months of this year aren\'t downloaded.';
+
+  @override
+  String festivalRowDates(String gregorian, String bengali) {
+    return '$gregorian · $bengali';
+  }
+
+  @override
+  String festivalDayOf(String day) {
+    return 'Day $day';
+  }
 }

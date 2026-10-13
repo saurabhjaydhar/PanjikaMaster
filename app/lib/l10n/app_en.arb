@@ -168,5 +168,18 @@
   "festivalNotFound": "This festival isn't in the data on this phone.",
   "goToToday": "Go to Today",
   "numeralsBengaliSemantics": "Bengali numerals",
-  "numeralsLatinSemantics": "Latin numerals"
+  "numeralsLatinSemantics": "Latin numerals",
+  "festivalsTitle": "Festivals {year}",
+  "filterAll": "All",
+  "filterTitle": "Filter",
+  "filterMonth": "Month",
+  "filterImportance": "Importance",
+  "tierMajor": "Major festivals",
+  "tierOther": "Other observances",
+  "tierCivic": "Anniversaries and civic days",
+  "showAll": "Show all",
+  "noFestivalsMatch": "No observances match these filters.",
+  "festivalYearPartial": "Some months of this year aren't downloaded.",
+  "festivalRowDates": "{gregorian} · {bengali}",
+  "festivalDayOf": "Day {day}"
 }

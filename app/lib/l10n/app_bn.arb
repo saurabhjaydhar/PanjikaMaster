@@ -937,5 +937,75 @@
   "numeralsLatinSemantics": "ইংরেজি সংখ্যা",
   "@numeralsLatinSemantics": {
     "description": "Screen-reader label of the Latin numerals option."
+  },
+  "festivalsTitle": "পার্বণ {year}",
+  "@festivalsTitle": {
+    "description": "Festivals tab title with the Bengali year (formatted with the user's numerals), spec §11.5.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "filterAll": "সব",
+  "@filterAll": {
+    "description": "Filter chip that shows every category."
+  },
+  "filterTitle": "বাছাই",
+  "@filterTitle": {
+    "description": "Festivals filter sheet title and button tooltip (FR-FEST-02)."
+  },
+  "filterMonth": "মাস",
+  "@filterMonth": {
+    "description": "Filter sheet section: Bengali month."
+  },
+  "filterImportance": "গুরুত্ব",
+  "@filterImportance": {
+    "description": "Filter sheet section: observance tier."
+  },
+  "tierMajor": "প্রধান উৎসব",
+  "@tierMajor": {
+    "description": "Tier 1 observances (spec §6.6)."
+  },
+  "tierOther": "অন্যান্য পার্বণ ও তিথি",
+  "@tierOther": {
+    "description": "Tier 2 observances."
+  },
+  "tierCivic": "জয়ন্তী ও স্মরণীয় দিন",
+  "@tierCivic": {
+    "description": "Tier 3 observances."
+  },
+  "showAll": "সব দেখান",
+  "@showAll": {
+    "description": "Clears every festival filter."
+  },
+  "noFestivalsMatch": "এই বাছাইয়ে কোনো পার্বণ নেই।",
+  "@noFestivalsMatch": {
+    "description": "Festival list empty after filtering."
+  },
+  "festivalYearPartial": "এই বছরের কয়েকটি মাসের তথ্য এই ফোনে নেই।",
+  "@festivalYearPartial": {
+    "description": "Festival list note when only part of the Bengali year is installed."
+  },
+  "festivalRowDates": "{gregorian} · {bengali}",
+  "@festivalRowDates": {
+    "description": "Festival row: Gregorian date, then Bengali date (FR-FEST-01).",
+    "placeholders": {
+      "gregorian": {
+        "type": "String"
+      },
+      "bengali": {
+        "type": "String"
+      }
+    }
+  },
+  "festivalDayOf": "দিন {day}",
+  "@festivalDayOf": {
+    "description": "Which day of a multi-day festival a row is (FR-FEST-04); day is formatted with the user's numerals.",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
   }
 }
