@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 2 — Engine & components** (Phase 1 complete; T-202, T-208–T-214 and T-217 done; T-201 partial — ephemeris hosts blocked here)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-202, T-204, T-208–T-214 and T-217 done; T-201 partial — ephemeris hosts blocked here)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -82,3 +82,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-13 | T-201: committed the DE440s size and SHA-256 that ci-data recorded when it downloaded the file from NAIF (`c1c7feea…49f2`, 32,726,016 bytes) as **unconfirmed**, so every CI run now verifies the cached file against it. `confirmed_by` stays empty for the human. |
 | 2026-10-13 | T-202 done: `engine/astro.py` gives apparent tropical Sun/Moon longitudes (true ecliptic of date) and elongation via Skyfield on the lock-verified DE440s; `engine/ephemeris.py` resolves the kernel (dev-only `PANJIKA_EPHEMERIS` override, refused by the pack builder). Found and fixed a 27 s leap-second slip in Unix→Skyfield time conversion. Tests: Skyfield's equinoxes/solstices and moon phases land within 1e-5°, Astronomy Engine (independent analytic theory) agrees within 0.005° (Sun) / 0.02° (Moon) across 2020–2045, physical motion rates (Hypothesis). They skip locally without an ephemeris and fail in CI if it is missing. Verified locally on DE421; CI runs them on DE440s. New: skyfield (MIT), astronomy-engine (dev, MIT). |
 | 2026-10-13 | T-203 (partial): `engine/ayanamsa.py` — Lahiri mean ayanamsa = 23°15′00.658″ at 1956-03-21 0h TT (Calendar Reform Committee definition) + IAU 2006 general precession; true = mean + Δψ (IAU 2000A). `astro.py` gains sidereal Sun/Moon and the yoga angle. Tests: epoch value, ~50.3″/yr rate, nutation included, Spica within 3′ of 180° (order check). The 1″ check against `reference/ayanamsa.csv` skips with a notice until the human enters it (expected format in the test's docstring). |
+| 2026-10-13 | T-204 done: `engine/panchanga.py` — one vectorised search for all four kinds (hourly scan on a whole-hour grid, 13 bisection steps ≈ 0.44 s, rounded to the second); spans overlapping a range, chunked for long ranges with identical results. Property tests (Hypothesis, random windows 2020–2045): contiguous, indices cycle, physical lengths (tithi 19–27 h), each transition on its boundary within 0.0002°, two karanas per tithi; full-year count; query-start independence. Verified locally on DE421; CI runs on DE440s. |

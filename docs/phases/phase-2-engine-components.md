@@ -10,7 +10,7 @@
 | T-201 🟡 | Ephemeris fetch for DE440s with a SHA-256 lock file | Re-run verifies the checksum; a mismatch fails — *checksum recorded from the CI download (unconfirmed); awaiting human confirmation* |
 | T-202 ✅ | `astro.py`: apparent geocentric Sun/Moon ecliptic longitude via Skyfield | Tests against Skyfield's documented examples |
 | T-203 🟡 | `ayanamsa.py`: Lahiri, formula and source cited | Within 1″ of `reference/ayanamsa.csv` (skipped with a visible notice until the file exists) — *implemented; awaiting the reference file (format in `data/tests/test_ayanamsa.py`)* |
-| T-204 | `panchanga.py`: tithi, nakshatra, yoga, karana transitions (scan + bisection to 1 s) | Property tests: no gaps/overlaps, indices cycle, tithi length 19–27 h |
+| T-204 ✅ | `panchanga.py`: tithi, nakshatra, yoga, karana transitions (scan + bisection to 1 s) | Property tests: no gaps/overlaps, indices cycle, tithi length 19–27 h |
 | T-205 | `solar.py`: sankranti search | 12 per year, ordered, 29–32 days apart |
 | T-206 | City list (source per Q13; WB districts + 10 metros, names in both languages, aliases) + sunrise/sunset/moonrise/moonset; sunrise definition behind a flag (Q3) | 10 cities × 12 days within ±1 min of Astronomy Engine (independent check) |
 | T-207 | Pipeline CLI `python -m engine build --from --to` with run metadata (library versions, ephemeris checksum) | Same inputs → identical output bytes; full 2020–2045 run time recorded |
