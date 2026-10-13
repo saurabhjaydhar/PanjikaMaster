@@ -377,6 +377,8 @@ class PackRow extends DataClass implements Insertable<PackRow> {
 
   /// NULL for sample packs
   final String? validationSummary;
+
+  /// JSON; `validated_on` (YYYY-MM-DD) once checked against the references (T-503)
   final String? installedAt;
 
   /// set by the app's importer; NULL inside a pack file
