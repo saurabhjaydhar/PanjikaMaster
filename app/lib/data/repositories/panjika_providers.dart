@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/config/feature_flags.dart';
 import '../../core/settings/settings.dart';
 import '../../core/time/civil_date.dart';
 import '../../core/time/clock.dart';
@@ -17,7 +18,11 @@ final panjikaRepositoryProvider = Provider<DriftPanjikaRepository>(
 
 final getDayPanjikaProvider = Provider<GetDayPanjika>((ref) {
   final repo = ref.watch(panjikaRepositoryProvider);
-  return GetDayPanjika(repo, repo);
+  return GetDayPanjika(
+    repo,
+    repo,
+    bengalPeriods: ref.watch(featureFlagsProvider).bengalPeriods,
+  );
 });
 
 final getMonthGridProvider = Provider<GetMonthGrid>((ref) {

@@ -55,6 +55,33 @@ void main() {
       ]);
     });
 
+    test('T-606: pack period rules only behind the flag, only if enabled', () async {
+      // Synthetic rules to exercise the switch; not a panjika's table (§6.5.9).
+      await db.customStatement(
+        "INSERT INTO period_rules VALUES ('drik_bishuddha', 3, 'ashubh', 1, 'day', "
+        "8, 4, 1, 'sample-global-drik'), ('drik_bishuddha', 5, 'ashubh', 1, "
+        "'night', 8, 3, 0, 'sample-global-drik')",
+      );
+      expect((await day(sampleDay))!.periods.map((p) => p.periodId), [
+        isNot(3),
+        isNot(3),
+        isNot(3),
+      ], reason: 'flag off by default');
+
+      final repo = DriftPanjikaRepository(db);
+      final on = (await GetDayPanjika(repo, repo, bengalPeriods: true)(
+        date: sampleDay,
+        tradition: drik,
+        cityId: 'kolkata',
+      ))!;
+      expect(on.periods.map((p) => p.periodId), contains(3));
+      expect(
+        on.periods.map((p) => p.periodId),
+        isNot(contains(5)),
+        reason: 'a rule not yet enabled by the pipeline never shows',
+      );
+    });
+
     test('containing(): before sunrise belongs to the previous date', () async {
       final d = (await day(sampleDay))!;
       final beforeNextSunrise = d.nextSunrise.subtract(

@@ -21,11 +21,17 @@ class GetDayPanjika {
     this._source,
     this._catalog, {
     this.assembler = const StandardDayAssembler(),
+    this.bengalPeriods = false,
   });
 
   final PanjikaSource _source;
   final CatalogSource _catalog;
   final DayAssembler assembler;
+
+  /// Whether the pack's `period_rules` (বারবেলা, কালবেলা, কালরাত্রি, অমৃতযোগ,
+  /// মাহেন্দ্রযোগ, spec §6.5.9) are shown. Off until their rules are validated against
+  /// 30 printed days (T-602); see `FeatureFlags.bengalPeriods`.
+  final bool bengalPeriods;
 
   /// The panjika day that starts at sunrise on [date].
   Future<DayPanjika?> call({
@@ -64,7 +70,9 @@ class GetDayPanjika {
 
     final (names, rules, observances) = await (
       _catalog.names(),
-      _catalog.enabledPeriodRules(tradition),
+      bengalPeriods
+          ? _catalog.enabledPeriodRules(tradition)
+          : Future.value(const <PeriodRule>[]),
       _source.observances(tradition, date, date),
     ).wait;
     final packIds = {
