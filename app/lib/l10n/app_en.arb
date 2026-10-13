@@ -135,5 +135,19 @@
   "aboutVersion": "Version {version}",
   "aboutDataHeading": "Where the data comes from",
   "aboutDataBody": "Positions of the Sun and Moon are computed from NASA JPL's DE440s ephemeris with the Skyfield software. The computation is done ahead of time; the phone only reads that data and never guesses.",
-  "aboutProvenance": "Every value is shown with its panjika tradition, city, time zone and verification status."
+  "aboutProvenance": "Every value is shown with its panjika tradition, city, time zone and verification status.",
+  "bothLanguages": "{bn} · {en}",
+  "onboardingStep": "Step {step} of {total}",
+  "onboardingChooseLanguage": "Choose your language",
+  "onboardingLanguagePreview": "For example: {tithi}",
+  "onboardingChangeLater": "You can change this later.",
+  "actionContinue": "Continue",
+  "onboardingTraditionTitle": "Which panjika do you follow?",
+  "onboardingTraditionNote": "The two can put a festival on different days. You can change this in Settings.",
+  "onboardingCityTitle": "Which is your city?",
+  "onboardingCityNote": "Sunrise, sunset and Rahu Kaal depend on your city. Tithis and festival dates don't.",
+  "onboardingRemindersTitle": "Would you like reminders?",
+  "onboardingRemindersBody": "The app can remind you before festivals, Ekadashi, Purnima and Amavasya. You'll choose which ones under Reminders. Your phone will ask for permission when the first reminder is set.",
+  "onboardingRemindersYes": "Yes, remind me",
+  "onboardingRemindersNo": "Not now"
 }

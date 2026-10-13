@@ -31,7 +31,10 @@ void main() {
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         settingsSourceProvider.overrideWithValue(
-          MemorySettings({SettingKey.locale: 'bn'}),
+          MemorySettings({
+            SettingKey.onboardingDone: '1',
+            SettingKey.locale: 'bn',
+          }),
         ),
         // The sample data covers Sep–Dec 2026; pin the clock to the PRD's sample day.
         clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),

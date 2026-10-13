@@ -37,7 +37,10 @@ void main() {
     double textScale = 1.0,
     Size size = const Size(360, 800),
   }) async {
-    settings = MemorySettings({SettingKey.theme: theme.name});
+    settings = MemorySettings({
+      SettingKey.onboardingDone: '1',
+      SettingKey.theme: theme.name,
+    });
     tester.view
       ..physicalSize = size
       ..devicePixelRatio = 1;

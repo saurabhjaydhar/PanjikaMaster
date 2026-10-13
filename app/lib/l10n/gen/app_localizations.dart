@@ -922,6 +922,90 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।'**
   String get aboutProvenance;
+
+  /// Layout pattern: the same text in Bengali then English, on the first onboarding step before a language is chosen.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bn} · {en}'**
+  String bothLanguages(String bn, String en);
+
+  /// Screen-reader label of the onboarding progress dots; numbers are formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'ধাপ {step}/{total}'**
+  String onboardingStep(String step, String total);
+
+  /// Onboarding step 1 heading (spec §11.1).
+  ///
+  /// In bn, this message translates to:
+  /// **'ভাষা বেছে নিন'**
+  String get onboardingChooseLanguage;
+
+  /// Preview line under each language option; tithi is a tithi name from the pack's names table (not today's data).
+  ///
+  /// In bn, this message translates to:
+  /// **'যেমন: {tithi}'**
+  String onboardingLanguagePreview(String tithi);
+
+  /// Onboarding step 1 note.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরে সেটিংসে বদলানো যাবে।'**
+  String get onboardingChangeLater;
+
+  /// Onboarding primary button.
+  ///
+  /// In bn, this message translates to:
+  /// **'এগিয়ে যান'**
+  String get actionContinue;
+
+  /// Onboarding step 2 heading (spec §11.1, US-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'কোন পঞ্জিকা মেনে চলেন?'**
+  String get onboardingTraditionTitle;
+
+  /// Onboarding step 2 note (spec §11.1).
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।'**
+  String get onboardingTraditionNote;
+
+  /// Onboarding step 3 heading.
+  ///
+  /// In bn, this message translates to:
+  /// **'আপনার শহর কোনটি?'**
+  String get onboardingCityTitle;
+
+  /// Onboarding step 3 note (FR-LOC-05).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।'**
+  String get onboardingCityNote;
+
+  /// Onboarding step 4 heading (optional step).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক চান?'**
+  String get onboardingRemindersTitle;
+
+  /// Onboarding step 4 explanation; the permission prompt comes later (T-507).
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।'**
+  String get onboardingRemindersBody;
+
+  /// Onboarding step 4: opt in to reminders.
+  ///
+  /// In bn, this message translates to:
+  /// **'হ্যাঁ, মনে করিয়ে দিন'**
+  String get onboardingRemindersYes;
+
+  /// Onboarding step 4: skip reminders.
+  ///
+  /// In bn, this message translates to:
+  /// **'এখন নয়'**
+  String get onboardingRemindersNo;
 }
 
 class _AppLocalizationsDelegate

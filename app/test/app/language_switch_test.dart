@@ -20,7 +20,9 @@ Future<ProviderContainer> pumpApp(
   final container = ProviderContainer(
     overrides: [
       deviceLocalesProvider.overrideWithValue(device),
-      settingsSourceProvider.overrideWithValue(settings ?? MemorySettings()),
+      settingsSourceProvider.overrideWithValue(
+        settings ?? MemorySettings({SettingKey.onboardingDone: '1'}),
+      ),
     ],
   );
   addTearDown(container.dispose);

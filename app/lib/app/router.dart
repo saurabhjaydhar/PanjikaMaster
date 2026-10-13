@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/settings/settings.dart';
 import '../core/time/civil_date.dart';
 import '../features/calendar/calendar_screen.dart';
 import '../features/city/city_picker_screen.dart';
@@ -9,6 +10,7 @@ import '../features/festivals/festivals_screen.dart';
 import '../features/more/about_screen.dart';
 import '../features/more/coming_soon_screen.dart';
 import '../features/more/more_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/today/today_screen.dart';
 import '../l10n/gen/app_localizations.dart';
@@ -23,6 +25,7 @@ abstract final class Routes {
   /// Day detail for a date, e.g. `/day/2026-10-12` (also the share-link form, T-411).
   static String day(CivilDate date) => '/day/${date.toIso()}';
 
+  static const onboarding = '/onboarding';
   static const city = '/city';
   static const settings = '/settings';
 
@@ -42,7 +45,36 @@ abstract final class Routes {
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
     initialLocation: Routes.today,
+    // First run goes through onboarding; a link that launched the app is kept and
+    // opened afterwards (spec §10).
+    redirect: (_, state) {
+      final done = ref.read(onboardingDoneProvider);
+      final atOnboarding = state.matchedLocation == Routes.onboarding;
+      if (!done && !atOnboarding) {
+        final next = state.uri.toString();
+        return next == Routes.today
+            ? Routes.onboarding
+            : Uri(
+                path: Routes.onboarding,
+                queryParameters: {'next': next},
+              ).toString();
+      }
+      if (done && atOnboarding) return Routes.today;
+      return null;
+    },
     routes: [
+      GoRoute(
+        path: Routes.onboarding,
+        builder: (_, state) {
+          final next = state.uri.queryParameters['next'];
+          // Only an in-app path, never a full URL.
+          return OnboardingScreen(
+            next: next != null && next.startsWith('/') && !next.startsWith('//')
+                ? next
+                : null,
+          );
+        },
+      ),
       // Above the tabs, so Back returns to whichever tab opened it.
       GoRoute(
         path: '/day/:date',

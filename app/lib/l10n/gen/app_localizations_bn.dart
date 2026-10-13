@@ -498,4 +498,55 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get aboutProvenance =>
       'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।';
+
+  @override
+  String bothLanguages(String bn, String en) {
+    return '$bn · $en';
+  }
+
+  @override
+  String onboardingStep(String step, String total) {
+    return 'ধাপ $step/$total';
+  }
+
+  @override
+  String get onboardingChooseLanguage => 'ভাষা বেছে নিন';
+
+  @override
+  String onboardingLanguagePreview(String tithi) {
+    return 'যেমন: $tithi';
+  }
+
+  @override
+  String get onboardingChangeLater => 'পরে সেটিংসে বদলানো যাবে।';
+
+  @override
+  String get actionContinue => 'এগিয়ে যান';
+
+  @override
+  String get onboardingTraditionTitle => 'কোন পঞ্জিকা মেনে চলেন?';
+
+  @override
+  String get onboardingTraditionNote =>
+      'দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।';
+
+  @override
+  String get onboardingCityTitle => 'আপনার শহর কোনটি?';
+
+  @override
+  String get onboardingCityNote =>
+      'সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।';
+
+  @override
+  String get onboardingRemindersTitle => 'অনুস্মারক চান?';
+
+  @override
+  String get onboardingRemindersBody =>
+      'উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।';
+
+  @override
+  String get onboardingRemindersYes => 'হ্যাঁ, মনে করিয়ে দিন';
+
+  @override
+  String get onboardingRemindersNo => 'এখন নয়';
 }

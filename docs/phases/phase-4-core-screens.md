@@ -7,7 +7,7 @@
 ### Frontend (screens & UI)
 | ID | Task | Done when |
 |---|---|---|
-| T-401 | Onboarding: bilingual language step → tradition → city → notifications (skippable), progress dots | US-02, US-09 |
+| T-401 ✅ | Onboarding: bilingual language step → tradition → city → notifications (skippable), progress dots | US-02, US-09 |
 | T-402 ✅ | Today complete: periods with active highlight, today's observances, next 3 upcoming, live updates across transitions, pull-to-refresh | US-01, US-11, FR-HOME-01..09 |
 | T-403 ✅ | Calendar: Bengali/Gregorian modes, swipe + arrows, markers by shape, legend sheet, jump-to-month sheet, long-press peek, selected-day strip, year roll-over, "আজ/Today" button | US-06, US-08, FR-CAL-01..07 |
 | T-404 ✅ | Day detail: all sections in §11.4 order, kshaya/vriddhi lines, "(পরদিন)/(next day)", swipe between days | FR-DAY-01..05 |

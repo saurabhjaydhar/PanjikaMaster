@@ -757,5 +757,82 @@
   "aboutProvenance": "প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।",
   "@aboutProvenance": {
     "description": "About screen: the provenance promise."
+  },
+  "bothLanguages": "{bn} · {en}",
+  "@bothLanguages": {
+    "description": "Layout pattern: the same text in Bengali then English, on the first onboarding step before a language is chosen.",
+    "placeholders": {
+      "bn": {
+        "type": "String"
+      },
+      "en": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingStep": "ধাপ {step}/{total}",
+  "@onboardingStep": {
+    "description": "Screen-reader label of the onboarding progress dots; numbers are formatted with the user's numerals.",
+    "placeholders": {
+      "step": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChooseLanguage": "ভাষা বেছে নিন",
+  "@onboardingChooseLanguage": {
+    "description": "Onboarding step 1 heading (spec §11.1)."
+  },
+  "onboardingLanguagePreview": "যেমন: {tithi}",
+  "@onboardingLanguagePreview": {
+    "description": "Preview line under each language option; tithi is a tithi name from the pack's names table (not today's data).",
+    "placeholders": {
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChangeLater": "পরে সেটিংসে বদলানো যাবে।",
+  "@onboardingChangeLater": {
+    "description": "Onboarding step 1 note."
+  },
+  "actionContinue": "এগিয়ে যান",
+  "@actionContinue": {
+    "description": "Onboarding primary button."
+  },
+  "onboardingTraditionTitle": "কোন পঞ্জিকা মেনে চলেন?",
+  "@onboardingTraditionTitle": {
+    "description": "Onboarding step 2 heading (spec §11.1, US-02)."
+  },
+  "onboardingTraditionNote": "দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।",
+  "@onboardingTraditionNote": {
+    "description": "Onboarding step 2 note (spec §11.1)."
+  },
+  "onboardingCityTitle": "আপনার শহর কোনটি?",
+  "@onboardingCityTitle": {
+    "description": "Onboarding step 3 heading."
+  },
+  "onboardingCityNote": "সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।",
+  "@onboardingCityNote": {
+    "description": "Onboarding step 3 note (FR-LOC-05)."
+  },
+  "onboardingRemindersTitle": "অনুস্মারক চান?",
+  "@onboardingRemindersTitle": {
+    "description": "Onboarding step 4 heading (optional step)."
+  },
+  "onboardingRemindersBody": "উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।",
+  "@onboardingRemindersBody": {
+    "description": "Onboarding step 4 explanation; the permission prompt comes later (T-507)."
+  },
+  "onboardingRemindersYes": "হ্যাঁ, মনে করিয়ে দিন",
+  "@onboardingRemindersYes": {
+    "description": "Onboarding step 4: opt in to reminders."
+  },
+  "onboardingRemindersNo": "এখন নয়",
+  "@onboardingRemindersNo": {
+    "description": "Onboarding step 4: skip reminders."
   }
 }

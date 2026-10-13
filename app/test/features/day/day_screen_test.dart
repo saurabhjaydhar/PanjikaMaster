@@ -57,7 +57,10 @@ void main() {
           appDatabaseProvider.overrideWithValue(db),
           deviceLocalesProvider.overrideWithValue([Locale(language)]),
           settingsSourceProvider.overrideWithValue(
-            MemorySettings({SettingKey.theme: theme.name}),
+            MemorySettings({
+              SettingKey.onboardingDone: '1',
+              SettingKey.theme: theme.name,
+            }),
           ),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
           clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),

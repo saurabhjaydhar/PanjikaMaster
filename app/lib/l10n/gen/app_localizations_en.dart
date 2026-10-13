@@ -500,4 +500,55 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aboutProvenance =>
       'Every value is shown with its panjika tradition, city, time zone and verification status.';
+
+  @override
+  String bothLanguages(String bn, String en) {
+    return '$bn · $en';
+  }
+
+  @override
+  String onboardingStep(String step, String total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get onboardingChooseLanguage => 'Choose your language';
+
+  @override
+  String onboardingLanguagePreview(String tithi) {
+    return 'For example: $tithi';
+  }
+
+  @override
+  String get onboardingChangeLater => 'You can change this later.';
+
+  @override
+  String get actionContinue => 'Continue';
+
+  @override
+  String get onboardingTraditionTitle => 'Which panjika do you follow?';
+
+  @override
+  String get onboardingTraditionNote =>
+      'The two can put a festival on different days. You can change this in Settings.';
+
+  @override
+  String get onboardingCityTitle => 'Which is your city?';
+
+  @override
+  String get onboardingCityNote =>
+      'Sunrise, sunset and Rahu Kaal depend on your city. Tithis and festival dates don\'t.';
+
+  @override
+  String get onboardingRemindersTitle => 'Would you like reminders?';
+
+  @override
+  String get onboardingRemindersBody =>
+      'The app can remind you before festivals, Ekadashi, Purnima and Amavasya. You\'ll choose which ones under Reminders. Your phone will ask for permission when the first reminder is set.';
+
+  @override
+  String get onboardingRemindersYes => 'Yes, remind me';
+
+  @override
+  String get onboardingRemindersNo => 'Not now';
 }

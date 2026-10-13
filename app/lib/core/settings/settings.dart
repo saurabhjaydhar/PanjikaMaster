@@ -18,7 +18,8 @@ enum SettingKey {
   lastManifestCheck('last_manifest_check'),
   lastManifest('last_manifest'),
   dismissedNotices('dismissed_notices'),
-  recentCities('recent_cities');
+  recentCities('recent_cities'),
+  remindersOptIn('reminders_opt_in');
 
   const SettingKey(this.key);
 
@@ -193,5 +194,16 @@ final onboardingDoneProvider = NotifierProvider<PersistedSetting<bool>, bool>(
     fallback: false,
     decode: (raw) => raw == '1',
     encode: (v) => v ? '1' : '0',
+  ),
+);
+
+/// The onboarding reminders answer: true = "Yes, remind me", false = "Not now",
+/// null = not asked. The scheduler (T-506) and permission flow (T-507) read it.
+final remindersOptInProvider = NotifierProvider<PersistedSetting<bool?>, bool?>(
+  () => PersistedSetting<bool?>(
+    SettingKey.remindersOptIn,
+    fallback: null,
+    decode: (raw) => raw == '1' ? true : (raw == '0' ? false : null),
+    encode: (v) => v == null ? null : (v ? '1' : '0'),
   ),
 );

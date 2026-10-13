@@ -40,7 +40,9 @@ Future<ProviderContainer> pumpApp(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         deviceLocalesProvider.overrideWithValue(const [Locale('bn')]),
-        settingsSourceProvider.overrideWithValue(MemorySettings()),
+        settingsSourceProvider.overrideWithValue(
+          MemorySettings({SettingKey.onboardingDone: '1'}),
+        ),
         appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
         clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),
       ],

@@ -12,7 +12,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          settingsSourceProvider.overrideWithValue(MemorySettings()),
+          settingsSourceProvider.overrideWithValue(
+            MemorySettings({SettingKey.onboardingDone: '1'}),
+          ),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
         ],
         child: const PanjikaApp(),
