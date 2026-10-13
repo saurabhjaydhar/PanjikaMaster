@@ -30,7 +30,7 @@
 ### DevOps
 | ID | Task | Done when |
 |---|---|---|
-| T-312 | `pack-build.yml` (manual dispatch): build → validate → sign with the dev key from CI secrets → upload artifacts → publish to staging | Run produces a validation report and a staging manifest |
+| T-312 🟡 | `pack-build.yml` (manual dispatch): build → validate → sign with the dev key from CI secrets → upload artifacts → publish to staging | Run produces a validation report and a staging manifest — *workflow done up to signed artifacts; needs the `PANJIKA_SIGNING_KEY` secret (Q12) and the staging host (T-304)* |
 
 ### QA
 | ID | Task | Done when |

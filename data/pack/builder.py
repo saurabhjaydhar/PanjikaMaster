@@ -58,7 +58,10 @@ def load_key() -> Ed25519PrivateKey:
     raw = os.environ.get(KEY_ENV)
     if not raw:
         raise PackRejected(f"{KEY_ENV} is not set (signing keys come from env/CI only)")
-    seed = base64.b64decode(raw)
+    try:
+        seed = base64.b64decode(raw, validate=True)
+    except ValueError as e:  # binascii.Error is a ValueError
+        raise PackRejected(f"{KEY_ENV} is not valid base64") from e
     if len(seed) != 32:
         raise PackRejected(f"{KEY_ENV} must be base64 of a 32-byte Ed25519 seed")
     return Ed25519PrivateKey.from_private_bytes(seed)

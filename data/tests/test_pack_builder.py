@@ -103,6 +103,13 @@ def test_needs_the_key_from_the_environment(sample_packs, tmp_path, monkeypatch)
         builder.build(sample_packs, tmp_path / "v1", allow_sample=True, allow_dev=True)
 
 
+@pytest.mark.parametrize("bad", ["x", "not base64!", base64.b64encode(b"short").decode()])
+def test_a_malformed_key_is_rejected_clearly(sample_packs, tmp_path, monkeypatch, bad):
+    monkeypatch.setenv(builder.KEY_ENV, bad)
+    with pytest.raises(builder.PackRejected, match=builder.KEY_ENV):
+        builder.build(sample_packs, tmp_path / "v1", allow_sample=True, allow_dev=True)
+
+
 def test_notices_need_both_languages(key, sample_packs, tmp_path):
     with pytest.raises(builder.PackRejected, match="notice"):
         builder.build(
