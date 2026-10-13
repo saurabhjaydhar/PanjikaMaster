@@ -6,6 +6,7 @@
 | Know what to build next | `phases/README.md` → the current phase file |
 | Look up a technical rule | the `spec/` file below |
 | Agent rules | `../CLAUDE.md` |
+| Check a performance budget | `performance.md` |
 
 ## Where each § lives
 

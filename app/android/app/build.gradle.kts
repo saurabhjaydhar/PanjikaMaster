@@ -45,6 +45,14 @@ android {
             // Debug keys until the release pipeline exists (T-703, T-708). The upload key will come
             // from CI secrets only (CLAUDE.md); never commit a keystore. TODO(Q12)
             signingConfig = signingConfigs.getByName("debug")
+            // R8 code and resource shrinking (T-608; Flutter's default, stated here so it
+            // stays on). Rules: proguard-rules.pro; kept resources: res/raw/keep.xml.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 }
