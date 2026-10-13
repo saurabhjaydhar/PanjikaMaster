@@ -7,6 +7,7 @@ import '../features/city/city_picker_screen.dart';
 import '../features/day/day_screen.dart';
 import '../features/festivals/festivals_screen.dart';
 import '../features/more/more_screen.dart';
+import '../features/settings/settings_screen.dart';
 import '../features/today/today_screen.dart';
 import 'shell/app_shell.dart';
 
@@ -20,6 +21,7 @@ abstract final class Routes {
   static String day(CivilDate date) => '/day/${date.toIso()}';
 
   static const city = '/city';
+  static const settings = '/settings';
 }
 
 /// One router for the app's lifetime, so a language or theme change never resets
@@ -37,6 +39,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(path: Routes.city, builder: (_, _) => const CityPickerScreen()),
+      GoRoute(path: Routes.settings, builder: (_, _) => const SettingsScreen()),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(navigationShell: shell),
         branches: [

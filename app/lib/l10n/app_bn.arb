@@ -78,7 +78,7 @@
   },
   "comingSoon": "শীঘ্রই আসছে",
   "@comingSoon": {
-    "description": "Placeholder body for a tab whose screen is not built yet (Phase 1 only)."
+    "description": "Marks an option that is not available yet."
   },
   "labelNakshatra": "নক্ষত্র",
   "@labelNakshatra": {
@@ -565,5 +565,128 @@
   "cityChanged": "সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই",
   "@cityChanged": {
     "description": "Toast after changing the city (FR-LOC-05)."
+  },
+  "settingsTitle": "সেটিংস",
+  "@settingsTitle": {
+    "description": "Title of the Settings screen."
+  },
+  "settingNamesBoth": "নাম দুই লিপিতে",
+  "@settingNamesBoth": {
+    "description": "Setting: show panchanga and festival names in the other script too (FR-SET-06)."
+  },
+  "settingTradition": "পঞ্জিকার মত",
+  "@settingTradition": {
+    "description": "Setting: which panjika tradition (school) to follow."
+  },
+  "settingCity": "শহর",
+  "@settingCity": {
+    "description": "Setting: the chosen city."
+  },
+  "settingTheme": "থিম",
+  "@settingTheme": {
+    "description": "Setting: light, dark or follow the phone."
+  },
+  "themeSystem": "স্বয়ংক্রিয়",
+  "@themeSystem": {
+    "description": "Theme option: follow the phone."
+  },
+  "themeLight": "হালকা",
+  "@themeLight": {
+    "description": "Theme option."
+  },
+  "themeDark": "গাঢ়",
+  "@themeDark": {
+    "description": "Theme option."
+  },
+  "settingTextSize": "লেখার আকার",
+  "@settingTextSize": {
+    "description": "Setting: text size, on top of the phone's own setting."
+  },
+  "textSizePreview": "লেখা এই আকারে দেখাবে",
+  "@textSizePreview": {
+    "description": "Preview line under the text size slider."
+  },
+  "settingTimeFormat": "সময়ের ধরন",
+  "@settingTimeFormat": {
+    "description": "Setting: 12- or 24-hour times."
+  },
+  "timeFormatHours": "{hours} ঘণ্টা",
+  "@timeFormatHours": {
+    "description": "A time format option; hours is 12 or 24 in the user's numerals.",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "settingNumerals": "সংখ্যা",
+  "@settingNumerals": {
+    "description": "Setting: Bengali or Latin digits (FR-L10N-04)."
+  },
+  "numeralsAuto": "ভাষা অনুযায়ী",
+  "@numeralsAuto": {
+    "description": "Numerals option: Bengali digits in Bengali, Latin in English."
+  },
+  "numeralsBengali": "বাংলা ({digits})",
+  "@numeralsBengali": {
+    "description": "Numerals option; digits shows Bengali digits as an example.",
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "numeralsLatin": "ইংরেজি ({digits})",
+  "@numeralsLatin": {
+    "description": "Numerals option; digits shows Latin digits as an example.",
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionData": "তথ্য",
+  "@sectionData": {
+    "description": "Settings section about the data packs."
+  },
+  "checkDataNow": "নতুন তথ্য আছে কিনা দেখুন",
+  "@checkDataNow": {
+    "description": "Settings row: check the server for new packs now."
+  },
+  "installedData": "ডাউনলোড করা তথ্য",
+  "@installedData": {
+    "description": "Settings row: the dates the installed data covers."
+  },
+  "dataRange": "{from} – {to}",
+  "@dataRange": {
+    "description": "A date range. Layout only.",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionOther": "অন্যান্য",
+  "@sectionOther": {
+    "description": "Settings section with licences etc."
+  },
+  "licences": "লাইসেন্স",
+  "@licences": {
+    "description": "Opens the open-source licences."
+  },
+  "traditionConfirm": "পঞ্জিকার মত বদলালে কিছু উৎসবের তারিখ বদলাতে পারে। অনুস্মারক নতুন করে সাজানো হবে।",
+  "@traditionConfirm": {
+    "description": "Confirm sheet before changing the tradition (spec §11.15)."
+  },
+  "actionChange": "বদলান",
+  "@actionChange": {
+    "description": "Button: confirm a change."
+  },
+  "actionKeep": "থাক",
+  "@actionKeep": {
+    "description": "Button: keep the current choice."
   }
 }

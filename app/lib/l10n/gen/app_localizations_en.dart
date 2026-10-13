@@ -363,4 +363,88 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cityChanged =>
       'Sunrise and Rahu Kaal times changed; tithi and festival dates stay the same';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingNamesBoth => 'Names in both scripts';
+
+  @override
+  String get settingTradition => 'Panjika tradition';
+
+  @override
+  String get settingCity => 'City';
+
+  @override
+  String get settingTheme => 'Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get settingTextSize => 'Text size';
+
+  @override
+  String get textSizePreview => 'Text will look like this';
+
+  @override
+  String get settingTimeFormat => 'Time format';
+
+  @override
+  String timeFormatHours(String hours) {
+    return '$hours-hour';
+  }
+
+  @override
+  String get settingNumerals => 'Numerals';
+
+  @override
+  String get numeralsAuto => 'Follow language';
+
+  @override
+  String numeralsBengali(String digits) {
+    return 'Bengali ($digits)';
+  }
+
+  @override
+  String numeralsLatin(String digits) {
+    return 'Latin ($digits)';
+  }
+
+  @override
+  String get sectionData => 'Data';
+
+  @override
+  String get checkDataNow => 'Check for new data';
+
+  @override
+  String get installedData => 'Downloaded data';
+
+  @override
+  String dataRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get sectionOther => 'Other';
+
+  @override
+  String get licences => 'Licences';
+
+  @override
+  String get traditionConfirm =>
+      'Changing the tradition can change some festival dates. Reminders will be rescheduled.';
+
+  @override
+  String get actionChange => 'Change';
+
+  @override
+  String get actionKeep => 'Keep';
 }
