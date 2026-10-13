@@ -19,7 +19,7 @@
 | T-506 ✅ | Reminder scheduler (`flutter_local_notifications` + `timezone`): per festival (day before / morning of), recurring Ekadashi/Purnima/Amavasya, next 60 days, cap 64 | FR-REM-01..03; unit tests |
 | T-507 ✅ | Permissions: Android 13+ notification prompt only on first reminder; toggle reverts on denial with inline help; inexact by default, exact only if granted (Q7) | US-03 |
 | T-508 ✅ | Reschedule triggers: app start, pack import, city/tradition/language change, `BOOT_COMPLETED`, time-zone change; bilingual channels re-registered on language change | FR-REM-04; tests for each trigger |
-| T-509 | Share rendering: `RepaintBoundary` → PNG 1080×1350, `share_plus`, share text with deep link | FR-DAY-06 |
+| T-509 ✅ | Share rendering: `RepaintBoundary` → PNG 1080×1350, `share_plus`, share text with deep link | FR-DAY-06 |
 
 ### Frontend (screens & UI)
 | ID | Task | Done when |

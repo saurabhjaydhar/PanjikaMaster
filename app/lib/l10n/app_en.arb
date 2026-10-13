@@ -218,5 +218,9 @@
   "timingSheetTitle": "When should we remind you?",
   "timingDayBeforeOption": "The day before",
   "timingMorningOption": "On the morning of the day",
-  "changeTime": "Change the time"
+  "changeTime": "Change the time",
+  "shareProvenance": "As per {tradition}",
+  "shareProvenanceWithPlace": "As per {tradition} · {city} · {timeZone}",
+  "shareFestivalMessage": "{name}: {date}",
+  "shareDayMessage": "{date} · {tithi}"
 }

@@ -29,6 +29,8 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | drift_dev | app (dev) | 2.35.1 | MIT | 2026-09-30 | Build host | Drift code generation | 2026-10-12 |
 | build_runner | app (dev) | 2.16.2 | BSD-3-Clause | 2026-10-07 | Build host | Runs code generation | 2026-10-12 |
 | sqlite3 | app (dev) | 3.5.2 | MIT | 2026-09 (3.x line) | All | Raw SQLite in tests to compare the Drift DB against `schema.sql` (already a runtime transitive dependency) | 2026-10-12 |
+| share_plus | app | 13.3.1 | BSD-3-Clause | 2026-10-01 | Android, iOS, desktop, web | System share sheet for share cards and messages (FR-DAY-06, T-509) | 2026-10-13 |
+| share_plus_platform_interface, cross_file, url_launcher_platform_interface / _web / _linux / _windows | app (via share_plus) | 7.2.0, 0.3.5+5, 2.3.2 / 2.4.3 / 3.2.3 / 3.1.6 | BSD-3-Clause | 2026 | All (the url_launcher ones only on web/desktop) | share_plus dependencies | 2026-10-13 |
 | flutter_local_notifications | app | 22.3.2 | BSD-3-Clause | 2026-10-12 | Android (iOS/macOS/Linux/Windows/web also supported) | Scheduled reminders, channels in the UI language (spec §17, T-506). Needs core-library desugaring (`desugar_jdk_libs` 2.1.4, Apache-2.0, Android build only) | 2026-10-13 |
 | flutter_local_notifications_platform_interface / _linux / _windows / _web | app (via flutter_local_notifications) | 12.2.0 / 8.0.2 / 3.1.1 / 1.0.0 | BSD-3-Clause | 2026 | Their platforms (not compiled into Android) | Federated implementations | 2026-10-13 |
 | timezone | app | 0.11.2 | BSD-2-Clause | 2026-10-12 | All | `TZDateTime` for scheduling; only UTC is used (times are planned as instants), so no time-zone database is loaded | 2026-10-13 |

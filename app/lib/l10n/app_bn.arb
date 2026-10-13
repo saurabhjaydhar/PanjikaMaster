@@ -1225,5 +1225,53 @@
   "changeTime": "সময় বদলান",
   "@changeTime": {
     "description": "Button tooltip that opens the time picker."
+  },
+  "shareProvenance": "{tradition} মতে",
+  "@shareProvenance": {
+    "description": "Share card and message provenance line (spec §11.8), e.g. 'বিশুদ্ধ সিদ্ধান্ত মতে'.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      }
+    }
+  },
+  "shareProvenanceWithPlace": "{tradition} মতে · {city} · {timeZone}",
+  "@shareProvenanceWithPlace": {
+    "description": "Provenance for shared times (day card): tradition, city and time zone.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "city": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFestivalMessage": "{name}: {date}",
+  "@shareFestivalMessage": {
+    "description": "Share message line for a festival.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "shareDayMessage": "{date} · {tithi}",
+  "@shareDayMessage": {
+    "description": "Share message line for a day: its date and tithi with end time.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      }
+    }
   }
 }
