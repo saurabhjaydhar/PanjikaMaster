@@ -149,5 +149,6 @@
   "onboardingRemindersTitle": "Would you like reminders?",
   "onboardingRemindersBody": "The app can remind you before festivals, Ekadashi, Purnima and Amavasya. You'll choose which ones under Reminders. Your phone will ask for permission when the first reminder is set.",
   "onboardingRemindersYes": "Yes, remind me",
-  "onboardingRemindersNo": "Not now"
+  "onboardingRemindersNo": "Not now",
+  "cityListProvenance": "{tradition} · today's sunrise in each city, {timeZone} · data: {packs} · {status}"
 }

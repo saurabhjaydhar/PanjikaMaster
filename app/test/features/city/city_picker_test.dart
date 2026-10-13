@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:panjika/app/panjika_app.dart';
 import 'package:panjika/app/widgets/date_header.dart';
+import 'package:panjika/app/widgets/panjika_widgets.dart';
 import 'package:panjika/core/l10n/l10n_providers.dart';
 import 'package:panjika/core/settings/settings.dart';
 import 'package:panjika/core/time/clock.dart';
@@ -81,6 +82,21 @@ void main() {
       findsOneWidget,
       reason: 'Kolkata is current',
     );
+  });
+
+  testWidgets('sunrise times carry their provenance and the sample mark', (
+    tester,
+  ) async {
+    await openPicker(tester);
+    await tester.scrollUntilVisible(
+      find.textContaining('প্রতিটি শহরের আজকের সূর্যোদয়, IST'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.textContaining('বিশুদ্ধ সিদ্ধান্ত (দৃক)'), findsOneWidget);
+    expect(find.textContaining('sample-cities'), findsOneWidget);
+    expect(find.textContaining('নমুনা তথ্য'), findsOneWidget);
+    expect(find.byType(SampleWatermark), findsOneWidget);
   });
 
   testWidgets('search: English, alias, Bengali; no match says so', (

@@ -551,4 +551,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingRemindersNo => 'Not now';
+
+  @override
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  ) {
+    return '$tradition · today\'s sunrise in each city, $timeZone · data: $packs · $status';
+  }
 }

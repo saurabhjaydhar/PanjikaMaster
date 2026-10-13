@@ -18,9 +18,12 @@ final cityNameProvider = FutureProvider<NameRef?>((ref) async {
 
 /// A city with today's sunrise, for the picker rows (spec §11.7).
 class CityRowData {
-  const CityRowData(this.city, this.sunrise);
+  const CityRowData(this.city, this.sunrise, {this.packId});
   final City city;
   final DateTime? sunrise;
+
+  /// The pack [sunrise] came from.
+  final String? packId;
 
   bool matches(String query) {
     final q = searchKey(query);
@@ -40,9 +43,21 @@ final cityRowsProvider = FutureProvider<List<CityRowData>>((ref) async {
   final today = ref.watch(nowProvider.select(CivilDate.ofInstant));
   return [
     for (final c in await repo.cities())
-      CityRowData(c, (await repo.sunMoonTimes(c.id, today))?.sunrise),
+      if (await repo.sunMoonTimes(c.id, today) case final sun)
+        CityRowData(c, sun?.sunrise, packId: sun?.packId),
   ];
 });
+
+/// Where the picker's sunrise times come from, for its provenance footer.
+final cityRowsSourceProvider =
+    FutureProvider<({List<String> packIds, bool isSample})>((ref) async {
+      final rows = await ref.watch(cityRowsProvider.future);
+      final ids = {for (final r in rows) ?r.packId};
+      return (
+        packIds: ids.toList()..sort(),
+        isSample: await ref.watch(panjikaRepositoryProvider).anySample(ids),
+      );
+    });
 
 /// Recently chosen city ids, newest first (at most five).
 List<String> recentCities(SettingsSource settings) => [

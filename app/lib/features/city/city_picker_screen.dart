@@ -8,6 +8,7 @@ import '../../app/widgets/panjika_widgets.dart';
 import '../../core/l10n/l10n_providers.dart';
 import '../../core/settings/settings.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../../data/repositories/panjika_providers.dart';
 import 'city_providers.dart';
 
 /// City picker (শহর, spec §11.7, §11.12): search in both scripts, recent cities,
@@ -69,39 +70,66 @@ class _CityPickerScreenState extends ConsumerState<CityPickerScreen> {
       for (final id in recent) ...matches.where((r) => r.city.id == id),
     ];
 
+    final source = ref.watch(cityRowsSourceProvider).value;
+    final names = ref.watch(namesProvider).value;
+    final t = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(title: Text(l.cityPickerTitle)),
-      body: ListView(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenMargin(MediaQuery.sizeOf(context).width),
-        ),
+      body: Stack(
         children: [
-          TextField(
-            autofocus: false,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.search),
-              hintText: l.citySearchHint,
+          ListView(
+            padding: EdgeInsets.symmetric(
+              horizontal: screenMargin(MediaQuery.sizeOf(context).width),
             ),
-            onChanged: (q) => setState(() => _query = q),
+            children: [
+              TextField(
+                autofocus: false,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search),
+                  hintText: l.citySearchHint,
+                ),
+                onChanged: (q) => setState(() => _query = q),
+              ),
+              const SizedBox(height: Space.m),
+              if (searching && matches.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(Space.xl),
+                  child: Text(l.noCityMatches, textAlign: TextAlign.center),
+                ),
+              if (!searching && recentRows.isNotEmpty) ...[
+                SectionHeader(title: l.sectionRecent),
+                for (final r in recentRows) tile(r),
+              ],
+              if (wb.isNotEmpty) ...[
+                SectionHeader(title: l.sectionWestBengal),
+                for (final r in wb) tile(r),
+              ],
+              if (others.isNotEmpty) ...[
+                SectionHeader(title: l.sectionOtherCities),
+                for (final r in others) tile(r),
+              ],
+              // The sunrise times' provenance (CLAUDE.md).
+              if (source != null &&
+                  names != null &&
+                  source.packIds.isNotEmpty) ...[
+                const Divider(height: Space.xl),
+                Text(
+                  l.cityListProvenance(
+                    names.tradition(ref.watch(traditionProvider)).of(language),
+                    l.timeZoneLabel,
+                    source.packIds.join(', '),
+                    source.isSample
+                        ? l.verificationSample
+                        : l.verificationComputed,
+                  ),
+                  style: t.bodySmall?.copyWith(color: context.colors.inkMuted),
+                ),
+                const SizedBox(height: Space.xl),
+              ],
+            ],
           ),
-          const SizedBox(height: Space.m),
-          if (searching && matches.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(Space.xl),
-              child: Text(l.noCityMatches, textAlign: TextAlign.center),
-            ),
-          if (!searching && recentRows.isNotEmpty) ...[
-            SectionHeader(title: l.sectionRecent),
-            for (final r in recentRows) tile(r),
-          ],
-          if (wb.isNotEmpty) ...[
-            SectionHeader(title: l.sectionWestBengal),
-            for (final r in wb) tile(r),
-          ],
-          if (others.isNotEmpty) ...[
-            SectionHeader(title: l.sectionOtherCities),
-            for (final r in others) tile(r),
-          ],
+          if (source?.isSample ?? false) const SampleWatermark(),
         ],
       ),
     );

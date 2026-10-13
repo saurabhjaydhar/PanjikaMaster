@@ -834,5 +834,23 @@
   "onboardingRemindersNo": "এখন নয়",
   "@onboardingRemindersNo": {
     "description": "Onboarding step 4: skip reminders."
+  },
+  "cityListProvenance": "{tradition} · প্রতিটি শহরের আজকের সূর্যোদয়, {timeZone} · তথ্য: {packs} · {status}",
+  "@cityListProvenance": {
+    "description": "Provenance footer of the city picker, whose rows show each city's sunrise (CLAUDE.md: no datum without its provenance).",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
   }
 }

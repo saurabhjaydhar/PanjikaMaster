@@ -1006,6 +1006,17 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'এখন নয়'**
   String get onboardingRemindersNo;
+
+  /// Provenance footer of the city picker, whose rows show each city's sunrise (CLAUDE.md: no datum without its provenance).
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} · প্রতিটি শহরের আজকের সূর্যোদয়, {timeZone} · তথ্য: {packs} · {status}'**
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  );
 }
 
 class _AppLocalizationsDelegate

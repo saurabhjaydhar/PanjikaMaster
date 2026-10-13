@@ -549,4 +549,14 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get onboardingRemindersNo => 'এখন নয়';
+
+  @override
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  ) {
+    return '$tradition · প্রতিটি শহরের আজকের সূর্যোদয়, $timeZone · তথ্য: $packs · $status';
+  }
 }
