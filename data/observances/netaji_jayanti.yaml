@@ -11,5 +11,9 @@ decision:
   type: fixed_gregorian_date
   month: 1
   day: 23
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "নেতাজি জয়ন্তী স্বাধীনতা সংগ্রামী নেতাজি সুভাষচন্দ্র বসুর জন্মদিন, তেইশে জানুয়ারি। ভারতের স্বাধীনতার জন্য তিনি আজাদ হিন্দ ফৌজের নেতৃত্ব দিয়েছিলেন; \"তোমরা আমাকে রক্ত দাও, আমি তোমাদের স্বাধীনতা দেব\" তাঁর বিখ্যাত আহ্বান। পশ্চিমবঙ্গে এই দিন ছুটি থাকে। পাড়ায় পাড়ায় প্রভাতফেরি, পতাকা উত্তোলন, তাঁর প্রতিকৃতিতে মালা দেওয়া আর স্কুলে কুচকাওয়াজ হয়। কলকাতার এলগিন রোডে নেতাজি ভবন, তাঁর পৈতৃক বাড়ি, এই দিনে বিশেষ শ্রদ্ধার জায়গা। ভারত সরকার এই দিনটিকে পরাক্রম দিবস হিসেবে পালন করে। তাঁর জন্মমুহূর্ত মনে রেখে অনেক জায়গায় দুপুরে শঙ্খ বাজিয়ে শ্রদ্ধা জানানো হয়। তাঁর অন্তর্ধানের রহস্য আজও বাঙালির আলোচনার বিষয়।"
+description_en: "Netaji Jayanti is the birth anniversary of the freedom fighter Netaji Subhas Chandra Bose, on 23 January. He led the Azad Hind Fauj, the Indian National Army, in the struggle for India's independence, and his call \"Give me blood, and I will give you freedom\" is still remembered. The day is a holiday in West Bengal. Neighbourhoods hold dawn processions and flag hoistings, garland his portrait, and schools hold parades. Netaji Bhawan on Elgin Road in Kolkata, his family home, is a place of special tribute on this day. The Government of India observes the day as Parakram Diwas."
+description_review: pending
 review:
   status: draft

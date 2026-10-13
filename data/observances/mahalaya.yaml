@@ -15,5 +15,9 @@ decision:
   on_vriddhi: first
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "মহালয়া পিতৃপক্ষের শেষ দিনের অমাবস্যা, দুর্গাপূজার ঠিক আগে। এই দিন ভোরবেলা নদী বা পুকুরের ঘাটে গিয়ে পূর্বপুরুষদের উদ্দেশে জল ও তিল দিয়ে তর্পণ করা হয়। কলকাতার গঙ্গার ঘাটে এই সময় বহু মানুষের ভিড় হয়। মহালয়ার মধ্য দিয়ে পিতৃপক্ষ শেষ হয়ে দেবীপক্ষ শুরু হয়, তাই বাঙালির কাছে দিনটি দুর্গাপূজার আগমনী বার্তা। ভোরে রেডিওতে বহু দশকের পুরোনো \"মহিষাসুরমর্দিনী\" অনুষ্ঠান শোনা অনেক পরিবারের অভ্যাস, চণ্ডীপাঠ আর আগমনী গানে ঘুম ভাঙে। অনেক জায়গায় এই দিনেই প্রতিমার চোখ আঁকা হয়, যাকে চক্ষুদান বলে। শোক আর উৎসবের মাঝখানে দাঁড়িয়ে মহালয়া একদিকে পূর্বপুরুষদের স্মরণ, অন্যদিকে দেবীকে আহ্বানের দিন।"
+description_en: "Mahalaya is the new-moon day that ends Pitri Paksha, the fortnight of the ancestors, just before Durga Puja. Before sunrise people go to rivers and ponds to offer water and sesame to their forebears in a rite called tarpan, and the Ganga ghats of Kolkata fill with families. With Mahalaya the fortnight of the ancestors gives way to Devi Paksha, the fortnight of the goddess, so for Bengal the day announces that Durga Puja is near. Many households wake to the decades-old dawn radio programme Mahishasuramardini, with recitations from the Chandi and songs welcoming the goddess. In many studios the eyes of the Durga images are painted on this day, a moment known as chokkhu daan."
+description_review: pending
 review:
   status: draft

@@ -302,6 +302,7 @@ def test_rows_never_lack_tradition_or_status():
         ({"decision": {**UDAYA, "tithi": "purnima"}}, "tithi"),
         ({"review": {"status": "reviewed"}}, "names its reviewer"),
         ({"description_bn": "শুধু বাংলা"}, "pairs"),
+        ({"description_bn": "ক", "description_en": "a"}, "description_review: missing"),
         ({"windows": ["sunset"]}, "windows"),
         ({"decision": {**PREVAILS, "location": "delhi"}}, "location"),
         (

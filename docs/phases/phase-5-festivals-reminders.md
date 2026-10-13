@@ -10,7 +10,7 @@
 | T-501 ✅ | Observance rule engine + YAML schema; decision types `udaya`, `prevails_at`, `sankranti_day`, `fixed_bengali_date`, `ekadashi_smarta`, `span`, `override` (with mandatory reason); skips মলমাস; windows (Sandhi Puja, Nishita) | Unit tests per decision type; engine never outputs a row without tradition + status |
 | T-502 ✅ | Tier 1, 2, 3 rules drafted (`review.status: draft`); drafts never reach production packs | Pack builder test blocks drafts in production mode |
 | T-503 | Festival validation vs the printed panjika; statuses set | Tier 1/2: exact match or hidden |
-| T-504 | Festival descriptions written natively in Bengali and English (80–150 words, `review: pending`) | Every tier-1/2 observance has both |
+| T-504 ✅ | Festival descriptions written natively in Bengali and English (80–150 words, `review: pending`) | Every tier-1/2 observance has both |
 | T-505 | Observances pack published to staging | App imports it |
 
 ### App core (state, data, platform)
@@ -28,7 +28,7 @@
 | T-511 ✅ | Festival detail: category band, multi-day selector, windows, tithi span, description, verification card, reminder toggle, share | FR-FEST-03..04 |
 | T-512 ✅ | Reminders screen: recurring rows with timing pickers, festival reminders, add-festival, empty state, "notifications off" banner | §11.13 |
 | T-513 ✅ | Share sheet (bn / en / both) and card layouts for festival and day | §11.8 goldens with the longest names |
-| T-514 | Observances shown on Today, Day detail and calendar markers from real data | FR-HOME-05..06 |
+| T-514 ✅ | Observances shown on Today, Day detail and calendar markers from real data | FR-HOME-05..06 |
 
 ### QA
 | ID | Task | Done when |

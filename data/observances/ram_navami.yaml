@@ -19,5 +19,9 @@ decision:
   if_none: udaya
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "রামনবমী শ্রীরামচন্দ্রের জন্মতিথি, চৈত্র মাসের শুক্লা নবমী। প্রচলিত বিশ্বাস অনুযায়ী মধ্যাহ্নে তাঁর জন্ম হয়েছিল, তাই দুপুরে বিশেষ পূজা ও আরতি হয়। অনেকে এই দিন উপবাস রাখেন এবং রামায়ণ পাঠ বা কীর্তন শোনেন। মন্দিরে রাম, সীতা, লক্ষ্মণ ও হনুমানের পূজা হয়। বাংলায় কৃত্তিবাস ওঝার রামায়ণ ঘরে ঘরে পরিচিত, আর এই দিন তার পাঠের আসর বসে। রামনবমীর আগের নয় দিন জুড়ে অনেক পরিবার বাসন্তী পূজা ও চৈত্র নবরাত্রি পালন করেন। নানা জায়গায় এই দিনে মেলা ও শোভাযাত্রাও হয়। কোথাও কোথাও রামের জন্মকাহিনি নিয়ে যাত্রাপালাও হয়।"
+description_en: "Ram Navami marks the birth of Rama, on the bright-fortnight Navami of Chaitra. Tradition holds that he was born at midday, so special worship and aarti take place around noon. Many people fast and read or listen to the Ramayana or devotional songs, and temples worship Rama with Sita, Lakshmana and Hanuman. In Bengal the Ramayana of Krittibas Ojha is a household classic, and readings are held on this day. Many families keep Basanti Puja and the Chaitra Navaratri over the nine days leading up to Ram Navami, and fairs and processions take place in several towns."
+description_review: pending
 review:
   status: draft

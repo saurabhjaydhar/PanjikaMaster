@@ -110,6 +110,10 @@ def check_releasable(info: PackInfo, *, release: bool, allow_sample: bool, allow
             raise PackRejected(f"{info.id}: draft observance rules {drafts or '(unknown)'}")
         if release and info.summary.get("moments_review") != "reviewed":
             raise PackRejected(f"{info.id}: moment definitions are not reviewed")
+        # Descriptions go out only after a human review (spec §13.8, T-504).
+        pending = info.summary.get("pending_descriptions")
+        if release and (pending is None or pending):
+            raise PackRejected(f"{info.id}: descriptions not reviewed {pending or '(unknown)'}")
 
 
 def manifest_id(info: PackInfo) -> str:

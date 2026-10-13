@@ -184,6 +184,9 @@ class Rule:
     corrections: tuple[Correction, ...]
     description_bn: str | None
     description_en: str | None
+    # "pending" until a human reviews accuracy and tone (spec §13.8); production
+    # packs refuse pending descriptions.
+    description_review: str | None
     source: str | None  # where a tier-3 date comes from (§6.6 validation level)
     review: Review
 
@@ -357,6 +360,9 @@ def parse_rule(data: object, where: str, expected_id: str | None = None) -> Rule
     description_en = f.text("description_en", optional=True)
     if (description_bn is None) != (description_en is None):
         raise RuleError(f"{where}: descriptions come in pairs (bn and en)")
+    description_review = None
+    if description_bn is not None:
+        description_review = f.choice("description_review", ("pending", "reviewed"))
     g = _Fields(f.get("review", dict), f"{where}.review")
     review = Review(
         g.choice("status", REVIEW),
@@ -381,6 +387,7 @@ def parse_rule(data: object, where: str, expected_id: str | None = None) -> Rule
         corrections=tuple(corrections),
         description_bn=description_bn,
         description_en=description_en,
+        description_review=description_review,
         source=source,
         review=review,
     )

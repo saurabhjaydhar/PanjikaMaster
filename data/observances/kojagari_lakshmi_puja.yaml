@@ -19,5 +19,9 @@ decision:
   if_none: udaya
   include_mala: false
 windows: [tithi_span, nishita]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "কোজাগরী লক্ষ্মীপূজা হয় দুর্গাপূজার পরের পূর্ণিমায়, আশ্বিন মাসের শুক্লা পূর্ণিমার রাতে। \"কোজাগরী\" কথাটি এসেছে \"কো জাগর্তি\" থেকে, অর্থাৎ \"কে জেগে আছ?\"। প্রচলিত বিশ্বাস, এই রাতে দেবী লক্ষ্মী ঘরে ঘরে ঘুরে দেখেন কে জেগে আছে, আর তাকে ধনধান্যে ভরিয়ে দেন। তাই অনেকে রাত জেগে পূজা ও লক্ষ্মীর পাঁচালি পাঠ করেন। বাড়ির দরজা থেকে ঠাকুরঘর পর্যন্ত আলপনায় লক্ষ্মীর পায়ের ছাপ আঁকা হয়। পূজায় খিচুড়ি, নাড়ু, মোয়া আর ফলের ভোগ দেওয়া হয়। বাঙালি হিন্দু পরিবারে এই পূজা মূলত ঘরোয়া, বাড়ির মহিলারাই পূজার প্রধান আয়োজক।"
+description_en: "Kojagari Lakshmi Puja falls on the full-moon night after Durga Puja, the bright-fortnight Purnima of Ashwin. The name comes from \"ko jagarti\", who is awake? Tradition holds that on this night the goddess Lakshmi goes from house to house and blesses with plenty those she finds awake, so many families keep vigil, worship through the night and read the Lakshmi panchali. Footprints of the goddess are drawn in alpana from the front door to the shrine room, and offerings of khichuri, naru, moa and fruit are made. In Bengali Hindu homes it is above all a household puja, usually led by the women of the family."
+description_review: pending
 review:
   status: draft

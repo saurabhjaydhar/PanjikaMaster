@@ -14,5 +14,9 @@ decision:
   tithi: shashthi
   on_vriddhi: first
   include_mala: false
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "জামাইষষ্ঠী জ্যৈষ্ঠ মাসের শুক্লা ষষ্ঠীতে পালিত বাঙালির এক আদরের পারিবারিক উৎসব। মূলত এটি সন্তানের মঙ্গলের জন্য দেবী ষষ্ঠীর ব্রত, তবে সময়ের সঙ্গে দিনটি জামাই আদরের দিন হয়ে উঠেছে। শাশুড়ি সকালে ষষ্ঠীর পূজা করে জামাইকে তালপাতার পাখায় হাওয়া দেন, কপালে দইয়ের ফোঁটা দেন আর হাতে হলুদ সুতো বেঁধে দেন। তার পর হয় এলাহি ভোজ: ইলিশ, চিংড়ি, আম, লিচু আর নানা রকম মিষ্টি। জামাই শ্বশুরবাড়ির জন্য উপহার নিয়ে আসেন। গরমের দুপুরে আমকাঁঠালের এই উৎসবে দুই পরিবারের সম্পর্ক আরও মধুর হয়। এই সময় বাজারে মাছ আর ফলের দাম চড়ে যায়, যা নিয়ে বাঙালির রসিকতারও শেষ নেই।"
+description_en: "Jamai Shashthi, on the bright-fortnight Shashthi of Jyoishtho, is one of Bengal's most affectionate family festivals. At heart it is a vow to the goddess Shashthi for the wellbeing of children, but over time it has become the day of honouring the son-in-law. After her morning puja the mother-in-law fans her son-in-law with a palm-leaf fan, marks his forehead with curd and ties a yellow thread on his wrist. Then comes a lavish meal of hilsa, prawns, mangoes, lychees and sweets, and the son-in-law brings gifts for his wife's family. In the heat of summer, amid the mangoes and jackfruit, the day draws the two families closer."
+description_review: pending
 review:
   status: draft

@@ -15,5 +15,9 @@ decision:
   on_vriddhi: first
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "মহানবমী দুর্গাপূজার শেষ পূজার দিন। এই দিন যজ্ঞ বা হোম করা হয় এবং দেবীর উদ্দেশে বিশেষ ভোগ নিবেদন করা হয়; অনেক বাড়ির পূজায় খিচুড়ি, ভাজা, লাবড়া আর পায়েসের ভোগ সবাই মিলে প্রসাদ হিসেবে খান। সারাদিন মণ্ডপে ভিড় থাকে, সন্ধ্যায় ধুনুচি নাচ আর আরতিতে উৎসব চরমে ওঠে। তবু নবমীর রাতে এক চাপা মনখারাপও থাকে, কারণ পরদিনই দেবীর বিদায়। বাঙালির কাছে \"নবমী নিশি\" তাই একসঙ্গে আনন্দ আর বিদায়ের বেদনার নাম, যা নিয়ে বহু গান আর কবিতা লেখা হয়েছে। কোথাও কোথাও এই দিনে চালকুমড়ো বা আখ দিয়ে প্রতীকী বলির প্রথা আছে।"
+description_en: "Maha Navami is the last day of worship in Durga Puja. A fire ritual, the homa, is performed, and special bhog is offered to the goddess; in many household pujas everyone then shares the prasad of khichuri, fried vegetables, labra and payesh. The pandals stay crowded all day, and in the evening the festival reaches its height with the dhunuchi dance, performed with smoking incense burners, and the aarti. Yet Navami night carries a quiet sadness too, because the goddess leaves the next day, and Bengali songs and poems have long dwelt on that mix of joy and farewell."
+description_review: pending
 review:
   status: draft

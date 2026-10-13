@@ -11,5 +11,9 @@ decision:
   type: sankranti_day
   month: bhadro
   day: last
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "বিশ্বকর্মা পূজা হয় ভাদ্র সংক্রান্তিতে, অর্থাৎ ভাদ্র মাসের শেষ দিনে। দেবশিল্পী বিশ্বকর্মা সৃষ্টির স্থপতি ও কারিগরদের দেবতা। তাই এই দিন কলকারখানা, ছাপাখানা, কর্মশালা, দোকান আর গাড়ির গ্যারেজে তাঁর পূজা হয়; যন্ত্রপাতি পরিষ্কার করে সাজিয়ে পূজায় রাখা হয় এবং সেদিন কাজ বন্ধ থাকে। অনেকে নিজের গাড়ি, রিকশা বা সাইকেলও এই দিনে পূজা করেন। বাংলায় বিশ্বকর্মা পূজার আর এক পরিচিত ছবি ঘুড়ি ওড়ানো: আকাশ রঙিন ঘুড়িতে ভরে যায়, ছাদে ছাদে চলে প্যাঁচ খেলা আর \"ভোকাট্টা\" চিৎকার। অনেকের কাছে এই দিন দুর্গাপূজার আগমনী বার্তা।"
+description_en: "Vishwakarma Puja falls on Bhadra Sankranti, the last day of the month of Bhadro. Vishwakarma, the divine architect, is the god of craftsmen and builders, so he is worshipped in factories, printing presses, workshops, shops and garages; tools and machines are cleaned, decorated and placed before him, and work stops for the day. Many people also have their cars, rickshaws or bicycles blessed. In Bengal the day is also known for kite flying: the sky fills with colourful kites, rooftops ring with kite fights and cries of \"bhokatta\" when a string is cut. For many, the day is the first sign that Durga Puja is on its way."
+description_review: pending
 review:
   status: draft

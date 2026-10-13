@@ -15,5 +15,9 @@ decision:
   on_vriddhi: first
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "জগদ্ধাত্রী পূজা হয় কার্তিক মাসের শুক্লা নবমীতে, কালীপূজার কয়েক দিন পরে। দেবী জগদ্ধাত্রী সিংহবাহিনী, সিংহের পায়ের নিচে থাকে হাতি, যা অহংকার দমনের প্রতীক বলে ধরা হয়। নদিয়ার কৃষ্ণনগর ও হুগলির চন্দননগরে এই পূজা দুর্গাপূজার মতোই জাঁকজমকে পালিত হয়। চন্দননগরের আলোকসজ্জা দেশজুড়ে বিখ্যাত, আর বিসর্জনের শোভাযাত্রা দেখতে দূরদূরান্ত থেকে মানুষ আসেন। অনেক জায়গায় পূজা সপ্তমী থেকে নবমী তিন দিন ধরে হয়, কোথাও এক দিনেই সব পূজা সম্পন্ন হয়। প্রচলিত মত অনুযায়ী কৃষ্ণনগরের রাজা কৃষ্ণচন্দ্রের সময় থেকে এই পূজা বাংলায় জনপ্রিয় হয়।"
+description_en: "Jagaddhatri Puja falls on the bright-fortnight Navami of Kartik, a few days after Kali Puja. The goddess Jagaddhatri rides a lion that stands on an elephant, often read as the subduing of pride. In Krishnanagar in Nadia and Chandannagar in Hooghly the festival is as grand as Durga Puja; Chandannagar's light displays are famous across the country, and its immersion procession draws visitors from far away. In many places the worship runs over three days, Saptami to Navami, while elsewhere it is completed in a single day. Tradition credits Raja Krishnachandra of Krishnanagar with making the puja popular in Bengal."
+description_review: pending
 review:
   status: draft

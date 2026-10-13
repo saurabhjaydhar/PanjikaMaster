@@ -15,5 +15,9 @@ decision:
   on_vriddhi: first
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "রথযাত্রা জগন্নাথ, বলরাম ও সুভদ্রার রথে চড়ে মাসির বাড়ি যাওয়ার উৎসব, আষাঢ় মাসের শুক্লা দ্বিতীয়ায়। পুরীর রথযাত্রা সবচেয়ে বিখ্যাত, তবে বাংলাতেও এর দীর্ঘ ঐতিহ্য আছে; শ্রীরামপুরের কাছে মাহেশের রথ বাংলার সবচেয়ে পুরোনো রথযাত্রাগুলির একটি। ভক্তরা দড়ি টেনে রথ এগিয়ে নিয়ে যান, যা পুণ্যের কাজ বলে মনে করা হয়। পাড়ায় পাড়ায় ছোটরা কাগজ আর রঙিন কাপড় দিয়ে সাজানো ছোট রথ টানে, আর রথের মেলায় পাঁপড়ভাজা ও জিলিপি খাওয়ার রীতি আছে। প্রায় এক সপ্তাহ পরে উল্টোরথে দেবতারা আবার নিজের মন্দিরে ফিরে আসেন।"
+description_en: "Rath Yatra is the chariot festival in which Jagannath, Balaram and Subhadra ride out to visit their aunt's house, on the bright-fortnight Dwitiya of Asharh. The festival at Puri is the most famous, but Bengal has a long tradition of its own; the chariot of Mahesh near Serampore is among the oldest in the region. Devotees pull the chariots by long ropes, which is thought to bring merit. In neighbourhoods children pull small chariots decorated with paper and coloured cloth, and the rath fairs are known for papad bhaja and jilipi. About a week later, on Ulto Rath, the deities make the return journey to their temple."
+description_review: pending
 review:
   status: draft

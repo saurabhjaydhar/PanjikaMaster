@@ -15,5 +15,9 @@ decision:
   on_vriddhi: first
   include_mala: false
 windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "দোলপূর্ণিমা ফাল্গুন মাসের পূর্ণিমায় পালিত রঙের উৎসব, বাংলায় যার নাম দোলযাত্রা। এই দিন রাধা ও কৃষ্ণের মূর্তি দোলনায় চড়িয়ে আবির দিয়ে পূজা করা হয়, আর সবাই একে অপরকে রঙ ও আবির মাখিয়ে বসন্তকে স্বাগত জানায়। ছোটরা বড়দের পায়ে আবির দিয়ে প্রণাম করে। আগের সন্ধ্যায় অনেক জায়গায় ন্যাড়াপোড়া হয়, শুকনো ডালপালার আগুনে অশুভকে পোড়ানোর প্রতীক। এই পূর্ণিমা শ্রীচৈতন্যদেবের জন্মতিথিও, তাই বৈষ্ণবরা দিনটিকে গৌরপূর্ণিমা নামে পালন করেন, বিশেষ করে নবদ্বীপ ও মায়াপুরে। শান্তিনিকেতনের বসন্ত উৎসব দোলের আর একটি বিখ্যাত রূপ, যেখানে গান আর নাচে বসন্তের আবাহন হয়।"
+description_en: "Dol Purnima, the Bengali festival of colours known as Dol Jatra, falls on the full moon of Falgun. Images of Radha and Krishna are placed on a swing and worshipped with abir, coloured powder, and everyone smears one another with colour to welcome spring; children touch the feet of their elders with a pinch of abir. On the evening before, many places light bonfires of dry branches, known as nyara pora, to burn away evil. The same full moon is the birth anniversary of Sri Chaitanya, so Vaishnavas keep it as Gaura Purnima, above all in Nabadwip and Mayapur. Santiniketan's Basanta Utsav, with its songs and dances greeting spring, is another well-known form of the festival."
+description_review: pending
 review:
   status: draft

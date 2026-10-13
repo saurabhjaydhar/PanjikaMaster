@@ -93,6 +93,7 @@ def build(
         "moments_review": moments.review,
         "rules": {r.id: r.review.status for r in rules},
         "draft_rules": sorted(r.id for r in rules if r.review.status == "draft"),
+        "pending_descriptions": sorted(r.id for r in rules if r.description_review != "reviewed"),
         "dev_ephemeris": dev,
     }
 

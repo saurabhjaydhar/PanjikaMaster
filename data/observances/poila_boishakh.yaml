@@ -11,5 +11,9 @@ decision:
   type: fixed_bengali_date
   month: boishakh
   day: 1
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "পয়লা বৈশাখ বাংলা নববর্ষ, বৈশাখ মাসের প্রথম দিন। সূর্য মেষ রাশিতে প্রবেশ করার পর বাংলা পঞ্জিকার নিয়মে এই দিন ঠিক হয়। সকালে স্নান সেরে নতুন জামা পরে বড়দের প্রণাম করার রীতি আছে, আর পরিচিতদের মধ্যে চলে \"শুভ নববর্ষ\" শুভেচ্ছা। ব্যবসায়ীরা এই দিনে হালখাতা করেন: নতুন খাতা খোলা হয়, দোকানে গণেশ ও লক্ষ্মীর পূজা হয়, খদ্দেরদের মিষ্টিমুখ করানো হয়। পাড়ায় পাড়ায় প্রভাতফেরি, গান আর সাংস্কৃতিক অনুষ্ঠান হয়। ঘরে ঘরে ভালোমন্দ রান্না হয়, আত্মীয়স্বজন একসঙ্গে বসে খাওয়াদাওয়া করেন। অনেক পরিবারে এই দিন থেকেই নতুন বছরের পঞ্জিকা দেখে শুভ কাজের দিন ঠিক করা শুরু হয়। পুরোনো বছরের ক্লান্তি ঝেড়ে নতুন করে শুরু করার আনন্দই এই দিনের মূল সুর।"
+description_en: "Poila Boishakh is the Bengali New Year, the first day of the month of Boishakh. The panjika fixes it from the Sun's entry into Mesha under the Bengal rule for when a month begins. Families bathe early, put on new clothes and touch the feet of elders, and friends greet each other with \"Shubho Noboborsho\". For shopkeepers it is the day of haal khata: a fresh account book is opened, Ganesh and Lakshmi are worshipped in the shop, and regular customers are welcomed with sweets. Neighbourhoods hold dawn processions, music and cultural programmes, and homes cook a festive meal for visiting relatives. Many households also open the new year's panjika on this day to look up auspicious dates for the months ahead."
+description_review: pending
 review:
   status: draft
