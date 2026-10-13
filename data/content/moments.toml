@@ -1,0 +1,34 @@
+# Named moments for `prevails_at` rules and moment windows (spec §6.6).
+#
+# A moment is a stretch of the day (sunrise → sunset) or the night (sunset → next
+# sunrise), each divided into 15 muhurtas; `from` and `to` count muhurtas from its start.
+#
+# DRAFT — these are the common textbook divisions, entered as a starting point for
+# expert review, not decided. Production packs refuse to build while `review` is
+# "draft" (T-502). TODO(expert): confirm each definition for Bishuddha Siddhanta.
+review = "draft"
+
+[pratah]
+part = "day"
+from = 0
+to = 3
+
+[madhyahna]
+part = "day"
+from = 6
+to = 9
+
+[aparahna]
+part = "day"
+from = 9
+to = 12
+
+[pradosha]
+part = "night"
+from = 0
+to = 3
+
+[nishita]
+part = "night"
+from = 7
+to = 8
