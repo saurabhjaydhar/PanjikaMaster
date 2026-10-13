@@ -240,4 +240,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appUpdateRequired => 'Update the app to get new data.';
+
+  @override
+  String get labelTithi => 'Tithi';
+
+  @override
+  String get labelPaksha => 'Paksha';
+
+  @override
+  String get sectionSunMoon => 'Sun and moon';
+
+  @override
+  String get sectionObservances => 'Festivals and vratas';
+
+  @override
+  String get dayTitle => 'Day';
+
+  @override
+  String get previousDay => 'Previous day';
+
+  @override
+  String get nextDay => 'Next day';
+
+  @override
+  String coordinates(String lat, String lon) {
+    return '$lat° N, $lon° E';
+  }
+
+  @override
+  String footerDetail(String coordinates, String packs, String status) {
+    return '$coordinates · data: $packs · $status';
+  }
 }

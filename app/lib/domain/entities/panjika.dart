@@ -227,10 +227,16 @@ class Provenance {
     required this.packIds,
     required this.isSample,
     this.timeZoneLabel = 'IST',
+    this.latitude,
+    this.longitude,
   });
 
   final NameRef tradition;
   final NameRef city;
+
+  /// The city's coordinates, for the Day detail footer (FR-DAY-04).
+  final double? latitude;
+  final double? longitude;
   final List<String> packIds;
 
   /// True if any contributing pack is a fixture: the UI must show the watermark.

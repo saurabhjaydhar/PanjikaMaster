@@ -58,5 +58,14 @@
   "actionLater": "Later",
   "noticeDismiss": "Got it",
   "updateFailed": "Couldn't download the data. We'll try again later.",
-  "appUpdateRequired": "Update the app to get new data."
+  "appUpdateRequired": "Update the app to get new data.",
+  "labelTithi": "Tithi",
+  "labelPaksha": "Paksha",
+  "sectionSunMoon": "Sun and moon",
+  "sectionObservances": "Festivals and vratas",
+  "dayTitle": "Day",
+  "previousDay": "Previous day",
+  "nextDay": "Next day",
+  "coordinates": "{lat}° N, {lon}° E",
+  "footerDetail": "{coordinates} · data: {packs} · {status}"
 }

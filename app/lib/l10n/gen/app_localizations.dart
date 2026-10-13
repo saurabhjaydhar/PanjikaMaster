@@ -460,6 +460,60 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।'**
   String get appUpdateRequired;
+
+  /// Row label: tithi.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি'**
+  String get labelTithi;
+
+  /// Row label: paksha (fortnight).
+  ///
+  /// In bn, this message translates to:
+  /// **'পক্ষ'**
+  String get labelPaksha;
+
+  /// Day detail section title.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্য ও চন্দ্র'**
+  String get sectionSunMoon;
+
+  /// Day detail section title.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব ও ব্রত'**
+  String get sectionObservances;
+
+  /// Title of the Day detail screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের পঞ্জিকা'**
+  String get dayTitle;
+
+  /// Button / screen-reader label: go to the previous day.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের দিন'**
+  String get previousDay;
+
+  /// Button / screen-reader label: go to the next day.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের দিন'**
+  String get nextDay;
+
+  /// A city's latitude (north) and longitude (east), numbers already formatted.
+  ///
+  /// In bn, this message translates to:
+  /// **'{lat}° উ, {lon}° পূ'**
+  String coordinates(String lat, String lon);
+
+  /// Second provenance line on Day detail: coordinates, data packs, verification status.
+  ///
+  /// In bn, this message translates to:
+  /// **'{coordinates} · তথ্য: {packs} · {status}'**
+  String footerDetail(String coordinates, String packs, String status);
 }
 
 class _AppLocalizationsDelegate

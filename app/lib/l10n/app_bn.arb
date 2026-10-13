@@ -365,5 +365,60 @@
   "appUpdateRequired": "নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।",
   "@appUpdateRequired": {
     "description": "The data server needs a newer app version (min_app_version)."
+  },
+  "labelTithi": "তিথি",
+  "@labelTithi": {
+    "description": "Row label: tithi."
+  },
+  "labelPaksha": "পক্ষ",
+  "@labelPaksha": {
+    "description": "Row label: paksha (fortnight)."
+  },
+  "sectionSunMoon": "সূর্য ও চন্দ্র",
+  "@sectionSunMoon": {
+    "description": "Day detail section title."
+  },
+  "sectionObservances": "উৎসব ও ব্রত",
+  "@sectionObservances": {
+    "description": "Day detail section title."
+  },
+  "dayTitle": "দিনের পঞ্জিকা",
+  "@dayTitle": {
+    "description": "Title of the Day detail screen."
+  },
+  "previousDay": "আগের দিন",
+  "@previousDay": {
+    "description": "Button / screen-reader label: go to the previous day."
+  },
+  "nextDay": "পরের দিন",
+  "@nextDay": {
+    "description": "Button / screen-reader label: go to the next day."
+  },
+  "coordinates": "{lat}° উ, {lon}° পূ",
+  "@coordinates": {
+    "description": "A city's latitude (north) and longitude (east), numbers already formatted.",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
+  "footerDetail": "{coordinates} · তথ্য: {packs} · {status}",
+  "@footerDetail": {
+    "description": "Second provenance line on Day detail: coordinates, data packs, verification status.",
+    "placeholders": {
+      "coordinates": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
   }
 }

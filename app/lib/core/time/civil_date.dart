@@ -8,6 +8,15 @@ class CivilDate implements Comparable<CivilDate> {
     return CivilDate(parts[0], parts[1], parts[2]);
   }
 
+  /// A strict `YYYY-MM-DD` that names a real date, else null (route parameters).
+  static CivilDate? tryParse(String text) {
+    final m = RegExp(r'^(\d{4})-(\d{2})-(\d{2})$').firstMatch(text);
+    if (m == null) return null;
+    final d = CivilDate(int.parse(m[1]!), int.parse(m[2]!), int.parse(m[3]!));
+    final utc = DateTime.utc(d.year, d.month, d.day);
+    return (utc.month == d.month && utc.day == d.day) ? d : null;
+  }
+
   /// The IST civil date of a UTC instant.
   factory CivilDate.ofInstant(DateTime instant) {
     final ist = Ist.wallClock(instant);

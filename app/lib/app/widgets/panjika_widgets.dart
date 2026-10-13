@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n/l10n_providers.dart';
+import '../../core/l10n/panjika_formatter.dart';
 import '../../domain/entities/panjika.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../theme/app_theme.dart';
@@ -276,9 +277,16 @@ class TimingStrip extends StatelessWidget {
 
 /// Tradition · city · IST, on every date screen (spec §6.8, US-02).
 class ProvenanceFooter extends ConsumerWidget {
-  const ProvenanceFooter({super.key, required this.provenance});
+  const ProvenanceFooter({
+    super.key,
+    required this.provenance,
+    this.detailed = false,
+  });
 
   final Provenance provenance;
+
+  /// Adds coordinates, data packs and verification status (Day detail, FR-DAY-04).
+  final bool detailed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -300,9 +308,29 @@ class ProvenanceFooter extends ConsumerWidget {
             ),
             style: t.bodySmall?.copyWith(color: context.colors.inkMuted),
           ),
+          if (detailed)
+            Text(
+              _detail(l, ref.watch(formatterProvider)),
+              style: t.bodySmall?.copyWith(color: context.colors.inkMuted),
+            ),
         ],
       ),
     );
+  }
+
+  String _detail(AppLocalizations l, PanjikaFormatter f) {
+    final lat = provenance.latitude, lon = provenance.longitude;
+    final coordinates = lat == null || lon == null
+        ? ''
+        : l.coordinates(
+            f.digits(lat.toStringAsFixed(2)),
+            f.digits(lon.toStringAsFixed(2)),
+          );
+    // Transitions are computed until the validation harness matches them (§6.8).
+    final status = provenance.isSample
+        ? l.verificationSample
+        : l.verificationComputed;
+    return l.footerDetail(coordinates, provenance.packIds.join(', '), status);
   }
 }
 

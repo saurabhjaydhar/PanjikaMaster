@@ -238,4 +238,35 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get appUpdateRequired => 'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।';
+
+  @override
+  String get labelTithi => 'তিথি';
+
+  @override
+  String get labelPaksha => 'পক্ষ';
+
+  @override
+  String get sectionSunMoon => 'সূর্য ও চন্দ্র';
+
+  @override
+  String get sectionObservances => 'উৎসব ও ব্রত';
+
+  @override
+  String get dayTitle => 'দিনের পঞ্জিকা';
+
+  @override
+  String get previousDay => 'আগের দিন';
+
+  @override
+  String get nextDay => 'পরের দিন';
+
+  @override
+  String coordinates(String lat, String lon) {
+    return '$lat° উ, $lon° পূ';
+  }
+
+  @override
+  String footerDetail(String coordinates, String packs, String status) {
+    return '$coordinates · তথ্য: $packs · $status';
+  }
 }
