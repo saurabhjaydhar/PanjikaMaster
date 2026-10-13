@@ -34,6 +34,9 @@ class NameTable {
   /// the packs don't name it.
   NameRef tradition(String id) => _traditions[id] ?? NameRef(id, id);
 
+  /// Every tradition the packs name, in pack order.
+  Iterable<String> get traditionIds => _traditions.keys;
+
   /// The plain-language explanation for the glossary (FR-SET-07), if the pack has one.
   NameRef? glossOf(String kind, int idx) => _glosses[(kind, idx)];
 }
