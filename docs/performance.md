@@ -5,7 +5,7 @@ what a person measures on a device.
 
 | Budget | Limit | How it is checked |
 |---|---|---|
-| App size | < 30 MB | CI (`ci-app`): `scripts/check_apk_size.sh` fails the build when the release APK is over 30 MiB, and writes the size to the job summary. The universal APK carries every ABI, so it is an upper bound on what Play delivers from the bundle. |
+| App size | < 30 MB | CI (`ci-app`): `scripts/check_apk_size.sh` checks each ABI's share of the release APK (the APK minus the other ABIs' native libraries, which is what Play delivers to a phone from the app bundle). It fails the build when the largest is over 30 MiB and writes the sizes to the job summary. The universal APK carries three ABIs (65 MB on 2026-10-13) and is not what a phone downloads. |
 | Fonts | ≤ 1.5 MB of the app (§12) | Subset by `scripts/build_fonts.sh`; 788 KB today (`docs/assets.md`). |
 | Code shrinking | R8 on in release | `android/app/build.gradle.kts` turns on code and resource shrinking; rules in `android/app/proguard-rules.pro`, with the reason for each; kept resources in `res/raw/keep.xml`. Drift needs no rules (SQL goes through `dart:ffi` on native SQLite). |
 | Cold start to Today | < 1.5 s on a ₹10k Android phone | **Measured by a person** on the low-end phone of the device matrix (§22.2, T-616); see below. |
