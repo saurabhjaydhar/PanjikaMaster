@@ -261,7 +261,15 @@ class _TodayContent extends ConsumerWidget {
                   runSpacing: Space.s,
                   children: [
                     for (final o in d.observances)
-                      ObservanceChip(observance: o),
+                      ObservanceChip(
+                        observance: o,
+                        corrected:
+                            ref
+                                .watch(correctedObservancesProvider)
+                                .value
+                                ?.contains(o.observance.id) ??
+                            false,
+                      ),
                   ],
                 ),
               ],
@@ -276,6 +284,12 @@ class _TodayContent extends ConsumerWidget {
                     child: FestivalCard(
                       observance: o,
                       daysLeft: o.date.difference(CivilDate.ofInstant(now)),
+                      corrected:
+                          ref
+                              .watch(correctedObservancesProvider)
+                              .value
+                              ?.contains(o.observance.id) ??
+                          false,
                     ),
                   ),
               ],

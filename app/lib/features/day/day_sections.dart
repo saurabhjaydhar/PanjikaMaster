@@ -171,7 +171,16 @@ class DaySections extends ConsumerWidget {
             spacing: Space.s,
             runSpacing: Space.s,
             children: [
-              for (final o in d.observances) ObservanceChip(observance: o),
+              for (final o in d.observances)
+                ObservanceChip(
+                  observance: o,
+                  corrected:
+                      ref
+                          .watch(correctedObservancesProvider)
+                          .value
+                          ?.contains(o.observance.id) ??
+                      false,
+                ),
             ],
           ),
         ],

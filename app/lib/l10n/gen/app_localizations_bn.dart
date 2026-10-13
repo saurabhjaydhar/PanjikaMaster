@@ -1132,4 +1132,11 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get remindersHelpLink => 'অনুস্মারক ঠিক সময়ে আসছে না?';
+
+  @override
+  String get correctedLabel => 'সংশোধিত';
+
+  @override
+  String get correctedNote =>
+      'এই উৎসবের তারিখ সম্প্রতি সংশোধন করা হয়েছে। আগের তারিখ মনে রাখলে মিলিয়ে নিন।';
 }
