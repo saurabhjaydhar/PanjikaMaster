@@ -836,4 +836,16 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get shareInBoth => 'দুই ভাষায়';
+
+  @override
+  String get sectionTerms => 'পঞ্জিকার শব্দ';
+
+  @override
+  String get sectionPeriods => 'দিনের নানা সময়';
+
+  @override
+  String get glossarySearchHint => 'শব্দ খুঁজুন';
+
+  @override
+  String get noGlossaryMatches => 'এই নামে কোনো শব্দ পাওয়া যায়নি';
 }

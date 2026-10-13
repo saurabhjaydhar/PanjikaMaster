@@ -840,4 +840,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareInBoth => 'Both';
+
+  @override
+  String get sectionTerms => 'Panjika terms';
+
+  @override
+  String get sectionPeriods => 'Periods of the day';
+
+  @override
+  String get glossarySearchHint => 'Search terms';
+
+  @override
+  String get noGlossaryMatches => 'No term matches that';
 }

@@ -1471,6 +1471,30 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দুই ভাষায়'**
   String get shareInBoth;
+
+  /// Glossary section: panchanga terms (FR-SET-07).
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার শব্দ'**
+  String get sectionTerms;
+
+  /// Glossary section: Rahu Kaal, Barabela etc.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের নানা সময়'**
+  String get sectionPeriods;
+
+  /// Glossary search field hint.
+  ///
+  /// In bn, this message translates to:
+  /// **'শব্দ খুঁজুন'**
+  String get glossarySearchHint;
+
+  /// Glossary search with no results.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই নামে কোনো শব্দ পাওয়া যায়নি'**
+  String get noGlossaryMatches;
 }
 
 class _AppLocalizationsDelegate

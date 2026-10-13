@@ -1285,5 +1285,21 @@
   "shareInBoth": "দুই ভাষায়",
   "@shareInBoth": {
     "description": "Share language option: Bengali and English together; shown with the other language's word beside it."
+  },
+  "sectionTerms": "পঞ্জিকার শব্দ",
+  "@sectionTerms": {
+    "description": "Glossary section: panchanga terms (FR-SET-07)."
+  },
+  "sectionPeriods": "দিনের নানা সময়",
+  "@sectionPeriods": {
+    "description": "Glossary section: Rahu Kaal, Barabela etc."
+  },
+  "glossarySearchHint": "শব্দ খুঁজুন",
+  "@glossarySearchHint": {
+    "description": "Glossary search field hint."
+  },
+  "noGlossaryMatches": "এই নামে কোনো শব্দ পাওয়া যায়নি",
+  "@noGlossaryMatches": {
+    "description": "Glossary search with no results."
   }
 }
