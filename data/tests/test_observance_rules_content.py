@@ -1,13 +1,10 @@
 """T-502: the drafted tier 1–3 rules load, are all drafts, cover the spec's tier list,
 and drafts never reach a production pack."""
 
-from datetime import date
-from pathlib import Path
-
 import pytest
 
 from engine.observances import load_rules
-from engine.observances.build import RULES_DIR, MissingContent, build
+from engine.observances.build import RULES_DIR
 from pack import builder
 
 RULES = {r.id: r for r in load_rules(RULES_DIR)}
@@ -51,18 +48,13 @@ def test_draft_files_say_so_and_name_the_open_questions():
         assert head[2].startswith("# Expert to confirm:"), path.name
 
 
-def test_no_pack_without_descriptions(tmp_path: Path):
-    # Descriptions come with T-504; until then there is nothing to put in the
-    # observances table, which requires them in both languages.
-    with pytest.raises(MissingContent, match="T-504"):
-        build(
-            date(2026, 4, 14),
-            date(2027, 4, 13),
-            tmp_path,
-            ref_lat=0.0,
-            ref_lon=0.0,
-            generated_at="2026-10-13T00:00:00Z",
-        )
+def test_every_rule_has_native_descriptions_awaiting_review():
+    # T-504: 80–150 words in each language (spec §13.8), not reviewed yet.
+    for r in RULES.values():
+        assert r.description_bn and r.description_en, r.id
+        for text in (r.description_bn, r.description_en):
+            assert 80 <= len(text.split()) <= 150, (r.id, len(text.split()))
+        assert r.description_review == "pending", r.id
 
 
 def _info(summary: dict) -> builder.PackInfo:
@@ -91,10 +83,20 @@ def test_release_refuses_draft_rules_and_draft_moments():
 
 
 def test_release_accepts_reviewed_rules_and_staging_accepts_drafts():
-    ok = {"draft_rules": [], "moments_review": "reviewed"}
+    ok = {"draft_rules": [], "moments_review": "reviewed", "pending_descriptions": []}
     builder.check_releasable(_info(ok), release=True, allow_sample=False, allow_dev=False)
     drafts = {"draft_rules": ["kali_puja"], "moments_review": "draft"}
     builder.check_releasable(_info(drafts), release=False, allow_sample=False, allow_dev=False)
+
+
+def test_release_refuses_unreviewed_descriptions():
+    pending = {
+        "draft_rules": [],
+        "moments_review": "reviewed",
+        "pending_descriptions": ["kali_puja"],
+    }
+    with pytest.raises(builder.PackRejected, match="descriptions not reviewed"):
+        builder.check_releasable(_info(pending), release=True, allow_sample=False, allow_dev=False)
 
 
 def test_observance_packs_on_a_dev_ephemeris_are_refused():

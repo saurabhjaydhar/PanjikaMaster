@@ -14,5 +14,9 @@ decision:
   tithi: dwitiya
   on_vriddhi: first
   include_mala: false
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "ভাইফোঁটা হয় কালীপূজার দুদিন পরে, কার্তিক মাসের শুক্লা দ্বিতীয়ায়। এই দিন বোনেরা ভাইয়ের কপালে চন্দন, দই বা ঘিয়ের ফোঁটা দিয়ে তার দীর্ঘায়ু কামনা করে। ফোঁটা দেওয়ার সময় বলা হয় সেই প্রচলিত ছড়া: \"ভাইয়ের কপালে দিলাম ফোঁটা, যমের দুয়ারে পড়ল কাঁটা\"। ধান-দূর্বা দিয়ে আশীর্বাদ, প্রদীপ দিয়ে বরণ আর শাঁখ বাজিয়ে অনুষ্ঠান শেষ হয়। তার পর উপহার বিনিময় আর বোনের হাতে রান্না করা ভোজ। প্রচলিত কাহিনি অনুযায়ী যমুনা এই দিনে ভাই যমকে ফোঁটা দিয়ে আপ্যায়ন করেছিলেন, তাই ভারতের অন্য জায়গায় দিনটি ভাইদুজ বা যমদ্বিতীয়া নামে পরিচিত।"
+description_en: "Bhai Phonta falls two days after Kali Puja, on the bright-fortnight Dwitiya of Kartik. Sisters place a phonta, a dot of sandalwood paste, curd or ghee, on their brothers' foreheads and pray for their long life, reciting the old rhyme \"bhaiyer kopale dilam phonta, Jomer duare porlo kanta\": I put a mark on my brother's brow, and a thorn bars the door of Yama, god of death. Blessings with paddy and durba grass, a lamp waved in welcome and the sound of the conch complete the rite, followed by gifts and a feast cooked by the sister. By tradition the goddess Yamuna welcomed her brother Yama this way, so elsewhere in India the day is called Bhai Dooj or Yama Dwitiya."
+description_review: pending
 review:
   status: draft

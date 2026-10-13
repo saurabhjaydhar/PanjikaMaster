@@ -11,5 +11,9 @@ decision:
   type: span
   days: [durga_shashthi, durga_saptami, durga_ashtami, durga_navami, vijaya_dashami]
   within_days: 7
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "দুর্গাপূজা বাঙালির সবচেয়ে বড় উৎসব। আশ্বিন মাসের শুক্লপক্ষে ষষ্ঠী থেকে দশমী পর্যন্ত পাঁচ দিন ধরে মহিষাসুরমর্দিনী দুর্গার আরাধনা হয়, সঙ্গে থাকেন লক্ষ্মী, সরস্বতী, গণেশ ও কার্তিক। বনেদি বাড়ির পূজার পাশাপাশি পাড়ায় পাড়ায় বারোয়ারি পূজা এখন উৎসবের প্রাণ; প্রতিমা, মণ্ডপ আর আলোকসজ্জায় শিল্পীদের সৃজনশীলতার পরিচয় মেলে। কলকাতার দুর্গাপূজা ইউনেস্কোর মানবতার অধরা সাংস্কৃতিক ঐতিহ্যের তালিকায় স্থান পেয়েছে। এই কয়দিন নতুন জামা, ঠাকুর দেখা, আড্ডা আর খাওয়াদাওয়ায় শহর-গ্রাম জেগে থাকে, প্রবাসী বাঙালিরাও যেখানে থাকেন সেখানেই পূজার আয়োজন করেন। এই অ্যাপে প্রতিটি দিনের আলাদা বিবরণ ও সময় দেখা যাবে।"
+description_en: "Durga Puja is the greatest festival of Bengal. For five days, from Shashthi to Dashami in the bright fortnight of Ashwin, Durga is worshipped as the slayer of the buffalo demon Mahishasura, together with Lakshmi, Saraswati, Ganesh and Kartik. Alongside the old family pujas of aristocratic homes, community pujas organised by neighbourhoods are now the heart of the festival, showcasing the artistry of image-makers, pandal designers and lighting craftsmen. Durga Puja in Kolkata is on UNESCO's list of the Intangible Cultural Heritage of Humanity. For these days towns and villages stay up late with new clothes, pandal visits, conversation and food, and Bengalis abroad hold pujas wherever they live. This app shows each day and its timings separately."
+description_review: pending
 review:
   status: draft

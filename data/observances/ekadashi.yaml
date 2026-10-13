@@ -12,5 +12,9 @@ decision:
   paksha: both
   on_vriddhi: first
   include_mala: true
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "একাদশী প্রতিটি পক্ষের এগারোতম তিথি, তাই মাসে দুবার আসে: শুক্লপক্ষে একবার, কৃষ্ণপক্ষে একবার। দিনটি বিষ্ণুর আরাধনার জন্য পবিত্র বলে ধরা হয়। অনেকে এই দিন উপবাস রাখেন, কেউ সম্পূর্ণ নির্জলা, কেউ শুধু ভাত ও অন্যান্য শস্য বাদ দিয়ে ফল, দুধ বা সাবু খেয়ে। পরদিন দ্বাদশী তিথিতে নির্দিষ্ট সময়ের মধ্যে উপবাস ভাঙতে হয়, যাকে পারণ বলে। বছরের প্রতিটি একাদশীর আলাদা নাম ও মাহাত্ম্য আছে, যেমন নির্জলা একাদশী বা উত্থান একাদশী। কোন দিনে একাদশী পালন হবে তা পঞ্জিকার নিয়মে ঠিক হয়, আর সম্প্রদায়ভেদে কখনো দিন আলাদা হতে পারে; এই অ্যাপ কোন নিয়ম মানে তা তথ্যসূত্র অংশে লেখা থাকবে।"
+description_en: "Ekadashi is the eleventh tithi of each lunar fortnight, so it comes twice a month, once in the bright half and once in the dark. The day is held sacred to Vishnu, and many people fast: some take no food or water at all, others give up rice and other grains and eat fruit, milk or sago. The fast is broken the next day, on Dwadashi, within a set window of time called parana. Each Ekadashi of the year has its own name and story, such as Nirjala Ekadashi or Utthana Ekadashi. Which day the fast is kept follows the panjika's rules and can differ between traditions; the rule this app follows will be described under Sources and verification."
+description_review: pending
 review:
   status: draft
