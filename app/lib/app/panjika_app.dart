@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,6 +8,7 @@ import '../core/l10n/l10n_providers.dart';
 import '../core/settings/settings.dart';
 import '../core/time/clock.dart';
 import '../data/packs/update_providers.dart';
+import '../data/reports/report_providers.dart';
 import '../features/reminders/reminder_triggers.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'router.dart';
@@ -31,6 +34,7 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
       if (mounted) {
         ref.read(updateControllerProvider.notifier).checkInBackground();
         ref.read(reminderTriggersProvider).appStarted();
+        _sendQueuedReports();
       }
     });
   }
@@ -54,7 +58,21 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
     if (state == AppLifecycleState.resumed) {
       ref.read(nowProvider.notifier).refresh();
       ref.read(reminderTriggersProvider).appResumed();
+      _sendQueuedReports();
     }
+  }
+
+  /// Error reports queued offline go out when the app opens or returns (T-604).
+  void _sendQueuedReports() {
+    Future<void> send() async {
+      try {
+        await ref.read(reportQueueProvider).flush();
+      } on Object catch (e) {
+        debugPrint('reports: flush failed: $e');
+      }
+    }
+
+    unawaited(send());
   }
 
   @override
