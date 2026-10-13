@@ -43,7 +43,6 @@ class DaySections extends ConsumerWidget {
         names?.of(kind, idx).of(language) ?? '';
 
     final tithi = d.currentOf(TransitionKind.tithi, now);
-    final active = d.activePeriod(now);
     final periods = names == null ? const <TimePeriod>[] : d.periods;
     final shubh = [
       for (final p in periods)
@@ -160,7 +159,9 @@ class DaySections extends ConsumerWidget {
                   kind: p.kind,
                   start: p.startUtc,
                   end: p.endUtc,
-                  active: identical(p, active),
+                  // Periods can overlap; every running one is tagged.
+                  active: p.isActiveAt(now.toUtc()),
+                  endsNextDay: d.isAfterMidnight(p.endUtc),
                 ),
               ),
           ],

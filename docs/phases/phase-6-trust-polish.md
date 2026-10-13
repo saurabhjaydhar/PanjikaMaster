@@ -28,7 +28,7 @@
 | T-611 ✅ | Search screen with examples, results, empty state | §11.14 |
 | T-612 ✅ | Glossary screen and long-press term sheets | FR-SET-07, FR-L10N-05 |
 | T-613 ✅ | Help: install Bengali TTS voice; OEM notification settings guides (Xiaomi, Samsung) | Both languages |
-| T-614 | "সংশোধিত / Corrected" label on changed observances; Bengal periods UI | Goldens |
+| T-614 ✅ | "সংশোধিত / Corrected" label on changed observances; Bengal periods UI | Goldens |
 
 ### QA
 | ID | Task | Done when |
