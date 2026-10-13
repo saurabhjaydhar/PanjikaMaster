@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:panjika/core/l10n/app_locale_channel.dart';
+import 'package:panjika/core/platform/system_settings.dart';
 import 'package:panjika/data/notifications/notification_permission.dart';
 import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/data/reports/report_sender.dart';
@@ -119,5 +120,19 @@ class FakeReportSender implements ReportSender {
   Future<SendOutcome> send(String payload) async {
     sent.add(payload);
     return outcomes.isEmpty ? SendOutcome.sent : outcomes.removeAt(0);
+  }
+}
+
+/// Records which system settings pages were asked for; [opens] says whether it worked.
+class FakeSystemSettings implements SystemSettings {
+  FakeSystemSettings({this.opens = true});
+
+  bool opens;
+  final opened = <SystemSettingsPage>[];
+
+  @override
+  Future<bool> open(SystemSettingsPage page) async {
+    opened.add(page);
+    return opens;
   }
 }

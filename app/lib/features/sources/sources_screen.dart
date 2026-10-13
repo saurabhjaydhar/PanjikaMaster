@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
 import '../../app/theme/tokens.dart';
+import '../../app/widgets/numbered_steps.dart';
 import '../../app/widgets/observance_widgets.dart';
 import '../../app/widgets/panjika_widgets.dart';
 import '../../core/l10n/l10n_providers.dart';
@@ -98,45 +99,7 @@ class SourcesScreen extends ConsumerWidget {
               const SizedBox(height: Space.l),
               SectionHeader(title: l.sourcesHowHeading),
               // A genuine sequence, so numbered (§11.16).
-              for (final (i, (title, body)) in steps.indexed)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: Space.s),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ExcludeSemantics(
-                        child: Container(
-                          constraints: const BoxConstraints(
-                            minWidth: Space.xxl,
-                            minHeight: Space.xxl,
-                          ),
-                          padding: const EdgeInsets.all(Space.xs),
-                          decoration: BoxDecoration(
-                            color: c.haldiContainer,
-                            shape: BoxShape.circle,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            f.number(i + 1),
-                            style: t.titleSmall?.copyWith(
-                              color: c.onHaldiContainer,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: Space.m),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(title, style: t.titleSmall),
-                            Text(body, style: muted),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              NumberedSteps(steps),
               Padding(
                 padding: const EdgeInsets.only(top: Space.s),
                 child: Text(l.sourcesStepsNote, style: t.bodyMedium),

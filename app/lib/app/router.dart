@@ -12,6 +12,7 @@ import '../features/more/about_screen.dart';
 import '../features/more/coming_soon_screen.dart';
 import '../features/more/more_screen.dart';
 import '../features/glossary/glossary_screen.dart';
+import '../features/help/help_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/report/report_screen.dart';
 import '../features/reminders/reminders_screen.dart';
@@ -55,6 +56,10 @@ abstract final class Routes {
   static String reportFor(CivilDate date) => '$report?date=${date.toIso()}';
   static const removeAds = '/remove-ads';
   static const about = '/about';
+  static const help = '/help';
+
+  /// Help, scrolled to the phone settings that keep reminders on time.
+  static const helpReminders = '/help?topic=reminders';
   static const privacy = '/privacy';
 }
 
@@ -125,6 +130,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.report,
         builder: (_, state) => ReportScreen(
           date: CivilDate.tryParse(state.uri.queryParameters['date'] ?? ''),
+        ),
+      ),
+      GoRoute(
+        path: Routes.help,
+        builder: (_, state) => HelpScreen(
+          topic: HelpTopic.values
+              .where((t) => t.name == state.uri.queryParameters['topic'])
+              .firstOrNull,
         ),
       ),
       GoRoute(path: Routes.sources, builder: (_, _) => const SourcesScreen()),

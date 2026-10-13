@@ -110,6 +110,16 @@ class RemindersScreen extends ConsumerWidget {
               label: Text(l.addFestivalReminder),
             ),
           ),
+          const SizedBox(height: Space.l),
+          // Inexact alarms on some phones (TODO(Q7)): point to the settings guide.
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => context.push(Routes.helpReminders),
+              icon: const Icon(Icons.help_outline),
+              label: Text(l.remindersHelpLink),
+            ),
+          ),
         ],
       ),
     );

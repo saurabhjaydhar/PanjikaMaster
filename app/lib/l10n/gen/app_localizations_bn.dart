@@ -1033,4 +1033,103 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get reportQueued => 'ইন্টারনেট পেলে পাঠানো হবে।';
+
+  @override
+  String get menuHelp => 'সাহায্য';
+
+  @override
+  String get helpVoiceHeading => 'বাংলায় পড়ে শোনানো';
+
+  @override
+  String get helpVoiceIntro =>
+      'অনেক ফোনে বাংলা কণ্ঠ আগে থেকে থাকে না, তখন TalkBack বাংলা লেখা ঠিকমতো পড়তে পারে না। Google-এর বাংলা কণ্ঠ একবার নামিয়ে নিলেই হবে।';
+
+  @override
+  String get helpVoiceStep1 =>
+      'ফোনের সেটিংসে ‘টেক্সট-টু-স্পিচ’ (Text-to-speech) খুলুন, অথবা নিচের বোতাম টিপুন।';
+
+  @override
+  String get helpVoiceStep2 =>
+      'পছন্দের ইঞ্জিন হিসেবে ‘Speech Services by Google’ বেছে নিন।';
+
+  @override
+  String get helpVoiceStep3 =>
+      'ইঞ্জিনের পাশের সেটিংস চিহ্ন টিপে ‘ভয়েস ডেটা ইনস্টল করুন’ (Install voice data) খুলুন।';
+
+  @override
+  String get helpVoiceStep4 => '‘বাংলা (ভারত)’ বেছে নিয়ে কণ্ঠটি নামিয়ে নিন।';
+
+  @override
+  String get helpOpenTts => 'টেক্সট-টু-স্পিচ সেটিংস খুলুন';
+
+  @override
+  String get helpRemindersHeading => 'অনুস্মারক ঠিক সময়ে না এলে';
+
+  @override
+  String get helpRemindersIntro =>
+      'কিছু ফোন ব্যাটারি বাঁচাতে অ্যাপকে পেছনে ঘুম পাড়িয়ে রাখে, তাতে অনুস্মারক দেরিতে আসে বা আসেই না। এই দুটি জিনিস দেখে নিন:';
+
+  @override
+  String helpRemindersStep1(String app) {
+    return '$app-এর নোটিফিকেশন চালু আছে।';
+  }
+
+  @override
+  String helpRemindersStep2(String app) {
+    return 'ব্যাটারি সেটিংসে $app ‘সীমাবদ্ধ নয়’ (Unrestricted) রাখা আছে।';
+  }
+
+  @override
+  String get helpOpenNotifications => 'নোটিফিকেশন সেটিংস খুলুন';
+
+  @override
+  String get helpOpenBattery => 'ব্যাটারি সেটিংস খুলুন';
+
+  @override
+  String get helpXiaomiHeading => 'Xiaomi, Redmi ও POCO ফোনে';
+
+  @override
+  String helpXiaomiStep1(String app) {
+    return 'সেটিংস › অ্যাপস › অ্যাপ ম্যানেজ করুন (Manage apps) › $app খুলুন।';
+  }
+
+  @override
+  String get helpXiaomiStep2 => '‘অটোস্টার্ট’ (Autostart) চালু করুন।';
+
+  @override
+  String get helpXiaomiStep3 =>
+      '‘ব্যাটারি সেভার’ (Battery saver)-এ ‘কোনো বাধা নেই’ (No restrictions) বেছে নিন।';
+
+  @override
+  String get helpXiaomiStep4 =>
+      '‘নোটিফিকেশন’-এ অনুমতি দিন, লক স্ক্রিনে দেখানোও চালু রাখুন।';
+
+  @override
+  String get helpSamsungHeading => 'Samsung ফোনে';
+
+  @override
+  String helpSamsungStep1(String app) {
+    return 'সেটিংস › অ্যাপস › $app › ব্যাটারি খুলে ‘সীমাবদ্ধ নয়’ (Unrestricted) বেছে নিন।';
+  }
+
+  @override
+  String helpSamsungStep2(String app) {
+    return 'সেটিংস › ব্যাটারি › ‘পটভূমিতে ব্যবহারের সীমা’ (Background usage limits) খুলুন; $app যেন ঘুমন্ত বা গভীর ঘুমন্ত অ্যাপের তালিকায় না থাকে।';
+  }
+
+  @override
+  String helpSamsungStep3(String app) {
+    return 'চাইলে $app-কে ‘কখনো ঘুমায় না’ (Never auto sleeping apps) তালিকায় যোগ করুন।';
+  }
+
+  @override
+  String get helpPathsVary =>
+      'সেটিংসের নাম ও পথ ফোন ও সংস্করণভেদে একটু আলাদা হতে পারে।';
+
+  @override
+  String get helpOpenFailed =>
+      'সেটিংস খোলা গেল না। ফোনের সেটিংস থেকে খুঁজে নিন।';
+
+  @override
+  String get remindersHelpLink => 'অনুস্মারক ঠিক সময়ে আসছে না?';
 }

@@ -85,6 +85,7 @@ class MoreScreen extends ConsumerWidget {
             Divider(indent: margin, endIndent: margin),
             entry(Icons.verified_outlined, l.menuSources, Routes.sources),
             entry(Icons.flag_outlined, l.menuReport, Routes.report),
+            entry(Icons.help_outline, l.menuHelp, Routes.help),
             Divider(indent: margin, endIndent: margin),
             entry(
               Icons.do_not_disturb_on_outlined,
