@@ -197,12 +197,18 @@ class SettingsScreen extends ConsumerWidget {
                 RadioListTile<NumeralStyle?>(
                   contentPadding: EdgeInsets.zero,
                   value: NumeralStyle.bengali,
-                  title: Text(l.numeralsBengali(bnDigits)),
+                  title: Text(
+                    l.numeralsBengali(bnDigits),
+                    semanticsLabel: l.numeralsBengaliSemantics,
+                  ),
                 ),
                 RadioListTile<NumeralStyle?>(
                   contentPadding: EdgeInsets.zero,
                   value: NumeralStyle.latin,
-                  title: Text(l.numeralsLatin('123')), // l10n-ok: digits sample
+                  title: Text(
+                    l.numeralsLatin('123'), // l10n-ok: digits sample
+                    semanticsLabel: l.numeralsLatinSemantics,
+                  ),
                 ),
               ],
             ),

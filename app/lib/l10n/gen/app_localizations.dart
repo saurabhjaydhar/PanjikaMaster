@@ -1113,6 +1113,18 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'আজকের পঞ্জিকা দেখুন'**
   String get goToToday;
+
+  /// Screen-reader label of the Bengali numerals option; the visible label's sample digits would be read in the wrong voice (FR-L10N-08).
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা সংখ্যা'**
+  String get numeralsBengaliSemantics;
+
+  /// Screen-reader label of the Latin numerals option.
+  ///
+  /// In bn, this message translates to:
+  /// **'ইংরেজি সংখ্যা'**
+  String get numeralsLatinSemantics;
 }
 
 class _AppLocalizationsDelegate

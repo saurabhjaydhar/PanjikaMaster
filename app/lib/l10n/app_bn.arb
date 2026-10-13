@@ -929,5 +929,13 @@
   "goToToday": "আজকের পঞ্জিকা দেখুন",
   "@goToToday": {
     "description": "Button that opens the Today tab."
+  },
+  "numeralsBengaliSemantics": "বাংলা সংখ্যা",
+  "@numeralsBengaliSemantics": {
+    "description": "Screen-reader label of the Bengali numerals option; the visible label's sample digits would be read in the wrong voice (FR-L10N-08)."
+  },
+  "numeralsLatinSemantics": "ইংরেজি সংখ্যা",
+  "@numeralsLatinSemantics": {
+    "description": "Screen-reader label of the Latin numerals option."
   }
 }

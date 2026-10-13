@@ -618,4 +618,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goToToday => 'Go to Today';
+
+  @override
+  String get numeralsBengaliSemantics => 'Bengali numerals';
+
+  @override
+  String get numeralsLatinSemantics => 'Latin numerals';
 }

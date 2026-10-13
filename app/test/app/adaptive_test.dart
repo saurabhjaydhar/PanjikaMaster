@@ -86,17 +86,18 @@ void main() {
     expect(left, greaterThan(0));
   });
 
-  testWidgets('landscape: cells stay ≥ 48 dp, the strip moves beside the grid', (
-    tester,
-  ) async {
-    await open(tester, '/calendar', size: _landscape);
-    final cell = tester.getSize(find.byType(CalendarDayCell).first);
-    expect(cell.width, greaterThanOrEqualTo(48));
-    expect(cell.height, greaterThanOrEqualTo(48));
-    final grid = tester.getTopRight(find.byType(CalendarDayCell).first);
-    final strip = tester.getTopLeft(find.text('দেখুন'));
-    expect(strip.dx, greaterThan(grid.dx), reason: 'strip to the right');
-  });
+  testWidgets(
+    'landscape: cells stay ≥ 48 dp, the strip moves beside the grid',
+    (tester) async {
+      await open(tester, '/calendar', size: _landscape);
+      final cell = tester.getSize(find.byType(CalendarDayCell).first);
+      expect(cell.width, greaterThanOrEqualTo(48));
+      expect(cell.height, greaterThanOrEqualTo(48));
+      final grid = tester.getTopRight(find.byType(CalendarDayCell).first);
+      final strip = tester.getTopLeft(find.text('দেখুন'));
+      expect(strip.dx, greaterThan(grid.dx), reason: 'strip to the right');
+    },
+  );
 
   const screens = {
     'today': '/today',

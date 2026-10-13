@@ -615,4 +615,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get goToToday => 'আজকের পঞ্জিকা দেখুন';
+
+  @override
+  String get numeralsBengaliSemantics => 'বাংলা সংখ্যা';
+
+  @override
+  String get numeralsLatinSemantics => 'ইংরেজি সংখ্যা';
 }

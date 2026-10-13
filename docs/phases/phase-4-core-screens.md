@@ -22,7 +22,7 @@
 | T-409 ✅ | Location: coarse permission on tap only, nearest supported city with distance, > 50 km warning, denial never blocks (Kolkata default) | FR-LOC-02..04; tests with a fake location service |
 | T-410 ✅ | Tradition change: Surya Siddhanta shows "coming soon" and keeps Drik; change triggers reload and reminder reschedule hook | Unit + widget tests |
 | T-411 ✅ | Deep-link routes (`/day/YYYY-MM-DD`, `/festival/<id>`) for later share links | Route tests |
-| T-412 | Screen-reader labels per language (FR-L10N-08), second-script line excluded or locale-tagged | Semantics tests in both languages |
+| T-412 ✅ | Screen-reader labels per language (FR-L10N-08), second-script line excluded or locale-tagged | Semantics tests in both languages |
 
 ### QA
 | ID | Task | Done when |
