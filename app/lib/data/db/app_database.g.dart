@@ -7066,6 +7066,30 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<ObservanceDatesOfResult> observanceDatesOf(
+    String tradition,
+    String id,
+  ) {
+    return customSelect(
+      'SELECT"o"."id" AS "nested_0.id", "o"."name_bn" AS "nested_0.name_bn", "o"."name_en" AS "nested_0.name_en", "o"."category" AS "nested_0.category", "o"."tier" AS "nested_0.tier", "o"."description_bn" AS "nested_0.description_bn", "o"."description_en" AS "nested_0.description_en", "o"."pack_id" AS "nested_0.pack_id","d"."observance_id" AS "nested_1.observance_id", "d"."tradition" AS "nested_1.tradition", "d"."date" AS "nested_1.date", "d"."day_index" AS "nested_1.day_index", "d"."status" AS "nested_1.status", "d"."reviewed_by" AS "nested_1.reviewed_by", "d"."reviewed_on" AS "nested_1.reviewed_on", "d"."note_bn" AS "nested_1.note_bn", "d"."note_en" AS "nested_1.note_en", "d"."pack_id" AS "nested_1.pack_id" FROM observance_dates AS d JOIN observances AS o ON o.id = d.observance_id WHERE d.tradition = ?1 AND d.observance_id = ?2 ORDER BY d.date',
+      variables: [Variable<String>(tradition), Variable<String>(id)],
+      readsFrom: {this.observanceDates, this.observances},
+    ).asyncMap(
+      (QueryRow row) async => ObservanceDatesOfResult(
+        o: await this.observances.mapFromRow(row, tablePrefix: 'nested_0'),
+        d: await this.observanceDates.mapFromRow(row, tablePrefix: 'nested_1'),
+      ),
+    );
+  }
+
+  Selectable<ObservanceWindowRow> windowsOf(String tradition, String id) {
+    return customSelect(
+      'SELECT * FROM observance_windows WHERE tradition = ?1 AND observance_id = ?2 ORDER BY date, start_utc',
+      variables: [Variable<String>(tradition), Variable<String>(id)],
+      readsFrom: {this.observanceWindows},
+    ).asyncMap(this.observanceWindows.mapFromRow);
+  }
+
   Selectable<ObservanceRow> observanceById(String id) {
     return customSelect(
       'SELECT * FROM observances WHERE id = ?1',
@@ -13128,4 +13152,10 @@ class ObservancesBetweenResult {
   final ObservanceRow o;
   final ObservanceDateRow d;
   ObservancesBetweenResult({required this.o, required this.d});
+}
+
+class ObservanceDatesOfResult {
+  final ObservanceRow o;
+  final ObservanceDateRow d;
+  ObservanceDatesOfResult({required this.o, required this.d});
 }

@@ -1203,6 +1203,78 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দিন {day}'**
   String festivalDayOf(String day);
+
+  /// Window name (spec §11.6).
+  ///
+  /// In bn, this message translates to:
+  /// **'সন্ধিপূজা'**
+  String get windowSandhiPuja;
+
+  /// Explains the Sandhi Puja window; minutes is formatted with the user's numerals (24).
+  ///
+  /// In bn, this message translates to:
+  /// **'অষ্টমীর শেষ {minutes} মিনিট ও নবমীর প্রথম {minutes} মিনিট'**
+  String windowSandhiPujaHint(String minutes);
+
+  /// Window name: the midnight muhurta.
+  ///
+  /// In bn, this message translates to:
+  /// **'নিশীথ'**
+  String get windowNishita;
+
+  /// Window name.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রাতঃকাল'**
+  String get windowPratah;
+
+  /// Window name.
+  ///
+  /// In bn, this message translates to:
+  /// **'মধ্যাহ্ন'**
+  String get windowMadhyahna;
+
+  /// Window name.
+  ///
+  /// In bn, this message translates to:
+  /// **'অপরাহ্ণ'**
+  String get windowAparahna;
+
+  /// Window name.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রদোষ'**
+  String get windowPradosha;
+
+  /// The tithi a festival depends on and its span.
+  ///
+  /// In bn, this message translates to:
+  /// **'{name} · {start} থেকে {end}'**
+  String festivalTithiSpan(String name, String start, String end);
+
+  /// Verification card: when the date was checked; date in the UI language.
+  ///
+  /// In bn, this message translates to:
+  /// **'যাচাই: {date}'**
+  String checkedOn(String date);
+
+  /// Festival detail: turn on a reminder (FR-FEST-03).
+  ///
+  /// In bn, this message translates to:
+  /// **'মনে করিয়ে দিন'**
+  String get reminderOff;
+
+  /// Festival detail: the reminder is on; tap to turn it off.
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক চালু আছে'**
+  String get reminderOn;
+
+  /// Screen-reader label of the multi-day selector (FR-FEST-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনগুলি'**
+  String get festivalDaysLabel;
 }
 
 class _AppLocalizationsDelegate

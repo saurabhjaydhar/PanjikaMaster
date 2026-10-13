@@ -670,4 +670,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String festivalDayOf(String day) {
     return 'Day $day';
   }
+
+  @override
+  String get windowSandhiPuja => 'Sandhi Puja';
+
+  @override
+  String windowSandhiPujaHint(String minutes) {
+    return 'The last $minutes minutes of Ashtami and the first $minutes of Navami';
+  }
+
+  @override
+  String get windowNishita => 'Nishita (midnight)';
+
+  @override
+  String get windowPratah => 'Pratah (early morning)';
+
+  @override
+  String get windowMadhyahna => 'Madhyahna (midday)';
+
+  @override
+  String get windowAparahna => 'Aparahna (afternoon)';
+
+  @override
+  String get windowPradosha => 'Pradosha (dusk)';
+
+  @override
+  String festivalTithiSpan(String name, String start, String end) {
+    return '$name · $start to $end';
+  }
+
+  @override
+  String checkedOn(String date) {
+    return 'Checked: $date';
+  }
+
+  @override
+  String get reminderOff => 'Remind me';
+
+  @override
+  String get reminderOn => 'Reminder on';
+
+  @override
+  String get festivalDaysLabel => 'Days';
 }

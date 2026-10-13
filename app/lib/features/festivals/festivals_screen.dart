@@ -417,7 +417,7 @@ class _FestivalRow extends ConsumerWidget {
       f.bengaliDayMonth(bn.day, month),
     );
     return InkWell(
-      onTap: () => context.push(Routes.festival(o.observance.id)),
+      onTap: () => context.push(Routes.festival(o.observance.id, date: o.date)),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: Space.minTouch),
         child: Padding(

@@ -181,5 +181,17 @@
   "noFestivalsMatch": "No observances match these filters.",
   "festivalYearPartial": "Some months of this year aren't downloaded.",
   "festivalRowDates": "{gregorian} · {bengali}",
-  "festivalDayOf": "Day {day}"
+  "festivalDayOf": "Day {day}",
+  "windowSandhiPuja": "Sandhi Puja",
+  "windowSandhiPujaHint": "The last {minutes} minutes of Ashtami and the first {minutes} of Navami",
+  "windowNishita": "Nishita (midnight)",
+  "windowPratah": "Pratah (early morning)",
+  "windowMadhyahna": "Madhyahna (midday)",
+  "windowAparahna": "Aparahna (afternoon)",
+  "windowPradosha": "Pradosha (dusk)",
+  "festivalTithiSpan": "{name} · {start} to {end}",
+  "checkedOn": "Checked: {date}",
+  "reminderOff": "Remind me",
+  "reminderOn": "Reminder on",
+  "festivalDaysLabel": "Days"
 }

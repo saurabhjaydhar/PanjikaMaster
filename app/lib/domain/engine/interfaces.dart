@@ -47,6 +47,12 @@ abstract interface class PanjikaSource {
     CivilDate to,
   );
   Future<DataCoverage> coverage(String tradition, String cityId);
+
+  /// Every installed date of one observance, in date order.
+  Future<List<ObservanceDate>> observanceDatesOf(String tradition, String id);
+
+  /// Every installed window of one observance (Sandhi Puja, nishita, …).
+  Future<List<ObservanceWindow>> windowsOf(String tradition, String id);
 }
 
 /// Computes timed periods (Rahu Kaal, Yamaganda, Gulika, Bengal periods) from sunrise,

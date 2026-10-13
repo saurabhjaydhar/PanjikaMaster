@@ -6,7 +6,7 @@ import '../core/time/civil_date.dart';
 import '../features/calendar/calendar_screen.dart';
 import '../features/city/city_picker_screen.dart';
 import '../features/day/day_screen.dart';
-import '../features/festivals/festival_link_screen.dart';
+import '../features/festivals/festival_detail_screen.dart';
 import '../features/festivals/festivals_screen.dart';
 import '../features/more/about_screen.dart';
 import '../features/more/coming_soon_screen.dart';
@@ -28,7 +28,8 @@ abstract final class Routes {
   static String day(CivilDate date) => '/day/${date.toIso()}';
 
   /// A festival, e.g. `/festival/durga_puja` (share links, T-411).
-  static String festival(String id) => '/festival/$id';
+  static String festival(String id, {CivilDate? date}) =>
+      date == null ? '/festival/$id' : '/festival/$id?date=${date.toIso()}';
 
   /// Observance ids as the packs write them.
   static final festivalId = RegExp(r'^[a-z0-9_]{1,64}$');
@@ -97,8 +98,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/festival/:id',
         builder: (_, state) {
           final id = state.pathParameters['id']!;
+          final date = state.uri.queryParameters['date'];
           return Routes.festivalId.hasMatch(id)
-              ? FestivalLinkScreen(id: id)
+              ? FestivalDetailScreen(
+                  id: id,
+                  date: date == null ? null : CivilDate.tryParse(date),
+                )
               : const NotFoundScreen();
         },
       ),

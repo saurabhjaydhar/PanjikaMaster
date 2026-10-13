@@ -1007,5 +1007,74 @@
         "type": "String"
       }
     }
+  },
+  "windowSandhiPuja": "সন্ধিপূজা",
+  "@windowSandhiPuja": {
+    "description": "Window name (spec §11.6)."
+  },
+  "windowSandhiPujaHint": "অষ্টমীর শেষ {minutes} মিনিট ও নবমীর প্রথম {minutes} মিনিট",
+  "@windowSandhiPujaHint": {
+    "description": "Explains the Sandhi Puja window; minutes is formatted with the user's numerals (24).",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "windowNishita": "নিশীথ",
+  "@windowNishita": {
+    "description": "Window name: the midnight muhurta."
+  },
+  "windowPratah": "প্রাতঃকাল",
+  "@windowPratah": {
+    "description": "Window name."
+  },
+  "windowMadhyahna": "মধ্যাহ্ন",
+  "@windowMadhyahna": {
+    "description": "Window name."
+  },
+  "windowAparahna": "অপরাহ্ণ",
+  "@windowAparahna": {
+    "description": "Window name."
+  },
+  "windowPradosha": "প্রদোষ",
+  "@windowPradosha": {
+    "description": "Window name."
+  },
+  "festivalTithiSpan": "{name} · {start} থেকে {end}",
+  "@festivalTithiSpan": {
+    "description": "The tithi a festival depends on and its span.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "checkedOn": "যাচাই: {date}",
+  "@checkedOn": {
+    "description": "Verification card: when the date was checked; date in the UI language.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderOff": "মনে করিয়ে দিন",
+  "@reminderOff": {
+    "description": "Festival detail: turn on a reminder (FR-FEST-03)."
+  },
+  "reminderOn": "অনুস্মারক চালু আছে",
+  "@reminderOn": {
+    "description": "Festival detail: the reminder is on; tap to turn it off."
+  },
+  "festivalDaysLabel": "দিনগুলি",
+  "@festivalDaysLabel": {
+    "description": "Screen-reader label of the multi-day selector (FR-FEST-04)."
   }
 }

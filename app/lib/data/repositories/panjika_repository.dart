@@ -145,39 +145,60 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
         .get();
     return [
       for (final ObservancesBetweenResult(:o, :d) in rows)
-        ObservanceDate(
-          observance: Observance(
-            id: o.id,
-            name: NameRef(o.nameBn, o.nameEn),
-            category: ObservanceCategory.values.byName(o.category),
-            tier: o.tier,
-            description: NameRef(o.descriptionBn, o.descriptionEn),
-          ),
-          date: CivilDate.parse(d.date),
-          dayIndex: d.dayIndex,
-          status: VerificationStatus.parse(d.status),
-          packId: d.packId,
-          reviewedBy: d.reviewedBy,
-          reviewedOn: d.reviewedOn == null
-              ? null
-              : CivilDate.parse(d.reviewedOn!),
-          note: d.noteBn == null ? null : NameRef(d.noteBn!, d.noteEn!),
-        ),
+        _observanceDate(o, d),
     ];
   }
+
+  @override
+  Future<List<ObservanceDate>> observanceDatesOf(
+    String tradition,
+    String id,
+  ) async => [
+    for (final ObservanceDatesOfResult(:o, :d)
+        in await _db.observanceDatesOf(tradition, id).get())
+      _observanceDate(o, d),
+  ];
+
+  @override
+  Future<List<ObservanceWindow>> windowsOf(String tradition, String id) async =>
+      [
+        for (final w in await _db.windowsOf(tradition, id).get())
+          ObservanceWindow(
+            observanceId: w.observanceId,
+            date: CivilDate.parse(w.date),
+            kind: w.windowKind,
+            start: _utc(w.startUtc),
+            end: _utc(w.endUtc),
+            packId: w.packId,
+          ),
+      ];
+
+  ObservanceDate _observanceDate(ObservanceRow o, ObservanceDateRow d) =>
+      ObservanceDate(
+        observance: _observance(o),
+        date: CivilDate.parse(d.date),
+        dayIndex: d.dayIndex,
+        status: VerificationStatus.parse(d.status),
+        packId: d.packId,
+        reviewedBy: d.reviewedBy,
+        reviewedOn: d.reviewedOn == null
+            ? null
+            : CivilDate.parse(d.reviewedOn!),
+        note: d.noteBn == null ? null : NameRef(d.noteBn!, d.noteEn!),
+      );
+
+  Observance _observance(ObservanceRow o) => Observance(
+    id: o.id,
+    name: NameRef(o.nameBn, o.nameEn),
+    category: ObservanceCategory.values.byName(o.category),
+    tier: o.tier,
+    description: NameRef(o.descriptionBn, o.descriptionEn),
+  );
 
   /// One observance by id (festival links, T-411); null if no pack has it.
   Future<Observance?> observance(String id) async {
     final o = await _db.observanceById(id).getSingleOrNull();
-    return o == null
-        ? null
-        : Observance(
-            id: o.id,
-            name: NameRef(o.nameBn, o.nameEn),
-            category: ObservanceCategory.values.byName(o.category),
-            tier: o.tier,
-            description: NameRef(o.descriptionBn, o.descriptionEn),
-          );
+    return o == null ? null : _observance(o);
   }
 
   /// The dates both the global pack(s) of [tradition] and [cityId]'s pack cover.

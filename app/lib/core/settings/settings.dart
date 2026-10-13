@@ -19,7 +19,8 @@ enum SettingKey {
   lastManifest('last_manifest'),
   dismissedNotices('dismissed_notices'),
   recentCities('recent_cities'),
-  remindersOptIn('reminders_opt_in');
+  remindersOptIn('reminders_opt_in'),
+  festivalReminders('festival_reminders');
 
   const SettingKey(this.key);
 

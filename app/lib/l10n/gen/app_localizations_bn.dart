@@ -666,4 +666,46 @@ class AppLocalizationsBn extends AppLocalizations {
   String festivalDayOf(String day) {
     return 'দিন $day';
   }
+
+  @override
+  String get windowSandhiPuja => 'সন্ধিপূজা';
+
+  @override
+  String windowSandhiPujaHint(String minutes) {
+    return 'অষ্টমীর শেষ $minutes মিনিট ও নবমীর প্রথম $minutes মিনিট';
+  }
+
+  @override
+  String get windowNishita => 'নিশীথ';
+
+  @override
+  String get windowPratah => 'প্রাতঃকাল';
+
+  @override
+  String get windowMadhyahna => 'মধ্যাহ্ন';
+
+  @override
+  String get windowAparahna => 'অপরাহ্ণ';
+
+  @override
+  String get windowPradosha => 'প্রদোষ';
+
+  @override
+  String festivalTithiSpan(String name, String start, String end) {
+    return '$name · $start থেকে $end';
+  }
+
+  @override
+  String checkedOn(String date) {
+    return 'যাচাই: $date';
+  }
+
+  @override
+  String get reminderOff => 'মনে করিয়ে দিন';
+
+  @override
+  String get reminderOn => 'অনুস্মারক চালু আছে';
+
+  @override
+  String get festivalDaysLabel => 'দিনগুলি';
 }

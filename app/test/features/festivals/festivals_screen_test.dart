@@ -17,7 +17,7 @@ import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
-import 'package:panjika/features/festivals/festival_link_screen.dart';
+import 'package:panjika/features/festivals/festival_detail_screen.dart';
 import 'package:panjika/features/festivals/festivals_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
@@ -128,7 +128,7 @@ void main() {
     await open(tester, language: 'en');
     await tester.tap(find.text('Kali Puja'));
     await tester.pumpAndSettle();
-    expect(find.byType(FestivalLinkScreen), findsOneWidget);
+    expect(find.byType(FestivalDetailScreen), findsOneWidget);
   });
 
   testWidgets('a year outside the packs says it is not downloaded', (
