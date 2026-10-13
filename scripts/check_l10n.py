@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
 L10N = APP / "lib" / "l10n"
-SAME_IN_BOTH = {"timeZoneLabel", "sampleWatermark"}  # identical on purpose (see @description)
+SAME_IN_BOTH = {"timeZoneLabel", "sampleWatermark", "languageNameBengali", "languageNameEnglish"}  # identical on purpose (see @description)
 
 # A placeholder is {name} or {name, plural|select, …}; a plural/select branch like =0{…} or
 # other{…} is message text, so its brace follows a selector character and is skipped.

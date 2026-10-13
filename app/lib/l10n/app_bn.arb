@@ -169,5 +169,167 @@
         "example": "বিকেল ৪:১০ পর্যন্ত"
       }
     }
+  },
+  "labelNow": "এখন",
+  "@labelNow": {
+    "description": "Tag on the period row that is running right now (not colour alone, spec §12.5)."
+  },
+  "labelToday": "আজ",
+  "@labelToday": {
+    "description": "Screen-reader prefix for today's calendar cell."
+  },
+  "periodSemantics": "{name}, {range}{active, select, yes{, এখন চলছে} other{}}",
+  "@periodSemantics": {
+    "description": "Screen-reader label of a period row. active is yes or no.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      },
+      "active": {
+        "type": "String"
+      }
+    }
+  },
+  "periodShubh": "শুভ সময়",
+  "@periodShubh": {
+    "description": "Section title for auspicious periods."
+  },
+  "periodAshubh": "অশুভ সময়",
+  "@periodAshubh": {
+    "description": "Section title for inauspicious periods (Rahu Kaal etc.)."
+  },
+  "verificationSample": "নমুনা তথ্য",
+  "@verificationSample": {
+    "description": "Verification label: fixture data in debug builds."
+  },
+  "verificationComputed": "গণনা করা, এখনও মেলানো হয়নি",
+  "@verificationComputed": {
+    "description": "Verification label: computed but not checked against the reference panjika."
+  },
+  "verificationReferenceMatched": "পঞ্জিকার সঙ্গে মেলানো",
+  "@verificationReferenceMatched": {
+    "description": "Verification label: matches the reference panjika."
+  },
+  "verificationExpertReviewed": "বিশেষজ্ঞ যাচাই করেছেন",
+  "@verificationExpertReviewed": {
+    "description": "Verification label: reviewed by the expert."
+  },
+  "calendarCellSemantics": "{bengaliDate}, {gregorianDate}, {tithi}",
+  "@calendarCellSemantics": {
+    "description": "Screen-reader label of a calendar day without festivals. Layout only.",
+    "placeholders": {
+      "bengaliDate": {
+        "type": "String"
+      },
+      "gregorianDate": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarCellWithFestival": "{bengaliDate}, {gregorianDate}, {tithi}, {festival}",
+  "@calendarCellWithFestival": {
+    "description": "Screen-reader label of a calendar day with a festival. Layout only.",
+    "placeholders": {
+      "bengaliDate": {
+        "type": "String"
+      },
+      "gregorianDate": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      },
+      "festival": {
+        "type": "String"
+      }
+    }
+  },
+  "todayPrefix": "আজ, {label}",
+  "@todayPrefix": {
+    "description": "Screen-reader label for today's calendar cell.",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cityChipSemantics": "শহর: {city}। বদলাতে ট্যাপ করুন",
+  "@cityChipSemantics": {
+    "description": "Screen-reader label of the city chip.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "glossaryTitle": "শব্দকোষ",
+  "@glossaryTitle": {
+    "description": "Title of the glossary sheet and screen (FR-SET-07)."
+  },
+  "glossaryOpen": "অর্থ দেখুন",
+  "@glossaryOpen": {
+    "description": "Tooltip of the (i) button next to a panjika term."
+  },
+  "loading": "লোড হচ্ছে",
+  "@loading": {
+    "description": "Screen-reader label of loading placeholders."
+  },
+  "languageNameBengali": "বাংলা",
+  "@languageNameBengali": {
+    "description": "The Bengali language, always written in Bengali (language switch). Same in both languages on purpose."
+  },
+  "languageNameEnglish": "English",
+  "@languageNameEnglish": {
+    "description": "The English language, always written in English (language switch). Same in both languages on purpose."
+  },
+  "termWithName": "{term}: {name}",
+  "@termWithName": {
+    "description": "A term with a name, e.g. 'ক্ষয় তিথি: অষ্টমী'. Layout only.",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "stateNotDownloaded": "এই সময়ের তথ্য ডাউনলোড করা নেই।",
+  "@stateNotDownloaded": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateOffline": "ইন্টারনেট সংযোগ নেই। সংযোগ পেলে তথ্য ডাউনলোড হবে।",
+  "@stateOffline": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateStale": "তথ্য হালনাগাদ প্রয়োজন।",
+  "@stateStale": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateSignatureFailed": "তথ্য যাচাই করা যায়নি, তাই দেখানো হচ্ছে না।",
+  "@stateSignatureFailed": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateUnverified": "এই তারিখ এখনও পঞ্জিকা মিলিয়ে দেখা হয়নি।",
+  "@stateUnverified": {
+    "description": "System state for tier 2/3 festivals (spec §11.9)."
+  },
+  "stateCheckClock": "ফোনের তারিখ ঠিক আছে কিনা দেখুন",
+  "@stateCheckClock": {
+    "description": "Shown when the device date is outside every pack (spec §16)."
+  },
+  "actionDownload": "ডাউনলোড করুন",
+  "@actionDownload": {
+    "description": "Button: download data."
+  },
+  "actionUpdate": "হালনাগাদ করুন",
+  "@actionUpdate": {
+    "description": "Button: update data."
   }
 }

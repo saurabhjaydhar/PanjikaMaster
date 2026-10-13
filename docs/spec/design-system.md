@@ -110,7 +110,7 @@ Every component has a widget test and golden images for bn/en × light/dark × 1
 
 ### 12.7 Layout, spacing and shape
 - **Grid:** 4 dp base. Spacing tokens: `xs` 4, `s` 8, `m` 12, `l` 16, `xl` 24, `xxl` 32, `xxxl` 48.
-- **Screen margins:** 16 dp on compact widths, 24 dp on medium and expanded. Content max width 640 dp, centred, on wide screens.
+- **Screen margins:** 16 dp on compact widths, 24 dp on medium and expanded. Content max width 640 dp, centred, on wide screens. Exception: the month grid uses 8 dp margins on compact widths, so seven cells keep their 48 dp minimum on a 360 dp phone.
 - **Shape:** radius 8 (chips, small buttons), 12 (cards, rows with fills), 20 (bottom sheets, tithi seal container), full (pills, segmented controls).
 - **Elevation:** flat by default. Hierarchy comes from tonal surfaces (`paper` → `paper-raised` → containers), not shadows. One shadow level, for bottom sheets and menus only.
 - **Rhythm:** sections are separated by `xl` (24 dp) and a section header; rows inside a section by `s` (8 dp). Avoid dividers between every row; use them between sections only.

@@ -27,7 +27,7 @@
 ### Frontend (screens & UI)
 | ID | Task | Done when |
 |---|---|---|
-| T-213 | Components (§12.5): `DateHeader`, `TithiSeal`, `NameText`, `PanchangRow`, `TimingStrip`, `PeriodRow`, `CalendarDayCell`, `ObservanceChip`, `FestivalCard`, `VerificationBadge`, `ProvenanceFooter`, `CityChip`, `StateMessage`, `LanguageSwitch`, `GlossaryTerm`, `SectionHeader`, `Skeleton` | Widget tests at 100/130/200 %; golden matrix bn/en × light/dark |
+| T-213 ✅ | Components (§12.5): `DateHeader`, `TithiSeal`, `NameText`, `PanchangRow`, `TimingStrip`, `PeriodRow`, `CalendarDayCell`, `ObservanceChip`, `FestivalCard`, `VerificationBadge`, `ProvenanceFooter`, `CityChip`, `StateMessage`, `LanguageSwitch`, `GlossaryTerm`, `SectionHeader`, `Skeleton` | Widget tests at 100/130/200 %; golden matrix bn/en × light/dark |
 | T-214 | Motion (§12.8): ring fill, cross-fade, reduced-motion switch | Golden/widget test with `disableAnimations` on and off |
 
 ### Design & content
