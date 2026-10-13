@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Dashami, or Dashami prevailing at aparahna.
+id: vijaya_dashami
+name_bn: বিজয়া দশমী
+name_en: Vijaya Dashami
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: dashami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+review:
+  status: draft

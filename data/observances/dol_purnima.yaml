@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Purnima of Falgun, or the Bengal dol-yatra rule.
+id: dol_purnima
+name_bn: দোলপূর্ণিমা
+name_en: Dol Purnima
+category: utsav
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: falgun
+  paksha: shukla
+  tithi: purnima
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+review:
+  status: draft

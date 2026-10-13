@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 11 Jyoishtho; cite the source.
+id: nazrul_jayanti
+name_bn: নজরুল জয়ন্তী
+name_en: Nazrul Jayanti
+category: jayanti
+tier: 3
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_bengali_date
+  month: jyoishtho
+  day: 11
+review:
+  status: draft

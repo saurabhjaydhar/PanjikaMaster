@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Ashtami; Sandhi Puja as the last danda of Ashtami and the first of Navami.
+id: durga_ashtami
+name_bn: মহাষ্টমী
+name_en: Maha Ashtami
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: ashtami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span, sandhi_puja]
+review:
+  status: draft

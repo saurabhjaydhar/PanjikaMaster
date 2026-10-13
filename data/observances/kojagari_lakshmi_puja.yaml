@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Purnima of Ashwin prevailing at nishita; tie-breaker; coverage 'any'.
+id: kojagari_lakshmi_puja
+name_bn: কোজাগরী লক্ষ্মীপূজা
+name_en: Kojagari Lakshmi Puja
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: purnima
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+review:
+  status: draft

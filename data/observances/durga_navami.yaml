@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Navami.
+id: durga_navami
+name_bn: মহানবমী
+name_en: Maha Navami
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: navami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+review:
+  status: draft

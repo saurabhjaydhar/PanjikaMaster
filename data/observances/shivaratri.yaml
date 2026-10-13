@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Krishna Chaturdashi of amanta Magh at nishita.
+id: shivaratri
+name_bn: শিবরাত্রি
+name_en: Shivaratri
+category: vrata
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: magh
+  paksha: krishna
+  tithi: chaturdashi
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+review:
+  status: draft

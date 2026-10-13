@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the Srabon sankranti day.
+id: manasa_puja
+name_bn: মনসা পূজা
+name_en: Manasa Puja
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: sankranti_day
+  month: srabon
+  day: last
+review:
+  status: draft

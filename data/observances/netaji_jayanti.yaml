@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 23 January; cite the source.
+id: netaji_jayanti
+name_bn: নেতাজি জয়ন্তী
+name_en: Netaji Jayanti
+category: jayanti
+tier: 3
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_gregorian_date
+  month: 1
+  day: 23
+review:
+  status: draft

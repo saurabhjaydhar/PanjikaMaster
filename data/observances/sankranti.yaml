@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the last day of each Bengali month (Bengal midnight rule, Q4).
+id: sankranti
+name_bn: সংক্রান্তি
+name_en: Sankranti
+category: tithi
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: sankranti_day
+  month: every
+  day: last
+review:
+  status: draft

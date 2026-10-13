@@ -1,0 +1,18 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Shashthi of Jyoishtho.
+id: jamai_shashthi
+name_bn: জামাইষষ্ঠী
+name_en: Jamai Shashthi
+category: utsav
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: jyoishtho
+  paksha: shukla
+  tithi: shashthi
+  on_vriddhi: first
+  include_mala: false
+review:
+  status: draft

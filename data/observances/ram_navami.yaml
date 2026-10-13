@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Navami of Chaitra prevailing at madhyahna.
+id: ram_navami
+name_bn: রামনবমী
+name_en: Ram Navami
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: chaitra
+  paksha: shukla
+  tithi: navami
+  moment: madhyahna
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span]
+review:
+  status: draft

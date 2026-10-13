@@ -100,6 +100,14 @@ class FixedBengaliDate:
 
 
 @dataclass(frozen=True)
+class FixedGregorianDate:
+    """A civil day on a Gregorian date (tier 3, e.g. a birth anniversary)."""
+
+    month: int
+    day: int
+
+
+@dataclass(frozen=True)
 class EkadashiSmarta:
     """Every Ekadashi by sunrise, as an udaya rule with an explicit [on_vriddhi].
     The dashami-vedha refinements belong to `ekadashi_vaishnava` (v1.1)."""
@@ -133,7 +141,16 @@ class Override:
     dates: tuple[OverrideDate, ...]
 
 
-Decision = Udaya | PrevailsAt | SankrantiDay | FixedBengaliDate | EkadashiSmarta | SpanOf | Override
+Decision = (
+    Udaya
+    | PrevailsAt
+    | SankrantiDay
+    | FixedBengaliDate
+    | FixedGregorianDate
+    | EkadashiSmarta
+    | SpanOf
+    | Override
+)
 
 
 @dataclass(frozen=True)
@@ -167,6 +184,7 @@ class Rule:
     corrections: tuple[Correction, ...]
     description_bn: str | None
     description_en: str | None
+    source: str | None  # where a tier-3 date comes from (§6.6 validation level)
     review: Review
 
 
@@ -228,7 +246,7 @@ def _decision(data: object, where: str) -> Decision:
         "type",
         (
             "udaya", "prevails_at", "sankranti_day", "fixed_bengali_date",
-            "ekadashi_smarta", "span", "override",
+            "fixed_gregorian_date", "ekadashi_smarta", "span", "override",
         ),
     )  # fmt: skip
     months_or_every = (*MONTHS, EVERY)
@@ -264,6 +282,13 @@ def _decision(data: object, where: str) -> Decision:
             if not 1 <= day <= 32:
                 raise RuleError(f"{where}.day: {day} is not 1–32")
             decision = FixedBengaliDate(month, day)
+        case "fixed_gregorian_date":
+            month, day = f.get("month", int), f.get("day", int)
+            try:
+                date(2000, month, day)  # a leap year, so 29 February is allowed
+            except ValueError as e:
+                raise RuleError(f"{where}: {month}-{day} is not a date") from e
+            decision = FixedGregorianDate(month, day)
         case "ekadashi_smarta":
             decision = EkadashiSmarta(
                 paksha=f.choice("paksha", ("shukla", "krishna", "both")),
@@ -312,7 +337,9 @@ def parse_rule(data: object, where: str, expected_id: str | None = None) -> Rule
     for w in windows:
         if w not in WINDOWS:
             raise RuleError(f"{where}.windows: {w!r} is not one of {WINDOWS}")
-    if windows and isinstance(decision, SpanOf | Override | SankrantiDay | FixedBengaliDate):
+    if windows and isinstance(
+        decision, SpanOf | Override | SankrantiDay | FixedBengaliDate | FixedGregorianDate
+    ):
         raise RuleError(f"{where}.windows: only tithi-based decisions have windows")
     corrections = []
     for i, item in enumerate(f.get("corrections", list, optional=True) or ()):
@@ -339,6 +366,9 @@ def parse_rule(data: object, where: str, expected_id: str | None = None) -> Rule
     g.done()
     if review.status == "reviewed" and (review.reviewer is None or review.reviewed_on is None):
         raise RuleError(f"{where}.review: a reviewed rule names its reviewer and date")
+    source = f.text("source", optional=True)
+    if tier == 3 and review.status == "reviewed" and source is None:
+        raise RuleError(f"{where}.source: a reviewed tier-3 rule cites its source")
     rule = Rule(
         id=rule_id,
         name_bn=f.text("name_bn"),
@@ -351,6 +381,7 @@ def parse_rule(data: object, where: str, expected_id: str | None = None) -> Rule
         corrections=tuple(corrections),
         description_bn=description_bn,
         description_en=description_en,
+        source=source,
         review=review,
     )
     f.done()

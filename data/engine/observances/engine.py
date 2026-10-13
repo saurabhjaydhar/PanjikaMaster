@@ -6,6 +6,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import date, timedelta
+from itertools import pairwise
 
 from ..bengali import BengaliDate, LunarMonth
 from ..panchanga import Span
@@ -14,6 +15,7 @@ from .rules import (
     MONTHS,
     EkadashiSmarta,
     FixedBengaliDate,
+    FixedGregorianDate,
     Moments,
     Override,
     PrevailsAt,
@@ -60,7 +62,7 @@ class Almanac:
     def __post_init__(self):
         if not self.tradition:
             raise ValueError("an almanac belongs to a tradition")
-        for a, b in zip(self.days, self.days[1:], strict=False):
+        for a, b in pairwise(self.days):
             if b.date != a.date + timedelta(days=1) or b.sunrise != a.next_sunrise:
                 raise ValueError(f"days are not consecutive at {a.date}")
 
@@ -218,6 +220,9 @@ class _Calc:
             if bn.month_idx == month and bn.day == d.day
         ]
 
+    def gregorian(self, d: FixedGregorianDate) -> list[_Hit]:
+        return [_Hit(x.date) for x in self.a.days if (x.date.month, x.date.day) == (d.month, d.day)]
+
     def ekadashi(self, d: EkadashiSmarta) -> list[_Hit]:
         pakshas = ("shukla", "krishna") if d.paksha == "both" else (d.paksha,)
         hits = []
@@ -269,6 +274,8 @@ def evaluate(rules: Iterable[Rule], almanac: Almanac, moments: Moments) -> list[
                 hits = calc.sankranti_day(d)
             case FixedBengaliDate():
                 hits = calc.fixed(d)
+            case FixedGregorianDate():
+                hits = calc.gregorian(d)
             case EkadashiSmarta():
                 hits = calc.ekadashi(d)
             case Override():

@@ -175,7 +175,38 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help=f"allow ${ephemeris.ENV} (local testing; marked and never packable)",
     )
+    o = sub.add_parser("observances", help="evaluate the observance rules for a date range")
+    o.add_argument("--from", dest="first", type=date.fromisoformat, required=True)
+    o.add_argument("--to", dest="last", type=date.fromisoformat, required=True)
+    o.add_argument("--out", type=Path, default=Path("dist"))
+    o.add_argument("--tradition", default="drik_bishuddha", choices=TRADITIONS)
+    o.add_argument("--version", type=int, default=1)
+    # TODO(Q1): the reference place for festival decisions; explicit until decided.
+    o.add_argument("--ref-lat", type=float, required=True)
+    o.add_argument("--ref-lon", type=float, required=True)
+    o.add_argument("--dev", action="store_true", help=f"allow ${ephemeris.ENV}")
     args = parser.parse_args(argv)
+    if args.command == "observances":
+        from engine.observances import RuleError
+        from engine.observances import build as obs
+
+        try:
+            path = obs.build(
+                args.first,
+                args.last,
+                args.out,
+                ref_lat=args.ref_lat,
+                ref_lon=args.ref_lon,
+                tradition=args.tradition,
+                version=args.version,
+                dev=args.dev,
+                generated_at=generated_at(),
+            )
+        except (ephemeris.EphemerisUnavailable, RuleError, ValueError, sqlite3.Error) as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            return 1
+        print(f"wrote {path}")
+        return 0
     try:
         path = build(
             args.first,

@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 25 Boishakh; cite the source.
+id: rabindra_jayanti
+name_bn: রবীন্দ্র জয়ন্তী
+name_en: Rabindra Jayanti
+category: jayanti
+tier: 3
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_bengali_date
+  month: boishakh
+  day: 25
+review:
+  status: draft
