@@ -13,7 +13,7 @@
 | T-204 ✅ | `panchanga.py`: tithi, nakshatra, yoga, karana transitions (scan + bisection to 1 s) | Property tests: no gaps/overlaps, indices cycle, tithi length 19–27 h |
 | T-205 ✅ | `solar.py`: sankranti search | 12 per year, ordered, 29–32 days apart |
 | T-206 🟡 | City list (source per Q13; WB districts + 10 metros, names in both languages, aliases) + sunrise/sunset/moonrise/moonset; sunrise definition behind a flag (Q3) | 10 cities × 12 days within ±1 min of Astronomy Engine (independent check) — *rise/set done (agrees within 2 s); city list waits for Q13* |
-| T-207 | Pipeline CLI `python -m engine build --from --to` with run metadata (library versions, ephemeris checksum) | Same inputs → identical output bytes; full 2020–2045 run time recorded |
+| T-207 ✅ | Pipeline CLI `python -m engine build --from --to` with run metadata (library versions, ephemeris checksum) | Same inputs → identical output bytes; full 2020–2045 run time recorded |
 
 ### App core (state, data, platform)
 | ID | Task | Done when |
