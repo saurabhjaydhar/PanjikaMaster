@@ -1,8 +1,9 @@
 """Tithi, nakshatra, yoga and karana transitions (spec §6.5.1–6.5.4, T-204).
 
 Each kind is an angle that grows steadily and is cut into equal steps. The search
-samples the angle every hour, finds where the step index changes, and bisects each
-bracket to well under a second (vectorised over all brackets at once). Times are
+samples the angle every hour (every day for the Sun's sign), finds where the step index
+changes, and bisects each bracket to under half a second (vectorised over all brackets
+at once). Times are
 integer Unix seconds, so the same inputs always give the same output.
 """
 
@@ -16,10 +17,10 @@ from engine.astro import Astro
 HOUR = 3600
 DAY = 86_400
 SCAN = HOUR
-# Bracket width after bisection: 3600 / 2**13 ≈ 0.44 s, then rounded to the second.
-BISECT_STEPS = 13
-# Longest span of any kind is under 28 h; two days of margin catch spans overlapping
-# the requested range on both sides.
+# Bisect until the bracket is under half a second, then round to the second.
+BRACKET = 0.5
+# The longest tithi/nakshatra/yoga/karana span is under 28 h; two days of margin catch
+# spans overlapping the requested range on both sides.
 PAD = 2 * DAY
 
 
@@ -28,6 +29,12 @@ class Kind:
     name: str
     count: int
     angle: Callable[[Astro, np.ndarray], np.ndarray]
+    pad: int = PAD  # margin that surely holds one whole span before and after
+    scan: int = SCAN  # sampling step: short enough that the index moves at most once
+
+    @property
+    def bisect_steps(self) -> int:
+        return int(np.ceil(np.log2(self.scan / BRACKET)))
 
     @property
     def step(self) -> float:
@@ -39,7 +46,13 @@ KINDS = {
     "karana": Kind("karana", 60, lambda a, t: a.elongation(t)),
     "nakshatra": Kind("nakshatra", 27, lambda a, t: a.moon_sidereal(t)),
     "yoga": Kind("yoga", 27, lambda a, t: a.yoga_angle(t)),
+    # The Sun's sign (solar.py); a sign lasts 29–32 days.
+    "sankranti": Kind("sankranti", 12, lambda a, t: a.sun_sidereal(t), pad=33 * DAY, scan=DAY),
 }
+
+
+# The four daily elements; "sankranti" is the Sun's sign (solar.py).
+PANCHANGA = ("tithi", "nakshatra", "yoga", "karana")
 
 
 @dataclass(frozen=True, order=True)
@@ -61,12 +74,12 @@ def _index(kind: Kind, astro: Astro, t: np.ndarray) -> np.ndarray:
 def crossings(kind: Kind, astro: Astro, start: int, end: int) -> tuple[np.ndarray, np.ndarray]:
     """Instants in [start, end] where the index changes, and the index that begins.
 
-    The grid sits on whole hours (Unix time), so a given crossing is always bracketed
+    The grid sits on whole multiples of the scan step, so a given crossing is always bracketed
     and bisected the same way, whatever range was asked for: results are identical
     across overlapping queries and chunks.
     """
-    first = (start // SCAN) * SCAN
-    grid = np.arange(first, end + SCAN, SCAN, dtype=float)
+    first = (start // kind.scan) * kind.scan
+    grid = np.arange(first, end + kind.scan, kind.scan, dtype=float)
     idx = _index(kind, astro, grid)
     at = np.nonzero(idx[1:] != idx[:-1])[0]
     if not len(at):
@@ -77,7 +90,7 @@ def crossings(kind: Kind, astro: Astro, start: int, end: int) -> tuple[np.ndarra
         raise SearchError(f"{kind.name}: index skipped within one scan step")
     lo, hi = grid[at], grid[at + 1]
     before = idx[at]
-    for _ in range(BISECT_STEPS):
+    for _ in range(kind.bisect_steps):
         mid = (lo + hi) / 2
         still = _index(kind, astro, mid) == before
         lo = np.where(still, mid, lo)
@@ -88,7 +101,7 @@ def crossings(kind: Kind, astro: Astro, start: int, end: int) -> tuple[np.ndarra
 def spans(kind_name: str, astro: Astro, start: int, end: int) -> list[Span]:
     """Every span of [kind_name] overlapping [start, end), in order."""
     kind = KINDS[kind_name]
-    times, idx = crossings(kind, astro, start - PAD, end + PAD)
+    times, idx = crossings(kind, astro, start - kind.pad, end + kind.pad)
     out = [
         Span(int(a), int(b), int(i), kind_name)
         for a, b, i in zip(times[:-1], times[1:], idx[:-1], strict=True)

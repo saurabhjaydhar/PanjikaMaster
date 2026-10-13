@@ -5,7 +5,8 @@ TT), as adopted on the Calendar Reform Committee's recommendation (Govt. of Indi
 and used by the Indian Astronomical Ephemeris and the Rashtriya Panchang. From that
 epoch it grows with the general precession in longitude, p_A, for which we use the IAU
 2006 expression (Capitaine, Wallace & Chapront 2003; IERS Conventions 2010, eq. 5.39).
-The true ayanamsa adds the nutation in longitude Δψ (IAU 2000A).
+The true ayanamsa adds the nutation in longitude Δψ (IAU 2000B: within 1 mas of 2000A
+over 1995–2050 and twenty times faster, so the hourly scans stay cheap).
 
 Sidereal longitude = apparent tropical longitude − true ayanamsa: both refer to the true
 equinox of date, so nutation cancels and the result is star-fixed.
@@ -15,7 +16,7 @@ values in `reference/ayanamsa.csv` once the human has entered them (T-203 gate).
 """
 
 import numpy as np
-from skyfield.nutationlib import iau2000a_radians
+from skyfield.nutationlib import iau2000b_radians
 
 EPOCH_JD_TT = 2435553.5  # 1956-03-21 00:00 TT
 EPOCH_VALUE_ARCSEC = 23 * 3600 + 15 * 60 + 0.658
@@ -43,5 +44,5 @@ def mean_ayanamsa(jd_tt) -> np.ndarray:
 
 def true_ayanamsa(t) -> np.ndarray:
     """True Lahiri ayanamsa in degrees for a Skyfield Time: mean + Δψ."""
-    dpsi, _ = iau2000a_radians(t)
+    dpsi, _ = iau2000b_radians(t)
     return mean_ayanamsa(t.tt) + dpsi * ARCSEC_PER_RAD / 3600

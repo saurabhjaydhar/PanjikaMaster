@@ -12,7 +12,7 @@ import numpy as np
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from engine.panchanga import DAY, HOUR, KINDS, search_in_chunks, spans
+from engine.panchanga import DAY, HOUR, KINDS, PANCHANGA, search_in_chunks, spans
 
 START = int(datetime(2020, 1, 1, tzinfo=UTC).timestamp())
 END = int(datetime(2046, 1, 1, tzinfo=UTC).timestamp())
@@ -25,7 +25,7 @@ windows = st.tuples(st.integers(START, END - 12 * DAY), st.integers(2, 10))
 
 
 def all_kinds(astro, start, end):
-    return {k: spans(k, astro, start, end) for k in KINDS}
+    return {k: spans(k, astro, start, end) for k in PANCHANGA}
 
 
 @settings(max_examples=15, deadline=None)
