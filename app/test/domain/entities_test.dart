@@ -45,10 +45,12 @@ void main() {
     String describe(DataCoverage c) => switch (c) {
       Covered() => 'covered',
       NotDownloaded() => 'not downloaded',
-      Stale(:final reason) => 'stale: $reason',
+      Stale(:final packIds) => 'stale: ${packIds.join()}',
+      ClockSuspect() => 'check the clock',
     };
-    expect(describe(const Stale('old pack')), 'stale: old pack');
+    expect(describe(const Stale(covered, ['g'])), 'stale: g');
     expect(describe(const NotDownloaded()), 'not downloaded');
+    expect(describe(const ClockSuspect()), 'check the clock');
   });
 
   test('a period rule part must lie within its divisions', () {

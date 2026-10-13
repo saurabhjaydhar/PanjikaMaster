@@ -19,7 +19,7 @@
 | T-306 ✅ | Pack importer: SHA-256 from manifest, Ed25519 signature with embedded public key, attach + copy in one transaction, supersede old pack, fire "reschedule" hook | Tests: bad signature and partial file rejected; v1→v2 upgrade |
 | T-307 | Bundled packs in the APK (current + next 2 Bengali years global; WB + metros cities), imported on first launch | Fresh install works in airplane mode (US-05) |
 | T-308 | Manifest client: check at most once per 24 h; download silently if < 2 MB, else ask; resume; `min_app_version`; manifest notices (bn/en) | Tests with a fake server for each branch |
-| T-309 | Coverage and staleness: `Covered` / `NotDownloaded` / `Stale`; device clock outside every pack range | Unit tests for each case |
+| T-309 ✅ | Coverage and staleness: `Covered` / `NotDownloaded` / `Stale`; device clock outside every pack range | Unit tests for each case |
 
 ### Frontend (screens & UI)
 | ID | Task | Done when |

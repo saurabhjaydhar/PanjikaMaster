@@ -255,12 +255,22 @@ final class Covered extends DataCoverage {
       date.compareTo(from) >= 0 && date.compareTo(to) <= 0;
 }
 
+/// No installed pack covers the date, but a known one does: offer the download.
 final class NotDownloaded extends DataCoverage {
   const NotDownloaded();
 }
 
+/// Covered, but the manifest has newer versions of [packIds]: the data is still shown,
+/// with the amber "needs an update" banner (spec §6.8, §11.9).
 final class Stale extends DataCoverage {
-  const Stale(this.reason);
+  const Stale(this.covered, this.packIds);
 
-  final String reason;
+  final Covered covered;
+  final List<String> packIds;
+}
+
+/// No pack the app knows of covers the date, so the phone's clock is probably wrong:
+/// "ফোনের তারিখ ঠিক আছে কিনা দেখুন" (spec §16).
+final class ClockSuspect extends DataCoverage {
+  const ClockSuspect();
 }
