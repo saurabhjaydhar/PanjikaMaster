@@ -25,7 +25,7 @@
 |---|---|---|
 | T-609 | Sources & verification screen + "why do the two schools differ?" explainer | FR-SET-02 |
 | T-610 | Report-an-error form, pre-filled, no personal data | FR-SET-03 |
-| T-611 | Search screen with examples, results, empty state | §11.14 |
+| T-611 ✅ | Search screen with examples, results, empty state | §11.14 |
 | T-612 ✅ | Glossary screen and long-press term sheets | FR-SET-07, FR-L10N-05 |
 | T-613 | Help: install Bengali TTS voice; OEM notification settings guides (Xiaomi, Samsung) | Both languages |
 | T-614 | "সংশোধিত / Corrected" label on changed observances; Bengal periods UI | Goldens |

@@ -852,4 +852,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noGlossaryMatches => 'No term matches that';
+
+  @override
+  String get searchHint => 'A date or festival name';
+
+  @override
+  String get searchExamples =>
+      'For example: 25 Ashwin 1433 · 12/10/2026 · Kali Puja';
+
+  @override
+  String get searchResults => 'Results';
+
+  @override
+  String searchDateEquals(String bengali, String gregorian) {
+    return '$bengali = $gregorian';
+  }
+
+  @override
+  String searchDateNotInstalled(String date) {
+    return '$date: this date isn\'t in the data on this phone';
+  }
+
+  @override
+  String get searchNoResults =>
+      'Nothing found. Check the spelling or the date format.';
 }

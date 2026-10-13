@@ -848,4 +848,27 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get noGlossaryMatches => 'এই নামে কোনো শব্দ পাওয়া যায়নি';
+
+  @override
+  String get searchHint => 'তারিখ বা উৎসবের নাম';
+
+  @override
+  String get searchExamples => 'উদাহরণ: ২৫ আশ্বিন ১৪৩৩ · ১২/১০/২০২৬ · কালীপূজা';
+
+  @override
+  String get searchResults => 'ফলাফল';
+
+  @override
+  String searchDateEquals(String bengali, String gregorian) {
+    return '$bengali = $gregorian';
+  }
+
+  @override
+  String searchDateNotInstalled(String date) {
+    return '$date: এই তারিখের তথ্য এই ফোনে নেই';
+  }
+
+  @override
+  String get searchNoResults =>
+      'কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।';
 }

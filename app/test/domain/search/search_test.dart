@@ -91,7 +91,7 @@ void main() {
 
     test('festival names in either script and with variants', () async {
       for (final q in ['কালী পূজা', 'kali puja', 'KALIPUJA']) {
-        final hits = await search.search(q);
+        final hits = (await search.search(q)).items;
         expect(
           hits.whereType<FestivalResult>().map(
             (r) => r.observance.observance.id,
@@ -100,7 +100,7 @@ void main() {
           reason: q,
         );
       }
-      final laxmi = await search.search('laxmi');
+      final laxmi = (await search.search('laxmi')).items;
       expect(
         laxmi.whereType<FestivalResult>().single.observance.observance.id,
         'lakshmi_puja',
@@ -108,7 +108,7 @@ void main() {
     });
 
     test('a Gregorian date comes with its Bengali date', () async {
-      final r = (await search.search('১২/১০/২০২৬'))
+      final r = (await search.search('১২/১০/২০২৬')).items
           .whereType<DateResult>()
           .single;
       expect(r.date, const CivilDate(2026, 10, 12));
@@ -119,18 +119,22 @@ void main() {
     });
 
     test('a Bengali date resolves through the packs', () async {
-      final r = (await search.search('25 Ashwin'))
+      final r = (await search.search('25 Ashwin')).items
           .whereType<DateResult>()
           .single;
       expect(r.date, const CivilDate(2026, 10, 12));
     });
 
     test('a Bengali date outside the packs is never guessed', () async {
-      final r = (await search.search('১ বৈশাখ ১৪৩৩'))
+      final r = (await search.search('১ বৈশাখ ১৪৩৩')).items
           .whereType<DateResult>()
           .single;
       expect(r.date, isNull);
       expect(r.asked, const BengaliDay(1, 0, 1433));
+    });
+
+    test('sample data is flagged so the screen shows the watermark', () async {
+      expect((await search.search('kali')).isSample, isTrue);
     });
   });
 }

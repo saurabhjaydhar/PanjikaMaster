@@ -33,6 +33,17 @@ final class FestivalResult extends SearchResult {
   final ObservanceDate observance;
 }
 
+/// The hits for a query, and whether any of them comes from a sample pack (then the
+/// screen shows the watermark, CLAUDE.md).
+class SearchResults {
+  const SearchResults(this.items, {required this.isSample});
+
+  final List<SearchResult> items;
+  final bool isSample;
+
+  bool get isEmpty => items.isEmpty;
+}
+
 final searchServiceProvider = Provider<SearchService>(
   (ref) => SearchService(
     ref.watch(panjikaRepositoryProvider),
@@ -52,16 +63,24 @@ class SearchService {
   final CivilDate Function() today;
   List<({ObservanceDate o, List<String> keys})>? _index;
 
-  Future<List<SearchResult>> search(String input) async {
+  Future<SearchResults> search(String input) async {
     final query = input.trim();
-    if (query.isEmpty) return const [];
+    if (query.isEmpty) return const SearchResults([], isSample: false);
     final names = await _repo.names();
     final out = <SearchResult>[];
     for (final q in parseDateQueries(query, names)) {
       out.addAll(await _resolve(q));
     }
     out.addAll(await _festivals(query));
-    return out;
+    final packs = {
+      for (final r in out)
+        ...switch (r) {
+          DateResult(:final bengaliDate?) => [bengaliDate.packId],
+          FestivalResult(:final observance) => [observance.packId],
+          _ => const <String>[],
+        },
+    };
+    return SearchResults(out, isSample: await _repo.anySample(packs));
   }
 
   Future<List<SearchResult>> _resolve(DateQuery q) async {
