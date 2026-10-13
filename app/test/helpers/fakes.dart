@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:panjika/core/l10n/app_locale_channel.dart';
 import 'package:panjika/data/notifications/notification_permission.dart';
 import 'package:panjika/data/notifications/notification_scheduler.dart';
+import 'package:panjika/data/reports/report_sender.dart';
 import 'package:panjika/domain/location/location.dart';
 import 'package:panjika/domain/reminders/plan_reminders.dart';
 import 'package:panjika/features/share/share_render.dart';
@@ -104,4 +105,19 @@ class FakeSharer implements Sharer {
     required String text,
     required String fileName,
   }) async => shared.add((png: png, text: text, fileName: fileName));
+}
+
+/// A [ReportSender] that answers with [outcomes] in turn (then [SendOutcome.sent])
+/// and records every payload it was given.
+class FakeReportSender implements ReportSender {
+  FakeReportSender([List<SendOutcome>? outcomes]) : outcomes = outcomes ?? [];
+
+  final List<SendOutcome> outcomes;
+  final sent = <String>[];
+
+  @override
+  Future<SendOutcome> send(String payload) async {
+    sent.add(payload);
+    return outcomes.isEmpty ? SendOutcome.sent : outcomes.removeAt(0);
+  }
 }

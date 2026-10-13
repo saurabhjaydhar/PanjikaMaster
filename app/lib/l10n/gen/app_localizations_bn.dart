@@ -871,4 +871,166 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get searchNoResults =>
       'কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।';
+
+  @override
+  String get sourcesTraditionHeading => 'পঞ্জিকার মত';
+
+  @override
+  String sourcesTraditionBody(String tradition) {
+    return 'এই অ্যাপের সব তারিখ ও সময় $tradition মতে, যা সেটিংসে বেছে নেওয়া আছে।';
+  }
+
+  @override
+  String get sourcesHowHeading => 'আমরা কীভাবে হিসাব করি';
+
+  @override
+  String get sourcesStep1Title => 'জ্যোতির্বিজ্ঞানের হিসাব (NASA JPL)';
+
+  @override
+  String get sourcesStep1Body =>
+      'সূর্য ও চাঁদের অবস্থান NASA JPL-এর DE440s তালিকা থেকে, Skyfield সফটওয়্যারে আগেই হিসাব করা থাকে।';
+
+  @override
+  String get sourcesStep2Title => 'রাষ্ট্রীয় পঞ্চাঙ্গের সঙ্গে মিলানো';
+
+  @override
+  String get sourcesStep2Body =>
+      'তিথি, নক্ষত্র ও অন্যান্য সময় ভারত সরকারের জাতীয় পঞ্চাঙ্গের সঙ্গে মিলিয়ে দেখা হয়।';
+
+  @override
+  String get sourcesStep3Title => 'মুদ্রিত পঞ্জিকার সঙ্গে মিলানো';
+
+  @override
+  String get sourcesStep3Body =>
+      'বাংলা তারিখ ও উৎসবের দিন মুদ্রিত পঞ্জিকার সঙ্গে মিলিয়ে দেখা হয়।';
+
+  @override
+  String get sourcesStep4Title => 'প্রধান উৎসব বিশেষজ্ঞের যাচাই';
+
+  @override
+  String get sourcesStep4Body =>
+      'প্রধান উৎসবের নিয়ম একজন পঞ্জিকা-বিশেষজ্ঞ দেখে নেন।';
+
+  @override
+  String get sourcesStepsNote =>
+      'প্রতিটি তথ্য কোন ধাপ পর্যন্ত যাচাই হয়েছে, তা পাশের চিহ্নে দেখা যায়।';
+
+  @override
+  String get sourcesMarksHeading => 'চিহ্নের অর্থ';
+
+  @override
+  String get sourcesPhoneHeading => 'এই ফোনের তথ্য';
+
+  @override
+  String get packKindGlobal => 'পঞ্চাঙ্গের তথ্য';
+
+  @override
+  String get packKindCities => 'শহরের তথ্য';
+
+  @override
+  String get packKindObservances => 'উৎসবের তথ্য';
+
+  @override
+  String sourcesPackTitle(String kind, String version) {
+    return '$kind · সংস্করণ $version';
+  }
+
+  @override
+  String sourcesPackScope(String tradition, String range) {
+    return '$tradition · $range';
+  }
+
+  @override
+  String sourcesValidatedOn(String date) {
+    return 'শেষ যাচাই: $date';
+  }
+
+  @override
+  String get sourcesNotValidated => 'এখনও মিলিয়ে দেখা হয়নি';
+
+  @override
+  String get sourcesNoPacks => 'এই ফোনে এখনও কোনো তথ্য নেই।';
+
+  @override
+  String get sourcesWhyLink => 'দুই মত কেন আলাদা?';
+
+  @override
+  String get schoolsPara1 =>
+      'পশ্চিমবঙ্গে পঞ্জিকার দুটি মত চালু আছে। বিশুদ্ধ সিদ্ধান্ত (দৃক) মত সূর্য ও চাঁদের আধুনিক জ্যোতির্বিজ্ঞানসম্মত অবস্থান থেকে হিসাব করে; ভারত সরকারের জাতীয় পঞ্চাঙ্গও এই পদ্ধতিতে তৈরি। সূর্যসিদ্ধান্ত মত, যা গুপ্তপ্রেস ও আরও কয়েকটি পঞ্জিকা মেনে চলে, প্রাচীন সূর্যসিদ্ধান্ত গ্রন্থের হিসাব আর রঘুনন্দনের বিধান অনুসরণ করে।';
+
+  @override
+  String get schoolsPara2 =>
+      'দুই হিসাবে সূর্য ও চাঁদের অবস্থান সামান্য আলাদা আসে, তাই একই তিথি দুই মতে ভিন্ন সময়ে শেষ হয় — কখনো কয়েক মিনিট, কখনো আরও বেশি তফাতে। সূর্যোদয়ের সময় যে তিথি চলে, সেটাই সেদিনের তিথি। তাই তিথি সূর্যোদয়ের কাছাকাছি শেষ হলে দুই মতে একই সকালের তিথি আলাদা হতে পারে, আর তাতে কোনো উৎসব এক দিন আগে বা পরে পড়ে।';
+
+  @override
+  String get schoolsPara3 =>
+      'এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।';
+
+  @override
+  String get reportDateLabel => 'কোন তারিখ?';
+
+  @override
+  String reportDateBoth(String bengali, String gregorian) {
+    return '$bengali ($gregorian)';
+  }
+
+  @override
+  String get reportChangeDate => 'তারিখ বদলান';
+
+  @override
+  String get reportKindLabel => 'কী ভুল?';
+
+  @override
+  String get reportKindTithiTime => 'তিথির সময়';
+
+  @override
+  String get reportKindFestivalDay => 'উৎসবের দিন';
+
+  @override
+  String get reportKindBengaliDate => 'বাংলা তারিখ';
+
+  @override
+  String get reportKindOther => 'অন্য কিছু';
+
+  @override
+  String get reportPanjikaSaysLabel => 'আপনার পঞ্জিকায় কী আছে?';
+
+  @override
+  String get reportPanjikaSaysHint =>
+      'পঞ্জিকায় যা লেখা আছে, নিজের ভাষায় লিখুন';
+
+  @override
+  String get reportPanjikaNameLabel => 'পঞ্জিকার নাম (ঐচ্ছিক)';
+
+  @override
+  String get packKindShortGlobal => 'পঞ্চাঙ্গ';
+
+  @override
+  String get packKindShortCities => 'শহর';
+
+  @override
+  String get packKindShortObservances => 'উৎসব';
+
+  @override
+  String reportPackVersion(String kind, String version) {
+    return '$kind সংস্করণ $version';
+  }
+
+  @override
+  String reportSentWith(String city, String tradition, String versions) {
+    return 'সঙ্গে যাবে: $city · $tradition · $versions';
+  }
+
+  @override
+  String get reportPrivacy =>
+      'আপনার নাম, ফোন নম্বর বা ইমেল চাওয়া হয় না, পাঠানোও হয় না।';
+
+  @override
+  String get reportSend => 'পাঠান';
+
+  @override
+  String get reportSent => 'পাঠানো হয়েছে। যাচাই করে প্রয়োজনে সংশোধন করা হবে।';
+
+  @override
+  String get reportQueued => 'ইন্টারনেট পেলে পাঠানো হবে।';
 }

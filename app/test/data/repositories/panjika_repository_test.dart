@@ -136,6 +136,25 @@ void main() {
     expect(await repo.anySample(['not-installed']), isFalse);
   });
 
+  test('T-609: pack details in order, with sample flag and validation date', () async {
+    final packs = await repo.packDetails();
+    expect(packs.map((p) => p.kind), ['global', 'cities', 'observances']);
+    expect(packs.every((p) => p.isSample && p.validatedOn == null), isTrue);
+    expect(packs.first.id, isNot(endsWith('-v1')));
+
+    // The validation step records its date in the summary (T-503).
+    await db.customStatement(
+      "UPDATE packs SET validation_summary = '{\"validated_on\": \"2026-09-30\"}'"
+      " WHERE kind = 'global'",
+    );
+    await db.customStatement(
+      "UPDATE packs SET validation_summary = 'not json' WHERE kind = 'cities'",
+    );
+    final updated = await repo.packDetails();
+    expect(updated[0].validatedOn, const CivilDate(2026, 9, 30));
+    expect(updated[1].validatedOn, isNull);
+  });
+
   test('T-217: every glossary term and period has a name and a gloss in both languages', () async {
     final names = await repo.names();
     final ids = (await db.allNames().get())

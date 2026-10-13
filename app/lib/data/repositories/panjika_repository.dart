@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 
 import '../../core/time/civil_date.dart';
 import '../../domain/engine/interfaces.dart';
 import '../../domain/entities/name_ref.dart';
 import '../../domain/entities/name_table.dart';
+import '../../domain/entities/pack_detail.dart';
 import '../../domain/entities/panjika.dart';
 import '../../domain/usecases/assess_coverage.dart';
 import '../db/app_database.dart';
@@ -333,6 +336,44 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
           to: CivilDate.parse(p.coversTo),
         ),
     ];
+  }
+
+  /// Every installed pack as the Sources & verification screen shows it (FR-SET-02),
+  /// global data first, then cities, then festivals.
+  Future<List<PackDetail>> packDetails() async {
+    const order = ['global', 'cities', 'observances'];
+    final rows = await _db.select(_db.packs).get();
+    final details = [
+      for (final p in rows)
+        PackDetail(
+          id: p.id.endsWith('-v${p.version}')
+              ? p.id.substring(0, p.id.length - '-v${p.version}'.length)
+              : p.id,
+          kind: p.kind,
+          tradition: p.tradition,
+          version: p.version,
+          from: CivilDate.parse(p.coversFrom),
+          to: CivilDate.parse(p.coversTo),
+          isSample: p.isSample == 1,
+          validatedOn: _validatedOn(p.validationSummary),
+        ),
+    ];
+    return details
+      ..sort((a, b) => order.indexOf(a.kind).compareTo(order.indexOf(b.kind)));
+  }
+
+  /// `validated_on` (YYYY-MM-DD) from a pack's validation summary; null when the
+  /// summary is missing, not JSON, or the pack has not been validated.
+  static CivilDate? _validatedOn(String? summary) {
+    if (summary == null) return null;
+    try {
+      final meta = jsonDecode(summary);
+      if (meta is! Map) return null;
+      final value = meta['validated_on'];
+      return value is String ? CivilDate.tryParse(value) : null;
+    } on FormatException {
+      return null;
+    }
   }
 
   /// The pack that holds [cityId]'s rows, if the city is installed.
