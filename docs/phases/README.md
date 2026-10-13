@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 2 — Engine & components** (Phase 1 complete; T-202, T-204, T-205, T-207–T-214, T-217 and T-218 done; T-201 partial — ephemeris hosts blocked here)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-202, T-204, T-205, T-207–T-214, T-217 and T-218 done; T-201, T-203, T-206 partial — waiting on the checksum confirmation, `reference/ayanamsa.csv` and Q13; T-215, T-216 are human design gates)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
