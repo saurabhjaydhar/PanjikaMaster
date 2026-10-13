@@ -3,8 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/settings/settings.dart';
 import '../../core/time/civil_date.dart';
 import '../../core/time/clock.dart';
+
+import 'dart:convert';
+
+import '../../data/packs/manifest.dart';
 import '../../data/repositories/panjika_providers.dart';
 import '../../domain/engine/day_assembler.dart';
+import '../../domain/entities/panjika.dart';
+import '../../domain/usecases/assess_coverage.dart';
 import '../../domain/usecases/get_day_panjika.dart';
 
 /// The panjika day in progress (sunrise to sunrise) for the chosen tradition and city.
@@ -64,3 +70,41 @@ class RingFilledFor extends Notifier<CivilDate?> {
 
   void mark(CivilDate date) => state = date;
 }
+
+/// What the last manifest offered (cached in settings, so it works offline); empty if
+/// the app has never fetched one.
+final availablePacksProvider = Provider<List<PackRange>>((ref) {
+  final raw = ref.watch(settingsSourceProvider).read(SettingKey.lastManifest);
+  if (raw == null) return const [];
+  try {
+    final m = Manifest.fromJson(jsonDecode(raw) as Map<String, Object?>);
+    return [
+      for (final e in m.packs)
+        PackRange(
+          id: e.id,
+          kind: e.kind,
+          tradition: e.tradition,
+          version: e.version,
+          from: e.coversFrom,
+          to: e.coversTo,
+        ),
+    ];
+  } on Object {
+    return const [];
+  }
+});
+
+/// Whether today's data can be shown, needs an update or a download, or points at a
+/// wrong phone clock (T-309, T-310). Re-evaluated when the date changes.
+final todayCoverageProvider = FutureProvider<DataCoverage>((ref) async {
+  final repo = ref.watch(panjikaRepositoryProvider);
+  final date = ref.watch(nowProvider.select(CivilDate.ofInstant));
+  final cityPack = await repo.cityPackId(ref.watch(cityIdProvider));
+  return assessCoverage(
+    date: date,
+    tradition: ref.watch(traditionProvider),
+    cityPackId: cityPack,
+    installed: await repo.installedPacks(),
+    available: ref.watch(availablePacksProvider),
+  );
+});
