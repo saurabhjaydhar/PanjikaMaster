@@ -10,6 +10,8 @@ import numpy as np
 from skyfield.api import load, load_file
 from skyfield.framelib import ecliptic_frame
 
+from engine.ayanamsa import true_ayanamsa
+
 DAY = 86_400
 
 
@@ -54,3 +56,21 @@ class Astro:
         """(λ_moon − λ_sun) mod 360°: tithi and karana (spec §6.5.1, §6.5.4). The same in
         tropical and sidereal terms, so it needs no ayanamsa."""
         return (self.moon_longitude(unix_seconds) - self.sun_longitude(unix_seconds)) % 360
+
+    def ayanamsa(self, unix_seconds) -> np.ndarray:
+        """True Lahiri ayanamsa, degrees (ayanamsa.py)."""
+        return true_ayanamsa(self.time(unix_seconds))
+
+    def sun_sidereal(self, unix_seconds) -> np.ndarray:
+        """Nirayana longitude of the Sun, degrees in [0, 360): sankranti (§6.5.6)."""
+        return (self.sun_longitude(unix_seconds) - self.ayanamsa(unix_seconds)) % 360
+
+    def moon_sidereal(self, unix_seconds) -> np.ndarray:
+        """Nirayana longitude of the Moon, degrees in [0, 360): nakshatra (§6.5.2)."""
+        return (self.moon_longitude(unix_seconds) - self.ayanamsa(unix_seconds)) % 360
+
+    def yoga_angle(self, unix_seconds) -> np.ndarray:
+        """(λ_sun_sid + λ_moon_sid) mod 360° (§6.5.3)."""
+        secs = np.asarray(unix_seconds, dtype=float)
+        ayan = self.ayanamsa(secs)
+        return (self.sun_longitude(secs) + self.moon_longitude(secs) - 2 * ayan) % 360
