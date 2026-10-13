@@ -9,12 +9,13 @@ import '../../core/l10n/app_language.dart';
 import '../../core/l10n/l10n_providers.dart';
 import '../../core/l10n/panjika_formatter.dart';
 import '../../core/time/clock.dart';
-import '../../domain/entities/today_snapshot.dart';
+import '../../domain/engine/day_assembler.dart';
+import '../../domain/entities/panjika.dart';
 import '../../l10n/gen/app_localizations.dart';
 import 'today_providers.dart';
 
-/// Today (আজ), basic version (T-112; spec §11.2). Periods, observances and live updates
-/// arrive in Phase 4.
+/// Today (আজ), basic version (T-112; spec §11.2). Updates while open (T-212). Periods
+/// and observances arrive in Phase 4.
 class TodayScreen extends ConsumerWidget {
   const TodayScreen({super.key});
 
@@ -24,9 +25,10 @@ class TodayScreen extends ConsumerWidget {
     final today = ref.watch(todayProvider);
     return Scaffold(
       body: SafeArea(
+        // A reload at sunrise keeps showing the previous day until the new one is in.
         child: switch (today) {
-          AsyncData(value: final snapshot?) => _TodayContent(snapshot),
-          AsyncLoading() => const SizedBox.expand(),
+          AsyncValue(value: final day?, hasError: false) => _TodayContent(day),
+          AsyncValue(isLoading: true) => const SizedBox.expand(),
           _ => StateMessage(
             message: l.todayDataMissing,
             actionLabel: l.retry,
@@ -39,9 +41,9 @@ class TodayScreen extends ConsumerWidget {
 }
 
 class _TodayContent extends ConsumerWidget {
-  const _TodayContent(this.s);
+  const _TodayContent(this.d);
 
-  final TodaySnapshot s;
+  final DayPanjika d;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +52,7 @@ class _TodayContent extends ConsumerWidget {
     final c = context.colors;
     final language = ref.watch(appLanguageProvider);
     final f = ref.watch(formatterProvider);
-    final now = ref.watch(clockProvider)();
+    final now = ref.watch(nowProvider);
     final showBoth = ref.watch(showBothScriptsProvider);
     final other = language == AppLanguage.bn ? AppLanguage.en : AppLanguage.bn;
     final otherF = PanjikaFormatter(
@@ -61,14 +63,15 @@ class _TodayContent extends ConsumerWidget {
     /// "দুপুর ২:৩২ পর্যন্ত", with "(পরদিন)" when it ends after midnight (spec §12.4).
     String until(DateTime end) {
       final time = f.time(end);
-      return l.untilTime(f.isNextDay(end, s.date) ? l.nextDayTime(time) : time);
+      return l.untilTime(d.isAfterMidnight(end) ? l.nextDayTime(time) : time);
     }
 
     String timeOrNone(DateTime? instant) =>
         instant == null ? l.timeNone : f.time(instant);
 
-    final tithiUntil = until(s.tithi.end);
-    final tithiThen = l.thenName(s.tithi.next!.of(language));
+    final tithi = d.currentOf(TransitionKind.tithi, now);
+    final tithiUntil = until(tithi.endUtc);
+    final tithiThen = l.thenName(tithi.next.of(language));
 
     return Stack(
       children: [
@@ -85,29 +88,37 @@ class _TodayContent extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      f.weekday(s.date),
+                      f.weekday(d.date),
                       style: t.labelLarge?.copyWith(color: c.inkMuted),
                     ),
                   ),
                   Chip(
                     avatar: Icon(Icons.place_outlined, size: 18, color: c.ink),
-                    label: Text(s.provenance.city.of(language)),
+                    label: Text(d.provenance.city.of(language)),
                   ),
                 ],
               ),
               Text(
-                f.bengaliDate(s.bnDay, s.bnMonth.of(language), s.bnYear),
+                f.bengaliDate(
+                  d.bengaliDate.day,
+                  d.bengaliMonth.of(language),
+                  d.bengaliDate.year,
+                ),
                 style: t.displaySmall,
               ),
               if (showBoth)
                 ExcludeSemantics(
                   child: Text(
-                    otherF.bengaliDate(s.bnDay, s.bnMonth.of(other), s.bnYear),
+                    otherF.bengaliDate(
+                      d.bengaliDate.day,
+                      d.bengaliMonth.of(other),
+                      d.bengaliDate.year,
+                    ),
                     style: t.bodySmall?.copyWith(color: c.inkMuted),
                   ),
                 ),
               Text(
-                f.gregorianDate(s.date),
+                f.gregorianDate(d.date),
                 style: t.bodyLarge?.copyWith(color: c.inkMuted),
               ),
               const SizedBox(height: Space.l),
@@ -116,7 +127,7 @@ class _TodayContent extends ConsumerWidget {
               Semantics(
                 container: true,
                 label: l.tithiSealSemantics(
-                  s.tithi.name.of(language),
+                  tithi.name.of(language),
                   tithiUntil,
                   tithiThen,
                 ),
@@ -129,13 +140,13 @@ class _TodayContent extends ConsumerWidget {
                     ),
                     child: Row(
                       children: [
-                        TithiRing(progress: s.tithi.progressAt(now)),
+                        TithiRing(progress: tithi.progressAt(now)),
                         const SizedBox(width: Space.l),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              NameText(s.tithi.name, style: t.headlineSmall),
+                              NameText(tithi.name, style: t.headlineSmall),
                               Text(
                                 tithiUntil,
                                 style: t.bodyLarge?.copyWith(
@@ -160,14 +171,14 @@ class _TodayContent extends ConsumerWidget {
 
               // Nakshatra, yoga, karana (FR-HOME-03)
               for (final (label, e) in [
-                (l.labelNakshatra, s.nakshatra),
-                (l.labelYoga, s.yoga),
-                (l.labelKarana, s.karana),
+                (l.labelNakshatra, d.currentOf(TransitionKind.nakshatra, now)),
+                (l.labelYoga, d.currentOf(TransitionKind.yoga, now)),
+                (l.labelKarana, d.currentOf(TransitionKind.karana, now)),
               ])
                 PanchangRow(
                   label: label,
                   value: Text(
-                    l.nameWithUntil(e.name.of(language), until(e.end)),
+                    l.nameWithUntil(e.name.of(language), until(e.endUtc)),
                   ),
                 ),
               const SizedBox(height: Space.l),
@@ -178,23 +189,23 @@ class _TodayContent extends ConsumerWidget {
                   TimingCell(
                     icon: Icons.wb_twilight,
                     label: l.labelSunrise,
-                    time: f.time(s.sunrise),
+                    time: f.time(d.sun.sunrise),
                   ),
                   TimingCell(
                     icon: Icons.wb_sunny_outlined,
                     label: l.labelSunset,
-                    time: f.time(s.sunset),
+                    time: f.time(d.sun.sunset),
                   ),
                   TimingCell(
                     icon: Icons.nightlight_outlined,
                     label: l.labelMoonrise,
-                    time: timeOrNone(s.moonrise),
+                    time: timeOrNone(d.sun.moonrise),
                     iconColor: c.inkMuted,
                   ),
                   TimingCell(
                     icon: Icons.dark_mode_outlined,
                     label: l.labelMoonset,
-                    time: timeOrNone(s.moonset),
+                    time: timeOrNone(d.sun.moonset),
                     iconColor: c.inkMuted,
                   ),
                 ],
@@ -202,15 +213,15 @@ class _TodayContent extends ConsumerWidget {
 
               ProvenanceFooter(
                 text: l.provenance(
-                  s.provenance.tradition.of(language),
-                  s.provenance.city.of(language),
+                  d.provenance.tradition.of(language),
+                  d.provenance.city.of(language),
                   l.timeZoneLabel,
                 ),
               ),
             ],
           ),
         ),
-        if (s.provenance.isSample) const SampleWatermark(),
+        if (d.provenance.isSample) const SampleWatermark(),
       ],
     );
   }

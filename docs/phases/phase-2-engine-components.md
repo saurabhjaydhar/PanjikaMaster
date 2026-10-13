@@ -7,7 +7,7 @@
 ### Backend (pipeline)
 | ID | Task | Done when |
 |---|---|---|
-| T-201 | Ephemeris fetch for DE440s with a SHA-256 lock file | Re-run verifies the checksum; a mismatch fails |
+| T-201 🟡 | Ephemeris fetch for DE440s with a SHA-256 lock file | Re-run verifies the checksum; a mismatch fails |
 | T-202 | `astro.py`: apparent geocentric Sun/Moon ecliptic longitude via Skyfield | Tests against Skyfield's documented examples |
 | T-203 | `ayanamsa.py`: Lahiri, formula and source cited | Within 1″ of `reference/ayanamsa.csv` (skipped with a visible notice until the file exists) |
 | T-204 | `panchanga.py`: tithi, nakshatra, yoga, karana transitions (scan + bisection to 1 s) | Property tests: no gaps/overlaps, indices cycle, tithi length 19–27 h |
@@ -18,11 +18,11 @@
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
-| T-208 | Domain entities + interfaces (§15.4): `BengaliDate`, `Transition`, `DayPanjika`, `Observance`, `City`, `Provenance`, `DataCoverage` | Compile-time: no UI type without `Provenance` |
-| T-209 | `PeriodCalculator` with the §6.5.8 table | Unit tests for all weekdays |
-| T-210 | `DayAssembler` incl. udaya tithi, kshaya/vriddhi, after-midnight times, IST conversion | Unit tests incl. a device in another time zone |
-| T-211 | Repositories on Drift + use cases `GetDayPanjika`, `GetMonthGrid`, `GetUpcomingObservances` | Tests on the sample pack |
-| T-212 | `clockProvider`: ticks each minute and at the next transition/sunrise/midnight | Test with a fake clock: provider fires at the transition |
+| T-208 ✅ | Domain entities + interfaces (§15.4): `BengaliDate`, `Transition`, `DayPanjika`, `Observance`, `City`, `Provenance`, `DataCoverage` | Compile-time: no UI type without `Provenance` |
+| T-209 ✅ | `PeriodCalculator` with the §6.5.8 table | Unit tests for all weekdays |
+| T-210 ✅ | `DayAssembler` incl. udaya tithi, kshaya/vriddhi, after-midnight times, IST conversion | Unit tests incl. a device in another time zone |
+| T-211 ✅ | Repositories on Drift + use cases `GetDayPanjika`, `GetMonthGrid`, `GetUpcomingObservances` | Tests on the sample pack |
+| T-212 ✅ | `clockProvider`: ticks each minute and at the next transition/sunrise/midnight | Test with a fake clock: provider fires at the transition |
 
 ### Frontend (screens & UI)
 | ID | Task | Done when |

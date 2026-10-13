@@ -5045,941 +5045,6 @@ class ObservanceWindowsCompanion extends UpdateCompanion<ObservanceWindowRow> {
   }
 }
 
-class Reminders extends Table with TableInfo<Reminders, ReminderRow> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  Reminders(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    hasAutoIncrement: true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    $customConstraints: 'PRIMARY KEY AUTOINCREMENT',
-  );
-  static const VerificationMeta _targetKindMeta = const VerificationMeta(
-    'targetKind',
-  );
-  late final GeneratedColumn<String> targetKind = GeneratedColumn<String>(
-    'target_kind',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints:
-        'NOT NULL CHECK (target_kind IN (\'observance\', \'tithi\'))',
-  );
-  static const VerificationMeta _targetIdMeta = const VerificationMeta(
-    'targetId',
-  );
-  late final GeneratedColumn<String> targetId = GeneratedColumn<String>(
-    'target_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  static const VerificationMeta _offsetMinutesMeta = const VerificationMeta(
-    'offsetMinutes',
-  );
-  late final GeneratedColumn<int> offsetMinutes = GeneratedColumn<int>(
-    'offset_minutes',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT 0',
-    defaultValue: const CustomExpression('0'),
-  );
-  static const VerificationMeta _timeOfDayMeta = const VerificationMeta(
-    'timeOfDay',
-  );
-  late final GeneratedColumn<String> timeOfDay = GeneratedColumn<String>(
-    'time_of_day',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    $customConstraints: '',
-  );
-  static const VerificationMeta _enabledMeta = const VerificationMeta(
-    'enabled',
-  );
-  late final GeneratedColumn<int> enabled = GeneratedColumn<int>(
-    'enabled',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT 1 CHECK (enabled IN (0, 1))',
-    defaultValue: const CustomExpression('1'),
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
-  late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    targetKind,
-    targetId,
-    offsetMinutes,
-    timeOfDay,
-    enabled,
-    createdAt,
-  ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'reminders';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<ReminderRow> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('target_kind')) {
-      context.handle(
-        _targetKindMeta,
-        targetKind.isAcceptableOrUnknown(data['target_kind']!, _targetKindMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_targetKindMeta);
-    }
-    if (data.containsKey('target_id')) {
-      context.handle(
-        _targetIdMeta,
-        targetId.isAcceptableOrUnknown(data['target_id']!, _targetIdMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_targetIdMeta);
-    }
-    if (data.containsKey('offset_minutes')) {
-      context.handle(
-        _offsetMinutesMeta,
-        offsetMinutes.isAcceptableOrUnknown(
-          data['offset_minutes']!,
-          _offsetMinutesMeta,
-        ),
-      );
-    }
-    if (data.containsKey('time_of_day')) {
-      context.handle(
-        _timeOfDayMeta,
-        timeOfDay.isAcceptableOrUnknown(data['time_of_day']!, _timeOfDayMeta),
-      );
-    }
-    if (data.containsKey('enabled')) {
-      context.handle(
-        _enabledMeta,
-        enabled.isAcceptableOrUnknown(data['enabled']!, _enabledMeta),
-      );
-    }
-    if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_createdAtMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  ReminderRow map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ReminderRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      targetKind: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}target_kind'],
-      )!,
-      targetId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}target_id'],
-      )!,
-      offsetMinutes: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}offset_minutes'],
-      )!,
-      timeOfDay: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}time_of_day'],
-      ),
-      enabled: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}enabled'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}created_at'],
-      )!,
-    );
-  }
-
-  @override
-  Reminders createAlias(String alias) {
-    return Reminders(attachedDatabase, alias);
-  }
-
-  @override
-  bool get isStrict => true;
-  @override
-  bool get dontWriteConstraints => true;
-}
-
-class ReminderRow extends DataClass implements Insertable<ReminderRow> {
-  final int id;
-  final String targetKind;
-  final String targetId;
-  final int offsetMinutes;
-  final String? timeOfDay;
-
-  /// 'HH:MM' local, NULL = relative to the event
-  final int enabled;
-  final String createdAt;
-  const ReminderRow({
-    required this.id,
-    required this.targetKind,
-    required this.targetId,
-    required this.offsetMinutes,
-    this.timeOfDay,
-    required this.enabled,
-    required this.createdAt,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['target_kind'] = Variable<String>(targetKind);
-    map['target_id'] = Variable<String>(targetId);
-    map['offset_minutes'] = Variable<int>(offsetMinutes);
-    if (!nullToAbsent || timeOfDay != null) {
-      map['time_of_day'] = Variable<String>(timeOfDay);
-    }
-    map['enabled'] = Variable<int>(enabled);
-    map['created_at'] = Variable<String>(createdAt);
-    return map;
-  }
-
-  RemindersCompanion toCompanion(bool nullToAbsent) {
-    return RemindersCompanion(
-      id: Value(id),
-      targetKind: Value(targetKind),
-      targetId: Value(targetId),
-      offsetMinutes: Value(offsetMinutes),
-      timeOfDay: timeOfDay == null && nullToAbsent
-          ? const Value.absent()
-          : Value(timeOfDay),
-      enabled: Value(enabled),
-      createdAt: Value(createdAt),
-    );
-  }
-
-  factory ReminderRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ReminderRow(
-      id: serializer.fromJson<int>(json['id']),
-      targetKind: serializer.fromJson<String>(json['target_kind']),
-      targetId: serializer.fromJson<String>(json['target_id']),
-      offsetMinutes: serializer.fromJson<int>(json['offset_minutes']),
-      timeOfDay: serializer.fromJson<String?>(json['time_of_day']),
-      enabled: serializer.fromJson<int>(json['enabled']),
-      createdAt: serializer.fromJson<String>(json['created_at']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'target_kind': serializer.toJson<String>(targetKind),
-      'target_id': serializer.toJson<String>(targetId),
-      'offset_minutes': serializer.toJson<int>(offsetMinutes),
-      'time_of_day': serializer.toJson<String?>(timeOfDay),
-      'enabled': serializer.toJson<int>(enabled),
-      'created_at': serializer.toJson<String>(createdAt),
-    };
-  }
-
-  ReminderRow copyWith({
-    int? id,
-    String? targetKind,
-    String? targetId,
-    int? offsetMinutes,
-    Value<String?> timeOfDay = const Value.absent(),
-    int? enabled,
-    String? createdAt,
-  }) => ReminderRow(
-    id: id ?? this.id,
-    targetKind: targetKind ?? this.targetKind,
-    targetId: targetId ?? this.targetId,
-    offsetMinutes: offsetMinutes ?? this.offsetMinutes,
-    timeOfDay: timeOfDay.present ? timeOfDay.value : this.timeOfDay,
-    enabled: enabled ?? this.enabled,
-    createdAt: createdAt ?? this.createdAt,
-  );
-  ReminderRow copyWithCompanion(RemindersCompanion data) {
-    return ReminderRow(
-      id: data.id.present ? data.id.value : this.id,
-      targetKind: data.targetKind.present
-          ? data.targetKind.value
-          : this.targetKind,
-      targetId: data.targetId.present ? data.targetId.value : this.targetId,
-      offsetMinutes: data.offsetMinutes.present
-          ? data.offsetMinutes.value
-          : this.offsetMinutes,
-      timeOfDay: data.timeOfDay.present ? data.timeOfDay.value : this.timeOfDay,
-      enabled: data.enabled.present ? data.enabled.value : this.enabled,
-      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ReminderRow(')
-          ..write('id: $id, ')
-          ..write('targetKind: $targetKind, ')
-          ..write('targetId: $targetId, ')
-          ..write('offsetMinutes: $offsetMinutes, ')
-          ..write('timeOfDay: $timeOfDay, ')
-          ..write('enabled: $enabled, ')
-          ..write('createdAt: $createdAt')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    id,
-    targetKind,
-    targetId,
-    offsetMinutes,
-    timeOfDay,
-    enabled,
-    createdAt,
-  );
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ReminderRow &&
-          other.id == this.id &&
-          other.targetKind == this.targetKind &&
-          other.targetId == this.targetId &&
-          other.offsetMinutes == this.offsetMinutes &&
-          other.timeOfDay == this.timeOfDay &&
-          other.enabled == this.enabled &&
-          other.createdAt == this.createdAt);
-}
-
-class RemindersCompanion extends UpdateCompanion<ReminderRow> {
-  final Value<int> id;
-  final Value<String> targetKind;
-  final Value<String> targetId;
-  final Value<int> offsetMinutes;
-  final Value<String?> timeOfDay;
-  final Value<int> enabled;
-  final Value<String> createdAt;
-  const RemindersCompanion({
-    this.id = const Value.absent(),
-    this.targetKind = const Value.absent(),
-    this.targetId = const Value.absent(),
-    this.offsetMinutes = const Value.absent(),
-    this.timeOfDay = const Value.absent(),
-    this.enabled = const Value.absent(),
-    this.createdAt = const Value.absent(),
-  });
-  RemindersCompanion.insert({
-    this.id = const Value.absent(),
-    required String targetKind,
-    required String targetId,
-    this.offsetMinutes = const Value.absent(),
-    this.timeOfDay = const Value.absent(),
-    this.enabled = const Value.absent(),
-    required String createdAt,
-  }) : targetKind = Value(targetKind),
-       targetId = Value(targetId),
-       createdAt = Value(createdAt);
-  static Insertable<ReminderRow> custom({
-    Expression<int>? id,
-    Expression<String>? targetKind,
-    Expression<String>? targetId,
-    Expression<int>? offsetMinutes,
-    Expression<String>? timeOfDay,
-    Expression<int>? enabled,
-    Expression<String>? createdAt,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (targetKind != null) 'target_kind': targetKind,
-      if (targetId != null) 'target_id': targetId,
-      if (offsetMinutes != null) 'offset_minutes': offsetMinutes,
-      if (timeOfDay != null) 'time_of_day': timeOfDay,
-      if (enabled != null) 'enabled': enabled,
-      if (createdAt != null) 'created_at': createdAt,
-    });
-  }
-
-  RemindersCompanion copyWith({
-    Value<int>? id,
-    Value<String>? targetKind,
-    Value<String>? targetId,
-    Value<int>? offsetMinutes,
-    Value<String?>? timeOfDay,
-    Value<int>? enabled,
-    Value<String>? createdAt,
-  }) {
-    return RemindersCompanion(
-      id: id ?? this.id,
-      targetKind: targetKind ?? this.targetKind,
-      targetId: targetId ?? this.targetId,
-      offsetMinutes: offsetMinutes ?? this.offsetMinutes,
-      timeOfDay: timeOfDay ?? this.timeOfDay,
-      enabled: enabled ?? this.enabled,
-      createdAt: createdAt ?? this.createdAt,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (targetKind.present) {
-      map['target_kind'] = Variable<String>(targetKind.value);
-    }
-    if (targetId.present) {
-      map['target_id'] = Variable<String>(targetId.value);
-    }
-    if (offsetMinutes.present) {
-      map['offset_minutes'] = Variable<int>(offsetMinutes.value);
-    }
-    if (timeOfDay.present) {
-      map['time_of_day'] = Variable<String>(timeOfDay.value);
-    }
-    if (enabled.present) {
-      map['enabled'] = Variable<int>(enabled.value);
-    }
-    if (createdAt.present) {
-      map['created_at'] = Variable<String>(createdAt.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('RemindersCompanion(')
-          ..write('id: $id, ')
-          ..write('targetKind: $targetKind, ')
-          ..write('targetId: $targetId, ')
-          ..write('offsetMinutes: $offsetMinutes, ')
-          ..write('timeOfDay: $timeOfDay, ')
-          ..write('enabled: $enabled, ')
-          ..write('createdAt: $createdAt')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class Settings extends Table with TableInfo<Settings, SettingRow> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  Settings(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _keyMeta = const VerificationMeta('key');
-  late final GeneratedColumn<String> key = GeneratedColumn<String>(
-    'key',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'PRIMARY KEY',
-  );
-  static const VerificationMeta _valueMeta = const VerificationMeta('value');
-  late final GeneratedColumn<String> value = GeneratedColumn<String>(
-    'value',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  @override
-  List<GeneratedColumn> get $columns => [key, value];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'settings';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<SettingRow> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('key')) {
-      context.handle(
-        _keyMeta,
-        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_keyMeta);
-    }
-    if (data.containsKey('value')) {
-      context.handle(
-        _valueMeta,
-        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_valueMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {key};
-  @override
-  SettingRow map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return SettingRow(
-      key: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}key'],
-      )!,
-      value: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}value'],
-      )!,
-    );
-  }
-
-  @override
-  Settings createAlias(String alias) {
-    return Settings(attachedDatabase, alias);
-  }
-
-  @override
-  bool get isStrict => true;
-  @override
-  bool get dontWriteConstraints => true;
-}
-
-class SettingRow extends DataClass implements Insertable<SettingRow> {
-  final String key;
-
-  /// keys listed in spec §15.1
-  final String value;
-  const SettingRow({required this.key, required this.value});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['key'] = Variable<String>(key);
-    map['value'] = Variable<String>(value);
-    return map;
-  }
-
-  SettingsCompanion toCompanion(bool nullToAbsent) {
-    return SettingsCompanion(key: Value(key), value: Value(value));
-  }
-
-  factory SettingRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return SettingRow(
-      key: serializer.fromJson<String>(json['key']),
-      value: serializer.fromJson<String>(json['value']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'key': serializer.toJson<String>(key),
-      'value': serializer.toJson<String>(value),
-    };
-  }
-
-  SettingRow copyWith({String? key, String? value}) =>
-      SettingRow(key: key ?? this.key, value: value ?? this.value);
-  SettingRow copyWithCompanion(SettingsCompanion data) {
-    return SettingRow(
-      key: data.key.present ? data.key.value : this.key,
-      value: data.value.present ? data.value.value : this.value,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SettingRow(')
-          ..write('key: $key, ')
-          ..write('value: $value')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(key, value);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is SettingRow &&
-          other.key == this.key &&
-          other.value == this.value);
-}
-
-class SettingsCompanion extends UpdateCompanion<SettingRow> {
-  final Value<String> key;
-  final Value<String> value;
-  final Value<int> rowid;
-  const SettingsCompanion({
-    this.key = const Value.absent(),
-    this.value = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  SettingsCompanion.insert({
-    required String key,
-    required String value,
-    this.rowid = const Value.absent(),
-  }) : key = Value(key),
-       value = Value(value);
-  static Insertable<SettingRow> custom({
-    Expression<String>? key,
-    Expression<String>? value,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (key != null) 'key': key,
-      if (value != null) 'value': value,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  SettingsCompanion copyWith({
-    Value<String>? key,
-    Value<String>? value,
-    Value<int>? rowid,
-  }) {
-    return SettingsCompanion(
-      key: key ?? this.key,
-      value: value ?? this.value,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (key.present) {
-      map['key'] = Variable<String>(key.value);
-    }
-    if (value.present) {
-      map['value'] = Variable<String>(value.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('SettingsCompanion(')
-          ..write('key: $key, ')
-          ..write('value: $value, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
-class ErrorReportsQueue extends Table
-    with TableInfo<ErrorReportsQueue, QueuedErrorReportRow> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  ErrorReportsQueue(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    hasAutoIncrement: true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    $customConstraints: 'PRIMARY KEY AUTOINCREMENT',
-  );
-  static const VerificationMeta _payloadMeta = const VerificationMeta(
-    'payload',
-  );
-  late final GeneratedColumn<String> payload = GeneratedColumn<String>(
-    'payload',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
-  late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  @override
-  List<GeneratedColumn> get $columns => [id, payload, createdAt];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'error_reports_queue';
-  @override
-  VerificationContext validateIntegrity(
-    Insertable<QueuedErrorReportRow> instance, {
-    bool isInserting = false,
-  }) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('payload')) {
-      context.handle(
-        _payloadMeta,
-        payload.isAcceptableOrUnknown(data['payload']!, _payloadMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_payloadMeta);
-    }
-    if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_createdAtMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  QueuedErrorReportRow map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return QueuedErrorReportRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      payload: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}payload'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}created_at'],
-      )!,
-    );
-  }
-
-  @override
-  ErrorReportsQueue createAlias(String alias) {
-    return ErrorReportsQueue(attachedDatabase, alias);
-  }
-
-  @override
-  bool get isStrict => true;
-  @override
-  bool get dontWriteConstraints => true;
-}
-
-class QueuedErrorReportRow extends DataClass
-    implements Insertable<QueuedErrorReportRow> {
-  final int id;
-  final String payload;
-
-  /// JSON with only the fields in spec §15.3
-  final String createdAt;
-  const QueuedErrorReportRow({
-    required this.id,
-    required this.payload,
-    required this.createdAt,
-  });
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['payload'] = Variable<String>(payload);
-    map['created_at'] = Variable<String>(createdAt);
-    return map;
-  }
-
-  ErrorReportsQueueCompanion toCompanion(bool nullToAbsent) {
-    return ErrorReportsQueueCompanion(
-      id: Value(id),
-      payload: Value(payload),
-      createdAt: Value(createdAt),
-    );
-  }
-
-  factory QueuedErrorReportRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return QueuedErrorReportRow(
-      id: serializer.fromJson<int>(json['id']),
-      payload: serializer.fromJson<String>(json['payload']),
-      createdAt: serializer.fromJson<String>(json['created_at']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'payload': serializer.toJson<String>(payload),
-      'created_at': serializer.toJson<String>(createdAt),
-    };
-  }
-
-  QueuedErrorReportRow copyWith({
-    int? id,
-    String? payload,
-    String? createdAt,
-  }) => QueuedErrorReportRow(
-    id: id ?? this.id,
-    payload: payload ?? this.payload,
-    createdAt: createdAt ?? this.createdAt,
-  );
-  QueuedErrorReportRow copyWithCompanion(ErrorReportsQueueCompanion data) {
-    return QueuedErrorReportRow(
-      id: data.id.present ? data.id.value : this.id,
-      payload: data.payload.present ? data.payload.value : this.payload,
-      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('QueuedErrorReportRow(')
-          ..write('id: $id, ')
-          ..write('payload: $payload, ')
-          ..write('createdAt: $createdAt')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, payload, createdAt);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is QueuedErrorReportRow &&
-          other.id == this.id &&
-          other.payload == this.payload &&
-          other.createdAt == this.createdAt);
-}
-
-class ErrorReportsQueueCompanion extends UpdateCompanion<QueuedErrorReportRow> {
-  final Value<int> id;
-  final Value<String> payload;
-  final Value<String> createdAt;
-  const ErrorReportsQueueCompanion({
-    this.id = const Value.absent(),
-    this.payload = const Value.absent(),
-    this.createdAt = const Value.absent(),
-  });
-  ErrorReportsQueueCompanion.insert({
-    this.id = const Value.absent(),
-    required String payload,
-    required String createdAt,
-  }) : payload = Value(payload),
-       createdAt = Value(createdAt);
-  static Insertable<QueuedErrorReportRow> custom({
-    Expression<int>? id,
-    Expression<String>? payload,
-    Expression<String>? createdAt,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (payload != null) 'payload': payload,
-      if (createdAt != null) 'created_at': createdAt,
-    });
-  }
-
-  ErrorReportsQueueCompanion copyWith({
-    Value<int>? id,
-    Value<String>? payload,
-    Value<String>? createdAt,
-  }) {
-    return ErrorReportsQueueCompanion(
-      id: id ?? this.id,
-      payload: payload ?? this.payload,
-      createdAt: createdAt ?? this.createdAt,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (payload.present) {
-      map['payload'] = Variable<String>(payload.value);
-    }
-    if (createdAt.present) {
-      map['created_at'] = Variable<String>(createdAt.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('ErrorReportsQueueCompanion(')
-          ..write('id: $id, ')
-          ..write('payload: $payload, ')
-          ..write('createdAt: $createdAt')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class LunarMonths extends Table with TableInfo<LunarMonths, LunarMonthRow> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -6976,6 +6041,941 @@ class PeriodRulesCompanion extends UpdateCompanion<PeriodRuleRow> {
   }
 }
 
+class Reminders extends Table with TableInfo<Reminders, ReminderRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Reminders(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'PRIMARY KEY AUTOINCREMENT',
+  );
+  static const VerificationMeta _targetKindMeta = const VerificationMeta(
+    'targetKind',
+  );
+  late final GeneratedColumn<String> targetKind = GeneratedColumn<String>(
+    'target_kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (target_kind IN (\'observance\', \'tithi\'))',
+  );
+  static const VerificationMeta _targetIdMeta = const VerificationMeta(
+    'targetId',
+  );
+  late final GeneratedColumn<String> targetId = GeneratedColumn<String>(
+    'target_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _offsetMinutesMeta = const VerificationMeta(
+    'offsetMinutes',
+  );
+  late final GeneratedColumn<int> offsetMinutes = GeneratedColumn<int>(
+    'offset_minutes',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT 0',
+    defaultValue: const CustomExpression('0'),
+  );
+  static const VerificationMeta _timeOfDayMeta = const VerificationMeta(
+    'timeOfDay',
+  );
+  late final GeneratedColumn<String> timeOfDay = GeneratedColumn<String>(
+    'time_of_day',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: '',
+  );
+  static const VerificationMeta _enabledMeta = const VerificationMeta(
+    'enabled',
+  );
+  late final GeneratedColumn<int> enabled = GeneratedColumn<int>(
+    'enabled',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT 1 CHECK (enabled IN (0, 1))',
+    defaultValue: const CustomExpression('1'),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    targetKind,
+    targetId,
+    offsetMinutes,
+    timeOfDay,
+    enabled,
+    createdAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'reminders';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ReminderRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('target_kind')) {
+      context.handle(
+        _targetKindMeta,
+        targetKind.isAcceptableOrUnknown(data['target_kind']!, _targetKindMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_targetKindMeta);
+    }
+    if (data.containsKey('target_id')) {
+      context.handle(
+        _targetIdMeta,
+        targetId.isAcceptableOrUnknown(data['target_id']!, _targetIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_targetIdMeta);
+    }
+    if (data.containsKey('offset_minutes')) {
+      context.handle(
+        _offsetMinutesMeta,
+        offsetMinutes.isAcceptableOrUnknown(
+          data['offset_minutes']!,
+          _offsetMinutesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('time_of_day')) {
+      context.handle(
+        _timeOfDayMeta,
+        timeOfDay.isAcceptableOrUnknown(data['time_of_day']!, _timeOfDayMeta),
+      );
+    }
+    if (data.containsKey('enabled')) {
+      context.handle(
+        _enabledMeta,
+        enabled.isAcceptableOrUnknown(data['enabled']!, _enabledMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ReminderRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReminderRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      targetKind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}target_kind'],
+      )!,
+      targetId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}target_id'],
+      )!,
+      offsetMinutes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}offset_minutes'],
+      )!,
+      timeOfDay: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}time_of_day'],
+      ),
+      enabled: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}enabled'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  Reminders createAlias(String alias) {
+    return Reminders(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class ReminderRow extends DataClass implements Insertable<ReminderRow> {
+  final int id;
+  final String targetKind;
+  final String targetId;
+  final int offsetMinutes;
+  final String? timeOfDay;
+
+  /// 'HH:MM' local, NULL = relative to the event
+  final int enabled;
+  final String createdAt;
+  const ReminderRow({
+    required this.id,
+    required this.targetKind,
+    required this.targetId,
+    required this.offsetMinutes,
+    this.timeOfDay,
+    required this.enabled,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['target_kind'] = Variable<String>(targetKind);
+    map['target_id'] = Variable<String>(targetId);
+    map['offset_minutes'] = Variable<int>(offsetMinutes);
+    if (!nullToAbsent || timeOfDay != null) {
+      map['time_of_day'] = Variable<String>(timeOfDay);
+    }
+    map['enabled'] = Variable<int>(enabled);
+    map['created_at'] = Variable<String>(createdAt);
+    return map;
+  }
+
+  RemindersCompanion toCompanion(bool nullToAbsent) {
+    return RemindersCompanion(
+      id: Value(id),
+      targetKind: Value(targetKind),
+      targetId: Value(targetId),
+      offsetMinutes: Value(offsetMinutes),
+      timeOfDay: timeOfDay == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timeOfDay),
+      enabled: Value(enabled),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory ReminderRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReminderRow(
+      id: serializer.fromJson<int>(json['id']),
+      targetKind: serializer.fromJson<String>(json['target_kind']),
+      targetId: serializer.fromJson<String>(json['target_id']),
+      offsetMinutes: serializer.fromJson<int>(json['offset_minutes']),
+      timeOfDay: serializer.fromJson<String?>(json['time_of_day']),
+      enabled: serializer.fromJson<int>(json['enabled']),
+      createdAt: serializer.fromJson<String>(json['created_at']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'target_kind': serializer.toJson<String>(targetKind),
+      'target_id': serializer.toJson<String>(targetId),
+      'offset_minutes': serializer.toJson<int>(offsetMinutes),
+      'time_of_day': serializer.toJson<String?>(timeOfDay),
+      'enabled': serializer.toJson<int>(enabled),
+      'created_at': serializer.toJson<String>(createdAt),
+    };
+  }
+
+  ReminderRow copyWith({
+    int? id,
+    String? targetKind,
+    String? targetId,
+    int? offsetMinutes,
+    Value<String?> timeOfDay = const Value.absent(),
+    int? enabled,
+    String? createdAt,
+  }) => ReminderRow(
+    id: id ?? this.id,
+    targetKind: targetKind ?? this.targetKind,
+    targetId: targetId ?? this.targetId,
+    offsetMinutes: offsetMinutes ?? this.offsetMinutes,
+    timeOfDay: timeOfDay.present ? timeOfDay.value : this.timeOfDay,
+    enabled: enabled ?? this.enabled,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  ReminderRow copyWithCompanion(RemindersCompanion data) {
+    return ReminderRow(
+      id: data.id.present ? data.id.value : this.id,
+      targetKind: data.targetKind.present
+          ? data.targetKind.value
+          : this.targetKind,
+      targetId: data.targetId.present ? data.targetId.value : this.targetId,
+      offsetMinutes: data.offsetMinutes.present
+          ? data.offsetMinutes.value
+          : this.offsetMinutes,
+      timeOfDay: data.timeOfDay.present ? data.timeOfDay.value : this.timeOfDay,
+      enabled: data.enabled.present ? data.enabled.value : this.enabled,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReminderRow(')
+          ..write('id: $id, ')
+          ..write('targetKind: $targetKind, ')
+          ..write('targetId: $targetId, ')
+          ..write('offsetMinutes: $offsetMinutes, ')
+          ..write('timeOfDay: $timeOfDay, ')
+          ..write('enabled: $enabled, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    targetKind,
+    targetId,
+    offsetMinutes,
+    timeOfDay,
+    enabled,
+    createdAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReminderRow &&
+          other.id == this.id &&
+          other.targetKind == this.targetKind &&
+          other.targetId == this.targetId &&
+          other.offsetMinutes == this.offsetMinutes &&
+          other.timeOfDay == this.timeOfDay &&
+          other.enabled == this.enabled &&
+          other.createdAt == this.createdAt);
+}
+
+class RemindersCompanion extends UpdateCompanion<ReminderRow> {
+  final Value<int> id;
+  final Value<String> targetKind;
+  final Value<String> targetId;
+  final Value<int> offsetMinutes;
+  final Value<String?> timeOfDay;
+  final Value<int> enabled;
+  final Value<String> createdAt;
+  const RemindersCompanion({
+    this.id = const Value.absent(),
+    this.targetKind = const Value.absent(),
+    this.targetId = const Value.absent(),
+    this.offsetMinutes = const Value.absent(),
+    this.timeOfDay = const Value.absent(),
+    this.enabled = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  RemindersCompanion.insert({
+    this.id = const Value.absent(),
+    required String targetKind,
+    required String targetId,
+    this.offsetMinutes = const Value.absent(),
+    this.timeOfDay = const Value.absent(),
+    this.enabled = const Value.absent(),
+    required String createdAt,
+  }) : targetKind = Value(targetKind),
+       targetId = Value(targetId),
+       createdAt = Value(createdAt);
+  static Insertable<ReminderRow> custom({
+    Expression<int>? id,
+    Expression<String>? targetKind,
+    Expression<String>? targetId,
+    Expression<int>? offsetMinutes,
+    Expression<String>? timeOfDay,
+    Expression<int>? enabled,
+    Expression<String>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (targetKind != null) 'target_kind': targetKind,
+      if (targetId != null) 'target_id': targetId,
+      if (offsetMinutes != null) 'offset_minutes': offsetMinutes,
+      if (timeOfDay != null) 'time_of_day': timeOfDay,
+      if (enabled != null) 'enabled': enabled,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  RemindersCompanion copyWith({
+    Value<int>? id,
+    Value<String>? targetKind,
+    Value<String>? targetId,
+    Value<int>? offsetMinutes,
+    Value<String?>? timeOfDay,
+    Value<int>? enabled,
+    Value<String>? createdAt,
+  }) {
+    return RemindersCompanion(
+      id: id ?? this.id,
+      targetKind: targetKind ?? this.targetKind,
+      targetId: targetId ?? this.targetId,
+      offsetMinutes: offsetMinutes ?? this.offsetMinutes,
+      timeOfDay: timeOfDay ?? this.timeOfDay,
+      enabled: enabled ?? this.enabled,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (targetKind.present) {
+      map['target_kind'] = Variable<String>(targetKind.value);
+    }
+    if (targetId.present) {
+      map['target_id'] = Variable<String>(targetId.value);
+    }
+    if (offsetMinutes.present) {
+      map['offset_minutes'] = Variable<int>(offsetMinutes.value);
+    }
+    if (timeOfDay.present) {
+      map['time_of_day'] = Variable<String>(timeOfDay.value);
+    }
+    if (enabled.present) {
+      map['enabled'] = Variable<int>(enabled.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<String>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RemindersCompanion(')
+          ..write('id: $id, ')
+          ..write('targetKind: $targetKind, ')
+          ..write('targetId: $targetId, ')
+          ..write('offsetMinutes: $offsetMinutes, ')
+          ..write('timeOfDay: $timeOfDay, ')
+          ..write('enabled: $enabled, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class Settings extends Table with TableInfo<Settings, SettingRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Settings(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _keyMeta = const VerificationMeta('key');
+  late final GeneratedColumn<String> key = GeneratedColumn<String>(
+    'key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'PRIMARY KEY',
+  );
+  static const VerificationMeta _valueMeta = const VerificationMeta('value');
+  late final GeneratedColumn<String> value = GeneratedColumn<String>(
+    'value',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [key, value];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'settings';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SettingRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('key')) {
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_keyMeta);
+    }
+    if (data.containsKey('value')) {
+      context.handle(
+        _valueMeta,
+        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_valueMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {key};
+  @override
+  SettingRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SettingRow(
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      value: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}value'],
+      )!,
+    );
+  }
+
+  @override
+  Settings createAlias(String alias) {
+    return Settings(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class SettingRow extends DataClass implements Insertable<SettingRow> {
+  final String key;
+
+  /// keys listed in spec §15.1
+  final String value;
+  const SettingRow({required this.key, required this.value});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['key'] = Variable<String>(key);
+    map['value'] = Variable<String>(value);
+    return map;
+  }
+
+  SettingsCompanion toCompanion(bool nullToAbsent) {
+    return SettingsCompanion(key: Value(key), value: Value(value));
+  }
+
+  factory SettingRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SettingRow(
+      key: serializer.fromJson<String>(json['key']),
+      value: serializer.fromJson<String>(json['value']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'key': serializer.toJson<String>(key),
+      'value': serializer.toJson<String>(value),
+    };
+  }
+
+  SettingRow copyWith({String? key, String? value}) =>
+      SettingRow(key: key ?? this.key, value: value ?? this.value);
+  SettingRow copyWithCompanion(SettingsCompanion data) {
+    return SettingRow(
+      key: data.key.present ? data.key.value : this.key,
+      value: data.value.present ? data.value.value : this.value,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SettingRow(')
+          ..write('key: $key, ')
+          ..write('value: $value')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(key, value);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SettingRow &&
+          other.key == this.key &&
+          other.value == this.value);
+}
+
+class SettingsCompanion extends UpdateCompanion<SettingRow> {
+  final Value<String> key;
+  final Value<String> value;
+  final Value<int> rowid;
+  const SettingsCompanion({
+    this.key = const Value.absent(),
+    this.value = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  SettingsCompanion.insert({
+    required String key,
+    required String value,
+    this.rowid = const Value.absent(),
+  }) : key = Value(key),
+       value = Value(value);
+  static Insertable<SettingRow> custom({
+    Expression<String>? key,
+    Expression<String>? value,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (key != null) 'key': key,
+      if (value != null) 'value': value,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  SettingsCompanion copyWith({
+    Value<String>? key,
+    Value<String>? value,
+    Value<int>? rowid,
+  }) {
+    return SettingsCompanion(
+      key: key ?? this.key,
+      value: value ?? this.value,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (key.present) {
+      map['key'] = Variable<String>(key.value);
+    }
+    if (value.present) {
+      map['value'] = Variable<String>(value.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SettingsCompanion(')
+          ..write('key: $key, ')
+          ..write('value: $value, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class ErrorReportsQueue extends Table
+    with TableInfo<ErrorReportsQueue, QueuedErrorReportRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  ErrorReportsQueue(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'PRIMARY KEY AUTOINCREMENT',
+  );
+  static const VerificationMeta _payloadMeta = const VerificationMeta(
+    'payload',
+  );
+  late final GeneratedColumn<String> payload = GeneratedColumn<String>(
+    'payload',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, payload, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'error_reports_queue';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<QueuedErrorReportRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('payload')) {
+      context.handle(
+        _payloadMeta,
+        payload.isAcceptableOrUnknown(data['payload']!, _payloadMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_payloadMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  QueuedErrorReportRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return QueuedErrorReportRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      payload: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payload'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}created_at'],
+      )!,
+    );
+  }
+
+  @override
+  ErrorReportsQueue createAlias(String alias) {
+    return ErrorReportsQueue(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class QueuedErrorReportRow extends DataClass
+    implements Insertable<QueuedErrorReportRow> {
+  final int id;
+  final String payload;
+
+  /// JSON with only the fields in spec §15.3
+  final String createdAt;
+  const QueuedErrorReportRow({
+    required this.id,
+    required this.payload,
+    required this.createdAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['payload'] = Variable<String>(payload);
+    map['created_at'] = Variable<String>(createdAt);
+    return map;
+  }
+
+  ErrorReportsQueueCompanion toCompanion(bool nullToAbsent) {
+    return ErrorReportsQueueCompanion(
+      id: Value(id),
+      payload: Value(payload),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory QueuedErrorReportRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return QueuedErrorReportRow(
+      id: serializer.fromJson<int>(json['id']),
+      payload: serializer.fromJson<String>(json['payload']),
+      createdAt: serializer.fromJson<String>(json['created_at']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'payload': serializer.toJson<String>(payload),
+      'created_at': serializer.toJson<String>(createdAt),
+    };
+  }
+
+  QueuedErrorReportRow copyWith({
+    int? id,
+    String? payload,
+    String? createdAt,
+  }) => QueuedErrorReportRow(
+    id: id ?? this.id,
+    payload: payload ?? this.payload,
+    createdAt: createdAt ?? this.createdAt,
+  );
+  QueuedErrorReportRow copyWithCompanion(ErrorReportsQueueCompanion data) {
+    return QueuedErrorReportRow(
+      id: data.id.present ? data.id.value : this.id,
+      payload: data.payload.present ? data.payload.value : this.payload,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('QueuedErrorReportRow(')
+          ..write('id: $id, ')
+          ..write('payload: $payload, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, payload, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is QueuedErrorReportRow &&
+          other.id == this.id &&
+          other.payload == this.payload &&
+          other.createdAt == this.createdAt);
+}
+
+class ErrorReportsQueueCompanion extends UpdateCompanion<QueuedErrorReportRow> {
+  final Value<int> id;
+  final Value<String> payload;
+  final Value<String> createdAt;
+  const ErrorReportsQueueCompanion({
+    this.id = const Value.absent(),
+    this.payload = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  ErrorReportsQueueCompanion.insert({
+    this.id = const Value.absent(),
+    required String payload,
+    required String createdAt,
+  }) : payload = Value(payload),
+       createdAt = Value(createdAt);
+  static Insertable<QueuedErrorReportRow> custom({
+    Expression<int>? id,
+    Expression<String>? payload,
+    Expression<String>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (payload != null) 'payload': payload,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  ErrorReportsQueueCompanion copyWith({
+    Value<int>? id,
+    Value<String>? payload,
+    Value<String>? createdAt,
+  }) {
+    return ErrorReportsQueueCompanion(
+      id: id ?? this.id,
+      payload: payload ?? this.payload,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (payload.present) {
+      map['payload'] = Variable<String>(payload.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<String>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ErrorReportsQueueCompanion(')
+          ..write('id: $id, ')
+          ..write('payload: $payload, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -6988,6 +6988,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Observances observances = Observances(this);
   late final ObservanceDates observanceDates = ObservanceDates(this);
   late final ObservanceWindows observanceWindows = ObservanceWindows(this);
+  late final LunarMonths lunarMonths = LunarMonths(this);
+  late final PeriodRules periodRules = PeriodRules(this);
   late final Reminders reminders = Reminders(this);
   late final Settings settings = Settings(this);
   late final ErrorReportsQueue errorReportsQueue = ErrorReportsQueue(this);
@@ -6999,8 +7001,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'transitions_by_end',
     'CREATE INDEX transitions_by_end ON transitions (tradition, kind, ends_utc)',
   );
-  late final LunarMonths lunarMonths = LunarMonths(this);
-  late final PeriodRules periodRules = PeriodRules(this);
   Selectable<TransitionRow> transitionsOverlapping(
     String tradition,
     String kind,
@@ -7080,6 +7080,102 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ).asyncMap(this.packs.mapFromRow);
   }
 
+  Selectable<CityDayRow> cityDaysBetween(
+    String cityId,
+    String fromDate,
+    String toDate,
+  ) {
+    return customSelect(
+      'SELECT * FROM city_days WHERE city_id = ?1 AND date BETWEEN ?2 AND ?3 ORDER BY date',
+      variables: [
+        Variable<String>(cityId),
+        Variable<String>(fromDate),
+        Variable<String>(toDate),
+      ],
+      readsFrom: {this.cityDays},
+    ).asyncMap(this.cityDays.mapFromRow);
+  }
+
+  Selectable<BengaliDateRow> bengaliDatesBetween(
+    String tradition,
+    String fromDate,
+    String toDate,
+  ) {
+    return customSelect(
+      'SELECT * FROM bengali_dates WHERE tradition = ?1 AND date BETWEEN ?2 AND ?3 ORDER BY date',
+      variables: [
+        Variable<String>(tradition),
+        Variable<String>(fromDate),
+        Variable<String>(toDate),
+      ],
+      readsFrom: {this.bengaliDates},
+    ).asyncMap(this.bengaliDates.mapFromRow);
+  }
+
+  Selectable<BengaliDateRow> bengaliMonthDates(
+    String tradition,
+    int bnYear,
+    int bnMonthIdx,
+  ) {
+    return customSelect(
+      'SELECT * FROM bengali_dates WHERE tradition = ?1 AND bn_year = ?2 AND bn_month_idx = ?3 ORDER BY date',
+      variables: [
+        Variable<String>(tradition),
+        Variable<int>(bnYear),
+        Variable<int>(bnMonthIdx),
+      ],
+      readsFrom: {this.bengaliDates},
+    ).asyncMap(this.bengaliDates.mapFromRow);
+  }
+
+  Selectable<LunarMonthRow> lunarMonthsOverlapping(
+    String tradition,
+    int fromUtc,
+    int toUtc,
+  ) {
+    return customSelect(
+      'SELECT * FROM lunar_months WHERE tradition = ?1 AND ends_utc > ?2 AND starts_utc < ?3 ORDER BY starts_utc',
+      variables: [
+        Variable<String>(tradition),
+        Variable<int>(fromUtc),
+        Variable<int>(toUtc),
+      ],
+      readsFrom: {this.lunarMonths},
+    ).asyncMap(this.lunarMonths.mapFromRow);
+  }
+
+  Selectable<PeriodRuleRow> enabledPeriodRules(String tradition) {
+    return customSelect(
+      'SELECT * FROM period_rules WHERE tradition = ?1 AND enabled = 1',
+      variables: [Variable<String>(tradition)],
+      readsFrom: {this.periodRules},
+    ).asyncMap(this.periodRules.mapFromRow);
+  }
+
+  Selectable<CityRow> cityById(String id) {
+    return customSelect(
+      'SELECT * FROM cities WHERE id = ?1',
+      variables: [Variable<String>(id)],
+      readsFrom: {this.cities},
+    ).asyncMap(this.cities.mapFromRow);
+  }
+
+  Selectable<NameRow> allNames() {
+    return customSelect(
+      'SELECT * FROM names ORDER BY kind, idx',
+      variables: [],
+      readsFrom: {this.names},
+    ).asyncMap(this.names.mapFromRow);
+  }
+
+  Selectable<PackRow> packsOfTradition(String tradition, String kind) {
+    return customSelect(
+      'SELECT * FROM packs WHERE tradition = ?1 AND kind = ?2',
+      variables: [Variable<String>(tradition), Variable<String>(kind)],
+      readsFrom: {this.packs},
+    ).asyncMap(this.packs.mapFromRow);
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -7094,13 +7190,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     observances,
     observanceDates,
     observanceWindows,
+    lunarMonths,
+    periodRules,
     reminders,
     settings,
     errorReportsQueue,
     transitionsByStart,
     transitionsByEnd,
-    lunarMonths,
-    periodRules,
   ];
 }
 
@@ -11724,540 +11820,6 @@ typedef $ObservanceWindowsProcessedTableManager =
       ObservanceWindowRow,
       PrefetchHooks Function({bool packId})
     >;
-typedef $RemindersCreateCompanionBuilder = RemindersCompanion Function({
-  Value<int> id,
-  required String targetKind,
-  required String targetId,
-  Value<int> offsetMinutes,
-  Value<String?> timeOfDay,
-  Value<int> enabled,
-  required String createdAt,
-});
-typedef $RemindersUpdateCompanionBuilder = RemindersCompanion Function({
-  Value<int> id,
-  Value<String> targetKind,
-  Value<String> targetId,
-  Value<int> offsetMinutes,
-  Value<String?> timeOfDay,
-  Value<int> enabled,
-  Value<String> createdAt,
-});
-
-class $RemindersFilterComposer extends Composer<_$AppDatabase, Reminders> {
-  $RemindersFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get targetKind => $composableBuilder(
-    column: $table.targetKind,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get targetId => $composableBuilder(
-    column: $table.targetId,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get offsetMinutes => $composableBuilder(
-    column: $table.offsetMinutes,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get timeOfDay => $composableBuilder(
-    column: $table.timeOfDay,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get enabled => $composableBuilder(
-    column: $table.enabled,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
-}
-
-class $RemindersOrderingComposer extends Composer<_$AppDatabase, Reminders> {
-  $RemindersOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get targetKind => $composableBuilder(
-    column: $table.targetKind,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get targetId => $composableBuilder(
-    column: $table.targetId,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get offsetMinutes => $composableBuilder(
-    column: $table.offsetMinutes,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get timeOfDay => $composableBuilder(
-    column: $table.timeOfDay,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get enabled => $composableBuilder(
-    column: $table.enabled,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
-}
-
-class $RemindersAnnotationComposer extends Composer<_$AppDatabase, Reminders> {
-  $RemindersAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get targetKind => $composableBuilder(
-    column: $table.targetKind,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get targetId =>
-      $composableBuilder(column: $table.targetId, builder: (column) => column);
-
-  GeneratedColumn<int> get offsetMinutes => $composableBuilder(
-    column: $table.offsetMinutes,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<String> get timeOfDay =>
-      $composableBuilder(column: $table.timeOfDay, builder: (column) => column);
-
-  GeneratedColumn<int> get enabled =>
-      $composableBuilder(column: $table.enabled, builder: (column) => column);
-
-  GeneratedColumn<String> get createdAt =>
-      $composableBuilder(column: $table.createdAt, builder: (column) => column);
-}
-
-class $RemindersTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          Reminders,
-          ReminderRow,
-          $RemindersFilterComposer,
-          $RemindersOrderingComposer,
-          $RemindersAnnotationComposer,
-          $RemindersCreateCompanionBuilder,
-          $RemindersUpdateCompanionBuilder,
-          (ReminderRow, BaseReferences<_$AppDatabase, Reminders, ReminderRow>),
-          ReminderRow,
-          PrefetchHooks Function()
-        > {
-  $RemindersTableManager(_$AppDatabase db, Reminders table)
-    : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $RemindersFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $RemindersOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $RemindersAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> targetKind = const Value.absent(),
-                Value<String> targetId = const Value.absent(),
-                Value<int> offsetMinutes = const Value.absent(),
-                Value<String?> timeOfDay = const Value.absent(),
-                Value<int> enabled = const Value.absent(),
-                Value<String> createdAt = const Value.absent(),
-              }) => RemindersCompanion(
-                id: id,
-                targetKind: targetKind,
-                targetId: targetId,
-                offsetMinutes: offsetMinutes,
-                timeOfDay: timeOfDay,
-                enabled: enabled,
-                createdAt: createdAt,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                required String targetKind,
-                required String targetId,
-                Value<int> offsetMinutes = const Value.absent(),
-                Value<String?> timeOfDay = const Value.absent(),
-                Value<int> enabled = const Value.absent(),
-                required String createdAt,
-              }) => RemindersCompanion.insert(
-                id: id,
-                targetKind: targetKind,
-                targetId: targetId,
-                offsetMinutes: offsetMinutes,
-                timeOfDay: timeOfDay,
-                enabled: enabled,
-                createdAt: createdAt,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<Reminders, ReminderRow>(table),
-                  BaseReferences<_$AppDatabase, Reminders, ReminderRow>(
-                    db,
-                    table,
-                    e,
-                  ),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback: null,
-        ),
-      );
-}
-
-typedef $RemindersProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      Reminders,
-      ReminderRow,
-      $RemindersFilterComposer,
-      $RemindersOrderingComposer,
-      $RemindersAnnotationComposer,
-      $RemindersCreateCompanionBuilder,
-      $RemindersUpdateCompanionBuilder,
-      (ReminderRow, BaseReferences<_$AppDatabase, Reminders, ReminderRow>),
-      ReminderRow,
-      PrefetchHooks Function()
-    >;
-typedef $SettingsCreateCompanionBuilder = SettingsCompanion Function({
-  required String key,
-  required String value,
-  Value<int> rowid,
-});
-typedef $SettingsUpdateCompanionBuilder = SettingsCompanion Function({
-  Value<String> key,
-  Value<String> value,
-  Value<int> rowid,
-});
-
-class $SettingsFilterComposer extends Composer<_$AppDatabase, Settings> {
-  $SettingsFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<String> get key => $composableBuilder(
-    column: $table.key,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get value => $composableBuilder(
-    column: $table.value,
-    builder: (column) => ColumnFilters(column),
-  );
-}
-
-class $SettingsOrderingComposer extends Composer<_$AppDatabase, Settings> {
-  $SettingsOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<String> get key => $composableBuilder(
-    column: $table.key,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get value => $composableBuilder(
-    column: $table.value,
-    builder: (column) => ColumnOrderings(column),
-  );
-}
-
-class $SettingsAnnotationComposer extends Composer<_$AppDatabase, Settings> {
-  $SettingsAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<String> get key =>
-      $composableBuilder(column: $table.key, builder: (column) => column);
-
-  GeneratedColumn<String> get value =>
-      $composableBuilder(column: $table.value, builder: (column) => column);
-}
-
-class $SettingsTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          Settings,
-          SettingRow,
-          $SettingsFilterComposer,
-          $SettingsOrderingComposer,
-          $SettingsAnnotationComposer,
-          $SettingsCreateCompanionBuilder,
-          $SettingsUpdateCompanionBuilder,
-          (SettingRow, BaseReferences<_$AppDatabase, Settings, SettingRow>),
-          SettingRow,
-          PrefetchHooks Function()
-        > {
-  $SettingsTableManager(_$AppDatabase db, Settings table)
-    : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $SettingsFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $SettingsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $SettingsAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> key = const Value.absent(),
-            Value<String> value = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) => SettingsCompanion(key: key, value: value, rowid: rowid),
-          createCompanionCallback: ({
-            required String key,
-            required String value,
-            Value<int> rowid = const Value.absent(),
-          }) => SettingsCompanion.insert(key: key, value: value, rowid: rowid),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<Settings, SettingRow>(table),
-                  BaseReferences<_$AppDatabase, Settings, SettingRow>(
-                    db,
-                    table,
-                    e,
-                  ),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback: null,
-        ),
-      );
-}
-
-typedef $SettingsProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      Settings,
-      SettingRow,
-      $SettingsFilterComposer,
-      $SettingsOrderingComposer,
-      $SettingsAnnotationComposer,
-      $SettingsCreateCompanionBuilder,
-      $SettingsUpdateCompanionBuilder,
-      (SettingRow, BaseReferences<_$AppDatabase, Settings, SettingRow>),
-      SettingRow,
-      PrefetchHooks Function()
-    >;
-typedef $ErrorReportsQueueCreateCompanionBuilder =
-    ErrorReportsQueueCompanion Function({
-      Value<int> id,
-      required String payload,
-      required String createdAt,
-    });
-typedef $ErrorReportsQueueUpdateCompanionBuilder =
-    ErrorReportsQueueCompanion Function({
-      Value<int> id,
-      Value<String> payload,
-      Value<String> createdAt,
-    });
-
-class $ErrorReportsQueueFilterComposer
-    extends Composer<_$AppDatabase, ErrorReportsQueue> {
-  $ErrorReportsQueueFilterComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get payload => $composableBuilder(
-    column: $table.payload,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
-}
-
-class $ErrorReportsQueueOrderingComposer
-    extends Composer<_$AppDatabase, ErrorReportsQueue> {
-  $ErrorReportsQueueOrderingComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get payload => $composableBuilder(
-    column: $table.payload,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
-}
-
-class $ErrorReportsQueueAnnotationComposer
-    extends Composer<_$AppDatabase, ErrorReportsQueue> {
-  $ErrorReportsQueueAnnotationComposer({
-    required super.$db,
-    required super.$table,
-    super.joinBuilder,
-    super.$addJoinBuilderToRootComposer,
-    super.$removeJoinBuilderFromRootComposer,
-  });
-  GeneratedColumn<int> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => column);
-
-  GeneratedColumn<String> get payload =>
-      $composableBuilder(column: $table.payload, builder: (column) => column);
-
-  GeneratedColumn<String> get createdAt =>
-      $composableBuilder(column: $table.createdAt, builder: (column) => column);
-}
-
-class $ErrorReportsQueueTableManager
-    extends
-        RootTableManager<
-          _$AppDatabase,
-          ErrorReportsQueue,
-          QueuedErrorReportRow,
-          $ErrorReportsQueueFilterComposer,
-          $ErrorReportsQueueOrderingComposer,
-          $ErrorReportsQueueAnnotationComposer,
-          $ErrorReportsQueueCreateCompanionBuilder,
-          $ErrorReportsQueueUpdateCompanionBuilder,
-          (
-            QueuedErrorReportRow,
-            BaseReferences<
-              _$AppDatabase,
-              ErrorReportsQueue,
-              QueuedErrorReportRow
-            >,
-          ),
-          QueuedErrorReportRow,
-          PrefetchHooks Function()
-        > {
-  $ErrorReportsQueueTableManager(_$AppDatabase db, ErrorReportsQueue table)
-    : super(
-        TableManagerState(
-          db: db,
-          table: table,
-          createFilteringComposer: () =>
-              $ErrorReportsQueueFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $ErrorReportsQueueOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $ErrorReportsQueueAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> payload = const Value.absent(),
-                Value<String> createdAt = const Value.absent(),
-              }) => ErrorReportsQueueCompanion(
-                id: id,
-                payload: payload,
-                createdAt: createdAt,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                required String payload,
-                required String createdAt,
-              }) => ErrorReportsQueueCompanion.insert(
-                id: id,
-                payload: payload,
-                createdAt: createdAt,
-              ),
-          withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<ErrorReportsQueue, QueuedErrorReportRow>(table),
-                  BaseReferences<
-                    _$AppDatabase,
-                    ErrorReportsQueue,
-                    QueuedErrorReportRow
-                  >(db, table, e),
-                ),
-              )
-              .toList(),
-          prefetchHooksCallback: null,
-        ),
-      );
-}
-
-typedef $ErrorReportsQueueProcessedTableManager =
-    ProcessedTableManager<
-      _$AppDatabase,
-      ErrorReportsQueue,
-      QueuedErrorReportRow,
-      $ErrorReportsQueueFilterComposer,
-      $ErrorReportsQueueOrderingComposer,
-      $ErrorReportsQueueAnnotationComposer,
-      $ErrorReportsQueueCreateCompanionBuilder,
-      $ErrorReportsQueueUpdateCompanionBuilder,
-      (
-        QueuedErrorReportRow,
-        BaseReferences<_$AppDatabase, ErrorReportsQueue, QueuedErrorReportRow>,
-      ),
-      QueuedErrorReportRow,
-      PrefetchHooks Function()
-    >;
 typedef $LunarMonthsCreateCompanionBuilder = LunarMonthsCompanion Function({
   required String tradition,
   required int monthIdx,
@@ -12979,6 +12541,540 @@ typedef $PeriodRulesProcessedTableManager =
       PeriodRuleRow,
       PrefetchHooks Function({bool packId})
     >;
+typedef $RemindersCreateCompanionBuilder = RemindersCompanion Function({
+  Value<int> id,
+  required String targetKind,
+  required String targetId,
+  Value<int> offsetMinutes,
+  Value<String?> timeOfDay,
+  Value<int> enabled,
+  required String createdAt,
+});
+typedef $RemindersUpdateCompanionBuilder = RemindersCompanion Function({
+  Value<int> id,
+  Value<String> targetKind,
+  Value<String> targetId,
+  Value<int> offsetMinutes,
+  Value<String?> timeOfDay,
+  Value<int> enabled,
+  Value<String> createdAt,
+});
+
+class $RemindersFilterComposer extends Composer<_$AppDatabase, Reminders> {
+  $RemindersFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get targetKind => $composableBuilder(
+    column: $table.targetKind,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get targetId => $composableBuilder(
+    column: $table.targetId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get offsetMinutes => $composableBuilder(
+    column: $table.offsetMinutes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get timeOfDay => $composableBuilder(
+    column: $table.timeOfDay,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get enabled => $composableBuilder(
+    column: $table.enabled,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $RemindersOrderingComposer extends Composer<_$AppDatabase, Reminders> {
+  $RemindersOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get targetKind => $composableBuilder(
+    column: $table.targetKind,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get targetId => $composableBuilder(
+    column: $table.targetId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get offsetMinutes => $composableBuilder(
+    column: $table.offsetMinutes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get timeOfDay => $composableBuilder(
+    column: $table.timeOfDay,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get enabled => $composableBuilder(
+    column: $table.enabled,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $RemindersAnnotationComposer extends Composer<_$AppDatabase, Reminders> {
+  $RemindersAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get targetKind => $composableBuilder(
+    column: $table.targetKind,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get targetId =>
+      $composableBuilder(column: $table.targetId, builder: (column) => column);
+
+  GeneratedColumn<int> get offsetMinutes => $composableBuilder(
+    column: $table.offsetMinutes,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get timeOfDay =>
+      $composableBuilder(column: $table.timeOfDay, builder: (column) => column);
+
+  GeneratedColumn<int> get enabled =>
+      $composableBuilder(column: $table.enabled, builder: (column) => column);
+
+  GeneratedColumn<String> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $RemindersTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          Reminders,
+          ReminderRow,
+          $RemindersFilterComposer,
+          $RemindersOrderingComposer,
+          $RemindersAnnotationComposer,
+          $RemindersCreateCompanionBuilder,
+          $RemindersUpdateCompanionBuilder,
+          (ReminderRow, BaseReferences<_$AppDatabase, Reminders, ReminderRow>),
+          ReminderRow,
+          PrefetchHooks Function()
+        > {
+  $RemindersTableManager(_$AppDatabase db, Reminders table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $RemindersFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $RemindersOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $RemindersAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> targetKind = const Value.absent(),
+                Value<String> targetId = const Value.absent(),
+                Value<int> offsetMinutes = const Value.absent(),
+                Value<String?> timeOfDay = const Value.absent(),
+                Value<int> enabled = const Value.absent(),
+                Value<String> createdAt = const Value.absent(),
+              }) => RemindersCompanion(
+                id: id,
+                targetKind: targetKind,
+                targetId: targetId,
+                offsetMinutes: offsetMinutes,
+                timeOfDay: timeOfDay,
+                enabled: enabled,
+                createdAt: createdAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String targetKind,
+                required String targetId,
+                Value<int> offsetMinutes = const Value.absent(),
+                Value<String?> timeOfDay = const Value.absent(),
+                Value<int> enabled = const Value.absent(),
+                required String createdAt,
+              }) => RemindersCompanion.insert(
+                id: id,
+                targetKind: targetKind,
+                targetId: targetId,
+                offsetMinutes: offsetMinutes,
+                timeOfDay: timeOfDay,
+                enabled: enabled,
+                createdAt: createdAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<Reminders, ReminderRow>(table),
+                  BaseReferences<_$AppDatabase, Reminders, ReminderRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $RemindersProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      Reminders,
+      ReminderRow,
+      $RemindersFilterComposer,
+      $RemindersOrderingComposer,
+      $RemindersAnnotationComposer,
+      $RemindersCreateCompanionBuilder,
+      $RemindersUpdateCompanionBuilder,
+      (ReminderRow, BaseReferences<_$AppDatabase, Reminders, ReminderRow>),
+      ReminderRow,
+      PrefetchHooks Function()
+    >;
+typedef $SettingsCreateCompanionBuilder = SettingsCompanion Function({
+  required String key,
+  required String value,
+  Value<int> rowid,
+});
+typedef $SettingsUpdateCompanionBuilder = SettingsCompanion Function({
+  Value<String> key,
+  Value<String> value,
+  Value<int> rowid,
+});
+
+class $SettingsFilterComposer extends Composer<_$AppDatabase, Settings> {
+  $SettingsFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $SettingsOrderingComposer extends Composer<_$AppDatabase, Settings> {
+  $SettingsOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $SettingsAnnotationComposer extends Composer<_$AppDatabase, Settings> {
+  $SettingsAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get key =>
+      $composableBuilder(column: $table.key, builder: (column) => column);
+
+  GeneratedColumn<String> get value =>
+      $composableBuilder(column: $table.value, builder: (column) => column);
+}
+
+class $SettingsTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          Settings,
+          SettingRow,
+          $SettingsFilterComposer,
+          $SettingsOrderingComposer,
+          $SettingsAnnotationComposer,
+          $SettingsCreateCompanionBuilder,
+          $SettingsUpdateCompanionBuilder,
+          (SettingRow, BaseReferences<_$AppDatabase, Settings, SettingRow>),
+          SettingRow,
+          PrefetchHooks Function()
+        > {
+  $SettingsTableManager(_$AppDatabase db, Settings table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $SettingsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $SettingsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $SettingsAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> key = const Value.absent(),
+            Value<String> value = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) => SettingsCompanion(key: key, value: value, rowid: rowid),
+          createCompanionCallback: ({
+            required String key,
+            required String value,
+            Value<int> rowid = const Value.absent(),
+          }) => SettingsCompanion.insert(key: key, value: value, rowid: rowid),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<Settings, SettingRow>(table),
+                  BaseReferences<_$AppDatabase, Settings, SettingRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $SettingsProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      Settings,
+      SettingRow,
+      $SettingsFilterComposer,
+      $SettingsOrderingComposer,
+      $SettingsAnnotationComposer,
+      $SettingsCreateCompanionBuilder,
+      $SettingsUpdateCompanionBuilder,
+      (SettingRow, BaseReferences<_$AppDatabase, Settings, SettingRow>),
+      SettingRow,
+      PrefetchHooks Function()
+    >;
+typedef $ErrorReportsQueueCreateCompanionBuilder =
+    ErrorReportsQueueCompanion Function({
+      Value<int> id,
+      required String payload,
+      required String createdAt,
+    });
+typedef $ErrorReportsQueueUpdateCompanionBuilder =
+    ErrorReportsQueueCompanion Function({
+      Value<int> id,
+      Value<String> payload,
+      Value<String> createdAt,
+    });
+
+class $ErrorReportsQueueFilterComposer
+    extends Composer<_$AppDatabase, ErrorReportsQueue> {
+  $ErrorReportsQueueFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get payload => $composableBuilder(
+    column: $table.payload,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $ErrorReportsQueueOrderingComposer
+    extends Composer<_$AppDatabase, ErrorReportsQueue> {
+  $ErrorReportsQueueOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get payload => $composableBuilder(
+    column: $table.payload,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $ErrorReportsQueueAnnotationComposer
+    extends Composer<_$AppDatabase, ErrorReportsQueue> {
+  $ErrorReportsQueueAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get payload =>
+      $composableBuilder(column: $table.payload, builder: (column) => column);
+
+  GeneratedColumn<String> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+}
+
+class $ErrorReportsQueueTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          ErrorReportsQueue,
+          QueuedErrorReportRow,
+          $ErrorReportsQueueFilterComposer,
+          $ErrorReportsQueueOrderingComposer,
+          $ErrorReportsQueueAnnotationComposer,
+          $ErrorReportsQueueCreateCompanionBuilder,
+          $ErrorReportsQueueUpdateCompanionBuilder,
+          (
+            QueuedErrorReportRow,
+            BaseReferences<
+              _$AppDatabase,
+              ErrorReportsQueue,
+              QueuedErrorReportRow
+            >,
+          ),
+          QueuedErrorReportRow,
+          PrefetchHooks Function()
+        > {
+  $ErrorReportsQueueTableManager(_$AppDatabase db, ErrorReportsQueue table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $ErrorReportsQueueFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $ErrorReportsQueueOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $ErrorReportsQueueAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> payload = const Value.absent(),
+                Value<String> createdAt = const Value.absent(),
+              }) => ErrorReportsQueueCompanion(
+                id: id,
+                payload: payload,
+                createdAt: createdAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String payload,
+                required String createdAt,
+              }) => ErrorReportsQueueCompanion.insert(
+                id: id,
+                payload: payload,
+                createdAt: createdAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<ErrorReportsQueue, QueuedErrorReportRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    ErrorReportsQueue,
+                    QueuedErrorReportRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $ErrorReportsQueueProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      ErrorReportsQueue,
+      QueuedErrorReportRow,
+      $ErrorReportsQueueFilterComposer,
+      $ErrorReportsQueueOrderingComposer,
+      $ErrorReportsQueueAnnotationComposer,
+      $ErrorReportsQueueCreateCompanionBuilder,
+      $ErrorReportsQueueUpdateCompanionBuilder,
+      (
+        QueuedErrorReportRow,
+        BaseReferences<_$AppDatabase, ErrorReportsQueue, QueuedErrorReportRow>,
+      ),
+      QueuedErrorReportRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -12998,16 +13094,16 @@ class $AppDatabaseManager {
       $ObservanceDatesTableManager(_db, _db.observanceDates);
   $ObservanceWindowsTableManager get observanceWindows =>
       $ObservanceWindowsTableManager(_db, _db.observanceWindows);
+  $LunarMonthsTableManager get lunarMonths =>
+      $LunarMonthsTableManager(_db, _db.lunarMonths);
+  $PeriodRulesTableManager get periodRules =>
+      $PeriodRulesTableManager(_db, _db.periodRules);
   $RemindersTableManager get reminders =>
       $RemindersTableManager(_db, _db.reminders);
   $SettingsTableManager get settings =>
       $SettingsTableManager(_db, _db.settings);
   $ErrorReportsQueueTableManager get errorReportsQueue =>
       $ErrorReportsQueueTableManager(_db, _db.errorReportsQueue);
-  $LunarMonthsTableManager get lunarMonths =>
-      $LunarMonthsTableManager(_db, _db.lunarMonths);
-  $PeriodRulesTableManager get periodRules =>
-      $PeriodRulesTableManager(_db, _db.periodRules);
 }
 
 class ObservancesBetweenResult {

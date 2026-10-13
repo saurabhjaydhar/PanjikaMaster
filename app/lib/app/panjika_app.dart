@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/l10n/app_language.dart';
 import '../core/l10n/l10n_providers.dart';
 import '../core/settings/settings.dart';
+import '../core/time/clock.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
@@ -36,6 +37,14 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
   @override
   void didChangeLocales(List<Locale>? locales) {
     ref.read(appLanguageProvider.notifier).syncFromSystem();
+  }
+
+  /// Timers don't run in the background: re-read the clock on return (FR-HOME-08).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ref.read(nowProvider.notifier).refresh();
+    }
   }
 
   @override

@@ -1,0 +1,12 @@
+{
+  "file": "de440s.bsp",
+  "sources": [
+    "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp",
+    "https://ssd.jpl.nasa.gov/ftp/eph/planets/bsp/de440s.bsp"
+  ],
+  "size": null,
+  "sha256": null,
+  "recorded_at": null,
+  "confirmed_by": null,
+  "confirmed_on": null
+}

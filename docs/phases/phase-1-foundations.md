@@ -14,7 +14,7 @@
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
-| T-104 🟡 | `flutter create` in `app/` with placeholder app ID (`TODO(Q11)`), targetSdk 36, edge-to-edge; minSdk recorded as an ADR in `docs/decisions/` | Debug and release builds start on an emulator — *builds verified (placeholder ID, targetSdk 36, minSdk 24); emulator launch runs in CI with T-115 (no KVM in the agent container)* |
+| T-104 ✅ | `flutter create` in `app/` with placeholder app ID (`TODO(Q11)`), targetSdk 36, edge-to-edge; minSdk recorded as an ADR in `docs/decisions/` | Debug and release builds start on an emulator — *verified: release APK built in CI; app launched on the Android 14 emulator (PR #2)* |
 | T-105 ✅ | Add the packages needed now (Riverpod 3, Drift + drift_flutter, go_router, flutter_localizations, intl) | Each in `docs/dependencies.md` |
 | T-106 ✅ | Drift database mirroring `schema.sql`, migration framework, DAOs for the tables Today needs | Test: Drift columns == `schema.sql` columns; in-memory DB tests |
 | T-107 ✅ | Localisation foundation: `app_bn.arb`/`app_en.arb`, locale controller (in-app setting + Android per-app language `locales_config.xml`), device-locale default, `PanjikaFormatter` (dates, times, ranges, numerals, plurals), independent numeral setting, ARB parity + no-literal checks wired into `ci-app.yml` (FR-L10N-01..04, FR-L10N-06) | Language switch re-renders without restart; formatter tests for both languages × both numeral styles; CI fails on a missing key |
@@ -31,21 +31,21 @@
 ### DevOps (CI/CD, builds)
 | ID | Task | Done when |
 |---|---|---|
-| T-113 🟡 | `ci-app.yml`: `flutter analyze`, `flutter test`, build release APK; fail if the release bundle contains a sample marker | Green on PR — *all steps pass locally; green on PR pending* |
+| T-113 ✅ | `ci-app.yml`: `flutter analyze`, `flutter test`, build release APK; fail if the release bundle contains a sample marker | Green on PR — *green on PR #2* |
 | T-114 ✅ | `ci-docs.yml`: run `scripts/check_docs.py` (every FR/US mapped to a task, every § reference resolves) | Green on PR; fails on an unmapped requirement or broken § reference |
 
 ### QA
 | ID | Task | Done when |
 |---|---|---|
-| T-115 🟡 | Integration smoke test: launch → Today in Bengali, switch to English, back | Passes on an emulator in CI or locally — *written and compiled for Android; runs in the `integration` job of ci-app.yml (Android 14 emulator) on the first PR* |
+| T-115 ✅ | Integration smoke test: launch → Today in Bengali, switch to English, back | Passes on an emulator in CI or locally — *passed on the Android 14 emulator in CI (PR #2), incl. the real per-app language channel* |
 
 ### Human gates
 None required. Optional: look at the Today skeleton on a phone; protect `main` in GitHub settings (require CI).
 
 ### Exit criteria
-- [ ] All tasks done, all CIs green
-- [ ] Today opens in Bengali and English; switching is instant
-- [ ] Release build contains no sample data
+- [x] All tasks done, all CIs green
+- [x] Today opens in Bengali and English; switching is instant
+- [x] Release build contains no sample data
 
 ### Not in this phase
 Real astronomy, signing, hosting, other screens, reminders, ads.
