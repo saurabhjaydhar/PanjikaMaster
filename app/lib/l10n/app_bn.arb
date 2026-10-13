@@ -757,5 +757,165 @@
   "aboutProvenance": "প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।",
   "@aboutProvenance": {
     "description": "About screen: the provenance promise."
+  },
+  "bothLanguages": "{bn} · {en}",
+  "@bothLanguages": {
+    "description": "Layout pattern: the same text in Bengali then English, on the first onboarding step before a language is chosen.",
+    "placeholders": {
+      "bn": {
+        "type": "String"
+      },
+      "en": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingStep": "ধাপ {step}/{total}",
+  "@onboardingStep": {
+    "description": "Screen-reader label of the onboarding progress dots; numbers are formatted with the user's numerals.",
+    "placeholders": {
+      "step": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChooseLanguage": "ভাষা বেছে নিন",
+  "@onboardingChooseLanguage": {
+    "description": "Onboarding step 1 heading (spec §11.1)."
+  },
+  "onboardingLanguagePreview": "যেমন: {tithi}",
+  "@onboardingLanguagePreview": {
+    "description": "Preview line under each language option; tithi is a tithi name from the pack's names table (not today's data).",
+    "placeholders": {
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChangeLater": "পরে সেটিংসে বদলানো যাবে।",
+  "@onboardingChangeLater": {
+    "description": "Onboarding step 1 note."
+  },
+  "actionContinue": "এগিয়ে যান",
+  "@actionContinue": {
+    "description": "Onboarding primary button."
+  },
+  "onboardingTraditionTitle": "কোন পঞ্জিকা মেনে চলেন?",
+  "@onboardingTraditionTitle": {
+    "description": "Onboarding step 2 heading (spec §11.1, US-02)."
+  },
+  "onboardingTraditionNote": "দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।",
+  "@onboardingTraditionNote": {
+    "description": "Onboarding step 2 note (spec §11.1)."
+  },
+  "onboardingCityTitle": "আপনার শহর কোনটি?",
+  "@onboardingCityTitle": {
+    "description": "Onboarding step 3 heading."
+  },
+  "onboardingCityNote": "সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।",
+  "@onboardingCityNote": {
+    "description": "Onboarding step 3 note (FR-LOC-05)."
+  },
+  "onboardingRemindersTitle": "অনুস্মারক চান?",
+  "@onboardingRemindersTitle": {
+    "description": "Onboarding step 4 heading (optional step)."
+  },
+  "onboardingRemindersBody": "উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।",
+  "@onboardingRemindersBody": {
+    "description": "Onboarding step 4 explanation; the permission prompt comes later (T-507)."
+  },
+  "onboardingRemindersYes": "হ্যাঁ, মনে করিয়ে দিন",
+  "@onboardingRemindersYes": {
+    "description": "Onboarding step 4: opt in to reminders."
+  },
+  "onboardingRemindersNo": "এখন নয়",
+  "@onboardingRemindersNo": {
+    "description": "Onboarding step 4: skip reminders."
+  },
+  "cityListProvenance": "{tradition} · প্রতিটি শহরের আজকের সূর্যোদয়, {timeZone} · তথ্য: {packs} · {status}",
+  "@cityListProvenance": {
+    "description": "Provenance footer of the city picker, whose rows show each city's sunrise (CLAUDE.md: no datum without its provenance).",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "useMyLocation": "আমার অবস্থান ব্যবহার করুন",
+  "@useMyLocation": {
+    "description": "City picker and onboarding: find the nearest city (FR-LOC-02)."
+  },
+  "locating": "অবস্থান খোঁজা হচ্ছে…",
+  "@locating": {
+    "description": "Shown on the Use my location button while waiting for a fix."
+  },
+  "locationRationale": "কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।",
+  "@locationRationale": {
+    "description": "Rationale shown before the system location prompt (§19.1 L18, §19 location row)."
+  },
+  "actionNotNow": "এখন নয়",
+  "@actionNotNow": {
+    "description": "Declines an optional action."
+  },
+  "nearestCity": "নিকটতম শহর: {city}, {distance} কিমি",
+  "@nearestCity": {
+    "description": "Result of Use my location (FR-LOC-02); distance is formatted with the user's numerals.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "cityFarWarning": "এই শহর {limit} কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।",
+  "@cityFarWarning": {
+    "description": "Warning when the nearest city is far (FR-LOC-03); limit is formatted with the user's numerals.",
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "actionChooseCity": "এই শহর বেছে নিন",
+  "@actionChooseCity": {
+    "description": "Confirms the nearest city."
+  },
+  "locationDenied": "অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।",
+  "@locationDenied": {
+    "description": "After the location permission is denied (FR-LOC-04)."
+  },
+  "locationDeniedForever": "অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।",
+  "@locationDeniedForever": {
+    "description": "After a permanent denial (FR-LOC-04)."
+  },
+  "actionOpenSettings": "সেটিংস খুলুন",
+  "@actionOpenSettings": {
+    "description": "Opens the phone's settings page for the app."
+  },
+  "locationOff": "ফোনের লোকেশন বন্ধ আছে।",
+  "@locationOff": {
+    "description": "When the phone's location service is off."
+  },
+  "actionTurnOn": "চালু করুন",
+  "@actionTurnOn": {
+    "description": "Opens the phone's location settings."
+  },
+  "locationUnavailable": "অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।",
+  "@locationUnavailable": {
+    "description": "When no location fix could be had."
   }
 }

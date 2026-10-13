@@ -74,6 +74,7 @@ void main() {
           settingsSourceProvider.overrideWithValue(
             settings ??
                 MemorySettings({
+                  SettingKey.onboardingDone: '1',
                   SettingKey.theme: theme.name,
                   SettingKey.lastManifest: ?cachedManifest,
                 }),
@@ -210,6 +211,7 @@ void main() {
     'T-311: a server notice shows in the UI language and stays dismissed',
     (tester) async {
       final settings = MemorySettings({
+        SettingKey.onboardingDone: '1',
         SettingKey.lastManifest: manifestOffering(
           const [],
           notices: [

@@ -46,7 +46,10 @@ void main() {
     Size size = const Size(360, 1200),
     String route = '/more',
   }) async {
-    settings = MemorySettings({SettingKey.theme: theme.name});
+    settings = MemorySettings({
+      SettingKey.onboardingDone: '1',
+      SettingKey.theme: theme.name,
+    });
     tester.view
       ..physicalSize = size
       ..devicePixelRatio = 1;

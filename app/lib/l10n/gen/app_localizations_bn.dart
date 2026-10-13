@@ -498,4 +498,112 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get aboutProvenance =>
       'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।';
+
+  @override
+  String bothLanguages(String bn, String en) {
+    return '$bn · $en';
+  }
+
+  @override
+  String onboardingStep(String step, String total) {
+    return 'ধাপ $step/$total';
+  }
+
+  @override
+  String get onboardingChooseLanguage => 'ভাষা বেছে নিন';
+
+  @override
+  String onboardingLanguagePreview(String tithi) {
+    return 'যেমন: $tithi';
+  }
+
+  @override
+  String get onboardingChangeLater => 'পরে সেটিংসে বদলানো যাবে।';
+
+  @override
+  String get actionContinue => 'এগিয়ে যান';
+
+  @override
+  String get onboardingTraditionTitle => 'কোন পঞ্জিকা মেনে চলেন?';
+
+  @override
+  String get onboardingTraditionNote =>
+      'দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।';
+
+  @override
+  String get onboardingCityTitle => 'আপনার শহর কোনটি?';
+
+  @override
+  String get onboardingCityNote =>
+      'সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।';
+
+  @override
+  String get onboardingRemindersTitle => 'অনুস্মারক চান?';
+
+  @override
+  String get onboardingRemindersBody =>
+      'উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।';
+
+  @override
+  String get onboardingRemindersYes => 'হ্যাঁ, মনে করিয়ে দিন';
+
+  @override
+  String get onboardingRemindersNo => 'এখন নয়';
+
+  @override
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  ) {
+    return '$tradition · প্রতিটি শহরের আজকের সূর্যোদয়, $timeZone · তথ্য: $packs · $status';
+  }
+
+  @override
+  String get useMyLocation => 'আমার অবস্থান ব্যবহার করুন';
+
+  @override
+  String get locating => 'অবস্থান খোঁজা হচ্ছে…';
+
+  @override
+  String get locationRationale =>
+      'কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।';
+
+  @override
+  String get actionNotNow => 'এখন নয়';
+
+  @override
+  String nearestCity(String city, String distance) {
+    return 'নিকটতম শহর: $city, $distance কিমি';
+  }
+
+  @override
+  String cityFarWarning(String limit) {
+    return 'এই শহর $limit কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।';
+  }
+
+  @override
+  String get actionChooseCity => 'এই শহর বেছে নিন';
+
+  @override
+  String get locationDenied =>
+      'অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।';
+
+  @override
+  String get locationDeniedForever =>
+      'অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।';
+
+  @override
+  String get actionOpenSettings => 'সেটিংস খুলুন';
+
+  @override
+  String get locationOff => 'ফোনের লোকেশন বন্ধ আছে।';
+
+  @override
+  String get actionTurnOn => 'চালু করুন';
+
+  @override
+  String get locationUnavailable =>
+      'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।';
 }

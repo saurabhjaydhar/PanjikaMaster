@@ -7,7 +7,7 @@
 ### Frontend (screens & UI)
 | ID | Task | Done when |
 |---|---|---|
-| T-401 | Onboarding: bilingual language step → tradition → city → notifications (skippable), progress dots | US-02, US-09 |
+| T-401 ✅ | Onboarding: bilingual language step → tradition → city → notifications (skippable), progress dots | US-02, US-09 |
 | T-402 ✅ | Today complete: periods with active highlight, today's observances, next 3 upcoming, live updates across transitions, pull-to-refresh | US-01, US-11, FR-HOME-01..09 |
 | T-403 ✅ | Calendar: Bengali/Gregorian modes, swipe + arrows, markers by shape, legend sheet, jump-to-month sheet, long-press peek, selected-day strip, year roll-over, "আজ/Today" button | US-06, US-08, FR-CAL-01..07 |
 | T-404 ✅ | Day detail: all sections in §11.4 order, kshaya/vriddhi lines, "(পরদিন)/(next day)", swipe between days | FR-DAY-01..05 |
@@ -19,7 +19,7 @@
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
-| T-409 | Location: coarse permission on tap only, nearest supported city with distance, > 50 km warning, denial never blocks (Kolkata default) | FR-LOC-02..04; tests with a fake location service |
+| T-409 ✅ | Location: coarse permission on tap only, nearest supported city with distance, > 50 km warning, denial never blocks (Kolkata default) | FR-LOC-02..04; tests with a fake location service |
 | T-410 ✅ | Tradition change: Surya Siddhanta shows "coming soon" and keeps Drik; change triggers reload and reminder reschedule hook | Unit + widget tests |
 | T-411 | Deep-link routes (`/day/YYYY-MM-DD`, `/festival/<id>`) for later share links | Route tests |
 | T-412 | Screen-reader labels per language (FR-L10N-08), second-script line excluded or locale-tagged | Semantics tests in both languages |

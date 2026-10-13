@@ -500,4 +500,112 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aboutProvenance =>
       'Every value is shown with its panjika tradition, city, time zone and verification status.';
+
+  @override
+  String bothLanguages(String bn, String en) {
+    return '$bn · $en';
+  }
+
+  @override
+  String onboardingStep(String step, String total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get onboardingChooseLanguage => 'Choose your language';
+
+  @override
+  String onboardingLanguagePreview(String tithi) {
+    return 'For example: $tithi';
+  }
+
+  @override
+  String get onboardingChangeLater => 'You can change this later.';
+
+  @override
+  String get actionContinue => 'Continue';
+
+  @override
+  String get onboardingTraditionTitle => 'Which panjika do you follow?';
+
+  @override
+  String get onboardingTraditionNote =>
+      'The two can put a festival on different days. You can change this in Settings.';
+
+  @override
+  String get onboardingCityTitle => 'Which is your city?';
+
+  @override
+  String get onboardingCityNote =>
+      'Sunrise, sunset and Rahu Kaal depend on your city. Tithis and festival dates don\'t.';
+
+  @override
+  String get onboardingRemindersTitle => 'Would you like reminders?';
+
+  @override
+  String get onboardingRemindersBody =>
+      'The app can remind you before festivals, Ekadashi, Purnima and Amavasya. You\'ll choose which ones under Reminders. Your phone will ask for permission when the first reminder is set.';
+
+  @override
+  String get onboardingRemindersYes => 'Yes, remind me';
+
+  @override
+  String get onboardingRemindersNo => 'Not now';
+
+  @override
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  ) {
+    return '$tradition · today\'s sunrise in each city, $timeZone · data: $packs · $status';
+  }
+
+  @override
+  String get useMyLocation => 'Use my location';
+
+  @override
+  String get locating => 'Finding your location…';
+
+  @override
+  String get locationRationale =>
+      'To find the nearest city, the app needs your phone\'s approximate location. It is used only on this phone; only the city you choose is remembered.';
+
+  @override
+  String get actionNotNow => 'Not now';
+
+  @override
+  String nearestCity(String city, String distance) {
+    return 'Nearest city: $city, $distance km';
+  }
+
+  @override
+  String cityFarWarning(String limit) {
+    return 'This city is more than $limit km away, so times may differ by a few minutes.';
+  }
+
+  @override
+  String get actionChooseCity => 'Choose this city';
+
+  @override
+  String get locationDenied =>
+      'The app works without it. Choose your city from the list.';
+
+  @override
+  String get locationDeniedForever =>
+      'Location permission is off. Choose your city from the list, or allow it in settings.';
+
+  @override
+  String get actionOpenSettings => 'Open settings';
+
+  @override
+  String get locationOff => 'Location is turned off on this phone.';
+
+  @override
+  String get actionTurnOn => 'Turn on';
+
+  @override
+  String get locationUnavailable =>
+      'Couldn\'t find your location. Choose your city from the list.';
 }

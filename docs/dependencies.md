@@ -28,6 +28,9 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | drift_dev | app (dev) | 2.35.1 | MIT | 2026-09-30 | Build host | Drift code generation | 2026-10-12 |
 | build_runner | app (dev) | 2.16.2 | BSD-3-Clause | 2026-10-07 | Build host | Runs code generation | 2026-10-12 |
 | sqlite3 | app (dev) | 3.5.2 | MIT | 2026-09 (3.x line) | All | Raw SQLite in tests to compare the Drift DB against `schema.sql` (already a runtime transitive dependency) | 2026-10-12 |
+| geolocator_android | app | 5.1.1+1 | MIT | 2026-10-02 | Android | One coarse location fix for "Use my location" (T-409). Used directly instead of the `geolocator` umbrella, whose Linux plugin pulls in D-Bus/GeoClue packages; iOS adds `geolocator_apple` with T-814. Its background location service is removed in the manifest; `forceLocationManager` avoids needing Play services at run time | 2026-10-13 |
+| geolocator_platform_interface | app (via geolocator_android) | 4.4.0 | MIT | 2026-09-26 | All | Types and exceptions | 2026-10-13 |
+| com.google.android.gms:play-services-location (Android library) | app (via geolocator_android) | 21.2.0 | Android Software Development Kit License | — | Android | Compiled in by geolocator_android; not called (LocationManager is forced) | 2026-10-13 |
 | package_info_plus | app | 10.2.2 | BSD-3-Clause | 2026-10-01 | Android, iOS, desktop, web | App version on the About screen (T-407) | 2026-10-13 |
 | package_info_plus_platform_interface | app (via package_info_plus) | 4.1.0 | BSD-3-Clause | 2026 | All | Platform interface | 2026-10-13 |
 | win32 | app (via package_info_plus) | 6.4.0 | BSD-3-Clause | 2026-08-05 | Windows only (unused on phones) | Windows version lookup | 2026-10-13 |

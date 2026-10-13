@@ -922,6 +922,179 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।'**
   String get aboutProvenance;
+
+  /// Layout pattern: the same text in Bengali then English, on the first onboarding step before a language is chosen.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bn} · {en}'**
+  String bothLanguages(String bn, String en);
+
+  /// Screen-reader label of the onboarding progress dots; numbers are formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'ধাপ {step}/{total}'**
+  String onboardingStep(String step, String total);
+
+  /// Onboarding step 1 heading (spec §11.1).
+  ///
+  /// In bn, this message translates to:
+  /// **'ভাষা বেছে নিন'**
+  String get onboardingChooseLanguage;
+
+  /// Preview line under each language option; tithi is a tithi name from the pack's names table (not today's data).
+  ///
+  /// In bn, this message translates to:
+  /// **'যেমন: {tithi}'**
+  String onboardingLanguagePreview(String tithi);
+
+  /// Onboarding step 1 note.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরে সেটিংসে বদলানো যাবে।'**
+  String get onboardingChangeLater;
+
+  /// Onboarding primary button.
+  ///
+  /// In bn, this message translates to:
+  /// **'এগিয়ে যান'**
+  String get actionContinue;
+
+  /// Onboarding step 2 heading (spec §11.1, US-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'কোন পঞ্জিকা মেনে চলেন?'**
+  String get onboardingTraditionTitle;
+
+  /// Onboarding step 2 note (spec §11.1).
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।'**
+  String get onboardingTraditionNote;
+
+  /// Onboarding step 3 heading.
+  ///
+  /// In bn, this message translates to:
+  /// **'আপনার শহর কোনটি?'**
+  String get onboardingCityTitle;
+
+  /// Onboarding step 3 note (FR-LOC-05).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।'**
+  String get onboardingCityNote;
+
+  /// Onboarding step 4 heading (optional step).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক চান?'**
+  String get onboardingRemindersTitle;
+
+  /// Onboarding step 4 explanation; the permission prompt comes later (T-507).
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।'**
+  String get onboardingRemindersBody;
+
+  /// Onboarding step 4: opt in to reminders.
+  ///
+  /// In bn, this message translates to:
+  /// **'হ্যাঁ, মনে করিয়ে দিন'**
+  String get onboardingRemindersYes;
+
+  /// Onboarding step 4: skip reminders.
+  ///
+  /// In bn, this message translates to:
+  /// **'এখন নয়'**
+  String get onboardingRemindersNo;
+
+  /// Provenance footer of the city picker, whose rows show each city's sunrise (CLAUDE.md: no datum without its provenance).
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} · প্রতিটি শহরের আজকের সূর্যোদয়, {timeZone} · তথ্য: {packs} · {status}'**
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  );
+
+  /// City picker and onboarding: find the nearest city (FR-LOC-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'আমার অবস্থান ব্যবহার করুন'**
+  String get useMyLocation;
+
+  /// Shown on the Use my location button while waiting for a fix.
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থান খোঁজা হচ্ছে…'**
+  String get locating;
+
+  /// Rationale shown before the system location prompt (§19.1 L18, §19 location row).
+  ///
+  /// In bn, this message translates to:
+  /// **'কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।'**
+  String get locationRationale;
+
+  /// Declines an optional action.
+  ///
+  /// In bn, this message translates to:
+  /// **'এখন নয়'**
+  String get actionNotNow;
+
+  /// Result of Use my location (FR-LOC-02); distance is formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'নিকটতম শহর: {city}, {distance} কিমি'**
+  String nearestCity(String city, String distance);
+
+  /// Warning when the nearest city is far (FR-LOC-03); limit is formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই শহর {limit} কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।'**
+  String cityFarWarning(String limit);
+
+  /// Confirms the nearest city.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই শহর বেছে নিন'**
+  String get actionChooseCity;
+
+  /// After the location permission is denied (FR-LOC-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।'**
+  String get locationDenied;
+
+  /// After a permanent denial (FR-LOC-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।'**
+  String get locationDeniedForever;
+
+  /// Opens the phone's settings page for the app.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস খুলুন'**
+  String get actionOpenSettings;
+
+  /// When the phone's location service is off.
+  ///
+  /// In bn, this message translates to:
+  /// **'ফোনের লোকেশন বন্ধ আছে।'**
+  String get locationOff;
+
+  /// Opens the phone's location settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'চালু করুন'**
+  String get actionTurnOn;
+
+  /// When no location fix could be had.
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।'**
+  String get locationUnavailable;
 }
 
 class _AppLocalizationsDelegate
