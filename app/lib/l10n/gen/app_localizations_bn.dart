@@ -803,4 +803,37 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get changeTime => 'সময় বদলান';
+
+  @override
+  String shareProvenance(String tradition) {
+    return '$tradition মতে';
+  }
+
+  @override
+  String shareProvenanceWithPlace(
+    String tradition,
+    String city,
+    String timeZone,
+  ) {
+    return '$tradition মতে · $city · $timeZone';
+  }
+
+  @override
+  String shareFestivalMessage(String name, String date) {
+    return '$name: $date';
+  }
+
+  @override
+  String shareDayMessage(String date, String tithi) {
+    return '$date · $tithi';
+  }
+
+  @override
+  String get shareAction => 'শেয়ার করুন';
+
+  @override
+  String get shareSheetTitle => 'শেয়ার কার্ড';
+
+  @override
+  String get shareInBoth => 'দুই ভাষায়';
 }

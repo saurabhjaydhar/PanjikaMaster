@@ -14,11 +14,15 @@ import '../../core/settings/settings.dart';
 import '../../core/time/civil_date.dart';
 import '../../core/time/clock.dart';
 import '../../data/repositories/panjika_providers.dart';
+import '../../domain/entities/name_table.dart';
 import '../../domain/entities/panjika.dart';
 import '../../domain/usecases/get_festival_detail.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../../data/notifications/notification_permission.dart';
 import '../reminders/notifications_off_note.dart';
+import '../share/share_cards.dart';
+import '../share/share_render.dart';
+import '../share/share_sheet.dart';
 import '../reminders/reminder_prefs.dart';
 
 final getFestivalDetailProvider = Provider<GetFestivalDetail>((ref) {
@@ -71,6 +75,25 @@ class _FestivalDetailScreenState extends ConsumerState<FestivalDetailScreen> {
       if (!allowed) return; // the toggle stays off
     }
     await ref.read(reminderConfigProvider.notifier).toggleFestival(id);
+  }
+
+  void _share(FestivalDetail d, FestivalDay day, NameTable names) {
+    final data = FestivalShareData(
+      id: d.observance.id,
+      name: d.observance.name,
+      category: d.observance.category,
+      date: day.date.date,
+      bengaliDate: day.bengaliDate,
+      names: names,
+      tradition: d.provenance.tradition,
+      isSample: d.provenance.isSample,
+    );
+    showShareSheet(
+      context,
+      card: (share) => FestivalShareCard(data: data, share: share),
+      message: (share) => data.message(share, link: shareLink(data.path)),
+      fileName: '${d.observance.id}-${day.date.date.toIso()}.png',
+    );
   }
 
   @override
@@ -242,25 +265,34 @@ class _FestivalDetailScreenState extends ConsumerState<FestivalDetailScreen> {
               const SizedBox(height: Space.xl),
               _VerificationCard(observance: day.date),
               const SizedBox(height: Space.xl),
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: reminderOn
-                    ? FilledButton.icon(
-                        onPressed: () => _toggleReminder(o.id, on: true),
-                        icon: const Icon(Icons.notifications_active),
-                        label: Text(l.reminderOn),
-                      )
-                    : OutlinedButton.icon(
-                        onPressed: () => _toggleReminder(o.id, on: false),
-                        icon: const Icon(Icons.notifications_none),
-                        label: Text(l.reminderOff),
-                      ),
+              Wrap(
+                spacing: Space.s,
+                runSpacing: Space.s,
+                children: [
+                  reminderOn
+                      ? FilledButton.icon(
+                          onPressed: () => _toggleReminder(o.id, on: true),
+                          icon: const Icon(Icons.notifications_active),
+                          label: Text(l.reminderOn),
+                        )
+                      : OutlinedButton.icon(
+                          onPressed: () => _toggleReminder(o.id, on: false),
+                          icon: const Icon(Icons.notifications_none),
+                          label: Text(l.reminderOff),
+                        ),
+                  OutlinedButton.icon(
+                    onPressed: names == null
+                        ? null
+                        : () => _share(d, day, names),
+                    icon: const Icon(Icons.share),
+                    label: Text(l.shareAction),
+                  ),
+                ],
               ),
               if (_refused) ...[
                 const SizedBox(height: Space.m),
                 const NotificationsOffNote(),
               ],
-              // TODO(T-509, T-513): the share button arrives with share cards.
               ProvenanceFooter(provenance: d.provenance, detailed: true),
             ],
           ),

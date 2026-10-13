@@ -807,4 +807,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get changeTime => 'Change the time';
+
+  @override
+  String shareProvenance(String tradition) {
+    return 'As per $tradition';
+  }
+
+  @override
+  String shareProvenanceWithPlace(
+    String tradition,
+    String city,
+    String timeZone,
+  ) {
+    return 'As per $tradition · $city · $timeZone';
+  }
+
+  @override
+  String shareFestivalMessage(String name, String date) {
+    return '$name: $date';
+  }
+
+  @override
+  String shareDayMessage(String date, String tithi) {
+    return '$date · $tithi';
+  }
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
+  String get shareSheetTitle => 'Share card';
+
+  @override
+  String get shareInBoth => 'Both';
 }

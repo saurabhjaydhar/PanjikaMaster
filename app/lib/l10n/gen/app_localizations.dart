@@ -1425,6 +1425,52 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'সময় বদলান'**
   String get changeTime;
+
+  /// Share card and message provenance line (spec §11.8), e.g. 'বিশুদ্ধ সিদ্ধান্ত মতে'.
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} মতে'**
+  String shareProvenance(String tradition);
+
+  /// Provenance for shared times (day card): tradition, city and time zone.
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} মতে · {city} · {timeZone}'**
+  String shareProvenanceWithPlace(
+    String tradition,
+    String city,
+    String timeZone,
+  );
+
+  /// Share message line for a festival.
+  ///
+  /// In bn, this message translates to:
+  /// **'{name}: {date}'**
+  String shareFestivalMessage(String name, String date);
+
+  /// Share message line for a day: its date and tithi with end time.
+  ///
+  /// In bn, this message translates to:
+  /// **'{date} · {tithi}'**
+  String shareDayMessage(String date, String tithi);
+
+  /// Share button and tooltip (FR-DAY-06, FR-FEST-03).
+  ///
+  /// In bn, this message translates to:
+  /// **'শেয়ার করুন'**
+  String get shareAction;
+
+  /// Share sheet title (spec §11.8).
+  ///
+  /// In bn, this message translates to:
+  /// **'শেয়ার কার্ড'**
+  String get shareSheetTitle;
+
+  /// Share language option: Bengali and English together; shown with the other language's word beside it.
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই ভাষায়'**
+  String get shareInBoth;
 }
 
 class _AppLocalizationsDelegate
