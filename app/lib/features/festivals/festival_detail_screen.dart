@@ -230,15 +230,15 @@ class _FestivalDetailScreenState extends ConsumerState<FestivalDetailScreen> {
                 child: reminderOn
                     ? FilledButton.icon(
                         onPressed: () => ref
-                            .read(festivalRemindersProvider.notifier)
-                            .toggle(o.id),
+                            .read(reminderConfigProvider.notifier)
+                            .toggleFestival(o.id),
                         icon: const Icon(Icons.notifications_active),
                         label: Text(l.reminderOn),
                       )
                     : OutlinedButton.icon(
                         onPressed: () => ref
-                            .read(festivalRemindersProvider.notifier)
-                            .toggle(o.id),
+                            .read(reminderConfigProvider.notifier)
+                            .toggleFestival(o.id),
                         icon: const Icon(Icons.notifications_none),
                         label: Text(l.reminderOff),
                       ),

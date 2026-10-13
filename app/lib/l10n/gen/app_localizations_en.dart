@@ -712,4 +712,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get festivalDaysLabel => 'Days';
+
+  @override
+  String reminderTomorrow(String name) {
+    return '$name tomorrow';
+  }
+
+  @override
+  String reminderToday(String name) {
+    return '$name today';
+  }
+
+  @override
+  String reminderTithiBegun(String name) {
+    return '$name has begun';
+  }
+
+  @override
+  String reminderTithiBegins(String time) {
+    return 'Tithi begins $time';
+  }
+
+  @override
+  String reminderBody(String detail, String tradition, String timeZone) {
+    return '$detail · $tradition · $timeZone';
+  }
+
+  @override
+  String get channelFestival => 'Festival reminders';
+
+  @override
+  String get channelFestivalDescription =>
+      'Reminders before the festivals you chose.';
+
+  @override
+  String get channelTithi => 'Tithi reminders';
+
+  @override
+  String get channelTithiDescription =>
+      'Ekadashi, Purnima and Amavasya reminders.';
 }

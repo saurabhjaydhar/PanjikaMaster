@@ -1,5 +1,7 @@
 import 'package:panjika/core/l10n/app_locale_channel.dart';
+import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/domain/location/location.dart';
+import 'package:panjika/domain/reminders/plan_reminders.dart';
 
 /// Stands in for the Android per-app language channel in widget tests: a real platform
 /// call never completes inside the test's fake clock.
@@ -43,4 +45,21 @@ class FakeLocationService implements LocationService {
 
   @override
   Future<void> openLocationSettings() async => locationSettingsOpened++;
+}
+
+/// Records reminder plans instead of scheduling them.
+class FakeNotificationScheduler implements NotificationScheduler {
+  final plans = <List<PlannedReminder>>[];
+  Map<ReminderChannel, ChannelText> channels = const {};
+
+  List<PlannedReminder> get last => plans.isEmpty ? const [] : plans.last;
+
+  @override
+  Future<void> replaceAll(
+    List<PlannedReminder> plan, {
+    required Map<ReminderChannel, ChannelText> channels,
+  }) async {
+    plans.add(plan);
+    this.channels = channels;
+  }
 }

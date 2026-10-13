@@ -29,6 +29,11 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | drift_dev | app (dev) | 2.35.1 | MIT | 2026-09-30 | Build host | Drift code generation | 2026-10-12 |
 | build_runner | app (dev) | 2.16.2 | BSD-3-Clause | 2026-10-07 | Build host | Runs code generation | 2026-10-12 |
 | sqlite3 | app (dev) | 3.5.2 | MIT | 2026-09 (3.x line) | All | Raw SQLite in tests to compare the Drift DB against `schema.sql` (already a runtime transitive dependency) | 2026-10-12 |
+| flutter_local_notifications | app | 22.3.2 | BSD-3-Clause | 2026-10-12 | Android (iOS/macOS/Linux/Windows/web also supported) | Scheduled reminders, channels in the UI language (spec §17, T-506). Needs core-library desugaring (`desugar_jdk_libs` 2.1.4, Apache-2.0, Android build only) | 2026-10-13 |
+| flutter_local_notifications_platform_interface / _linux / _windows / _web | app (via flutter_local_notifications) | 12.2.0 / 8.0.2 / 3.1.1 / 1.0.0 | BSD-3-Clause | 2026 | Their platforms (not compiled into Android) | Federated implementations | 2026-10-13 |
+| timezone | app | 0.11.2 | BSD-2-Clause | 2026-10-12 | All | `TZDateTime` for scheduling; only UTC is used (times are planned as instants), so no time-zone database is loaded | 2026-10-13 |
+| dbus | app (via flutter_local_notifications_linux) | 0.8.0 | MPL-2.0 (file-level copyleft; Linux desktop only, not in the Android app) | 2025 | Linux | Linux notifications backend | 2026-10-13 |
+| xml, petitparser | app (via flutter_local_notifications_windows) | 7.0.1, 7.0.2 | MIT | 2026 | Windows | Windows toast XML | 2026-10-13 |
 | geolocator_android | app | 5.1.1+1 | MIT | 2026-10-02 | Android | One coarse location fix for "Use my location" (T-409). Used directly instead of the `geolocator` umbrella, whose Linux plugin pulls in D-Bus/GeoClue packages; iOS adds `geolocator_apple` with T-814. Its background location service is removed in the manifest; `forceLocationManager` avoids needing Play services at run time | 2026-10-13 |
 | geolocator_platform_interface | app (via geolocator_android) | 4.4.0 | MIT | 2026-09-26 | All | Types and exceptions | 2026-10-13 |
 | com.google.android.gms:play-services-location (Android library) | app (via geolocator_android) | 21.2.0 | Android Software Development Kit License | — | Android | Compiled in by geolocator_android; not called (LocationManager is forced) | 2026-10-13 |

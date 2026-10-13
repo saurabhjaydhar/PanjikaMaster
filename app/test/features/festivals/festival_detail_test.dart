@@ -17,6 +17,7 @@ import 'package:panjika/core/settings/settings.dart';
 import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
+import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/features/festivals/festival_detail_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
@@ -29,7 +30,9 @@ void main() {
 
   late AppDatabase db;
   late MemorySettings settings;
+  late FakeNotificationScheduler scheduler;
   setUp(() async {
+    scheduler = FakeNotificationScheduler();
     db = AppDatabase(NativeDatabase.memory());
     await loadSamplePackIfEmpty(db);
   });
@@ -62,6 +65,7 @@ void main() {
           settingsSourceProvider.overrideWithValue(settings),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
           clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),
+          notificationSchedulerProvider.overrideWithValue(scheduler),
         ],
         child: const PanjikaApp(),
       ),
@@ -108,10 +112,11 @@ void main() {
     await tester.tap(find.text('Remind me'));
     await tester.pumpAndSettle();
     expect(find.text('Reminder on'), findsOneWidget);
-    expect(settings.read(SettingKey.festivalReminders), 'kali_puja');
+    expect(settings.read(SettingKey.reminders), contains('kali_puja'));
+    expect(scheduler.plans, isNotEmpty, reason: 'a change reschedules');
     await tester.tap(find.text('Reminder on'));
     await tester.pumpAndSettle();
-    expect(settings.read(SettingKey.festivalReminders), '');
+    expect(settings.read(SettingKey.reminders), isNull);
   });
 
   testWidgets('a multi-day festival has a day selector', (tester) async {

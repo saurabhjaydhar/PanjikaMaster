@@ -708,4 +708,43 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get festivalDaysLabel => 'দিনগুলি';
+
+  @override
+  String reminderTomorrow(String name) {
+    return 'আগামীকাল $name';
+  }
+
+  @override
+  String reminderToday(String name) {
+    return 'আজ $name';
+  }
+
+  @override
+  String reminderTithiBegun(String name) {
+    return '$name শুরু হলো';
+  }
+
+  @override
+  String reminderTithiBegins(String time) {
+    return 'তিথি শুরু $time';
+  }
+
+  @override
+  String reminderBody(String detail, String tradition, String timeZone) {
+    return '$detail · $tradition · $timeZone';
+  }
+
+  @override
+  String get channelFestival => 'উৎসব অনুস্মারক';
+
+  @override
+  String get channelFestivalDescription =>
+      'আপনার বেছে নেওয়া পার্বণের আগে মনে করিয়ে দেয়।';
+
+  @override
+  String get channelTithi => 'তিথি অনুস্মারক';
+
+  @override
+  String get channelTithiDescription =>
+      'একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।';
 }

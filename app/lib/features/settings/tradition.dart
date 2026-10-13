@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/settings/settings.dart';
+import '../reminders/reminder_service.dart';
 
 /// Traditions the engine computes. Surya Siddhanta needs its own engine, so the
 /// setting shows it as "coming soon" and keeps Drik (T-410).
@@ -9,9 +10,8 @@ final availableTraditionsProvider = Provider<Set<String>>(
 );
 
 /// Reminders depend on dates that a tradition or city change can move (spec §17).
-/// TODO(T-506): the scheduler plugs in here.
 final rescheduleRemindersProvider = Provider<Future<void> Function()>(
-  (ref) => () async {},
+  (ref) => ref.read(reminderServiceProvider).reschedule,
 );
 
 /// Switches the tradition if the engine supports it. Everything that reads the

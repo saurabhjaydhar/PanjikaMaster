@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keeps the notification icon through R8 resource shrinking (flutter_local_notifications
+     release notes). Replace with the real monochrome notification icon with T-216. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@mipmap/ic_launcher" />

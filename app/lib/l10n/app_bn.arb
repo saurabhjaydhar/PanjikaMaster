@@ -1076,5 +1076,72 @@
   "festivalDaysLabel": "দিনগুলি",
   "@festivalDaysLabel": {
     "description": "Screen-reader label of the multi-day selector (FR-FEST-04)."
+  },
+  "reminderTomorrow": "আগামীকাল {name}",
+  "@reminderTomorrow": {
+    "description": "Reminder title the evening before (FR-REM-04).",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderToday": "আজ {name}",
+  "@reminderToday": {
+    "description": "Reminder title on the morning of the day.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderTithiBegun": "{name} শুরু হলো",
+  "@reminderTithiBegun": {
+    "description": "Reminder title at tithi start.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderTithiBegins": "তিথি শুরু {time}",
+  "@reminderTithiBegins": {
+    "description": "Reminder detail: when the tithi begins, e.g. 'তিথি শুরু রাত ৯:১৪'.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderBody": "{detail} · {tradition} · {timeZone}",
+  "@reminderBody": {
+    "description": "Reminder body: the detail, then its provenance (tradition, IST).",
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      },
+      "tradition": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      }
+    }
+  },
+  "channelFestival": "উৎসব অনুস্মারক",
+  "@channelFestival": {
+    "description": "Android notification channel name (spec §17)."
+  },
+  "channelFestivalDescription": "আপনার বেছে নেওয়া পার্বণের আগে মনে করিয়ে দেয়।",
+  "@channelFestivalDescription": {
+    "description": "Android notification channel description."
+  },
+  "channelTithi": "তিথি অনুস্মারক",
+  "@channelTithi": {
+    "description": "Android notification channel name (spec §17)."
+  },
+  "channelTithiDescription": "একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।",
+  "@channelTithiDescription": {
+    "description": "Android notification channel description."
   }
 }

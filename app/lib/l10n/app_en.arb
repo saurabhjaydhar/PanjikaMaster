@@ -193,5 +193,14 @@
   "checkedOn": "Checked: {date}",
   "reminderOff": "Remind me",
   "reminderOn": "Reminder on",
-  "festivalDaysLabel": "Days"
+  "festivalDaysLabel": "Days",
+  "reminderTomorrow": "{name} tomorrow",
+  "reminderToday": "{name} today",
+  "reminderTithiBegun": "{name} has begun",
+  "reminderTithiBegins": "Tithi begins {time}",
+  "reminderBody": "{detail} · {tradition} · {timeZone}",
+  "channelFestival": "Festival reminders",
+  "channelFestivalDescription": "Reminders before the festivals you chose.",
+  "channelTithi": "Tithi reminders",
+  "channelTithiDescription": "Ekadashi, Purnima and Amavasya reminders."
 }
