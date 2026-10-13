@@ -1,13 +1,13 @@
 """`python -m engine build --from YYYY-MM-DD --to YYYY-MM-DD` (spec §6.4 step 1, T-207).
 
-Computes L0–L1 for a date range (tithi, nakshatra, yoga, karana and sankranti
-transitions) and writes a schema-conformant SQLite file with the names and one `packs`
-row. Run metadata (library versions, ephemeris checksum, models, row counts) goes in
-`packs.validation_summary`; the wall-clock time goes in a separate `.run.json`, so the
-database itself is byte-for-byte reproducible.
+Computes L0–L2 for a date range — tithi, nakshatra, yoga, karana and sankranti
+transitions, lunar months and Bengali dates — and writes a schema-conformant SQLite file
+with the names and one `packs` row. Run metadata (library versions, ephemeris checksum,
+models, row counts) goes in `packs.validation_summary`; the wall-clock time goes in a
+separate `.run.json`, so the database itself is byte-for-byte reproducible.
 
 Rows start unvalidated: the validation harness and pack builder (Phase 3) decide what
-ships. Bengali dates (Q4) and lunar months (Q2) are added in T-301.
+ships. The Bengal midnight rule (Q4) and lunar month naming (Q2) follow bengali.py.
 """
 
 import argparse
@@ -22,7 +22,7 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import engine
-from engine import ephemeris
+from engine import bengali, ephemeris
 from engine.astro import Astro
 from engine.panchanga import KINDS, search_in_chunks
 from engine.riseset import IST_OFFSET, SUNRISE_DEFINITION
@@ -62,6 +62,8 @@ def metadata(path: Path, *, dev: bool, counts: dict[str, int]) -> dict:
             "ayanamsa": "Lahiri: 23°15′00.658″ at 1956-03-21 0h TT + IAU 2006 p_A; true = + Δψ",
             "nutation": "IAU 2000B (ayanamsa); IAU 2000A (Skyfield frames)",
             "sunrise": SUNRISE_DEFINITION.name,  # TODO(Q3)
+            "bengal_midnight": bengali.MIDNIGHT.value,  # TODO(Q4)
+            "lunar_months": "amanta, named by the Sun's sign at the new moon",  # TODO(Q2)
         },
         "names_status": names.status(),
         "rows": counts,
@@ -90,13 +92,29 @@ def build(
     start, end = ist_midnight(first), ist_midnight(last + timedelta(days=1))
 
     pack_id = f"global-{tradition}-{first.isoformat()}-{last.isoformat()}-v{version}"
-    rows = []
-    for kind in KINDS:
-        rows += [
-            (pack_id, tradition, kind, s.idx, s.start, s.end)
-            for s in search_in_chunks(kind, astro, start, end)
-        ]
+    # Sankrantis and tithis a little beyond the range, so the first and last Bengali
+    # month and lunar month are complete; only spans overlapping the range are stored.
+    margin = {"sankranti": 40 * 86_400, "tithi": 31 * 86_400}
+    found = {
+        kind: search_in_chunks(kind, astro, start - margin.get(kind, 0), end + margin.get(kind, 0))
+        for kind in KINDS
+    }
+    rows = [
+        (pack_id, tradition, kind, s.idx, s.start, s.end)
+        for kind, spans in found.items()
+        for s in spans
+        if s.end > start and s.start < end
+    ]
+    dates = bengali.bengali_dates(found["sankranti"], first, last)
+    months = [
+        m
+        for m in bengali.lunar_months(
+            found["tithi"], lambda t: int(float(astro.sun_sidereal(t)) // 30)
+        )
+        if m.end > start and m.start < end
+    ]
     counts = {kind: sum(1 for r in rows if r[2] == kind) for kind in KINDS}
+    counts |= {"bengali_dates": len(dates), "lunar_months": len(months)}
 
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"{pack_id}.sqlite"
@@ -125,6 +143,14 @@ def build(
             "INSERT INTO transitions (pack_id, tradition, kind, idx, starts_utc, ends_utc)"
             " VALUES (?, ?, ?, ?, ?, ?)",
             sorted(rows, key=lambda r: (r[2], r[4])),
+        )
+        conn.executemany(
+            "INSERT INTO bengali_dates VALUES (?, ?, ?, ?, ?, ?)",
+            [(tradition, d.date.isoformat(), d.day, d.month_idx, d.year, pack_id) for d in dates],
+        )
+        conn.executemany(
+            "INSERT INTO lunar_months VALUES (?, ?, ?, ?, ?, ?)",
+            [(tradition, m.month_idx, int(m.is_adhik), m.start, m.end, pack_id) for m in months],
         )
         conn.executemany("INSERT INTO names VALUES (?, ?, ?, ?, ?, ?, ?, ?)", names.rows(pack_id))
     conn.execute("VACUUM")  # canonical page layout

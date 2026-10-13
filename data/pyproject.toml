@@ -5,6 +5,7 @@ description = "Build pipeline for Bangla Panjika data packs (PRD §6.4)"
 requires-python = ">=3.12"
 # Runtime dependencies are added per task (e.g. skyfield in T-103), each recorded in docs/dependencies.md.
 dependencies = [
+    "cryptography>=50,<51",
     "skyfield>=1.55,<2",
 ]
 

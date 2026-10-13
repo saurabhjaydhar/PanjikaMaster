@@ -5,6 +5,7 @@ import '../../domain/engine/interfaces.dart';
 import '../../domain/entities/name_ref.dart';
 import '../../domain/entities/name_table.dart';
 import '../../domain/entities/panjika.dart';
+import '../../domain/usecases/assess_coverage.dart';
 import '../db/app_database.dart';
 
 DateTime _utc(int seconds) =>
@@ -251,5 +252,35 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
     final query = _db.select(_db.packs)
       ..where((p) => p.id.isIn(ids) & p.isSample.equals(1));
     return (await query.get()).isNotEmpty;
+  }
+
+  /// Every installed pack's identity and range, for [assessCoverage].
+  Future<List<PackRange>> installedPacks() async {
+    final rows = await _db.select(_db.packs).get();
+    return [
+      for (final p in rows)
+        PackRange(
+          id: p.id.endsWith('-v${p.version}')
+              ? p.id.substring(0, p.id.length - '-v${p.version}'.length)
+              : p.id,
+          kind: p.kind,
+          tradition: p.tradition,
+          version: p.version,
+          from: CivilDate.parse(p.coversFrom),
+          to: CivilDate.parse(p.coversTo),
+        ),
+    ];
+  }
+
+  /// The pack that holds [cityId]'s rows, if the city is installed.
+  Future<String?> cityPackId(String cityId) async {
+    final city = await _db.cityById(cityId).getSingleOrNull();
+    if (city == null) return null;
+    final pack = await _db.packById(city.packId).getSingleOrNull();
+    if (pack == null) return null;
+    final suffix = '-v${pack.version}';
+    return pack.id.endsWith(suffix)
+        ? pack.id.substring(0, pack.id.length - suffix.length)
+        : pack.id;
   }
 }

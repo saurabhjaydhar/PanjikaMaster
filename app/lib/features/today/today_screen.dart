@@ -5,6 +5,7 @@ import '../../app/theme/app_theme.dart';
 import '../../app/theme/tokens.dart';
 import '../../app/widgets/date_header.dart';
 import '../../app/widgets/panjika_widgets.dart';
+import '../../app/widgets/system_states.dart';
 import '../../app/widgets/tithi_seal.dart';
 import '../../core/l10n/l10n_providers.dart';
 import '../../core/time/clock.dart';
@@ -24,17 +25,28 @@ class TodayScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final today = ref.watch(todayProvider);
+    final coverage = ref.watch(todayCoverageProvider).value;
     return Scaffold(
       body: SafeArea(
         // A reload at sunrise keeps showing the previous day until the new one is in.
         child: switch (today) {
-          AsyncValue(value: final day?, hasError: false) => _TodayContent(day),
-          AsyncValue(isLoading: true) => const SizedBox.expand(),
-          _ => StateMessage(
-            message: l.todayDataMissing,
-            actionLabel: l.retry,
-            onAction: () => ref.invalidate(todayProvider),
+          AsyncValue(value: final day?, hasError: false) => _TodayContent(
+            day,
+            stale: coverage is Stale,
           ),
+          AsyncValue(isLoading: true) => const SizedBox.expand(),
+          // No day: say why (spec §11.9, §16). The download action comes with T-311.
+          _ => switch (coverage) {
+            ClockSuspect() => const SystemStateMessage(SystemState.checkClock),
+            NotDownloaded() => const SystemStateMessage(
+              SystemState.notDownloaded,
+            ),
+            _ => StateMessage(
+              message: l.todayDataMissing,
+              actionLabel: l.retry,
+              onAction: () => ref.invalidate(todayProvider),
+            ),
+          },
         },
       ),
     );
@@ -42,9 +54,12 @@ class TodayScreen extends ConsumerWidget {
 }
 
 class _TodayContent extends ConsumerWidget {
-  const _TodayContent(this.d);
+  const _TodayContent(this.d, {this.stale = false});
 
   final DayPanjika d;
+
+  /// A newer pack is offered: the amber banner sits above the data (spec §6.8).
+  final bool stale;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -95,6 +110,10 @@ class _TodayContent extends ConsumerWidget {
               screenMargin(MediaQuery.sizeOf(context).width),
             ),
             children: [
+              if (stale) ...[
+                const StaleBanner(),
+                const SizedBox(height: Space.l),
+              ],
               // Date header (FR-HOME-01)
               DateHeader(
                 date: d.date,

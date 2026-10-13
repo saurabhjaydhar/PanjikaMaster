@@ -1,12 +1,15 @@
 // T-112: basic Today screen — both languages, watermark, missing-data state, US-01
 // visibility at 130 % text, and goldens (bn/en × light/dark). T-212: live updates.
 // Update goldens intentionally with: flutter test --update-goldens test/features/today
+import 'dart:convert';
+
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:panjika/app/panjika_app.dart';
 import 'package:panjika/app/widgets/panjika_widgets.dart';
+import 'package:panjika/app/widgets/system_states.dart';
 import 'package:panjika/core/l10n/l10n_providers.dart';
 import 'package:panjika/core/settings/settings.dart';
 import 'package:panjika/core/time/clock.dart';
@@ -46,6 +49,7 @@ void main() {
     double textScale = 1.0,
     DateTime? now,
     DateTime Function()? clock,
+    String? cachedManifest,
   }) async {
     tester.view
       ..physicalSize = const Size(360, 640) * 2
@@ -59,7 +63,10 @@ void main() {
           appDatabaseProvider.overrideWithValue(db),
           deviceLocalesProvider.overrideWithValue([Locale(language)]),
           settingsSourceProvider.overrideWithValue(
-            MemorySettings({SettingKey.theme: theme.name}),
+            MemorySettings({
+              SettingKey.theme: theme.name,
+              SettingKey.lastManifest: ?cachedManifest,
+            }),
           ),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
           clockProvider.overrideWithValue(clock ?? () => now ?? sampleNow),
@@ -101,12 +108,7 @@ void main() {
     );
   });
 
-  testWidgets('no data: explicit message and retry, no numbers (US-01)', (
-    tester,
-  ) async {
-    await pump(tester, now: DateTime.utc(2030));
-    expect(find.text('আজকের তথ্য পাওয়া যায়নি'), findsOneWidget);
-    expect(find.text('আবার চেষ্টা করুন'), findsOneWidget);
+  void expectNoNumbers(WidgetTester tester) {
     final texts = tester.widgetList<Text>(
       find.descendant(
         of: find.byType(TodayScreen),
@@ -120,7 +122,73 @@ void main() {
         reason: 'no numbers: ${t.data}',
       );
     }
+  }
+
+  /// A cached manifest (test input, shape per spec §15.3) offering [packs].
+  String manifestOffering(
+    List<(String id, String kind, int version, String from, String to)> packs,
+  ) => jsonEncode({
+    'schema': 1,
+    'generated_at': '2026-10-12T00:00:00Z',
+    'min_app_version': '1.0.0',
+    'packs': [
+      for (final (id, kind, version, from, to) in packs)
+        {
+          'id': id,
+          'kind': kind,
+          'tradition': 'drik_bishuddha',
+          'version': version,
+          'covers': [from, to],
+          'url': '/v1/packs/$id.sqlite.gz',
+          'size': 1,
+          'sha256': '0' * 64,
+          'sig_url': '/v1/packs/$id.sqlite.gz.sig',
+        },
+    ],
+    'notices': <Object>[],
   });
+
+  testWidgets(
+    'no pack covers the date: "check your phone\'s date", no numbers',
+    (tester) async {
+      await pump(tester, now: DateTime.utc(2030));
+      expect(find.text('ফোনের তারিখ ঠিক আছে কিনা দেখুন'), findsOneWidget);
+      expectNoNumbers(tester);
+    },
+  );
+
+  testWidgets('a pack is offered for the date: "not downloaded" (US-01)', (
+    tester,
+  ) async {
+    await pump(
+      tester,
+      language: 'en',
+      now: DateTime.utc(2030),
+      cachedManifest: manifestOffering([
+        ('global-drik-2029', 'global', 1, '2029-04-14', '2032-04-13'),
+      ]),
+    );
+    expect(
+      find.text("Data for these dates isn't downloaded yet."),
+      findsOneWidget,
+    );
+    expectNoNumbers(tester);
+  });
+
+  testWidgets(
+    'a newer version is offered: data still shown under the amber banner',
+    (tester) async {
+      await pump(
+        tester,
+        cachedManifest: manifestOffering([
+          ('sample-global-drik', 'global', 2, '2026-09-01', '2026-12-31'),
+        ]),
+      );
+      expect(find.byType(StaleBanner), findsOneWidget);
+      expect(find.text('তথ্য হালনাগাদ প্রয়োজন।'), findsOneWidget);
+      expect(find.text('২৫ আশ্বিন ১৪৩৩'), findsOneWidget);
+    },
+  );
 
   testWidgets('T-212: the tithi changes exactly at its end', (tester) async {
     final ending = sampleDay.tithis

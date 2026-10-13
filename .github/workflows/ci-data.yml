@@ -3,10 +3,10 @@ name: ci-data
 on:
   push:
     branches: [main]
-    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", "scripts/gen_test_packs.py", "app/test/fixtures/packs/**", ".github/workflows/ci-data.yml"]
   workflow_dispatch:
   pull_request:
-    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", "scripts/gen_test_packs.py", "app/test/fixtures/packs/**", ".github/workflows/ci-data.yml"]
 
 permissions:
   contents: read
@@ -44,6 +44,8 @@ jobs:
       - run: python ../scripts/sync_drift_schema.py --check
       # The app's debug-only sample fixture is generated from pack/sample.py (T-110).
       - run: uv run python ../scripts/gen_sample_fixture.py --check
+      # The app's importer tests use signed sample packs from the pack builder (T-303).
+      - run: uv run python ../scripts/gen_test_packs.py --check
 
   # T-207: the full 2020–2045 build on the locked DE440s; its run time goes in the job
   # summary and the database is kept for the validation work (Phase 3). Main and manual
@@ -73,8 +75,14 @@ jobs:
           cat dist/*.run.json >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           sha256sum dist/*.sqlite >> "$GITHUB_STEP_SUMMARY"
+      # T-302: compare with the human-entered references; fails beyond tolerance.
+      - name: Validate against references
+        run: uv run python -m validate --pack dist/global-*.sqlite
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: global-2020-2045
-          path: data/dist/
+          path: |
+            data/dist/
+            data/validate/reports/
           retention-days: 14

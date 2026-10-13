@@ -6,7 +6,7 @@ and used by the Indian Astronomical Ephemeris and the Rashtriya Panchang. From t
 epoch it grows with the general precession in longitude, p_A, for which we use the IAU
 2006 expression (Capitaine, Wallace & Chapront 2003; IERS Conventions 2010, eq. 5.39).
 The true ayanamsa adds the nutation in longitude Δψ (IAU 2000B: within 1 mas of 2000A
-over 1995–2050 and twenty times faster, so the hourly scans stay cheap).
+over 1995–2050 and twenty times faster, so the scans stay cheap).
 
 Sidereal longitude = apparent tropical longitude − true ayanamsa: both refer to the true
 equinox of date, so nutation cancels and the result is star-fixed.

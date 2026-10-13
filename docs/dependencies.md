@@ -13,10 +13,15 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | numpy | data (via skyfield) | 2.5.4 | BSD-3-Clause and permissive (bundled runtime libraries under their own permissive or runtime-exception licences) | 2026-10-10 | Wheels for all major platforms | Vectorised time grids for the transition search | 2026-10-13 |
 | certifi | data (via skyfield) | 2026.7.22 | MPL-2.0 (file-level; pipeline only, not shipped) | 2026-07-22 | Pure Python | CA bundle | 2026-10-13 |
 | astronomy-engine | data (dev) | 2.1.19 | MIT | 2023-12-14 | Pure Python | Independent analytic cross-check of Sun/Moon positions and rise/set (T-202, T-206); no JPL data | 2026-10-13 |
+| cryptography (Python) | data | 50.0.2 | Apache-2.0 OR BSD-3-Clause | 2026-09-30 | Wheels for all major platforms | Ed25519 signing of packs (T-303) | 2026-10-13 |
+| cffi | data (via cryptography) | 2.1.1 | MIT-0 | 2026-08-03 | Wheels for all major platforms | cryptography dependency | 2026-10-13 |
+| pycparser | data (via cryptography) | 3.11 | BSD-3-Clause | 2026-10-09 | Pure Python | cffi dependency | 2026-10-13 |
 
 | flutter_riverpod | app | 3.4.3 | MIT | 2026-09-03 | Android, iOS, desktop | State management (spec §14.3) | 2026-10-12 |
 | drift | app | 2.35.2 | MIT | 2026-10-07 | All | Typed SQLite DB mirroring `schema.sql` | 2026-10-12 |
 | drift_flutter | app | 0.3.1 | MIT | 2026-07-11 | All | Opens the Drift DB on device; pulls `sqlite3` 3.x, which bundles SQLite natively | 2026-10-12 |
+| cryptography (Dart) | app | 2.9.0 | Apache-2.0 | 2025-11-21 | All (pure Dart Ed25519 and SHA-256) | Verify pack signatures and hashes on import (spec §14.3, T-306) | 2026-10-13 |
+| http | app | 1.6.0 | BSD-3-Clause | 2025-11-10 | All | Manifest and pack downloads with Range resume; `MockClient` for tests (T-308) | 2026-10-13 |
 | go_router | app | 18.0.2 | BSD-3-Clause | 2026-09-28 | All | Routing + deep links | 2026-10-12 |
 | flutter_localizations | app | SDK | BSD-3-Clause | with Flutter 3.47.7 | All | Material/Cupertino strings for bn + en, gen-l10n | 2026-10-12 |
 | intl | app | 0.20.3 (pinned by SDK) | BSD-3-Clause | 2026-06-25 | All | ICU plural/select for ARB messages; formatting goes through `PanjikaFormatter` | 2026-10-12 |

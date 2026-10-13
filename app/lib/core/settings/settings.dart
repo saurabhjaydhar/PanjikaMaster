@@ -15,7 +15,8 @@ enum SettingKey {
   textScale('text_scale'),
   timeFormat('time_format'),
   onboardingDone('onboarding_done'),
-  lastManifestCheck('last_manifest_check');
+  lastManifestCheck('last_manifest_check'),
+  lastManifest('last_manifest');
 
   const SettingKey(this.key);
 
