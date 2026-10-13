@@ -73,6 +73,8 @@ settings(key TEXT PK, value TEXT)
   --       tradition, city_id, theme (system|light|dark), text_scale, time_format (12|24),
   --       onboarding_done, last_manifest_check
 error_reports_queue(id INT PK, payload TEXT, created_at DATETIME)
+observance_corrections(tradition TEXT, observance_id TEXT, corrected_at DATETIME,
+                       PK(tradition, observance_id))   -- §18 "corrected" label, 7 days
 ```
 
 **Index convention.** Every `idx` / `*_idx` column is 0-based: tithi 0 = Shukla Pratipada … 14 = Purnima, 15 = Krishna Pratipada … 29 = Amavasya (the 1–30 tithi number in §6.5.1 minus one); nakshatra and yoga 0–26; karana transitions store `k` (0–59, §6.5.4) and the domain maps `k` to a `names(kind='karana')` row (0–10); `solar_month` 0 = বৈশাখ; `weekday` 0 = Sunday. `bn_day` and `bn_year` are the numbers as written. Pipeline and app share one test fixture that checks this mapping.

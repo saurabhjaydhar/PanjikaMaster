@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:drift/drift.dart' show Variable;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:panjika/core/time/civil_date.dart';
@@ -13,6 +14,7 @@ import 'package:panjika/data/repositories/panjika_repository.dart';
 import 'package:panjika/domain/usecases/get_day_panjika.dart';
 
 const dir = 'test/fixtures/packs';
+const drik = 'drik_bishuddha';
 
 Manifest manifest([String name = 'manifest.json']) => Manifest.fromJson(
   jsonDecode(File('$dir/$name').readAsStringSync()) as Map<String, Object?>,
@@ -164,6 +166,125 @@ void main() {
         .getSingle();
     expect(stale.read<int>('n'), 0);
     expect(await count('packs'), 3, reason: 'cities and observances untouched');
+  });
+
+  group('T-603 correction', () {
+    late PackImporter fixer;
+    var at = DateTime.utc(2026, 10, 12, 5);
+    setUp(() {
+      at = DateTime.utc(2026, 10, 12, 5);
+      fixer = PackImporter(
+        db,
+        publicKey: testKey(),
+        allowSample: true,
+        now: () => at,
+      );
+    });
+
+    Future<List<(String, String)>> datesOf(String id) async => [
+      for (final r
+          in await db
+              .customSelect(
+                'SELECT date, pack_id FROM observance_dates '
+                'WHERE observance_id = ? ORDER BY date',
+                variables: [Variable(id)],
+              )
+              .get())
+        (r.read<String>('date'), r.read<String>('pack_id')),
+    ];
+
+    test('replaces only the changed rows and flags them for 7 days', () async {
+      await importAll(manifest());
+      final kaliBefore = await datesOf('kali_puja');
+      final lakshmiBefore = await datesOf('lakshmi_puja');
+      final windows = await count('observance_windows');
+      final rowids = await db
+          .customSelect(
+            "SELECT rowid FROM observance_dates WHERE observance_id = 'lakshmi_puja'",
+          )
+          .map((r) => r.read<int>('rowid'))
+          .get();
+
+      final fix = manifest('manifest_correction.json').packs.single;
+      final (gz, sig) = files(fix);
+      await fixer.import(fix, gz, sig);
+
+      const v2 = 'sample-observances-drik-v2';
+      final kali = await datesOf('kali_puja');
+      expect(kali.single.$1, isNot(kaliBefore.single.$1));
+      expect(kali.single.$2, v2);
+      // Unchanged rows stay where they are, only retagged with the new pack.
+      expect((await datesOf('lakshmi_puja')).single, (
+        lakshmiBefore.single.$1,
+        v2,
+      ));
+      expect(
+        await db
+            .customSelect(
+              "SELECT rowid FROM observance_dates WHERE observance_id = 'lakshmi_puja'",
+            )
+            .map((r) => r.read<int>('rowid'))
+            .get(),
+        rowids,
+      );
+      expect(await count('observance_windows'), windows);
+      final stale = await db
+          .customSelect(
+            'SELECT count(*) AS n FROM observances WHERE pack_id != ?',
+            variables: [const Variable(v2)],
+          )
+          .getSingle();
+      expect(stale.read<int>('n'), 0);
+      final packs = await db
+          .customSelect(
+            "SELECT id, version FROM packs WHERE kind = 'observances'",
+          )
+          .get();
+      expect(packs.map((r) => (r.read<String>('id'), r.read<int>('version'))), [
+        (v2, 2),
+      ]);
+
+      final repo = DriftPanjikaRepository(db);
+      expect(await repo.correctedObservances(drik, at), {'kali_puja'});
+      expect(
+        await repo.correctedObservances(drik, at.add(const Duration(days: 6))),
+        {'kali_puja'},
+      );
+      expect(
+        await repo.correctedObservances(drik, at.add(const Duration(days: 8))),
+        isEmpty,
+        reason: 'the label lasts 7 days',
+      );
+      expect(await repo.correctedObservances('surya_siddhanta', at), isEmpty);
+    });
+
+    test('a first install flags nothing; re-import keeps the flags', () async {
+      final fix = manifest('manifest_correction.json').packs.single;
+      final (gz, sig) = files(fix);
+      await fixer.import(fix, gz, sig);
+      final repo = DriftPanjikaRepository(db);
+      expect(await repo.correctedObservances(drik, at), isEmpty);
+    });
+
+    test('old flags are pruned on the next import', () async {
+      await db
+          .into(db.observanceCorrections)
+          .insert(
+            ObservanceCorrectionsCompanion.insert(
+              tradition: drik,
+              observanceId: 'old',
+              correctedAt: '2026-01-01T00:00:00.000Z',
+            ),
+          );
+      await importAll(manifest());
+      final fix = manifest('manifest_correction.json').packs.single;
+      final (gz, sig) = files(fix);
+      await fixer.import(fix, gz, sig);
+      final ids = (await db.select(db.observanceCorrections).get()).map(
+        (r) => r.observanceId,
+      );
+      expect(ids, ['kali_puja']);
+    });
   });
 
   test('re-importing the same pack is harmless', () async {

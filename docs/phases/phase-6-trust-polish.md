@@ -9,7 +9,7 @@
 |---|---|---|
 | T-601 | Error-report endpoint per Q6 (`POST /v1/reports`, only the §15.3 fields, rate-limited) or form-service integration | Accepts a report from the app; stores nothing else |
 | T-602 | Bengal period rules from the expert into `period_rules` | 30 sample days match the printed panjika |
-| T-603 | Correction packs: replace only affected rows; changed observances flagged for 7 days | Pipeline + importer tests |
+| T-603 ✅ | Correction packs: replace only affected rows; changed observances flagged for 7 days | Pipeline + importer tests |
 
 ### App core (state, data, platform)
 | ID | Task | Done when |

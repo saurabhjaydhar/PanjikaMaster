@@ -20,3 +20,12 @@ CREATE TABLE error_reports_queue (
   payload    TEXT NOT NULL,                     -- JSON with only the fields in spec §15.3
   created_at TEXT NOT NULL
 ) STRICT AS QueuedErrorReportRow;
+
+-- Observances whose dates changed in a correction (spec §18, T-603): Day detail and
+-- festival screens label them "সংশোধিত / Corrected" for 7 days. Schema version 2.
+CREATE TABLE observance_corrections (
+  tradition     TEXT NOT NULL,
+  observance_id TEXT NOT NULL,
+  corrected_at  TEXT NOT NULL,                  -- ISO 8601 UTC, when the import ran
+  PRIMARY KEY (tradition, observance_id)
+) STRICT AS ObservanceCorrectionRow;

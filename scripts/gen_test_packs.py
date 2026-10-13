@@ -4,8 +4,9 @@
 
 The sample packs go through the real pack builder, signed with a fixed TEST key (its
 seed is public; it never signs anything outside tests). Also writes a v2 of the global
-pack, identical rows under a new id and version, for the upgrade test. Test-only: app
-assets never include this folder.
+pack, identical rows under a new id and version, for the upgrade test, and a correction
+v2 of the observances pack (T-603) in which one sample observance moves by a day, for
+the correction test. Test-only: app assets never include this folder.
 
 `--check` (CI) verifies the committed files instead of comparing bytes, since SQLite file
 bytes can differ between SQLite versions: every signature valid, every SHA-256 as in its
@@ -28,7 +29,7 @@ sys.path.insert(0, str(ROOT / "data"))
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey  # noqa: E402
 
-from pack import builder, sample, schema  # noqa: E402
+from pack import builder, correction, sample, schema  # noqa: E402
 
 DST = ROOT / "app" / "test" / "fixtures" / "packs"
 TEST_SEED = bytes(range(32))  # TEST ONLY
@@ -50,6 +51,21 @@ def make_v2(src: Path, dst: Path) -> Path:
     return dst
 
 
+def make_correction(src: Path, dst: Path) -> Path:
+    """Observances v2 with the synthetic sample's Kali Puja one day later."""
+    make_v2(src, dst)
+    conn = sqlite3.connect(dst)
+    with conn:
+        conn.execute("PRAGMA foreign_keys = OFF")
+        for table in ("observance_dates", "observance_windows"):
+            conn.execute(
+                f"UPDATE {table} SET date = date(date, '+1 day') WHERE observance_id = 'kali_puja'"
+            )
+    conn.close()
+    correction.correct(src, dst, ["kali_puja"], "test fixture: a moved sample observance")
+    return dst
+
+
 def rows(db: Path) -> dict[str, list[tuple]]:
     conn = sqlite3.connect(db)
     return {t: sorted(conn.execute(f"SELECT * FROM {t}").fetchall()) for t in schema.PACK_TABLES}
@@ -68,6 +84,12 @@ def generate(out: Path) -> None:
         shutil.copy(tmp / "v2" / "manifest.json", out / "manifest_v2.json")
         for f in (tmp / "v2" / "packs").iterdir():
             shutil.copy(f, out / "packs" / f.name)
+        obs = next(p for p in packs if "observances" in p.name)
+        fix = make_correction(obs, tmp / "observances-v2.sqlite")
+        builder.build([fix], tmp / "fix", allow_sample=True, allow_dev=True)
+        shutil.copy(tmp / "fix" / "manifest.json", out / "manifest_correction.json")
+        for f in (tmp / "fix" / "packs").iterdir():
+            shutil.copy(f, out / "packs" / f.name)
     key = Ed25519PrivateKey.from_private_bytes(TEST_SEED)
     (out / "test_public_key.txt").write_text(builder.public_key_b64(key) + "\n")
 
@@ -78,7 +100,7 @@ def check() -> list[str]:
     with tempfile.TemporaryDirectory() as tmp:
         expected = Path(tmp) / "expected"
         generate(expected)
-        for manifest in ("manifest.json", "manifest_v2.json"):
+        for manifest in ("manifest.json", "manifest_v2.json", "manifest_correction.json"):
             committed = json.loads((DST / manifest).read_text())
             fresh = json.loads((expected / manifest).read_text())
             if [e["id"] for e in committed["packs"]] != [e["id"] for e in fresh["packs"]]:

@@ -49,14 +49,23 @@ final class PackInvalid extends PackImportError {
 /// the manifest, verify the Ed25519 signature over the gzip bytes, then attach the
 /// SQLite file and copy its rows in one transaction, replacing the pack it supersedes.
 /// Nothing changes unless every step succeeds.
+///
+/// A new version of an installed observances pack — a correction (spec §18, T-603) —
+/// replaces only the rows that differ, and the observances whose dates or windows
+/// changed are recorded in `observance_corrections` so the app can label them
+/// "সংশোধিত / Corrected" for 7 days.
 class PackImporter {
   PackImporter(
     this._db, {
     required this.publicKey,
     this.allowSample = false,
     this.onImported,
+    this.now = DateTime.now,
     Directory? tempDir,
   }) : _tempDir = tempDir ?? Directory.systemTemp;
+
+  /// Corrections older than this are pruned on import; the label shows for 7 days.
+  static const keepCorrections = Duration(days: 30);
 
   final AppDatabase _db;
 
@@ -68,6 +77,7 @@ class PackImporter {
 
   /// "Reschedule" hook: reminders depend on the data (spec §17).
   final Future<void> Function(ManifestEntry entry)? onImported;
+  final DateTime Function() now;
   final Directory _tempDir;
 
   Future<void> import(
@@ -161,23 +171,128 @@ class PackImporter {
           )
           .map((r) => r.read<String>('id'))
           .get();
-      for (final table in packTablesInOrder.reversed) {
-        for (final oldId in old) {
-          await _db.customStatement(
-            'DELETE FROM main.$table WHERE ${table == 'packs' ? 'id' : 'pack_id'} = ?',
-            [oldId],
-          );
-        }
-      }
-      for (final table in packTablesInOrder) {
-        await _db.customStatement(
-          'INSERT INTO main.$table SELECT * FROM incoming.$table',
-        );
+      final installedAt = now().toUtc();
+      if (entry.kind == 'observances' && old.isNotEmpty && !old.contains(id)) {
+        await _applyCorrection(old, id, entry.tradition, installedAt);
+      } else {
+        await _replace(old);
       }
       await _db.customStatement(
         'UPDATE main.packs SET installed_at = ?, sha256 = ? WHERE id = ?',
-        [DateTime.now().toUtc().toIso8601String(), entry.sha256, id],
+        [installedAt.toIso8601String(), entry.sha256, id],
       );
     });
+  }
+
+  Future<void> _replace(List<String> old) async {
+    for (final table in packTablesInOrder.reversed) {
+      for (final oldId in old) {
+        await _db.customStatement(
+          'DELETE FROM main.$table WHERE ${table == 'packs' ? 'id' : 'pack_id'} = ?',
+          [oldId],
+        );
+      }
+    }
+    for (final table in packTablesInOrder) {
+      await _db.customStatement(
+        'INSERT INTO main.$table SELECT * FROM incoming.$table',
+      );
+    }
+  }
+
+  /// Replaces only the rows that differ between the installed packs [old] and the
+  /// incoming pack [newId], retags the rest, and records the observances whose dates
+  /// or windows changed.
+  Future<void> _applyCorrection(
+    List<String> old,
+    String newId,
+    String tradition,
+    DateTime at,
+  ) async {
+    // Rows are compared on every column but pack_id; a parent row may be replaced
+    // while its children stay, so foreign keys are checked at commit.
+    await _db.customStatement('PRAGMA defer_foreign_keys = ON');
+    final oldIds = List.filled(old.length, '?').join(', ');
+    Future<List<String>> columns(String table) async => [
+      for (final r
+          in await _db.customSelect('PRAGMA main.table_info($table)').get())
+        if (r.read<String>('name') != 'pack_id') r.read<String>('name'),
+    ];
+    String same(List<String> cols, String a, String b) =>
+        cols.map((c) => '$a."$c" IS $b."$c"').join(' AND ');
+
+    final changed = <String>{};
+    for (final table in const ['observance_dates', 'observance_windows']) {
+      final cols = (await columns(table)).map((c) => '"$c"').join(', ');
+      final diff = await _db
+          .customSelect(
+            'SELECT observance_id FROM ('
+            'SELECT $cols FROM main.$table WHERE pack_id IN ($oldIds) '
+            'EXCEPT SELECT $cols FROM incoming.$table) '
+            'UNION SELECT observance_id FROM ('
+            'SELECT $cols FROM incoming.$table EXCEPT '
+            'SELECT $cols FROM main.$table WHERE pack_id IN ($oldIds))',
+            variables: [
+              for (final o in [...old, ...old]) Variable(o),
+            ],
+          )
+          .map((r) => r.read<String>('observance_id'))
+          .get();
+      changed.addAll(diff);
+    }
+    // A brand-new observance is not a correction.
+    final existing = await _db
+        .customSelect(
+          'SELECT id FROM main.observances WHERE pack_id IN ($oldIds)',
+          variables: [for (final o in old) Variable(o)],
+        )
+        .map((r) => r.read<String>('id'))
+        .get();
+    changed.retainAll(existing);
+
+    await _db.customStatement(
+      'INSERT INTO main.packs SELECT * FROM incoming.packs',
+    );
+    for (final table in packTablesInOrder.skip(1).toList().reversed) {
+      final cols = await columns(table);
+      await _db.customStatement(
+        'DELETE FROM main.$table WHERE pack_id IN ($oldIds) AND NOT EXISTS '
+        '(SELECT 1 FROM incoming.$table i WHERE ${same(cols, 'i', table)})',
+        old,
+      );
+    }
+    for (final table in packTablesInOrder.skip(1)) {
+      final cols = await columns(table);
+      await _db.customStatement(
+        'UPDATE main.$table SET pack_id = ? WHERE pack_id IN ($oldIds)',
+        [newId, ...old],
+      );
+      await _db.customStatement(
+        'INSERT INTO main.$table SELECT * FROM incoming.$table i WHERE NOT EXISTS '
+        '(SELECT 1 FROM main.$table m WHERE ${same(cols, 'm', 'i')})',
+      );
+    }
+    await _db.customStatement(
+      'DELETE FROM main.packs WHERE id IN ($oldIds)',
+      old,
+    );
+
+    for (final observanceId in changed) {
+      await _db
+          .into(_db.observanceCorrections)
+          .insertOnConflictUpdate(
+            ObservanceCorrectionsCompanion.insert(
+              tradition: tradition,
+              observanceId: observanceId,
+              correctedAt: at.toIso8601String(),
+            ),
+          );
+    }
+    await (_db.delete(_db.observanceCorrections)..where(
+          (c) => c.correctedAt.isSmallerThanValue(
+            at.subtract(keepCorrections).toIso8601String(),
+          ),
+        ))
+        .go();
   }
 }
