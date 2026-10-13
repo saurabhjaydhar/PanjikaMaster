@@ -260,9 +260,12 @@ class TimingStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Two per row; at large text a single column, so labels like "Moonrise" never
+    // break mid-word (§12.10: no side-by-side rows at 200 % on 360 dp).
+    final large = MediaQuery.textScalerOf(context).scale(10) > 15;
     return LayoutBuilder(
       builder: (context, box) {
-        final width = (box.maxWidth - Space.s) / 2;
+        final width = large ? box.maxWidth : (box.maxWidth - Space.s) / 2;
         return Wrap(
           spacing: Space.s,
           runSpacing: Space.s,
