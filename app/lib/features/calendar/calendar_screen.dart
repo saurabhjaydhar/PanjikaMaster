@@ -38,73 +38,86 @@ class CalendarScreen extends ConsumerWidget {
     final month = state.month;
     final grid = month == null ? null : ref.watch(monthGridProvider(month));
 
+    // Wide screens: the calendar is centred and its cells grow up to the content
+    // width (§12.10). Landscape phones keep the full width for the grid + strip.
+    final landscape = isShortLandscape(context);
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            _Header(state: state, names: names, grid: grid?.value),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: CalendarDayCell.gridMargin,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SegmentedButton<CalendarMode>(
-                      showSelectedIcon: false,
-                      segments: [
-                        ButtonSegment(
-                          value: CalendarMode.bengali,
-                          label: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(l.calendarModeBengali),
-                          ),
-                        ),
-                        ButtonSegment(
-                          value: CalendarMode.gregorian,
-                          label: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(l.calendarModeGregorian),
-                          ),
-                        ),
-                      ],
-                      selected: {state.mode},
-                      onSelectionChanged: (s) => calendar.setMode(s.single),
-                    ),
-                  ),
-                  IconButton(
-                    tooltip: l.legendTitle,
-                    icon: const Icon(Icons.info_outline),
-                    onPressed: names == null
-                        ? null
-                        : () => _showLegend(context, names),
-                  ),
-                ],
-              ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: landscape
+                  ? double.infinity
+                  : Space.maxContentWidth + 2 * CalendarDayCell.gridMargin,
             ),
-            const SizedBox(height: Space.s),
-            Expanded(
-              child: GestureDetector(
-                // Swipe for the next or previous month (FR-CAL-03).
-                onHorizontalDragEnd: (d) {
-                  final v = d.primaryVelocity ?? 0;
-                  if (v < -200) calendar.next();
-                  if (v > 200) calendar.previous();
-                },
-                child: state.resolving
-                    ? const SizedBox.expand()
-                    : switch (grid) {
-                        AsyncValue(value: final g?) => _MonthBody(
-                          grid: g,
-                          state: state,
+            child: Column(
+              children: [
+                _Header(state: state, names: names, grid: grid?.value),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: CalendarDayCell.gridMargin,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SegmentedButton<CalendarMode>(
+                          showSelectedIcon: false,
+                          segments: [
+                            ButtonSegment(
+                              value: CalendarMode.bengali,
+                              label: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(l.calendarModeBengali),
+                              ),
+                            ),
+                            ButtonSegment(
+                              value: CalendarMode.gregorian,
+                              label: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(l.calendarModeGregorian),
+                              ),
+                            ),
+                          ],
+                          selected: {state.mode},
+                          onSelectionChanged: (s) => calendar.setMode(s.single),
                         ),
-                        AsyncValue(isLoading: true) => const SizedBox.expand(),
-                        // Outside the installed packs (or the month lookup found none).
-                        _ => _notDownloaded(ref),
-                      },
-              ),
+                      ),
+                      IconButton(
+                        tooltip: l.legendTitle,
+                        icon: const Icon(Icons.info_outline),
+                        onPressed: names == null
+                            ? null
+                            : () => _showLegend(context, names),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: Space.s),
+                Expanded(
+                  child: GestureDetector(
+                    // Swipe for the next or previous month (FR-CAL-03).
+                    onHorizontalDragEnd: (d) {
+                      final v = d.primaryVelocity ?? 0;
+                      if (v < -200) calendar.next();
+                      if (v > 200) calendar.previous();
+                    },
+                    child: state.resolving
+                        ? const SizedBox.expand()
+                        : switch (grid) {
+                            AsyncValue(value: final g?) => _MonthBody(
+                              grid: g,
+                              state: state,
+                            ),
+                            AsyncValue(isLoading: true) =>
+                              const SizedBox.expand(),
+                            // Outside the installed packs (or the month lookup found none).
+                            _ => _notDownloaded(ref),
+                          },
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -215,12 +228,47 @@ class _MonthBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dir = state.direction.toDouble();
+    const padding = EdgeInsets.symmetric(
+      horizontal: CalendarDayCell.gridMargin,
+    );
+    final strip = _SelectedStrip(grid: grid, selected: state.selected);
+    final footer = ProvenanceFooter(provenance: grid.provenance);
+    // A short (landscape) screen puts the selected day beside the grid (§12.10).
+    if (isShortLandscape(context)) {
+      return Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: ListView(
+                  padding: padding,
+                  children: [
+                    _WeekdayHeads(),
+                    _MonthGridView(
+                      key: ValueKey(grid.month),
+                      grid: grid,
+                      state: state,
+                    ),
+                    footer,
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ListView(padding: padding, children: [strip]),
+              ),
+            ],
+          ),
+          if (grid.provenance.isSample) const SampleWatermark(),
+        ],
+      );
+    }
     return Stack(
       children: [
         ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: CalendarDayCell.gridMargin,
-          ),
+          padding: padding,
           children: [
             _WeekdayHeads(),
             // Month changes slide horizontally (shared axis, §12.8).
@@ -243,8 +291,8 @@ class _MonthBody extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: Space.m),
-            _SelectedStrip(grid: grid, selected: state.selected),
-            ProvenanceFooter(provenance: grid.provenance),
+            strip,
+            footer,
           ],
         ),
         if (grid.provenance.isSample) const SampleWatermark(),

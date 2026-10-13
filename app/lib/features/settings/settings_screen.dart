@@ -94,7 +94,7 @@ class SettingsScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l.settingsTitle)),
       body: ListView(
         padding: EdgeInsets.symmetric(
-          horizontal: screenMargin(MediaQuery.sizeOf(context).width),
+          horizontal: contentInset(MediaQuery.sizeOf(context).width),
         ),
         children: [
           row(l.languageSetting, const LanguageSwitch()),

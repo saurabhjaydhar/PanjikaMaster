@@ -81,7 +81,7 @@ class _CityPickerScreenState extends ConsumerState<CityPickerScreen> {
         children: [
           ListView(
             padding: EdgeInsets.symmetric(
-              horizontal: screenMargin(MediaQuery.sizeOf(context).width),
+              horizontal: contentInset(MediaQuery.sizeOf(context).width),
             ),
             children: [
               const SizedBox(height: Space.s),
