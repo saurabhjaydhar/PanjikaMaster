@@ -7,7 +7,7 @@
 ### Backend (pipeline)
 | ID | Task | Done when |
 |---|---|---|
-| T-201 🟡 | Ephemeris fetch for DE440s with a SHA-256 lock file | Re-run verifies the checksum; a mismatch fails |
+| T-201 🟡 | Ephemeris fetch for DE440s with a SHA-256 lock file | Re-run verifies the checksum; a mismatch fails — *checksum recorded from the CI download (unconfirmed); awaiting human confirmation* |
 | T-202 | `astro.py`: apparent geocentric Sun/Moon ecliptic longitude via Skyfield | Tests against Skyfield's documented examples |
 | T-203 | `ayanamsa.py`: Lahiri, formula and source cited | Within 1″ of `reference/ayanamsa.csv` (skipped with a visible notice until the file exists) |
 | T-204 | `panchanga.py`: tithi, nakshatra, yoga, karana transitions (scan + bisection to 1 s) | Property tests: no gaps/overlaps, indices cycle, tithi length 19–27 h |
