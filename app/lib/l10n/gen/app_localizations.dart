@@ -1963,6 +1963,18 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'অনুস্মারক ঠিক সময়ে আসছে না?'**
   String get remindersHelpLink;
+
+  /// Tag on an observance whose date was changed by a correction in the last 7 days (§18).
+  ///
+  /// In bn, this message translates to:
+  /// **'সংশোধিত'**
+  String get correctedLabel;
+
+  /// Festival detail: explains the Corrected tag (§18).
+  ///
+  /// In bn, this message translates to:
+  /// **'এই উৎসবের তারিখ সম্প্রতি সংশোধন করা হয়েছে। আগের তারিখ মনে রাখলে মিলিয়ে নিন।'**
+  String get correctedNote;
 }
 
 class _AppLocalizationsDelegate

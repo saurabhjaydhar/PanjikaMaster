@@ -453,6 +453,14 @@ class _FestivalRow extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: Space.m),
+                if (ref
+                        .watch(correctedObservancesProvider)
+                        .value
+                        ?.contains(o.observance.id) ??
+                    false) ...[
+                  const Center(child: CorrectedTag()),
+                  const SizedBox(width: Space.xs),
+                ],
                 Center(child: VerificationBadge(o.status)),
               ],
             ),

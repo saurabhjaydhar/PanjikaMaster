@@ -19,7 +19,12 @@ const packTables = [
   'observance_windows',
   'period_rules',
 ];
-const deviceTables = ['reminders', 'settings', 'error_reports_queue'];
+const deviceTables = [
+  'reminders',
+  'settings',
+  'error_reports_queue',
+  'observance_corrections',
+];
 
 // `flutter test` runs with app/ as the working directory.
 final schemaSql = File('../data/pack/schema.sql').readAsStringSync();

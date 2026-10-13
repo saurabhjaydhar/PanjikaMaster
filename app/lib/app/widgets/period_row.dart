@@ -20,6 +20,7 @@ class PeriodRow extends ConsumerWidget {
     required this.start,
     required this.end,
     this.active = false,
+    this.endsNextDay = false,
   });
 
   final NameRef name;
@@ -28,6 +29,10 @@ class PeriodRow extends ConsumerWidget {
   final DateTime end;
   final bool active;
 
+  /// The period ends after midnight (a night period such as কালরাত্রি): the range is
+  /// marked "(পরদিন)" / "(next day)" (spec §12.4, §16).
+  final bool endsNextDay;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
@@ -35,7 +40,8 @@ class PeriodRow extends ConsumerWidget {
     final c = context.colors;
     final f = ref.watch(formatterProvider);
     final language = ref.watch(appLanguageProvider);
-    final range = f.timeRange(start, end);
+    final clock = f.timeRange(start, end);
+    final range = endsNextDay ? l.nextDayTime(clock) : clock;
     final fill = kind == PeriodKind.ashubh ? c.altaContainer : c.durbaContainer;
     final accent = kind == PeriodKind.ashubh ? c.alta : c.durba;
     return Semantics(

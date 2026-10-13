@@ -1709,5 +1709,13 @@
   "remindersHelpLink": "অনুস্মারক ঠিক সময়ে আসছে না?",
   "@remindersHelpLink": {
     "description": "Reminders screen: link to the Help section about phone settings."
+  },
+  "correctedLabel": "সংশোধিত",
+  "@correctedLabel": {
+    "description": "Tag on an observance whose date was changed by a correction in the last 7 days (§18)."
+  },
+  "correctedNote": "এই উৎসবের তারিখ সম্প্রতি সংশোধন করা হয়েছে। আগের তারিখ মনে রাখলে মিলিয়ে নিন।",
+  "@correctedNote": {
+    "description": "Festival detail: explains the Corrected tag (§18)."
   }
 }

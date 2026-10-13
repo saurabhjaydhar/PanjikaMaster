@@ -307,5 +307,7 @@
   "helpSamsungStep3": "If you like, add {app} to Never auto sleeping apps.",
   "helpPathsVary": "The names and paths of settings can differ a little between phones and versions.",
   "helpOpenFailed": "Couldn't open the settings. Please find them in your phone's Settings.",
-  "remindersHelpLink": "Reminders not arriving on time?"
+  "remindersHelpLink": "Reminders not arriving on time?",
+  "correctedLabel": "Corrected",
+  "correctedNote": "This festival's date was recently corrected. If you noted the old date, please check it again."
 }

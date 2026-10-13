@@ -77,12 +77,46 @@ class VerificationBadge extends StatelessWidget {
   }
 }
 
+/// "সংশোধিত / Corrected": the observance's date changed in a correction pack within the
+/// last 7 days (spec §18, T-614).
+class CorrectedTag extends StatelessWidget {
+  const CorrectedTag({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final t = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Space.s,
+        vertical: Space.xs / 2,
+      ),
+      decoration: BoxDecoration(
+        color: c.haldiContainer,
+        borderRadius: BorderRadius.circular(Radii.small),
+      ),
+      child: Text(
+        AppLocalizations.of(context).correctedLabel,
+        style: t.labelMedium?.copyWith(color: c.onHaldiContainer),
+      ),
+    );
+  }
+}
+
 /// A festival on a day: category bar, name, verification (spec §12.5).
 class ObservanceChip extends StatelessWidget {
-  const ObservanceChip({super.key, required this.observance, this.onTap});
+  const ObservanceChip({
+    super.key,
+    required this.observance,
+    this.onTap,
+    this.corrected = false,
+  });
 
   final ObservanceDate observance;
   final VoidCallback? onTap;
+
+  /// Shows [CorrectedTag] (`correctedObservancesProvider`, spec §18).
+  final bool corrected;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +153,10 @@ class ObservanceChip extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: Space.s),
+                if (corrected) ...[
+                  const Center(child: CorrectedTag()),
+                  const SizedBox(width: Space.xs),
+                ],
                 Center(child: VerificationBadge(observance.status)),
                 const SizedBox(width: Space.s),
               ],
@@ -137,11 +175,15 @@ class FestivalCard extends ConsumerWidget {
     required this.observance,
     required this.daysLeft,
     this.onTap,
+    this.corrected = false,
   });
 
   final ObservanceDate observance;
   final int daysLeft;
   final VoidCallback? onTap;
+
+  /// Shows [CorrectedTag] (`correctedObservancesProvider`, spec §18).
+  final bool corrected;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -189,6 +231,7 @@ class FestivalCard extends ConsumerWidget {
                             style: t.labelLarge?.copyWith(color: c.ink),
                           ),
                           VerificationBadge(observance.status, showLabel: true),
+                          if (corrected) const CorrectedTag(),
                         ],
                       ),
                     ],

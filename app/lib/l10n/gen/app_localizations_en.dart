@@ -1137,4 +1137,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remindersHelpLink => 'Reminders not arriving on time?';
+
+  @override
+  String get correctedLabel => 'Corrected';
+
+  @override
+  String get correctedNote =>
+      'This festival\'s date was recently corrected. If you noted the old date, please check it again.';
 }

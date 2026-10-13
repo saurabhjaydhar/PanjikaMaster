@@ -376,6 +376,26 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
     }
   }
 
+  /// How long a corrected observance is labelled "সংশোধিত / Corrected" (spec §18).
+  static const correctionLabelFor = Duration(days: 7);
+
+  /// Observances of [tradition] whose dates changed in a correction within the last
+  /// [correctionLabelFor] before [now] (T-603).
+  Future<Set<String>> correctedObservances(
+    String tradition,
+    DateTime now,
+  ) async {
+    final since = now.toUtc().subtract(correctionLabelFor).toIso8601String();
+    final rows =
+        await (_db.select(_db.observanceCorrections)..where(
+              (c) =>
+                  c.tradition.equals(tradition) &
+                  c.correctedAt.isBiggerOrEqualValue(since),
+            ))
+            .get();
+    return {for (final r in rows) r.observanceId};
+  }
+
   /// The pack that holds [cityId]'s rows, if the city is installed.
   Future<String?> cityPackId(String cityId) async {
     final city = await _db.cityById(cityId).getSingleOrNull();

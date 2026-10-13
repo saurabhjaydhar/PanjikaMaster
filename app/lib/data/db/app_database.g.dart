@@ -6980,6 +6980,301 @@ class ErrorReportsQueueCompanion extends UpdateCompanion<QueuedErrorReportRow> {
   }
 }
 
+class ObservanceCorrections extends Table
+    with TableInfo<ObservanceCorrections, ObservanceCorrectionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  ObservanceCorrections(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _traditionMeta = const VerificationMeta(
+    'tradition',
+  );
+  late final GeneratedColumn<String> tradition = GeneratedColumn<String>(
+    'tradition',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _observanceIdMeta = const VerificationMeta(
+    'observanceId',
+  );
+  late final GeneratedColumn<String> observanceId = GeneratedColumn<String>(
+    'observance_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _correctedAtMeta = const VerificationMeta(
+    'correctedAt',
+  );
+  late final GeneratedColumn<String> correctedAt = GeneratedColumn<String>(
+    'corrected_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [tradition, observanceId, correctedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'observance_corrections';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ObservanceCorrectionRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('tradition')) {
+      context.handle(
+        _traditionMeta,
+        tradition.isAcceptableOrUnknown(data['tradition']!, _traditionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_traditionMeta);
+    }
+    if (data.containsKey('observance_id')) {
+      context.handle(
+        _observanceIdMeta,
+        observanceId.isAcceptableOrUnknown(
+          data['observance_id']!,
+          _observanceIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_observanceIdMeta);
+    }
+    if (data.containsKey('corrected_at')) {
+      context.handle(
+        _correctedAtMeta,
+        correctedAt.isAcceptableOrUnknown(
+          data['corrected_at']!,
+          _correctedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_correctedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {tradition, observanceId};
+  @override
+  ObservanceCorrectionRow map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ObservanceCorrectionRow(
+      tradition: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tradition'],
+      )!,
+      observanceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}observance_id'],
+      )!,
+      correctedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}corrected_at'],
+      )!,
+    );
+  }
+
+  @override
+  ObservanceCorrections createAlias(String alias) {
+    return ObservanceCorrections(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+  @override
+  List<String> get customConstraints => const [
+    'PRIMARY KEY(tradition, observance_id)',
+  ];
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class ObservanceCorrectionRow extends DataClass
+    implements Insertable<ObservanceCorrectionRow> {
+  final String tradition;
+  final String observanceId;
+  final String correctedAt;
+  const ObservanceCorrectionRow({
+    required this.tradition,
+    required this.observanceId,
+    required this.correctedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['tradition'] = Variable<String>(tradition);
+    map['observance_id'] = Variable<String>(observanceId);
+    map['corrected_at'] = Variable<String>(correctedAt);
+    return map;
+  }
+
+  ObservanceCorrectionsCompanion toCompanion(bool nullToAbsent) {
+    return ObservanceCorrectionsCompanion(
+      tradition: Value(tradition),
+      observanceId: Value(observanceId),
+      correctedAt: Value(correctedAt),
+    );
+  }
+
+  factory ObservanceCorrectionRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ObservanceCorrectionRow(
+      tradition: serializer.fromJson<String>(json['tradition']),
+      observanceId: serializer.fromJson<String>(json['observance_id']),
+      correctedAt: serializer.fromJson<String>(json['corrected_at']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'tradition': serializer.toJson<String>(tradition),
+      'observance_id': serializer.toJson<String>(observanceId),
+      'corrected_at': serializer.toJson<String>(correctedAt),
+    };
+  }
+
+  ObservanceCorrectionRow copyWith({
+    String? tradition,
+    String? observanceId,
+    String? correctedAt,
+  }) => ObservanceCorrectionRow(
+    tradition: tradition ?? this.tradition,
+    observanceId: observanceId ?? this.observanceId,
+    correctedAt: correctedAt ?? this.correctedAt,
+  );
+  ObservanceCorrectionRow copyWithCompanion(
+    ObservanceCorrectionsCompanion data,
+  ) {
+    return ObservanceCorrectionRow(
+      tradition: data.tradition.present ? data.tradition.value : this.tradition,
+      observanceId: data.observanceId.present
+          ? data.observanceId.value
+          : this.observanceId,
+      correctedAt: data.correctedAt.present
+          ? data.correctedAt.value
+          : this.correctedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ObservanceCorrectionRow(')
+          ..write('tradition: $tradition, ')
+          ..write('observanceId: $observanceId, ')
+          ..write('correctedAt: $correctedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(tradition, observanceId, correctedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ObservanceCorrectionRow &&
+          other.tradition == this.tradition &&
+          other.observanceId == this.observanceId &&
+          other.correctedAt == this.correctedAt);
+}
+
+class ObservanceCorrectionsCompanion
+    extends UpdateCompanion<ObservanceCorrectionRow> {
+  final Value<String> tradition;
+  final Value<String> observanceId;
+  final Value<String> correctedAt;
+  final Value<int> rowid;
+  const ObservanceCorrectionsCompanion({
+    this.tradition = const Value.absent(),
+    this.observanceId = const Value.absent(),
+    this.correctedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ObservanceCorrectionsCompanion.insert({
+    required String tradition,
+    required String observanceId,
+    required String correctedAt,
+    this.rowid = const Value.absent(),
+  }) : tradition = Value(tradition),
+       observanceId = Value(observanceId),
+       correctedAt = Value(correctedAt);
+  static Insertable<ObservanceCorrectionRow> custom({
+    Expression<String>? tradition,
+    Expression<String>? observanceId,
+    Expression<String>? correctedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (tradition != null) 'tradition': tradition,
+      if (observanceId != null) 'observance_id': observanceId,
+      if (correctedAt != null) 'corrected_at': correctedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ObservanceCorrectionsCompanion copyWith({
+    Value<String>? tradition,
+    Value<String>? observanceId,
+    Value<String>? correctedAt,
+    Value<int>? rowid,
+  }) {
+    return ObservanceCorrectionsCompanion(
+      tradition: tradition ?? this.tradition,
+      observanceId: observanceId ?? this.observanceId,
+      correctedAt: correctedAt ?? this.correctedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (tradition.present) {
+      map['tradition'] = Variable<String>(tradition.value);
+    }
+    if (observanceId.present) {
+      map['observance_id'] = Variable<String>(observanceId.value);
+    }
+    if (correctedAt.present) {
+      map['corrected_at'] = Variable<String>(correctedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ObservanceCorrectionsCompanion(')
+          ..write('tradition: $tradition, ')
+          ..write('observanceId: $observanceId, ')
+          ..write('correctedAt: $correctedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -6997,6 +7292,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Reminders reminders = Reminders(this);
   late final Settings settings = Settings(this);
   late final ErrorReportsQueue errorReportsQueue = ErrorReportsQueue(this);
+  late final ObservanceCorrections observanceCorrections =
+      ObservanceCorrections(this);
   late final Index transitionsByStart = Index(
     'transitions_by_start',
     'CREATE INDEX transitions_by_start ON transitions (tradition, kind, starts_utc)',
@@ -7268,6 +7565,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     reminders,
     settings,
     errorReportsQueue,
+    observanceCorrections,
     transitionsByStart,
     transitionsByEnd,
   ];
@@ -13148,6 +13446,193 @@ typedef $ErrorReportsQueueProcessedTableManager =
       QueuedErrorReportRow,
       PrefetchHooks Function()
     >;
+typedef $ObservanceCorrectionsCreateCompanionBuilder =
+    ObservanceCorrectionsCompanion Function({
+      required String tradition,
+      required String observanceId,
+      required String correctedAt,
+      Value<int> rowid,
+    });
+typedef $ObservanceCorrectionsUpdateCompanionBuilder =
+    ObservanceCorrectionsCompanion Function({
+      Value<String> tradition,
+      Value<String> observanceId,
+      Value<String> correctedAt,
+      Value<int> rowid,
+    });
+
+class $ObservanceCorrectionsFilterComposer
+    extends Composer<_$AppDatabase, ObservanceCorrections> {
+  $ObservanceCorrectionsFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get tradition => $composableBuilder(
+    column: $table.tradition,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get observanceId => $composableBuilder(
+    column: $table.observanceId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get correctedAt => $composableBuilder(
+    column: $table.correctedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $ObservanceCorrectionsOrderingComposer
+    extends Composer<_$AppDatabase, ObservanceCorrections> {
+  $ObservanceCorrectionsOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get tradition => $composableBuilder(
+    column: $table.tradition,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get observanceId => $composableBuilder(
+    column: $table.observanceId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get correctedAt => $composableBuilder(
+    column: $table.correctedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $ObservanceCorrectionsAnnotationComposer
+    extends Composer<_$AppDatabase, ObservanceCorrections> {
+  $ObservanceCorrectionsAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get tradition =>
+      $composableBuilder(column: $table.tradition, builder: (column) => column);
+
+  GeneratedColumn<String> get observanceId => $composableBuilder(
+    column: $table.observanceId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get correctedAt => $composableBuilder(
+    column: $table.correctedAt,
+    builder: (column) => column,
+  );
+}
+
+class $ObservanceCorrectionsTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          ObservanceCorrections,
+          ObservanceCorrectionRow,
+          $ObservanceCorrectionsFilterComposer,
+          $ObservanceCorrectionsOrderingComposer,
+          $ObservanceCorrectionsAnnotationComposer,
+          $ObservanceCorrectionsCreateCompanionBuilder,
+          $ObservanceCorrectionsUpdateCompanionBuilder,
+          (
+            ObservanceCorrectionRow,
+            BaseReferences<
+              _$AppDatabase,
+              ObservanceCorrections,
+              ObservanceCorrectionRow
+            >,
+          ),
+          ObservanceCorrectionRow,
+          PrefetchHooks Function()
+        > {
+  $ObservanceCorrectionsTableManager(
+    _$AppDatabase db,
+    ObservanceCorrections table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $ObservanceCorrectionsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $ObservanceCorrectionsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $ObservanceCorrectionsAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> tradition = const Value.absent(),
+                Value<String> observanceId = const Value.absent(),
+                Value<String> correctedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ObservanceCorrectionsCompanion(
+                tradition: tradition,
+                observanceId: observanceId,
+                correctedAt: correctedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String tradition,
+                required String observanceId,
+                required String correctedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => ObservanceCorrectionsCompanion.insert(
+                tradition: tradition,
+                observanceId: observanceId,
+                correctedAt: correctedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<ObservanceCorrections, ObservanceCorrectionRow>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    ObservanceCorrections,
+                    ObservanceCorrectionRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $ObservanceCorrectionsProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      ObservanceCorrections,
+      ObservanceCorrectionRow,
+      $ObservanceCorrectionsFilterComposer,
+      $ObservanceCorrectionsOrderingComposer,
+      $ObservanceCorrectionsAnnotationComposer,
+      $ObservanceCorrectionsCreateCompanionBuilder,
+      $ObservanceCorrectionsUpdateCompanionBuilder,
+      (
+        ObservanceCorrectionRow,
+        BaseReferences<
+          _$AppDatabase,
+          ObservanceCorrections,
+          ObservanceCorrectionRow
+        >,
+      ),
+      ObservanceCorrectionRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -13177,6 +13662,8 @@ class $AppDatabaseManager {
       $SettingsTableManager(_db, _db.settings);
   $ErrorReportsQueueTableManager get errorReportsQueue =>
       $ErrorReportsQueueTableManager(_db, _db.errorReportsQueue);
+  $ObservanceCorrectionsTableManager get observanceCorrections =>
+      $ObservanceCorrectionsTableManager(_db, _db.observanceCorrections);
 }
 
 class ObservancesBetweenResult {

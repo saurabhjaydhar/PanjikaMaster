@@ -388,6 +388,16 @@ class _VerificationCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VerificationBadge(observance.status, showLabel: true),
+          if (ref
+                  .watch(correctedObservancesProvider)
+                  .value
+                  ?.contains(observance.observance.id) ??
+              false) ...[
+            const SizedBox(height: Space.s),
+            const CorrectedTag(),
+            const SizedBox(height: Space.xs),
+            Text(l.correctedNote, style: t.bodyMedium),
+          ],
           if (observance.reviewedOn case final on?) ...[
             const SizedBox(height: Space.xs),
             Text(
