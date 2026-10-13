@@ -278,4 +278,52 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get openDay => 'দিনের পুরো পঞ্জিকা দেখুন';
+
+  @override
+  String get calendarModeBengali => 'বাংলা মাস';
+
+  @override
+  String get calendarModeGregorian => 'ইংরেজি মাস';
+
+  @override
+  String monthTitle(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get previousMonth => 'আগের মাস';
+
+  @override
+  String get nextMonth => 'পরের মাস';
+
+  @override
+  String get previousYear => 'আগের বছর';
+
+  @override
+  String get nextYear => 'পরের বছর';
+
+  @override
+  String get chooseMonth => 'মাস বেছে নিন';
+
+  @override
+  String get legendTitle => 'চিহ্নের অর্থ';
+
+  @override
+  String get legendFestival => 'উৎসব (রং বিভাগ অনুযায়ী)';
+
+  @override
+  String get legendSelected => 'নির্বাচিত দিন';
+
+  @override
+  String legendEither(String first, String second) {
+    return '$first / $second';
+  }
+
+  @override
+  String selectedDay(String date) {
+    return 'নির্বাচিত: $date';
+  }
+
+  @override
+  String get actionView => 'দেখুন';
 }

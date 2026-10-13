@@ -181,6 +181,9 @@ void main() {
       expect(await month(const GregorianMonthRef(2027, 2)), isNull);
       expect(await month(const GregorianMonthRef(2026, 8)), isNull);
       expect(await month(const BengaliMonthRef(1433, 0)), isNull);
+      // ভাদ্র 1433 starts before the pack and কার্তিক… the last month runs past it.
+      expect(await month(const BengaliMonthRef(1433, 4)), isNull);
+      expect(await month(const BengaliMonthRef(1433, 8)), isNull);
     });
 
     test('next and previous roll over the year', () {

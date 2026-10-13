@@ -70,5 +70,19 @@
   "footerDetail": "{coordinates} · data: {packs} · {status}",
   "sectionUpcoming": "Coming up",
   "sectionToday": "Today",
-  "openDay": "Open the full day"
+  "openDay": "Open the full day",
+  "calendarModeBengali": "Bengali month",
+  "calendarModeGregorian": "Gregorian month",
+  "monthTitle": "{month} {year}",
+  "previousMonth": "Previous month",
+  "nextMonth": "Next month",
+  "previousYear": "Previous year",
+  "nextYear": "Next year",
+  "chooseMonth": "Choose a month",
+  "legendTitle": "What the marks mean",
+  "legendFestival": "Festival (colour by category)",
+  "legendSelected": "Selected day",
+  "legendEither": "{first} / {second}",
+  "selectedDay": "Selected: {date}",
+  "actionView": "View"
 }

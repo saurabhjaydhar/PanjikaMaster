@@ -1,5 +1,6 @@
 // T-111: the four-tab shell — labels in both languages, navigation, back handling,
 // language switch keeping the current tab, and 200 % text.
+import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,10 @@ import 'package:panjika/app/panjika_app.dart';
 import 'package:panjika/core/l10n/app_language.dart';
 import 'package:panjika/core/l10n/l10n_providers.dart';
 import 'package:panjika/core/settings/settings.dart';
+import 'package:panjika/core/time/clock.dart';
+import 'package:panjika/data/db/app_database.dart';
+import 'package:panjika/data/db/database_provider.dart';
+import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/features/calendar/calendar_screen.dart';
 import 'package:panjika/features/festivals/festivals_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
@@ -15,18 +20,15 @@ import 'package:panjika/features/today/today_screen.dart';
 import '../helpers/fakes.dart';
 import '../helpers/fonts.dart';
 
+/// The app on the sample pack at a fixed time. The widget tree owns the container, so
+/// the clock's timer is cancelled when the test ends.
 Future<ProviderContainer> pumpApp(
   WidgetTester tester, {
   double textScale = 1.0,
 }) async {
-  final container = ProviderContainer(
-    overrides: [
-      deviceLocalesProvider.overrideWithValue(const [Locale('bn')]),
-      settingsSourceProvider.overrideWithValue(MemorySettings()),
-      appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
-    ],
-  );
-  addTearDown(container.dispose);
+  final db = AppDatabase(NativeDatabase.memory());
+  addTearDown(db.close);
+  await tester.runAsync(() => loadSamplePackIfEmpty(db));
   tester.view
     ..physicalSize = const Size(360, 640) * 3
     ..devicePixelRatio = 3;
@@ -34,10 +36,19 @@ Future<ProviderContainer> pumpApp(
   addTearDown(tester.view.reset);
   addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
   await tester.pumpWidget(
-    UncontrolledProviderScope(container: container, child: const PanjikaApp()),
+    ProviderScope(
+      overrides: [
+        appDatabaseProvider.overrideWithValue(db),
+        deviceLocalesProvider.overrideWithValue(const [Locale('bn')]),
+        settingsSourceProvider.overrideWithValue(MemorySettings()),
+        appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
+        clockProvider.overrideWithValue(() => DateTime.utc(2026, 10, 12, 5)),
+      ],
+      child: const PanjikaApp(),
+    ),
   );
   await tester.pumpAndSettle();
-  return container;
+  return ProviderScope.containerOf(tester.element(find.byType(PanjikaApp)));
 }
 
 NavigationBar navBar(WidgetTester tester) =>

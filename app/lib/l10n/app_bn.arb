@@ -432,5 +432,82 @@
   "openDay": "দিনের পুরো পঞ্জিকা দেখুন",
   "@openDay": {
     "description": "Screen-reader hint on the tithi seal: opens Day detail."
+  },
+  "calendarModeBengali": "বাংলা মাস",
+  "@calendarModeBengali": {
+    "description": "Calendar mode: months of the Bengali calendar."
+  },
+  "calendarModeGregorian": "ইংরেজি মাস",
+  "@calendarModeGregorian": {
+    "description": "Calendar mode: Gregorian months."
+  },
+  "monthTitle": "{month} {year}",
+  "@monthTitle": {
+    "description": "Calendar title, e.g. আশ্বিন ১৪৩৩. Layout only.",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "previousMonth": "আগের মাস",
+  "@previousMonth": {
+    "description": "Button: previous month."
+  },
+  "nextMonth": "পরের মাস",
+  "@nextMonth": {
+    "description": "Button: next month."
+  },
+  "previousYear": "আগের বছর",
+  "@previousYear": {
+    "description": "Button in the month chooser."
+  },
+  "nextYear": "পরের বছর",
+  "@nextYear": {
+    "description": "Button in the month chooser."
+  },
+  "chooseMonth": "মাস বেছে নিন",
+  "@chooseMonth": {
+    "description": "Title of the jump-to-month sheet; also the hint on the calendar title."
+  },
+  "legendTitle": "চিহ্নের অর্থ",
+  "@legendTitle": {
+    "description": "Title of the calendar legend sheet."
+  },
+  "legendFestival": "উৎসব (রং বিভাগ অনুযায়ী)",
+  "@legendFestival": {
+    "description": "Legend: the coloured bar under a day."
+  },
+  "legendSelected": "নির্বাচিত দিন",
+  "@legendSelected": {
+    "description": "Legend: the filled day."
+  },
+  "legendEither": "{first} / {second}",
+  "@legendEither": {
+    "description": "Two names for one mark, e.g. both Ekadashis. Layout only.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "selectedDay": "নির্বাচিত: {date}",
+  "@selectedDay": {
+    "description": "Calendar strip under the grid.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "actionView": "দেখুন",
+  "@actionView": {
+    "description": "Button: open the day."
   }
 }

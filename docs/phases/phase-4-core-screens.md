@@ -9,7 +9,7 @@
 |---|---|---|
 | T-401 | Onboarding: bilingual language step → tradition → city → notifications (skippable), progress dots | US-02, US-09 |
 | T-402 ✅ | Today complete: periods with active highlight, today's observances, next 3 upcoming, live updates across transitions, pull-to-refresh | US-01, US-11, FR-HOME-01..09 |
-| T-403 | Calendar: Bengali/Gregorian modes, swipe + arrows, markers by shape, legend sheet, jump-to-month sheet, long-press peek, selected-day strip, year roll-over, "আজ/Today" button | US-06, US-08, FR-CAL-01..07 |
+| T-403 ✅ | Calendar: Bengali/Gregorian modes, swipe + arrows, markers by shape, legend sheet, jump-to-month sheet, long-press peek, selected-day strip, year roll-over, "আজ/Today" button | US-06, US-08, FR-CAL-01..07 |
 | T-404 ✅ | Day detail: all sections in §11.4 order, kshaya/vriddhi lines, "(পরদিন)/(next day)", swipe between days | FR-DAY-01..05 |
 | T-405 | City picker: search in both scripts with transliteration, recent, WB by district, other cities, each with today's sunrise; city-change toast | US-04, FR-LOC-01, FR-LOC-05 |
 | T-406 | Settings: language, names in both scripts, tradition (with confirm sheet), city, theme, text size with preview, 12/24 h, numerals | FR-SET-01, FR-SET-05..06, US-10, FR-L10N-04 |

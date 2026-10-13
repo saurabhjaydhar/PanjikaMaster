@@ -186,6 +186,12 @@ class PanjikaFormatter {
     '${date.year}',
   );
 
+  /// Column heads of the month grid: "রবি" / "Sun", Sunday first ([Weekday] index).
+  String weekdayShort(int sundayFirstIndex) {
+    final i = (sundayFirstIndex + 6) % 7; // the tables start on Monday
+    return _bn ? _bnWeekdaysShort[i] : _enWeekdays[i].substring(0, 3);
+  }
+
   /// "সোমবার" / "Monday".
   String weekday(CivilDate date) =>
       (_bn ? _bnWeekdays : _enWeekdays)[date.weekday - 1];

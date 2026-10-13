@@ -27,6 +27,7 @@ class CalendarDayCell extends ConsumerWidget {
     this.isSelected = false,
     this.isSunday = false,
     this.onTap,
+    this.onLongPress,
   });
 
   /// Bengali day in Bengali-month mode, Gregorian day in Gregorian mode.
@@ -41,6 +42,9 @@ class CalendarDayCell extends ConsumerWidget {
   final bool isSelected;
   final bool isSunday;
   final VoidCallback? onTap;
+
+  /// Quick peek (FR-CAL-05).
+  final VoidCallback? onLongPress;
 
   static const minWidth = 48.0;
   static const minHeight = 56.0;
@@ -67,6 +71,7 @@ class CalendarDayCell extends ConsumerWidget {
                 HapticFeedback.selectionClick();
                 onTap!();
               },
+        onLongPress: onLongPress,
         borderRadius: BorderRadius.circular(Radii.small),
         child: Container(
           constraints: const BoxConstraints(

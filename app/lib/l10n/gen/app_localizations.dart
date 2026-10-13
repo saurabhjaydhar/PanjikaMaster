@@ -532,6 +532,90 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দিনের পুরো পঞ্জিকা দেখুন'**
   String get openDay;
+
+  /// Calendar mode: months of the Bengali calendar.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা মাস'**
+  String get calendarModeBengali;
+
+  /// Calendar mode: Gregorian months.
+  ///
+  /// In bn, this message translates to:
+  /// **'ইংরেজি মাস'**
+  String get calendarModeGregorian;
+
+  /// Calendar title, e.g. আশ্বিন ১৪৩৩. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{month} {year}'**
+  String monthTitle(String month, String year);
+
+  /// Button: previous month.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের মাস'**
+  String get previousMonth;
+
+  /// Button: next month.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের মাস'**
+  String get nextMonth;
+
+  /// Button in the month chooser.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের বছর'**
+  String get previousYear;
+
+  /// Button in the month chooser.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরের বছর'**
+  String get nextYear;
+
+  /// Title of the jump-to-month sheet; also the hint on the calendar title.
+  ///
+  /// In bn, this message translates to:
+  /// **'মাস বেছে নিন'**
+  String get chooseMonth;
+
+  /// Title of the calendar legend sheet.
+  ///
+  /// In bn, this message translates to:
+  /// **'চিহ্নের অর্থ'**
+  String get legendTitle;
+
+  /// Legend: the coloured bar under a day.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব (রং বিভাগ অনুযায়ী)'**
+  String get legendFestival;
+
+  /// Legend: the filled day.
+  ///
+  /// In bn, this message translates to:
+  /// **'নির্বাচিত দিন'**
+  String get legendSelected;
+
+  /// Two names for one mark, e.g. both Ekadashis. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{first} / {second}'**
+  String legendEither(String first, String second);
+
+  /// Calendar strip under the grid.
+  ///
+  /// In bn, this message translates to:
+  /// **'নির্বাচিত: {date}'**
+  String selectedDay(String date);
+
+  /// Button: open the day.
+  ///
+  /// In bn, this message translates to:
+  /// **'দেখুন'**
+  String get actionView;
 }
 
 class _AppLocalizationsDelegate
