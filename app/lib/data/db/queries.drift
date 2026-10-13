@@ -1,0 +1,30 @@
+-- Named queries the Today screen needs (spec §14.4). Drift generates typed methods.
+import 'pack_tables.drift';
+
+-- Transitions of one kind overlapping [fromUtc, toUtc), e.g. a panjika day (sunrise → next sunrise).
+transitionsOverlapping:
+SELECT * FROM transitions
+ WHERE tradition = :tradition AND kind = :kind
+   AND ends_utc > :from_utc AND starts_utc < :to_utc
+ ORDER BY starts_utc;
+
+cityDay:
+SELECT * FROM city_days WHERE city_id = :city_id AND date = :date;
+
+bengaliDateOn:
+SELECT * FROM bengali_dates WHERE tradition = :tradition AND date = :date;
+
+namesOfKind:
+SELECT * FROM names WHERE kind = :kind ORDER BY idx;
+
+observancesBetween:
+SELECT o.**, d.** FROM observance_dates d
+  JOIN observances o ON o.id = d.observance_id
+ WHERE d.tradition = :tradition AND d.date BETWEEN :from_date AND :to_date
+ ORDER BY d.date, o.tier, o.id;
+
+windowsOn:
+SELECT * FROM observance_windows WHERE tradition = :tradition AND date = :date ORDER BY start_utc;
+
+packById:
+SELECT * FROM packs WHERE id = :id;

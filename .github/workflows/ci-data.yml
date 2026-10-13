@@ -3,15 +3,15 @@ name: ci-data
 on:
   push:
     branches: [main]
-    paths: ["data/**", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", ".github/workflows/ci-data.yml"]
   pull_request:
-    paths: ["data/**", ".github/workflows/ci-data.yml"]
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", ".github/workflows/ci-data.yml"]
 
 permissions:
   contents: read
 
 jobs:
-  check:
+  data:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,3 +23,7 @@ jobs:
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run pytest
+      # The app's Drift tables are generated from data/pack/schema.sql (T-106).
+      - run: python ../scripts/sync_drift_schema.py --check
+      # The app's debug-only sample fixture is generated from pack/sample.py (T-110).
+      - run: uv run python ../scripts/gen_sample_fixture.py --check

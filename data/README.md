@@ -7,6 +7,7 @@ cd data
 uv sync            # creates .venv with Python 3.12 and dev tools
 uv run ruff check .
 uv run pytest
+uv run python -m pack.sample --out dist/sample   # SAMPLE fixture packs for app development
 ```
 
 Layout: `ephem/` ephemeris download + checksum · `engine/` astronomy, panchanga, Bengali date, observances · `reference/` human-entered validation values · `validate/` comparison reports · `pack/` SQLite pack builder and signing · `tests/`.
