@@ -688,5 +688,74 @@
   "actionKeep": "থাক",
   "@actionKeep": {
     "description": "Button: keep the current choice."
+  },
+  "moreTitle": "আরও",
+  "@moreTitle": {
+    "description": "Title of the More tab (spec §10)."
+  },
+  "menuReminders": "অনুস্মারক",
+  "@menuReminders": {
+    "description": "More menu: reminders screen (§11.13)."
+  },
+  "menuSearch": "খুঁজুন",
+  "@menuSearch": {
+    "description": "More menu: search screen (§11.14)."
+  },
+  "menuCity": "শহর",
+  "@menuCity": {
+    "description": "More menu: city picker (§11.12)."
+  },
+  "menuGlossary": "শব্দকোষ",
+  "@menuGlossary": {
+    "description": "More menu: glossary of panjika terms."
+  },
+  "menuSettings": "সেটিংস",
+  "@menuSettings": {
+    "description": "More menu: settings (§11.15)."
+  },
+  "menuSources": "তথ্যসূত্র ও যাচাই",
+  "@menuSources": {
+    "description": "More menu: how the data is computed and checked (§11.16)."
+  },
+  "menuReport": "ভুল জানান",
+  "@menuReport": {
+    "description": "More menu: report a wrong date or time (§11.17)."
+  },
+  "menuRemoveAds": "বিজ্ঞাপন সরান",
+  "@menuRemoveAds": {
+    "description": "More menu: remove-ads purchase (§11.18)."
+  },
+  "menuAbout": "সম্পর্কে",
+  "@menuAbout": {
+    "description": "More menu and Settings: the About screen."
+  },
+  "menuPrivacy": "গোপনীয়তা",
+  "@menuPrivacy": {
+    "description": "More menu and Settings: privacy policy."
+  },
+  "aboutTagline": "তিথি, উৎসব ও শুভ সময়ের বাংলা পঞ্জিকা, বাংলা ও ইংরেজিতে।",
+  "@aboutTagline": {
+    "description": "One-line description of the app on the About screen."
+  },
+  "aboutVersion": "সংস্করণ {version}",
+  "@aboutVersion": {
+    "description": "App version on the About screen; version is formatted with the user's numerals, e.g. ১.০.০.",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutDataHeading": "তথ্য কোথা থেকে আসে",
+  "@aboutDataHeading": {
+    "description": "About screen section heading."
+  },
+  "aboutDataBody": "সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA JPL-এর DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার দিয়ে। হিসাব আগে থেকে করা থাকে; ফোন শুধু সেই তথ্য পড়ে, কিছু আন্দাজ করে না।",
+  "@aboutDataBody": {
+    "description": "About screen: how the data is made (spec §6, PRD §1)."
+  },
+  "aboutProvenance": "প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।",
+  "@aboutProvenance": {
+    "description": "About screen: the provenance promise."
   }
 }

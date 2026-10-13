@@ -1,0 +1,7 @@
+বাংলা পঞ্জিকা — তথ্যের উৎস
+
+সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA জেট প্রোপালশন ল্যাবরেটরির (JPL) DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার (MIT লাইসেন্স) দিয়ে। হিসাব আগে থেকে করা থাকে; এফেমেরিস ফাইলটি এই অ্যাপে নেই। প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল, তথ্য-প্যাক ও যাচাইয়ের অবস্থা অ্যাপেই দেখানো হয়।
+
+Bangla Panjika — where the data comes from
+
+Positions of the Sun and Moon are computed from the DE440s ephemeris of NASA's Jet Propulsion Laboratory (JPL) with the Skyfield software (MIT licence). The computation is done ahead of time; the ephemeris file is not included in this app. Every value is shown in the app with its panjika tradition, city, time zone, data pack and verification status.

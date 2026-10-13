@@ -5,7 +5,16 @@ import '../../core/settings/settings.dart';
 import '../../core/time/civil_date.dart';
 import '../../core/time/clock.dart';
 import '../../data/repositories/panjika_providers.dart';
+import '../../domain/entities/name_ref.dart';
 import '../../domain/entities/panjika.dart';
+
+/// The chosen city's name, for the Settings and More rows.
+final cityNameProvider = FutureProvider<NameRef?>((ref) async {
+  final city = await ref
+      .watch(panjikaRepositoryProvider)
+      .city(ref.watch(cityIdProvider));
+  return city?.name;
+});
 
 /// A city with today's sunrise, for the picker rows (spec §11.7).
 class CityRowData {

@@ -826,6 +826,102 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'থাক'**
   String get actionKeep;
+
+  /// Title of the More tab (spec §10).
+  ///
+  /// In bn, this message translates to:
+  /// **'আরও'**
+  String get moreTitle;
+
+  /// More menu: reminders screen (§11.13).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক'**
+  String get menuReminders;
+
+  /// More menu: search screen (§11.14).
+  ///
+  /// In bn, this message translates to:
+  /// **'খুঁজুন'**
+  String get menuSearch;
+
+  /// More menu: city picker (§11.12).
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর'**
+  String get menuCity;
+
+  /// More menu: glossary of panjika terms.
+  ///
+  /// In bn, this message translates to:
+  /// **'শব্দকোষ'**
+  String get menuGlossary;
+
+  /// More menu: settings (§11.15).
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস'**
+  String get menuSettings;
+
+  /// More menu: how the data is computed and checked (§11.16).
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্যসূত্র ও যাচাই'**
+  String get menuSources;
+
+  /// More menu: report a wrong date or time (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'ভুল জানান'**
+  String get menuReport;
+
+  /// More menu: remove-ads purchase (§11.18).
+  ///
+  /// In bn, this message translates to:
+  /// **'বিজ্ঞাপন সরান'**
+  String get menuRemoveAds;
+
+  /// More menu and Settings: the About screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'সম্পর্কে'**
+  String get menuAbout;
+
+  /// More menu and Settings: privacy policy.
+  ///
+  /// In bn, this message translates to:
+  /// **'গোপনীয়তা'**
+  String get menuPrivacy;
+
+  /// One-line description of the app on the About screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি, উৎসব ও শুভ সময়ের বাংলা পঞ্জিকা, বাংলা ও ইংরেজিতে।'**
+  String get aboutTagline;
+
+  /// App version on the About screen; version is formatted with the user's numerals, e.g. ১.০.০.
+  ///
+  /// In bn, this message translates to:
+  /// **'সংস্করণ {version}'**
+  String aboutVersion(String version);
+
+  /// About screen section heading.
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য কোথা থেকে আসে'**
+  String get aboutDataHeading;
+
+  /// About screen: how the data is made (spec §6, PRD §1).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA JPL-এর DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার দিয়ে। হিসাব আগে থেকে করা থাকে; ফোন শুধু সেই তথ্য পড়ে, কিছু আন্দাজ করে না।'**
+  String get aboutDataBody;
+
+  /// About screen: the provenance promise.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।'**
+  String get aboutProvenance;
 }
 
 class _AppLocalizationsDelegate

@@ -341,7 +341,8 @@ enum StateKind {
   offline(Icons.cloud_off_outlined),
   stale(Icons.update),
   signatureFailed(Icons.gpp_maybe_outlined),
-  checkClock(Icons.schedule);
+  checkClock(Icons.schedule),
+  comingSoon(Icons.hourglass_empty);
 
   const StateKind(this.icon);
   final IconData icon;

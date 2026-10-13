@@ -447,4 +447,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionKeep => 'Keep';
+
+  @override
+  String get moreTitle => 'More';
+
+  @override
+  String get menuReminders => 'Reminders';
+
+  @override
+  String get menuSearch => 'Search';
+
+  @override
+  String get menuCity => 'City';
+
+  @override
+  String get menuGlossary => 'Glossary';
+
+  @override
+  String get menuSettings => 'Settings';
+
+  @override
+  String get menuSources => 'Sources & verification';
+
+  @override
+  String get menuReport => 'Report an error';
+
+  @override
+  String get menuRemoveAds => 'Remove ads';
+
+  @override
+  String get menuAbout => 'About';
+
+  @override
+  String get menuPrivacy => 'Privacy';
+
+  @override
+  String get aboutTagline =>
+      'The Bengali panjika of tithis, festivals and auspicious times, in Bengali and English.';
+
+  @override
+  String aboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get aboutDataHeading => 'Where the data comes from';
+
+  @override
+  String get aboutDataBody =>
+      'Positions of the Sun and Moon are computed from NASA JPL\'s DE440s ephemeris with the Skyfield software. The computation is done ahead of time; the phone only reads that data and never guesses.';
+
+  @override
+  String get aboutProvenance =>
+      'Every value is shown with its panjika tradition, city, time zone and verification status.';
 }

@@ -14,9 +14,9 @@ import '../../core/l10n/panjika_formatter.dart';
 import '../../core/settings/settings.dart';
 import '../../data/packs/update_providers.dart';
 import '../../data/repositories/panjika_providers.dart';
-import '../../domain/entities/name_ref.dart';
 import '../../domain/usecases/assess_coverage.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../city/city_providers.dart';
 import 'tradition.dart';
 
 /// Every installed pack's range, for the "Downloaded data" row.
@@ -37,7 +37,7 @@ class SettingsScreen extends ConsumerWidget {
     final t = Theme.of(context).textTheme;
     final c = context.colors;
     final updates = ref.read(updateControllerProvider.notifier);
-    final city = ref.watch(_cityNameProvider).value;
+    final city = ref.watch(cityNameProvider).value;
     final packs = ref.watch(installedPacksProvider).value ?? const [];
     final globals = [
       for (final p in packs)
@@ -230,20 +230,16 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: Space.l),
           SectionHeader(title: l.sectionOther),
+          link(l.menuRemoveAds, null, () => context.push(Routes.removeAds)),
+          link(l.menuPrivacy, null, () => context.push(Routes.privacy)),
           link(l.licences, null, () => showLicensePage(context: context)),
+          link(l.menuAbout, null, () => context.push(Routes.about)),
           const SizedBox(height: Space.xl),
         ],
       ),
     );
   }
 }
-
-final _cityNameProvider = FutureProvider<NameRef?>((ref) async {
-  final city = await ref
-      .watch(panjikaRepositoryProvider)
-      .city(ref.watch(cityIdProvider));
-  return city?.name;
-});
 
 /// Tradition list; unavailable ones say "coming soon" (T-410); a change asks first
 /// (spec §11.15).

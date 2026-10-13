@@ -119,5 +119,21 @@
   "licences": "Licences",
   "traditionConfirm": "Changing the tradition can change some festival dates. Reminders will be rescheduled.",
   "actionChange": "Change",
-  "actionKeep": "Keep"
+  "actionKeep": "Keep",
+  "moreTitle": "More",
+  "menuReminders": "Reminders",
+  "menuSearch": "Search",
+  "menuCity": "City",
+  "menuGlossary": "Glossary",
+  "menuSettings": "Settings",
+  "menuSources": "Sources & verification",
+  "menuReport": "Report an error",
+  "menuRemoveAds": "Remove ads",
+  "menuAbout": "About",
+  "menuPrivacy": "Privacy",
+  "aboutTagline": "The Bengali panjika of tithis, festivals and auspicious times, in Bengali and English.",
+  "aboutVersion": "Version {version}",
+  "aboutDataHeading": "Where the data comes from",
+  "aboutDataBody": "Positions of the Sun and Moon are computed from NASA JPL's DE440s ephemeris with the Skyfield software. The computation is done ahead of time; the phone only reads that data and never guesses.",
+  "aboutProvenance": "Every value is shown with its panjika tradition, city, time zone and verification status."
 }
