@@ -7066,6 +7066,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<ObservanceRow> observanceById(String id) {
+    return customSelect(
+      'SELECT * FROM observances WHERE id = ?1',
+      variables: [Variable<String>(id)],
+      readsFrom: {this.observances},
+    ).asyncMap(this.observances.mapFromRow);
+  }
+
   Selectable<ObservanceWindowRow> windowsOn(String tradition, String date) {
     return customSelect(
       'SELECT * FROM observance_windows WHERE tradition = ?1 AND date = ?2 ORDER BY start_utc',

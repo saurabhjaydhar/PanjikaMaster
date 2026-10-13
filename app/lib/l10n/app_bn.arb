@@ -917,5 +917,17 @@
   "locationUnavailable": "অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।",
   "@locationUnavailable": {
     "description": "When no location fix could be had."
+  },
+  "linkNotFound": "এই পাতাটি পাওয়া যায়নি।",
+  "@linkNotFound": {
+    "description": "Shown for a link or address the app doesn't know (T-411)."
+  },
+  "festivalNotFound": "এই উৎসবের তথ্য এই ফোনে নেই।",
+  "@festivalNotFound": {
+    "description": "A festival link whose id is not in the installed packs (T-411)."
+  },
+  "goToToday": "আজকের পঞ্জিকা দেখুন",
+  "@goToToday": {
+    "description": "Button that opens the Today tab."
   }
 }

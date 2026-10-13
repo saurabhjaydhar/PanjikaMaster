@@ -1095,6 +1095,24 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।'**
   String get locationUnavailable;
+
+  /// Shown for a link or address the app doesn't know (T-411).
+  ///
+  /// In bn, this message translates to:
+  /// **'এই পাতাটি পাওয়া যায়নি।'**
+  String get linkNotFound;
+
+  /// A festival link whose id is not in the installed packs (T-411).
+  ///
+  /// In bn, this message translates to:
+  /// **'এই উৎসবের তথ্য এই ফোনে নেই।'**
+  String get festivalNotFound;
+
+  /// Button that opens the Today tab.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজকের পঞ্জিকা দেখুন'**
+  String get goToToday;
 }
 
 class _AppLocalizationsDelegate

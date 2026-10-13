@@ -23,6 +23,9 @@ SELECT o.**, d.** FROM observance_dates d
  WHERE d.tradition = :tradition AND d.date BETWEEN :from_date AND :to_date
  ORDER BY d.date, o.tier, o.id;
 
+observanceById:
+SELECT * FROM observances WHERE id = :id;
+
 windowsOn:
 SELECT * FROM observance_windows WHERE tradition = :tradition AND date = :date ORDER BY start_utc;
 

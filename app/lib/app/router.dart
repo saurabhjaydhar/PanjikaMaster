@@ -6,6 +6,7 @@ import '../core/time/civil_date.dart';
 import '../features/calendar/calendar_screen.dart';
 import '../features/city/city_picker_screen.dart';
 import '../features/day/day_screen.dart';
+import '../features/festivals/festival_link_screen.dart';
 import '../features/festivals/festivals_screen.dart';
 import '../features/more/about_screen.dart';
 import '../features/more/coming_soon_screen.dart';
@@ -15,6 +16,7 @@ import '../features/settings/settings_screen.dart';
 import '../features/today/today_screen.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'shell/app_shell.dart';
+import 'shell/not_found_screen.dart';
 
 abstract final class Routes {
   static const today = '/today';
@@ -24,6 +26,12 @@ abstract final class Routes {
 
   /// Day detail for a date, e.g. `/day/2026-10-12` (also the share-link form, T-411).
   static String day(CivilDate date) => '/day/${date.toIso()}';
+
+  /// A festival, e.g. `/festival/durga_puja` (share links, T-411).
+  static String festival(String id) => '/festival/$id';
+
+  /// Observance ids as the packs write them.
+  static final festivalId = RegExp(r'^[a-z0-9_]{1,64}$');
 
   static const onboarding = '/onboarding';
   static const city = '/city';
@@ -45,6 +53,8 @@ abstract final class Routes {
 final routerProvider = Provider<GoRouter>((ref) {
   final router = GoRouter(
     initialLocation: Routes.today,
+    // An unknown address (a mistyped or newer link) says so instead of crashing.
+    errorBuilder: (_, _) => const NotFoundScreen(),
     // First run goes through onboarding; a link that launched the app is kept and
     // opened afterwards (spec §10).
     redirect: (_, state) {
@@ -80,7 +90,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/day/:date',
         builder: (_, state) {
           final date = CivilDate.tryParse(state.pathParameters['date']!);
-          return date == null ? const TodayScreen() : DayScreen(date: date);
+          return date == null ? const NotFoundScreen() : DayScreen(date: date);
+        },
+      ),
+      GoRoute(
+        path: '/festival/:id',
+        builder: (_, state) {
+          final id = state.pathParameters['id']!;
+          return Routes.festivalId.hasMatch(id)
+              ? FestivalLinkScreen(id: id)
+              : const NotFoundScreen();
         },
       ),
       GoRoute(path: Routes.city, builder: (_, _) => const CityPickerScreen()),
