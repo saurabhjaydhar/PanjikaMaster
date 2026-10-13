@@ -21,6 +21,7 @@ import 'package:panjika/features/more/about_screen.dart';
 import 'package:panjika/features/more/app_version.dart';
 import 'package:panjika/features/more/coming_soon_screen.dart';
 import 'package:panjika/features/more/more_screen.dart';
+import 'package:panjika/features/reminders/reminders_screen.dart';
 import 'package:panjika/features/settings/settings_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
@@ -87,7 +88,7 @@ void main() {
   ) async {
     await open(tester, language: 'en');
     final destinations = <String, Type>{
-      'Reminders': ComingSoonScreen,
+      'Reminders': RemindersScreen,
       'Search': ComingSoonScreen,
       'City': CityPickerScreen,
       'Glossary': ComingSoonScreen,

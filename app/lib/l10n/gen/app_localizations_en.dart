@@ -755,4 +755,56 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationsOff =>
       'Notifications are off, so reminders can\'t be shown. Turn on notifications for this app in your phone\'s settings.';
+
+  @override
+  String get sectionRecurring => 'Recurring';
+
+  @override
+  String get sectionFestivalReminders => 'Festivals';
+
+  @override
+  String get recurringEkadashi => 'Ekadashi';
+
+  @override
+  String get recurringPurnima => 'Purnima';
+
+  @override
+  String get recurringAmavasya => 'Amavasya';
+
+  @override
+  String timingDayBefore(String time) {
+    return 'The day before, $time';
+  }
+
+  @override
+  String timingMorningOf(String time) {
+    return 'On the day, $time';
+  }
+
+  @override
+  String get timingTithiStart => 'When the tithi begins';
+
+  @override
+  String timingBoth(String first, String second) {
+    return '$first and $second';
+  }
+
+  @override
+  String get addFestivalReminder => 'Add a festival';
+
+  @override
+  String get remindersEmpty =>
+      'No reminders yet. Turn one on for Ekadashi or a festival.';
+
+  @override
+  String get timingSheetTitle => 'When should we remind you?';
+
+  @override
+  String get timingDayBeforeOption => 'The day before';
+
+  @override
+  String get timingMorningOption => 'On the morning of the day';
+
+  @override
+  String get changeTime => 'Change the time';
 }

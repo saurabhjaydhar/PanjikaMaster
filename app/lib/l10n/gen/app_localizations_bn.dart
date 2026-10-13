@@ -751,4 +751,56 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get notificationsOff =>
       'বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।';
+
+  @override
+  String get sectionRecurring => 'নিয়মিত';
+
+  @override
+  String get sectionFestivalReminders => 'উৎসব';
+
+  @override
+  String get recurringEkadashi => 'একাদশী';
+
+  @override
+  String get recurringPurnima => 'পূর্ণিমা';
+
+  @override
+  String get recurringAmavasya => 'অমাবস্যা';
+
+  @override
+  String timingDayBefore(String time) {
+    return 'আগের দিন $time';
+  }
+
+  @override
+  String timingMorningOf(String time) {
+    return 'সেদিন $time';
+  }
+
+  @override
+  String get timingTithiStart => 'তিথি শুরুর সময়';
+
+  @override
+  String timingBoth(String first, String second) {
+    return '$first ও $second';
+  }
+
+  @override
+  String get addFestivalReminder => 'উৎসব যোগ করুন';
+
+  @override
+  String get remindersEmpty =>
+      'এখনো কোনো অনুস্মারক নেই। একাদশী বা কোনো উৎসবের জন্য চালু করুন।';
+
+  @override
+  String get timingSheetTitle => 'কখন মনে করাবে?';
+
+  @override
+  String get timingDayBeforeOption => 'আগের দিন';
+
+  @override
+  String get timingMorningOption => 'সেদিন সকালে';
+
+  @override
+  String get changeTime => 'সময় বদলান';
 }

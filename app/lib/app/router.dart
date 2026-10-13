@@ -12,6 +12,7 @@ import '../features/more/about_screen.dart';
 import '../features/more/coming_soon_screen.dart';
 import '../features/more/more_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
+import '../features/reminders/reminders_screen.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/today/today_screen.dart';
 import '../l10n/gen/app_localizations.dart';
@@ -110,8 +111,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.city, builder: (_, _) => const CityPickerScreen()),
       GoRoute(path: Routes.settings, builder: (_, _) => const SettingsScreen()),
       GoRoute(path: Routes.about, builder: (_, _) => const AboutScreen()),
+      GoRoute(
+        path: Routes.reminders,
+        builder: (_, _) => const RemindersScreen(),
+      ),
       // Screens built by later tasks; until then each says "coming soon".
-      _comingSoon(Routes.reminders, (l) => l.menuReminders), // TODO(T-512)
       _comingSoon(Routes.search, (l) => l.menuSearch), // TODO(T-611)
       _comingSoon(Routes.glossary, (l) => l.menuGlossary), // TODO(T-612)
       _comingSoon(Routes.sources, (l) => l.menuSources), // TODO(T-609)

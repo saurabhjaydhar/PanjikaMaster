@@ -1335,6 +1335,96 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।'**
   String get notificationsOff;
+
+  /// Reminders screen section (spec §11.13).
+  ///
+  /// In bn, this message translates to:
+  /// **'নিয়মিত'**
+  String get sectionRecurring;
+
+  /// Reminders screen section: festival reminders.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব'**
+  String get sectionFestivalReminders;
+
+  /// Recurring reminder row (FR-REM-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'একাদশী'**
+  String get recurringEkadashi;
+
+  /// Recurring reminder row.
+  ///
+  /// In bn, this message translates to:
+  /// **'পূর্ণিমা'**
+  String get recurringPurnima;
+
+  /// Recurring reminder row.
+  ///
+  /// In bn, this message translates to:
+  /// **'অমাবস্যা'**
+  String get recurringAmavasya;
+
+  /// Reminder timing summary; time in the user's format, e.g. 'রাত ৮:০০'.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের দিন {time}'**
+  String timingDayBefore(String time);
+
+  /// Reminder timing summary.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেদিন {time}'**
+  String timingMorningOf(String time);
+
+  /// Reminder timing (only where exact alarms are allowed, spec §17).
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি শুরুর সময়'**
+  String get timingTithiStart;
+
+  /// Two reminder timings together.
+  ///
+  /// In bn, this message translates to:
+  /// **'{first} ও {second}'**
+  String timingBoth(String first, String second);
+
+  /// Opens the festival list to choose one (spec §11.13).
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব যোগ করুন'**
+  String get addFestivalReminder;
+
+  /// Reminders empty state (spec §11.13).
+  ///
+  /// In bn, this message translates to:
+  /// **'এখনো কোনো অনুস্মারক নেই। একাদশী বা কোনো উৎসবের জন্য চালু করুন।'**
+  String get remindersEmpty;
+
+  /// Reminder timing sheet title.
+  ///
+  /// In bn, this message translates to:
+  /// **'কখন মনে করাবে?'**
+  String get timingSheetTitle;
+
+  /// Timing option.
+  ///
+  /// In bn, this message translates to:
+  /// **'আগের দিন'**
+  String get timingDayBeforeOption;
+
+  /// Timing option.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেদিন সকালে'**
+  String get timingMorningOption;
+
+  /// Button tooltip that opens the time picker.
+  ///
+  /// In bn, this message translates to:
+  /// **'সময় বদলান'**
+  String get changeTime;
 }
 
 class _AppLocalizationsDelegate

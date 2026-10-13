@@ -203,5 +203,20 @@
   "channelFestivalDescription": "Reminders before the festivals you chose.",
   "channelTithi": "Tithi reminders",
   "channelTithiDescription": "Ekadashi, Purnima and Amavasya reminders.",
-  "notificationsOff": "Notifications are off, so reminders can't be shown. Turn on notifications for this app in your phone's settings."
+  "notificationsOff": "Notifications are off, so reminders can't be shown. Turn on notifications for this app in your phone's settings.",
+  "sectionRecurring": "Recurring",
+  "sectionFestivalReminders": "Festivals",
+  "recurringEkadashi": "Ekadashi",
+  "recurringPurnima": "Purnima",
+  "recurringAmavasya": "Amavasya",
+  "timingDayBefore": "The day before, {time}",
+  "timingMorningOf": "On the day, {time}",
+  "timingTithiStart": "When the tithi begins",
+  "timingBoth": "{first} and {second}",
+  "addFestivalReminder": "Add a festival",
+  "remindersEmpty": "No reminders yet. Turn one on for Ekadashi or a festival.",
+  "timingSheetTitle": "When should we remind you?",
+  "timingDayBeforeOption": "The day before",
+  "timingMorningOption": "On the morning of the day",
+  "changeTime": "Change the time"
 }
