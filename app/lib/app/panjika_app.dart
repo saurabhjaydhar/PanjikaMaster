@@ -6,6 +6,7 @@ import '../core/l10n/l10n_providers.dart';
 import '../core/settings/settings.dart';
 import '../core/time/clock.dart';
 import '../data/packs/update_providers.dart';
+import '../features/reminders/reminder_triggers.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
@@ -29,6 +30,7 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         ref.read(updateControllerProvider.notifier).checkInBackground();
+        ref.read(reminderTriggersProvider).appStarted();
       }
     });
   }
@@ -51,6 +53,7 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       ref.read(nowProvider.notifier).refresh();
+      ref.read(reminderTriggersProvider).appResumed();
     }
   }
 

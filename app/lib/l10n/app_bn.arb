@@ -1143,5 +1143,87 @@
   "channelTithiDescription": "একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।",
   "@channelTithiDescription": {
     "description": "Android notification channel description."
+  },
+  "notificationsOff": "বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।",
+  "@notificationsOff": {
+    "description": "Inline help after the notification permission is refused (US-03, T-507)."
+  },
+  "sectionRecurring": "নিয়মিত",
+  "@sectionRecurring": {
+    "description": "Reminders screen section (spec §11.13)."
+  },
+  "sectionFestivalReminders": "উৎসব",
+  "@sectionFestivalReminders": {
+    "description": "Reminders screen section: festival reminders."
+  },
+  "recurringEkadashi": "একাদশী",
+  "@recurringEkadashi": {
+    "description": "Recurring reminder row (FR-REM-02)."
+  },
+  "recurringPurnima": "পূর্ণিমা",
+  "@recurringPurnima": {
+    "description": "Recurring reminder row."
+  },
+  "recurringAmavasya": "অমাবস্যা",
+  "@recurringAmavasya": {
+    "description": "Recurring reminder row."
+  },
+  "timingDayBefore": "আগের দিন {time}",
+  "@timingDayBefore": {
+    "description": "Reminder timing summary; time in the user's format, e.g. 'রাত ৮:০০'.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "timingMorningOf": "সেদিন {time}",
+  "@timingMorningOf": {
+    "description": "Reminder timing summary.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "timingTithiStart": "তিথি শুরুর সময়",
+  "@timingTithiStart": {
+    "description": "Reminder timing (only where exact alarms are allowed, spec §17)."
+  },
+  "timingBoth": "{first} ও {second}",
+  "@timingBoth": {
+    "description": "Two reminder timings together.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "addFestivalReminder": "উৎসব যোগ করুন",
+  "@addFestivalReminder": {
+    "description": "Opens the festival list to choose one (spec §11.13)."
+  },
+  "remindersEmpty": "এখনো কোনো অনুস্মারক নেই। একাদশী বা কোনো উৎসবের জন্য চালু করুন।",
+  "@remindersEmpty": {
+    "description": "Reminders empty state (spec §11.13)."
+  },
+  "timingSheetTitle": "কখন মনে করাবে?",
+  "@timingSheetTitle": {
+    "description": "Reminder timing sheet title."
+  },
+  "timingDayBeforeOption": "আগের দিন",
+  "@timingDayBeforeOption": {
+    "description": "Timing option."
+  },
+  "timingMorningOption": "সেদিন সকালে",
+  "@timingMorningOption": {
+    "description": "Timing option."
+  },
+  "changeTime": "সময় বদলান",
+  "@changeTime": {
+    "description": "Button tooltip that opens the time picker."
   }
 }

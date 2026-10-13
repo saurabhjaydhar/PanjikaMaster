@@ -1,4 +1,5 @@
 import 'package:panjika/core/l10n/app_locale_channel.dart';
+import 'package:panjika/data/notifications/notification_permission.dart';
 import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/domain/location/location.dart';
 import 'package:panjika/domain/reminders/plan_reminders.dart';
@@ -62,4 +63,30 @@ class FakeNotificationScheduler implements NotificationScheduler {
     plans.add(plan);
     this.channels = channels;
   }
+}
+
+/// A scripted notification permission.
+class FakeNotificationPermission implements NotificationPermission {
+  FakeNotificationPermission({
+    this.isGranted = true,
+    this.grantOnRequest = true,
+  });
+
+  bool isGranted;
+  bool grantOnRequest;
+  int requests = 0;
+  int settingsOpened = 0;
+
+  @override
+  Future<bool> granted() async => isGranted;
+
+  @override
+  Future<bool> request() async {
+    requests++;
+    isGranted = grantOnRequest;
+    return isGranted;
+  }
+
+  @override
+  Future<void> openSettings() async => settingsOpened++;
 }

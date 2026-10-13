@@ -17,6 +17,8 @@ import '../../data/repositories/panjika_providers.dart';
 import '../../domain/entities/panjika.dart';
 import '../../domain/usecases/get_festival_detail.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../../data/notifications/notification_permission.dart';
+import '../reminders/notifications_off_note.dart';
 import '../reminders/reminder_prefs.dart';
 
 final getFestivalDetailProvider = Provider<GetFestivalDetail>((ref) {
@@ -55,6 +57,21 @@ class FestivalDetailScreen extends ConsumerStatefulWidget {
 
 class _FestivalDetailScreenState extends ConsumerState<FestivalDetailScreen> {
   int? _day;
+
+  /// The user refused notifications when turning the reminder on (US-03).
+  bool _refused = false;
+
+  Future<void> _toggleReminder(String id, {required bool on}) async {
+    if (!on) {
+      final allowed = await ensureNotificationPermission(
+        ref.read(notificationPermissionProvider),
+      );
+      if (!mounted) return;
+      setState(() => _refused = !allowed);
+      if (!allowed) return; // the toggle stays off
+    }
+    await ref.read(reminderConfigProvider.notifier).toggleFestival(id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -229,20 +246,20 @@ class _FestivalDetailScreenState extends ConsumerState<FestivalDetailScreen> {
                 alignment: AlignmentDirectional.centerStart,
                 child: reminderOn
                     ? FilledButton.icon(
-                        onPressed: () => ref
-                            .read(reminderConfigProvider.notifier)
-                            .toggleFestival(o.id),
+                        onPressed: () => _toggleReminder(o.id, on: true),
                         icon: const Icon(Icons.notifications_active),
                         label: Text(l.reminderOn),
                       )
                     : OutlinedButton.icon(
-                        onPressed: () => ref
-                            .read(reminderConfigProvider.notifier)
-                            .toggleFestival(o.id),
+                        onPressed: () => _toggleReminder(o.id, on: false),
                         icon: const Icon(Icons.notifications_none),
                         label: Text(l.reminderOff),
                       ),
               ),
+              if (_refused) ...[
+                const SizedBox(height: Space.m),
+                const NotificationsOffNote(),
+              ],
               // TODO(T-509, T-513): the share button arrives with share cards.
               ProvenanceFooter(provenance: d.provenance, detailed: true),
             ],
