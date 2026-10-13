@@ -37,7 +37,16 @@ jobs:
       # Both languages complete and no hard-coded UI strings (spec §13.5).
       - run: python3 ../scripts/check_l10n.py
       - run: flutter analyze
+      # Goldens render with the bundled fonts and the pinned SDK's icon font, so they are
+      # identical on every run (T-218). On a mismatch the diffs are uploaded below.
       - run: flutter test
+      - name: Upload golden diffs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures
+          path: app/test/**/failures/
+          if-no-files-found: ignore
       # Domain logic must not depend on the device time zone (spec §16): UTC+14 and UTC−10.
       - name: Domain tests in other time zones
         run: |

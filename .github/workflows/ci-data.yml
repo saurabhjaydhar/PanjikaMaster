@@ -13,6 +13,9 @@ permissions:
 jobs:
   data:
     runs-on: ubuntu-latest
+    env:
+      # More examples and a fixed seed (data/tests/conftest.py, T-218).
+      HYPOTHESIS_PROFILE: ci
     defaults:
       run:
         working-directory: data
