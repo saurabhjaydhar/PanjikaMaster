@@ -7,8 +7,11 @@ import '../../app/widgets/date_header.dart';
 import '../../app/widgets/panjika_widgets.dart';
 import '../../app/widgets/system_states.dart';
 import '../../app/widgets/tithi_seal.dart';
+import '../../app/widgets/update_banners.dart';
 import '../../core/l10n/l10n_providers.dart';
 import '../../core/time/clock.dart';
+import '../../data/packs/pack_updater.dart';
+import '../../data/packs/update_providers.dart';
 import '../../data/repositories/panjika_providers.dart';
 import '../../domain/engine/day_assembler.dart';
 import '../../domain/entities/panjika.dart';
@@ -26,6 +29,9 @@ class TodayScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final today = ref.watch(todayProvider);
     final coverage = ref.watch(todayCoverageProvider).value;
+    final updates = ref.read(updateControllerProvider.notifier);
+    // Download and Update only when a pack server is configured (T-311).
+    final download = updates.available ? updates.downloadNow : null;
     return Scaffold(
       body: SafeArea(
         // A reload at sunrise keeps showing the previous day until the new one is in.
@@ -38,8 +44,9 @@ class TodayScreen extends ConsumerWidget {
           // No day: say why (spec §11.9, §16). The download action comes with T-311.
           _ => switch (coverage) {
             ClockSuspect() => const SystemStateMessage(SystemState.checkClock),
-            NotDownloaded() => const SystemStateMessage(
+            NotDownloaded() => SystemStateMessage(
               SystemState.notDownloaded,
+              onAction: download,
             ),
             _ => StateMessage(
               message: l.todayDataMissing,
@@ -51,6 +58,33 @@ class TodayScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Notices, the download prompt, update problems and the stale banner, in that order.
+List<Widget> _banners(
+  BuildContext context,
+  WidgetRef ref, {
+  required bool stale,
+}) {
+  final l = AppLocalizations.of(context);
+  final updates = ref.read(updateControllerProvider.notifier);
+  final result = ref.watch(updateControllerProvider);
+  final notices = ref.read(noticesProvider.notifier);
+  return [
+    for (final n in ref.watch(noticesProvider))
+      NoticeBanner(n, onDismiss: () => notices.dismiss(n.id)),
+    if (result case UpdateDone(:final waitingForUser)
+        when waitingForUser.isNotEmpty)
+      DownloadPrompt(
+        bytes: waitingForUser.fold(0, (sum, o) => sum + o.entry.size),
+        onDownload: updates.downloadNow,
+        onLater: updates.later,
+      ),
+    if (result is UpdateFailed) UpdateProblem(l.updateFailed),
+    if (result is UpdateNeedsNewerApp) UpdateProblem(l.appUpdateRequired),
+    if (stale)
+      StaleBanner(onUpdate: updates.available ? updates.downloadNow : null),
+  ];
 }
 
 class _TodayContent extends ConsumerWidget {
@@ -110,9 +144,9 @@ class _TodayContent extends ConsumerWidget {
               screenMargin(MediaQuery.sizeOf(context).width),
             ),
             children: [
-              if (stale) ...[
-                const StaleBanner(),
-                const SizedBox(height: Space.l),
+              for (final banner in _banners(context, ref, stale: stale)) ...[
+                banner,
+                const SizedBox(height: Space.m),
               ],
               // Date header (FR-HOME-01)
               DateHeader(

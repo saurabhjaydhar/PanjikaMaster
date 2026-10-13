@@ -331,5 +331,39 @@
   "actionUpdate": "হালনাগাদ করুন",
   "@actionUpdate": {
     "description": "Button: update data."
+  },
+  "sizeMegabytes": "{size} এমবি",
+  "@sizeMegabytes": {
+    "description": "A download size; size is formatted with the user's numerals, e.g. ৩.১.",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "downloadPrompt": "নতুন তথ্য পাওয়া যাচ্ছে ({size})। এখন ডাউনলোড করবেন?",
+  "@downloadPrompt": {
+    "description": "Asked before downloading a pack of 2 MB or more (spec §18).",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "actionLater": "পরে",
+  "@actionLater": {
+    "description": "Button: decide later."
+  },
+  "noticeDismiss": "বুঝেছি",
+  "@noticeDismiss": {
+    "description": "Button that hides a notice from the server."
+  },
+  "updateFailed": "তথ্য ডাউনলোড করা যায়নি। পরে আবার চেষ্টা করা হবে।",
+  "@updateFailed": {
+    "description": "Shown when a pack download or import fails."
+  },
+  "appUpdateRequired": "নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।",
+  "@appUpdateRequired": {
+    "description": "The data server needs a newer app version (min_app_version)."
   }
 }

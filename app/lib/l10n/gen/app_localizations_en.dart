@@ -217,4 +217,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionUpdate => 'Update';
+
+  @override
+  String sizeMegabytes(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String downloadPrompt(String size) {
+    return 'New data is available ($size). Download now?';
+  }
+
+  @override
+  String get actionLater => 'Later';
+
+  @override
+  String get noticeDismiss => 'Got it';
+
+  @override
+  String get updateFailed =>
+      'Couldn\'t download the data. We\'ll try again later.';
+
+  @override
+  String get appUpdateRequired => 'Update the app to get new data.';
 }

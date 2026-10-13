@@ -12,10 +12,15 @@ import 'package:panjika/app/widgets/panjika_widgets.dart';
 import 'package:panjika/app/widgets/system_states.dart';
 import 'package:panjika/core/l10n/l10n_providers.dart';
 import 'package:panjika/core/settings/settings.dart';
+import 'package:panjika/core/time/civil_date.dart';
 import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
+import 'package:panjika/data/packs/manifest.dart';
+import 'package:panjika/data/packs/manifest_client.dart';
+import 'package:panjika/data/packs/pack_updater.dart';
+import 'package:panjika/data/packs/update_providers.dart';
 import 'package:panjika/data/repositories/panjika_repository.dart';
 import 'package:panjika/domain/engine/day_assembler.dart';
 import 'package:panjika/domain/usecases/get_day_panjika.dart';
@@ -50,6 +55,8 @@ void main() {
     DateTime? now,
     DateTime Function()? clock,
     String? cachedManifest,
+    UpdateResult? update,
+    MemorySettings? settings,
   }) async {
     tester.view
       ..physicalSize = const Size(360, 640) * 2
@@ -63,13 +70,16 @@ void main() {
           appDatabaseProvider.overrideWithValue(db),
           deviceLocalesProvider.overrideWithValue([Locale(language)]),
           settingsSourceProvider.overrideWithValue(
-            MemorySettings({
-              SettingKey.theme: theme.name,
-              SettingKey.lastManifest: ?cachedManifest,
-            }),
+            settings ??
+                MemorySettings({
+                  SettingKey.theme: theme.name,
+                  SettingKey.lastManifest: ?cachedManifest,
+                }),
           ),
           appLocaleChannelProvider.overrideWithValue(FakeAppLocaleChannel()),
           clockProvider.overrideWithValue(clock ?? () => now ?? sampleNow),
+          if (update != null)
+            updateControllerProvider.overrideWith(() => _FixedUpdate(update)),
         ],
         child: const PanjikaApp(),
       ),
@@ -126,8 +136,9 @@ void main() {
 
   /// A cached manifest (test input, shape per spec §15.3) offering [packs].
   String manifestOffering(
-    List<(String id, String kind, int version, String from, String to)> packs,
-  ) => jsonEncode({
+    List<(String id, String kind, int version, String from, String to)> packs, {
+    List<Map<String, String>> notices = const [],
+  }) => jsonEncode({
     'schema': 1,
     'generated_at': '2026-10-12T00:00:00Z',
     'min_app_version': '1.0.0',
@@ -145,7 +156,7 @@ void main() {
           'sig_url': '/v1/packs/$id.sqlite.gz.sig',
         },
     ],
-    'notices': <Object>[],
+    'notices': notices,
   });
 
   testWidgets(
@@ -189,6 +200,87 @@ void main() {
       expect(find.text('২৫ আশ্বিন ১৪৩৩'), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'T-311: a server notice shows in the UI language and stays dismissed',
+    (tester) async {
+      final settings = MemorySettings({
+        SettingKey.lastManifest: manifestOffering(
+          const [],
+          notices: [
+            // Test input, not a real notice.
+            {
+              'id': 'n1',
+              'level': 'info',
+              'text_bn': 'নমুনা বিজ্ঞপ্তি',
+              'text_en': 'Sample notice',
+              'until': '2026-10-31',
+            },
+          ],
+        ),
+      });
+      await pump(tester, settings: settings);
+      expect(find.text('নমুনা বিজ্ঞপ্তি'), findsOneWidget);
+      await tester.tap(find.text('বুঝেছি'));
+      await tester.pumpAndSettle();
+      expect(find.text('নমুনা বিজ্ঞপ্তি'), findsNothing);
+      expect(settings.read(SettingKey.dismissedNotices), 'n1');
+    },
+  );
+
+  testWidgets('T-311: large packs wait for a yes', (tester) async {
+    await pump(
+      tester,
+      language: 'en',
+      update: UpdateDone(
+        imported: const [],
+        waitingForUser: [
+          PackOffer(
+            ManifestEntry(
+              id: 'global-drik-2029',
+              kind: 'global',
+              tradition: 'drik_bishuddha',
+              version: 1,
+              coversFrom: const CivilDate(2029, 4, 14),
+              coversTo: const CivilDate(2032, 4, 13),
+              url: '/v1/packs/x.sqlite.gz',
+              size: 5 * 1024 * 1024,
+              sha256: '0' * 64,
+              sigUrl: '/v1/packs/x.sqlite.gz.sig',
+            ),
+            OfferAction.ask,
+            isUpdate: false,
+          ),
+        ],
+        notices: const [],
+      ),
+    );
+    expect(
+      find.text('New data is available (5.0 MB). Download now?'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Later'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('New data is available'), findsNothing);
+  });
+
+  testWidgets('T-311: without a pack server there are no download buttons', (
+    tester,
+  ) async {
+    await pump(
+      tester,
+      language: 'en',
+      now: DateTime.utc(2030),
+      cachedManifest: manifestOffering([
+        ('global-drik-2029', 'global', 1, '2029-04-14', '2032-04-13'),
+      ]),
+    );
+    expect(
+      find.text("Data for these dates isn't downloaded yet."),
+      findsOneWidget,
+    );
+    expect(find.text('Download'), findsNothing);
+  });
 
   testWidgets('T-212: the tithi changes exactly at its end', (tester) async {
     final ending = sampleDay.tithis
@@ -264,4 +356,13 @@ void main() {
       });
     }
   }
+}
+
+/// A fixed update result instead of a real check.
+class _FixedUpdate extends UpdateController {
+  _FixedUpdate(this.initial);
+  final UpdateResult initial;
+
+  @override
+  UpdateResult? build() => initial;
 }

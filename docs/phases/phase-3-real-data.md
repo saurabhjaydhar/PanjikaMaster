@@ -25,7 +25,7 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-310 ✅ | System states (§11.9) with actions: not downloaded, offline, stale banner, signature failed, unverified festival; "check your phone's date" | Widget tests for each state in both languages |
-| T-311 | Today reads the real pack; verification badges from data; manifest notice banner; download prompt for large packs | Today shows real `computed`/`reference_matched` rows; no watermark in this build |
+| T-311 🟡 | Today reads the real pack; verification badges from data; manifest notice banner; download prompt for large packs | Today shows real `computed`/`reference_matched` rows; no watermark in this build — *updater, notices, prompt and actions done; a real pack on Today needs hosting (T-304) or bundled packs (T-307)* |
 
 ### DevOps
 | ID | Task | Done when |

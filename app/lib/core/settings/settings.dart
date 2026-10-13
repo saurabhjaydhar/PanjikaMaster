@@ -16,7 +16,8 @@ enum SettingKey {
   timeFormat('time_format'),
   onboardingDone('onboarding_done'),
   lastManifestCheck('last_manifest_check'),
-  lastManifest('last_manifest');
+  lastManifest('last_manifest'),
+  dismissedNotices('dismissed_notices');
 
   const SettingKey(this.key);
 
