@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-12T00:00:00Z",
+  "min_app_version": "1.0.0",
+  "packs": [
+    {
+      "id": "sample-global-drik",
+      "kind": "global",
+      "tradition": "drik_bishuddha",
+      "version": 2,
+      "covers": [
+        "2026-09-01",
+        "2026-12-31"
+      ],
+      "url": "/v1/packs/sample-global-drik-v2.sqlite.gz",
+      "size": 31495,
+      "sha256": "94c77540fd92e40511771b9c4d71550c051d6e6720896908237d82ae8a2197e4",
+      "sig_url": "/v1/packs/sample-global-drik-v2.sqlite.gz.sig"
+    }
+  ],
+  "notices": []
+}
