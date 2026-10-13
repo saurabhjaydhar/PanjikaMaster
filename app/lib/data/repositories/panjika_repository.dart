@@ -166,6 +166,20 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
     ];
   }
 
+  /// One observance by id (festival links, T-411); null if no pack has it.
+  Future<Observance?> observance(String id) async {
+    final o = await _db.observanceById(id).getSingleOrNull();
+    return o == null
+        ? null
+        : Observance(
+            id: o.id,
+            name: NameRef(o.nameBn, o.nameEn),
+            category: ObservanceCategory.values.byName(o.category),
+            tier: o.tier,
+            description: NameRef(o.descriptionBn, o.descriptionEn),
+          );
+  }
+
   /// The dates both the global pack(s) of [tradition] and [cityId]'s pack cover.
   /// Contiguous global packs (one per year) count as one range. Staleness needs the
   /// manifest and comes with the pack updater (Phase 3).

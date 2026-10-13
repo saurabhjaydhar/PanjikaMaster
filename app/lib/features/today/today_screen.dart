@@ -153,8 +153,9 @@ class _TodayContent extends ConsumerWidget {
             await ref.read(todayProvider.future);
           },
           child: ListView(
-            padding: EdgeInsets.all(
-              screenMargin(MediaQuery.sizeOf(context).width),
+            padding: EdgeInsets.symmetric(
+              horizontal: contentInset(MediaQuery.sizeOf(context).width),
+              vertical: screenMargin(MediaQuery.sizeOf(context).width),
             ),
             children: [
               for (final banner in _banners(context, ref, stale: stale)) ...[

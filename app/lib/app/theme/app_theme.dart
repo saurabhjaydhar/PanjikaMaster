@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../core/l10n/app_language.dart';
@@ -93,3 +95,16 @@ extension PanjikaThemeX on BuildContext {
 /// The minimum content padding for the current width class (§12.7).
 double screenMargin(double width) =>
     width >= 600 ? Space.screenWide : Space.screenCompact;
+
+/// A landscape phone: wider than tall and under 480 dp high. The tabs move to a side
+/// rail and the calendar's selected day sits beside the grid (§12.10).
+bool isShortLandscape(BuildContext context) {
+  final size = MediaQuery.sizeOf(context);
+  return size.height < 480 && size.width > size.height;
+}
+
+/// Horizontal padding that keeps content at most [Space.maxContentWidth] wide and
+/// centred on medium/expanded widths and landscape phones, and never less than the
+/// screen margin (§12.7, §12.10). Lists stay full width, so they scroll from anywhere.
+double contentInset(double width) =>
+    math.max(screenMargin(width), (width - Space.maxContentWidth) / 2);

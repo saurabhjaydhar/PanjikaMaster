@@ -163,5 +163,10 @@
   "actionOpenSettings": "Open settings",
   "locationOff": "Location is turned off on this phone.",
   "actionTurnOn": "Turn on",
-  "locationUnavailable": "Couldn't find your location. Choose your city from the list."
+  "locationUnavailable": "Couldn't find your location. Choose your city from the list.",
+  "linkNotFound": "This page couldn't be found.",
+  "festivalNotFound": "This festival isn't in the data on this phone.",
+  "goToToday": "Go to Today",
+  "numeralsBengaliSemantics": "Bengali numerals",
+  "numeralsLatinSemantics": "Latin numerals"
 }

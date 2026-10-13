@@ -606,4 +606,19 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get locationUnavailable =>
       'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।';
+
+  @override
+  String get linkNotFound => 'এই পাতাটি পাওয়া যায়নি।';
+
+  @override
+  String get festivalNotFound => 'এই উৎসবের তথ্য এই ফোনে নেই।';
+
+  @override
+  String get goToToday => 'আজকের পঞ্জিকা দেখুন';
+
+  @override
+  String get numeralsBengaliSemantics => 'বাংলা সংখ্যা';
+
+  @override
+  String get numeralsLatinSemantics => 'ইংরেজি সংখ্যা';
 }

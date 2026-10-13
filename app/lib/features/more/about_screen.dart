@@ -22,7 +22,7 @@ class AboutScreen extends ConsumerWidget {
     final c = context.colors;
     final f = ref.watch(formatterProvider);
     final version = ref.watch(appVersionProvider).value;
-    final margin = screenMargin(MediaQuery.sizeOf(context).width);
+    final margin = contentInset(MediaQuery.sizeOf(context).width);
 
     Widget link(IconData icon, String title, VoidCallback onTap) => ListTile(
       contentPadding: EdgeInsets.zero,

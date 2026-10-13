@@ -77,11 +77,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         : [
             FilledButton(
               onPressed: _continue,
-              child: Text(
-                _step == 0
-                    ? _bilingual((l) => l.actionContinue)
-                    : l.actionContinue,
-              ),
+              child: _step == 0
+                  ? _bilingualText((l) => l.actionContinue)
+                  : Text(l.actionContinue),
             ),
           ];
 
@@ -144,12 +142,27 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
-/// [message] in Bengali, then English: the first step is shown in both, because the
-/// user hasn't chosen yet (spec §11.1).
-String _bilingual(String Function(AppLocalizations) message) {
+/// [message] in Bengali, then English, on one line (the first step's button): the user
+/// hasn't chosen a language yet (spec §11.1). Each half is tagged with its locale so a
+/// screen reader uses the right voice for it (FR-L10N-08).
+Widget _bilingualText(String Function(AppLocalizations) message) {
   final bn = lookupAppLocalizations(AppLanguage.bn.locale);
   final en = lookupAppLocalizations(AppLanguage.en.locale);
-  return bn.bothLanguages(message(bn), message(en));
+  final first = message(bn), second = message(en);
+  final whole = bn.bothLanguages(first, second);
+  final i = whole.indexOf(first);
+  final j = whole.indexOf(second, i + first.length);
+  return Text.rich(
+    TextSpan(
+      children: [
+        TextSpan(text: whole.substring(0, i)),
+        TextSpan(text: first, locale: AppLanguage.bn.locale),
+        TextSpan(text: whole.substring(i + first.length, j)),
+        TextSpan(text: second, locale: AppLanguage.en.locale),
+        TextSpan(text: whole.substring(j + second.length)),
+      ],
+    ),
+  );
 }
 
 class _ProgressDots extends ConsumerWidget {

@@ -82,8 +82,9 @@ class _DayPage extends ConsumerWidget {
       AsyncValue(value: final d?) => Stack(
         children: [
           ListView(
-            padding: EdgeInsets.all(
-              screenMargin(MediaQuery.sizeOf(context).width),
+            padding: EdgeInsets.symmetric(
+              horizontal: contentInset(MediaQuery.sizeOf(context).width),
+              vertical: screenMargin(MediaQuery.sizeOf(context).width),
             ),
             children: [DaySections(d, now: now)],
           ),

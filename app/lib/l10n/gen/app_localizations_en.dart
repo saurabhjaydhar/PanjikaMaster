@@ -608,4 +608,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get locationUnavailable =>
       'Couldn\'t find your location. Choose your city from the list.';
+
+  @override
+  String get linkNotFound => 'This page couldn\'t be found.';
+
+  @override
+  String get festivalNotFound =>
+      'This festival isn\'t in the data on this phone.';
+
+  @override
+  String get goToToday => 'Go to Today';
+
+  @override
+  String get numeralsBengaliSemantics => 'Bengali numerals';
+
+  @override
+  String get numeralsLatinSemantics => 'Latin numerals';
 }

@@ -21,7 +21,7 @@ class MoreScreen extends ConsumerWidget {
     final t = Theme.of(context).textTheme;
     final c = context.colors;
     final city = ref.watch(cityNameProvider).value;
-    final margin = screenMargin(MediaQuery.sizeOf(context).width);
+    final margin = contentInset(MediaQuery.sizeOf(context).width);
 
     Widget entry(
       IconData icon,
@@ -62,7 +62,7 @@ class MoreScreen extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: Space.m),
-            const Divider(),
+            Divider(indent: margin, endIndent: margin),
             entry(
               Icons.notifications_outlined,
               l.menuReminders,
@@ -82,10 +82,10 @@ class MoreScreen extends ConsumerWidget {
             ),
             entry(Icons.menu_book_outlined, l.menuGlossary, Routes.glossary),
             entry(Icons.settings_outlined, l.menuSettings, Routes.settings),
-            const Divider(),
+            Divider(indent: margin, endIndent: margin),
             entry(Icons.verified_outlined, l.menuSources, Routes.sources),
             entry(Icons.flag_outlined, l.menuReport, Routes.report),
-            const Divider(),
+            Divider(indent: margin, endIndent: margin),
             entry(
               Icons.do_not_disturb_on_outlined,
               l.menuRemoveAds,

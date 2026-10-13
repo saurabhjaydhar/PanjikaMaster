@@ -14,20 +14,20 @@
 | T-405 ✅ | City picker: search in both scripts with transliteration, recent, WB by district, other cities, each with today's sunrise; city-change toast | US-04, FR-LOC-01, FR-LOC-05 |
 | T-406 ✅ | Settings: language, names in both scripts, tradition (with confirm sheet), city, theme, text size with preview, 12/24 h, numerals | FR-SET-01, FR-SET-05..06, US-10, FR-L10N-04 |
 | T-407 ✅ | More tab: quick language switch, menu to all §10 destinations; About screen; licences (`showLicensePage` + data/font notices) | Every §10 entry reachable |
-| T-408 | Adaptive layout: landscape phone, medium/expanded width centring, 200 % text on 360 dp | Goldens at 600 dp and landscape |
+| T-408 ✅ | Adaptive layout: landscape phone, medium/expanded width centring, 200 % text on 360 dp | Goldens at 600 dp and landscape |
 
 ### App core (state, data, platform)
 | ID | Task | Done when |
 |---|---|---|
 | T-409 ✅ | Location: coarse permission on tap only, nearest supported city with distance, > 50 km warning, denial never blocks (Kolkata default) | FR-LOC-02..04; tests with a fake location service |
 | T-410 ✅ | Tradition change: Surya Siddhanta shows "coming soon" and keeps Drik; change triggers reload and reminder reschedule hook | Unit + widget tests |
-| T-411 | Deep-link routes (`/day/YYYY-MM-DD`, `/festival/<id>`) for later share links | Route tests |
-| T-412 | Screen-reader labels per language (FR-L10N-08), second-script line excluded or locale-tagged | Semantics tests in both languages |
+| T-411 ✅ | Deep-link routes (`/day/YYYY-MM-DD`, `/festival/<id>`) for later share links | Route tests |
+| T-412 ✅ | Screen-reader labels per language (FR-L10N-08), second-script line excluded or locale-tagged | Semantics tests in both languages |
 
 ### QA
 | ID | Task | Done when |
 |---|---|---|
-| T-413 | Integration: onboarding → Today in both languages; language switch keeps screen and back stack | Passes on emulator |
+| T-413 ✅ | Integration: onboarding → Today in both languages; language switch keeps screen and back stack | Passes on emulator |
 
 ### Human gates
 - Answer Q15
