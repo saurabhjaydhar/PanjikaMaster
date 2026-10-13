@@ -2904,7 +2904,7 @@ class Names extends Table with TableInfo<Names, NameRow> {
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL CHECK (kind IN (\'tithi\', \'paksha\', \'nakshatra\', \'yoga\', \'karana\', \'solar_month\', \'lunar_month\', \'weekday\', \'gregorian_month\', \'period\', \'tradition\', \'category\'))',
+    $customConstraints: 'NOT NULL CHECK (kind IN (\'tithi\', \'paksha\', \'nakshatra\', \'yoga\', \'karana\', \'solar_month\', \'lunar_month\', \'weekday\', \'gregorian_month\', \'period\', \'tradition\', \'category\', \'term\'))',
   );
   static const VerificationMeta _idxMeta = const VerificationMeta('idx');
   late final GeneratedColumn<int> idx = GeneratedColumn<int>(
@@ -3120,6 +3120,8 @@ class Names extends Table with TableInfo<Names, NameRow> {
 
 class NameRow extends DataClass implements Insertable<NameRow> {
   final String kind;
+
+  /// term = glossary entries (FR-SET-07)
   final int idx;
   final String nameBn;
   final String nameEn;

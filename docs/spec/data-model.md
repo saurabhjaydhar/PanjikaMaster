@@ -43,7 +43,8 @@ names(kind TEXT, idx INT, name_bn TEXT, name_en TEXT, translit TEXT,
       pack_id TEXT,
       PRIMARY KEY(kind, idx))
   -- kinds: tithi, paksha, nakshatra, yoga, karana, solar_month, lunar_month,
-  --        weekday, gregorian_month, period, tradition, category
+  --        weekday, gregorian_month, period, tradition, category,
+  --        term (glossary entries, FR-SET-07; translit = term id)
 
 observances(id TEXT PK, name_bn TEXT, name_en TEXT, category TEXT, tier INT,
             description_bn TEXT, description_en TEXT, pack_id TEXT)

@@ -106,7 +106,8 @@ CREATE TABLE bengali_dates (
 CREATE TABLE names (
   kind     TEXT NOT NULL CHECK (kind IN ('tithi', 'paksha', 'nakshatra', 'yoga', 'karana',
                                          'solar_month', 'lunar_month', 'weekday',
-                                         'gregorian_month', 'period', 'tradition', 'category')),
+                                         'gregorian_month', 'period', 'tradition', 'category',
+                                         'term')),       -- term = glossary entries (FR-SET-07)
   idx      INTEGER NOT NULL CHECK (idx >= 0),
   name_bn  TEXT NOT NULL CHECK (length(name_bn) > 0),
   name_en  TEXT NOT NULL CHECK (length(name_en) > 0),

@@ -6,6 +6,7 @@ import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/data/repositories/panjika_repository.dart';
 import 'package:panjika/domain/entities/panjika.dart';
+import 'package:panjika/domain/entities/terms.dart';
 
 const drik = 'drik_bishuddha';
 const sampleDay = CivilDate(2026, 10, 12);
@@ -133,5 +134,29 @@ void main() {
     expect(await repo.anySample(['sample-cities']), isTrue);
     expect(await repo.anySample(<String>[]), isFalse);
     expect(await repo.anySample(['not-installed']), isFalse);
+  });
+
+  test('T-217: every glossary term and period has a name and a gloss in both languages', () async {
+    final names = await repo.names();
+    final ids = (await db.allNames().get())
+        .where((r) => r.kind == 'term')
+        .map((r) => r.translit)
+        .toList();
+    expect(ids, [
+      for (final t in Term.values) t.id,
+    ], reason: 'Term order = pack order');
+    for (final t in Term.values) {
+      final name = names.of('term', t.index);
+      final gloss = names.glossOf('term', t.index)!;
+      expect(
+        [name.bn, name.en, gloss.bn, gloss.en],
+        everyElement(isNotEmpty),
+        reason: t.id,
+      );
+    }
+    for (var i = 0; i < names.countOf('period'); i++) {
+      expect(names.glossOf('period', i), isNotNull, reason: 'period $i');
+    }
+    expect(names.glossOf('tithi', 0), isNull, reason: 'names without glosses');
   });
 }

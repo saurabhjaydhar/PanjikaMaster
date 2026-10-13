@@ -35,7 +35,7 @@
 |---|---|---|
 | T-215 | Approved designs for Onboarding, Today, Calendar, Day detail (bn/en × light/dark), starting from `docs/design/today-concept.html` | Sign-off in `docs/design/README.md` |
 | T-216 | App icon (concept choice §23.3), adaptive + monochrome layers, Android 12 splash; moon-phase glyphs and custom icons | Assets in repo; each in `docs/assets.md` |
-| T-217 | `names` table content: tithi, paksha, nakshatra, yoga, karana, months, weekdays, periods in both languages + translit + glosses (drafts per Q5, Q14) | Every row has both languages; marked draft until reviewed |
+| T-217 ✅ | `names` table content: tithi, paksha, nakshatra, yoga, karana, months, weekdays, periods in both languages + translit + glosses (drafts per Q5, Q14) | Every row has both languages; marked draft until reviewed |
 
 ### DevOps
 | ID | Task | Done when |

@@ -90,7 +90,7 @@ Store listing (§23.2), screenshots (§23.4), privacy policy, notification chann
 
 ### 27.1 Glossary (bn → en)
 
-The "English UI label" column is the romanised form shown in the English UI (FR-L10N-05). It is a **draft pending Q14** and becomes the `name_en` values in the `names` table. The "Meaning" column is source material for `gloss_en` (FR-SET-07).
+The "English UI label" column is the romanised form shown in the English UI (FR-L10N-05). It is a **draft pending Q14** and becomes the `name_en` values in the `names` table. The "Meaning" column is source material for `gloss_en` (FR-SET-07). The draft glossary lives in `data/content/names.toml` (`[[term]]` and `[[period]]` entries).
 
 | Bengali | English UI label (draft, Q14) | Meaning |
 |---|---|---|

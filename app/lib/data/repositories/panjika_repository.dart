@@ -201,12 +201,16 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
     final rows = await _db.allNames().get();
     final byKind = <String, List<NameRef>>{};
     final traditions = <String, NameRef>{};
+    final glosses = <(String, int), NameRef>{};
     for (final r in rows) {
       final name = NameRef(r.nameBn, r.nameEn);
       (byKind[r.kind] ??= []).add(name);
       if (r.kind == 'tradition') traditions[r.translit] = name;
+      if (r.glossBn != null) {
+        glosses[(r.kind, r.idx)] = NameRef(r.glossBn!, r.glossEn!);
+      }
     }
-    return NameTable(byKind, traditions);
+    return NameTable(byKind, traditions, glosses: glosses);
   }
 
   @override
