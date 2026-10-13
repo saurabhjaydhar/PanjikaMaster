@@ -1,6 +1,6 @@
 # Build phases
 
-**Current phase: 2 — Engine & components** (Phase 1 complete; T-208–T-214 and T-217 done; T-201 partial — ephemeris hosts blocked here)
+**Current phase: 2 — Engine & components** (Phase 1 complete; T-202, T-208–T-214 and T-217 done; T-201 partial — ephemeris hosts blocked here)
 
 | Phase | Name | What you can see at the end | Human gate before it can finish |
 |---|---|---|---|
@@ -80,3 +80,4 @@ This is not a typical feature-by-feature app build:
 | 2026-10-13 | T-214 done: `context.motion()` returns zero under the system's reduced-motion setting; the tithi ring fills from empty in 500 ms (emphasised easing) once per panjika day on first view, then follows the clock silently; the tithi name cross-fades (250 ms) when it changes; selection haptics on calendar cells and the language switch. 7 tests with reduced motion on and off. 254 app tests. |
 | 2026-10-13 | T-218 (pending CI evidence): Hypothesis profiles `dev` (50 examples) and `ci` (500, derandomised, no deadline; set in ci-data); 3 new property tests, one asserting the CI profile is active. ci-app uploads golden diff images on failure. Determinism notes in spec §22.1. To be ticked when the goldens pass on two CI runs. 65 data tests. |
 | 2026-10-13 | T-201: committed the DE440s size and SHA-256 that ci-data recorded when it downloaded the file from NAIF (`c1c7feea…49f2`, 32,726,016 bytes) as **unconfirmed**, so every CI run now verifies the cached file against it. `confirmed_by` stays empty for the human. |
+| 2026-10-13 | T-202 done: `engine/astro.py` gives apparent tropical Sun/Moon longitudes (true ecliptic of date) and elongation via Skyfield on the lock-verified DE440s; `engine/ephemeris.py` resolves the kernel (dev-only `PANJIKA_EPHEMERIS` override, refused by the pack builder). Found and fixed a 27 s leap-second slip in Unix→Skyfield time conversion. Tests: Skyfield's equinoxes/solstices and moon phases land within 1e-5°, Astronomy Engine (independent analytic theory) agrees within 0.005° (Sun) / 0.02° (Moon) across 2020–2045, physical motion rates (Hypothesis). They skip locally without an ephemeris and fail in CI if it is missing. Verified locally on DE421; CI runs them on DE440s. New: skyfield (MIT), astronomy-engine (dev, MIT). |
