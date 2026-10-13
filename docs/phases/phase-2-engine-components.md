@@ -40,7 +40,7 @@
 ### DevOps
 | ID | Task | Done when |
 |---|---|---|
-| T-218 | Golden tests in CI with bundled fonts (deterministic rendering); hypothesis CI profile | Goldens stable across two CI runs |
+| T-218 ✅ | Golden tests in CI with bundled fonts (deterministic rendering); hypothesis CI profile | Goldens stable across two CI runs |
 
 ### Human gates
 - Confirm the DE440s checksum (T-201); enter `reference/ayanamsa.csv` (T-203)
