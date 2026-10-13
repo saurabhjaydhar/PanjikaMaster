@@ -34,3 +34,18 @@ settings.register_profile(
     suppress_health_check=[HealthCheck.too_slow],
 )
 settings.load_profile(os.environ.get("HYPOTHESIS_PROFILE", "dev"))
+
+
+@pytest.fixture(scope="session")
+def astro():
+    """The engine on the lock-verified DE440s (CI), or on PANJIKA_EPHEMERIS locally.
+    Without either, astronomy tests skip with a visible reason (pytest -ra)."""
+    from engine.astro import Astro
+    from engine.ephemeris import EphemerisUnavailable, resolve
+
+    try:
+        return Astro(resolve())
+    except EphemerisUnavailable as e:
+        if os.environ.get("CI"):  # set by GitHub Actions: there it must never skip
+            pytest.fail(f"CI has no ephemeris: {e}")
+        pytest.skip(f"NOTICE: no ephemeris here, astronomy tests run in CI ({e})")

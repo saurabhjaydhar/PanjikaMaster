@@ -7,6 +7,12 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | pytest | data (dev) | 9.1.1 | MIT | 2026-06-19 | Linux/macOS/Windows, Python ≥ 3.10 | Test runner (T-101) | 2026-10-12 |
 | hypothesis | data (dev) | 6.169.0 | MPL-2.0 (file-level copyleft; dev-only, not shipped) | 2026-10-11 | Python ≥ 3.11 | Property tests for transitions (PRD §22.1) | 2026-10-12 |
 | ruff | data (dev) | 0.17.0 | MIT | 2026-10-09 | Prebuilt wheels for all major platforms | Lint + format | 2026-10-12 |
+| skyfield | data | 1.55 | MIT | 2026-08-07 | Pure Python | Sun/Moon apparent positions from the JPL kernel; leap seconds and ΔT built in, so builds need no download (T-202) | 2026-10-13 |
+| jplephem | data (via skyfield) | 2.24 | MIT | 2026-01-23 | Pure Python | Reads JPL `.bsp` kernels | 2026-10-13 |
+| sgp4 | data (via skyfield) | 2.27 | MIT | 2026-07-03 | Wheels for all major platforms | Skyfield dependency (satellites; unused) | 2026-10-13 |
+| numpy | data (via skyfield) | 2.5.4 | BSD-3-Clause and permissive (bundled runtime libraries under their own permissive or runtime-exception licences) | 2026-10-10 | Wheels for all major platforms | Vectorised time grids for the transition search | 2026-10-13 |
+| certifi | data (via skyfield) | 2026.7.22 | MPL-2.0 (file-level; pipeline only, not shipped) | 2026-07-22 | Pure Python | CA bundle | 2026-10-13 |
+| astronomy-engine | data (dev) | 2.1.19 | MIT | 2023-12-14 | Pure Python | Independent analytic cross-check of Sun/Moon positions and rise/set (T-202, T-206); no JPL data | 2026-10-13 |
 
 | flutter_riverpod | app | 3.4.3 | MIT | 2026-09-03 | Android, iOS, desktop | State management (spec §14.3) | 2026-10-12 |
 | drift | app | 2.35.2 | MIT | 2026-10-07 | All | Typed SQLite DB mirroring `schema.sql` | 2026-10-12 |

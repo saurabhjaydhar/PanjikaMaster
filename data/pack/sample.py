@@ -24,19 +24,17 @@ import math
 import os
 import sqlite3
 import sys
-import tomllib
-import unicodedata
 from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta, timezone
 from pathlib import Path
 
-from pack import schema
+from pack import names, schema
+from pack.names import NAMES_PATH, load_names, translit  # noqa: F401 (used by tests)
 
 SAMPLE_MARKER = "PANJIKA-SAMPLE-FIXTURE-DO-NOT-SHIP"
 ENGINE_VERSION = "sample-generator-1"
 TRADITION = "drik_bishuddha"
 IST = timezone(timedelta(hours=5, minutes=30))
-NAMES_PATH = Path(__file__).resolve().parents[1] / "content" / "names.toml"
 
 # Fixture range: "a few months" around the PRD wireframes' sample day (12 Oct 2026).
 COVERS_FROM = date(2026, 9, 1)
@@ -191,18 +189,6 @@ def city_day(lat: float, lon: float, d: date) -> tuple[int, int, int | None, int
 # ---------------------------------------------------------------- writing
 
 
-def translit(entry: dict) -> str:
-    if "translit" in entry:
-        return entry["translit"]
-    ascii_form = unicodedata.normalize("NFKD", entry["en"]).encode("ascii", "ignore").decode()
-    return ascii_form.lower()
-
-
-def load_names() -> dict[str, list[dict]]:
-    data = tomllib.loads(NAMES_PATH.read_text(encoding="utf-8"))
-    return {k: v for k, v in data.items() if isinstance(v, list)}
-
-
 def new_pack(path: Path, pack_id: str, kind: str) -> sqlite3.Connection:
     path.unlink(missing_ok=True)
     conn = schema.connect(path)
@@ -251,15 +237,7 @@ def write_global(path: Path) -> None:
                 for d, day, month in bengali_dates(rows["sankranti"])
             ],
         )
-        conn.executemany(
-            "INSERT INTO names (kind, idx, name_bn, name_en, translit, gloss_bn, gloss_en,"
-            " pack_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                (kind, i, e["bn"], e["en"], translit(e), e.get("gloss_bn"), e.get("gloss_en"), pid)
-                for kind, entries in load_names().items()
-                for i, e in enumerate(entries)
-            ],
-        )
+        conn.executemany("INSERT INTO names VALUES (?, ?, ?, ?, ?, ?, ?, ?)", names.rows(pid))
     conn.close()
 
 
