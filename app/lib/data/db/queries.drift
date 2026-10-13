@@ -34,6 +34,17 @@ SELECT * FROM observance_windows
  WHERE tradition = :tradition AND observance_id = :id
  ORDER BY date, start_utc;
 
+observanceStarts:
+SELECT o.**, d.** FROM observance_dates d
+  JOIN observances o ON o.id = d.observance_id
+ WHERE d.tradition = :tradition AND d.day_index = 0
+ ORDER BY d.date;
+
+bengaliDatesOf:
+SELECT * FROM bengali_dates
+ WHERE tradition = :tradition AND bn_month_idx = :month_idx AND bn_day = :day
+ ORDER BY date;
+
 observanceById:
 SELECT * FROM observances WHERE id = :id;
 
