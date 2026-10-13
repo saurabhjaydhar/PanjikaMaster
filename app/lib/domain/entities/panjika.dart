@@ -183,6 +183,28 @@ class ObservanceDate {
   final NameRef? note;
 }
 
+/// A timed window of an observance on a date, e.g. Sandhi Puja or nishita
+/// (observance_windows, spec §6.6).
+class ObservanceWindow {
+  const ObservanceWindow({
+    required this.observanceId,
+    required this.date,
+    required this.kind,
+    required this.start,
+    required this.end,
+    required this.packId,
+  });
+
+  final String observanceId;
+  final CivilDate date;
+
+  /// `sandhi_puja`, `nishita`, `tithi_span`, … (the pipeline's window kinds).
+  final String kind;
+  final DateTime start;
+  final DateTime end;
+  final String packId;
+}
+
 enum PeriodKind { shubh, ashubh }
 
 enum PeriodBasis { day, night }

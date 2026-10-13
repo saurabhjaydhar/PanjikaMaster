@@ -76,22 +76,34 @@ class StaleBanner extends StatelessWidget {
           color: c.haldiContainer,
           borderRadius: BorderRadius.circular(Radii.medium),
         ),
-        child: Row(
+        // The button goes under the message, as on the update banners, so the
+        // message keeps the full width at large text sizes.
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ExcludeSemantics(
-              child: Icon(StateKind.stale.icon, color: c.onHaldiContainer),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ExcludeSemantics(
+                  child: Icon(StateKind.stale.icon, color: c.onHaldiContainer),
+                ),
+                const SizedBox(width: Space.s),
+                Expanded(
+                  child: Text(
+                    l.stateStale,
+                    style: t.bodyMedium?.copyWith(color: c.onHaldiContainer),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: Space.s),
-            Expanded(
-              child: Text(
-                l.stateStale,
-                style: t.bodyMedium?.copyWith(color: c.onHaldiContainer),
+            if (onUpdate != null)
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: TextButton(
+                  onPressed: onUpdate,
+                  child: Text(l.actionUpdate),
+                ),
               ),
-            ),
-            if (onUpdate != null) ...[
-              const SizedBox(width: Space.s),
-              TextButton(onPressed: onUpdate, child: Text(l.actionUpdate)),
-            ],
           ],
         ),
       ),

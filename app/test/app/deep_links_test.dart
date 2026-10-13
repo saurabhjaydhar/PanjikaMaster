@@ -19,7 +19,7 @@ import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/features/day/day_screen.dart';
-import 'package:panjika/features/festivals/festival_link_screen.dart';
+import 'package:panjika/features/festivals/festival_detail_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
 import '../helpers/fakes.dart';
@@ -94,14 +94,10 @@ void main() {
     expect(find.byType(TodayScreen), findsOneWidget);
   });
 
-  testWidgets('/festival/<id> names the festival', (tester) async {
+  testWidgets('/festival/<id> opens the festival', (tester) async {
     await open(tester, '/festival/mahalaya', language: 'en');
-    expect(find.byType(FestivalLinkScreen), findsOneWidget);
-    expect(
-      find.descendant(of: find.byType(AppBar), matching: find.text('Mahalaya')),
-      findsOneWidget,
-    );
-    expect(find.text('Coming soon'), findsOneWidget);
+    expect(find.byType(FestivalDetailScreen), findsOneWidget);
+    expect(find.text('Mahalaya'), findsOneWidget);
   });
 
   testWidgets('an unknown festival says it isn\'t in the data', (tester) async {
