@@ -252,10 +252,10 @@ def write_global(path: Path) -> None:
             ],
         )
         conn.executemany(
-            "INSERT INTO names (kind, idx, name_bn, name_en, translit, pack_id)"
-            " VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO names (kind, idx, name_bn, name_en, translit, gloss_bn, gloss_en,"
+            " pack_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             [
-                (kind, i, e["bn"], e["en"], translit(e), pid)
+                (kind, i, e["bn"], e["en"], translit(e), e.get("gloss_bn"), e.get("gloss_en"), pid)
                 for kind, entries in load_names().items()
                 for i, e in enumerate(entries)
             ],

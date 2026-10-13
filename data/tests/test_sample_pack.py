@@ -9,13 +9,6 @@ import pytest
 from pack import sample, schema
 
 
-@pytest.fixture(scope="module")
-def packs(tmp_path_factory) -> dict[str, sqlite3.Connection]:
-    out = tmp_path_factory.mktemp("sample")
-    paths = sample.build(out)
-    return {p.stem: sqlite3.connect(p) for p in paths}
-
-
 def test_three_packs_one_kind_each(packs):
     kinds = {}
     for name, conn in packs.items():

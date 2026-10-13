@@ -1,31 +1,84 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/l10n/l10n_providers.dart';
+import '../../domain/entities/panjika.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 
-/// Thin moon-phase ring showing progress through the tithi (spec §12.1, §12.5).
-class TithiRing extends StatelessWidget {
-  const TithiRing({super.key, required this.progress, this.size = 64});
+/// Thin moon-phase ring showing progress through the tithi (spec §12.1, §12.5). With
+/// [animateFill] it fills from empty on first build (500 ms, emphasised easing); after
+/// that, and whenever reduced motion is on, it follows [progress] without animating
+/// (spec §12.8).
+class TithiRing extends StatefulWidget {
+  const TithiRing({
+    super.key,
+    required this.progress,
+    this.size = 64,
+    this.animateFill = false,
+  });
 
   final double progress;
   final double size;
+  final bool animateFill;
+
+  @override
+  State<TithiRing> createState() => TithiRingState();
+}
+
+class TithiRingState extends State<TithiRing>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fill = AnimationController(
+    vsync: this,
+    duration: Motion.emphasis,
+    value: 1,
+  );
+  late final Animation<double> _curve = CurvedAnimation(
+    parent: _fill,
+    curve: Motion.emphasisedDecelerate,
+  );
+
+  /// What the ring shows right now.
+  @visibleForTesting
+  double get displayedProgress => widget.progress * _curve.value;
+
+  bool _started = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // MediaQuery is not available in initState.
+    if (widget.animateFill && !_started) {
+      _started = true;
+      if (!MediaQuery.disableAnimationsOf(context)) _fill.forward(from: 0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _fill.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     return ExcludeSemantics(
       child: SizedBox.square(
-        dimension: size,
-        child: CustomPaint(
-          painter: _RingPainter(
-            progress: progress,
-            track: c.haldiStrong.withValues(alpha: 0.22),
-            fill: c.haldiStrong,
-            moon: c.haldiStrong,
-            disc: c.paper,
+        dimension: widget.size,
+        child: AnimatedBuilder(
+          animation: _curve,
+          builder: (context, _) => CustomPaint(
+            painter: _RingPainter(
+              progress: displayedProgress,
+              track: c.haldiStrong.withValues(alpha: 0.22),
+              fill: c.haldiStrong,
+              moon: c.haldiStrong,
+              disc: c.paper,
+            ),
           ),
         ),
       ),
@@ -222,14 +275,16 @@ class TimingStrip extends StatelessWidget {
 }
 
 /// Tradition · city · IST, on every date screen (spec §6.8, US-02).
-class ProvenanceFooter extends StatelessWidget {
-  const ProvenanceFooter({super.key, required this.text});
+class ProvenanceFooter extends ConsumerWidget {
+  const ProvenanceFooter({super.key, required this.provenance});
 
-  final String text;
+  final Provenance provenance;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final t = Theme.of(context).textTheme;
+    final language = ref.watch(appLanguageProvider);
     return Padding(
       padding: const EdgeInsets.only(top: Space.xl),
       child: Column(
@@ -238,7 +293,11 @@ class ProvenanceFooter extends StatelessWidget {
           const Divider(),
           const SizedBox(height: Space.s),
           Text(
-            text,
+            l.provenance(
+              provenance.tradition.of(language),
+              provenance.city.of(language),
+              l.timeZoneLabel,
+            ),
             style: t.bodySmall?.copyWith(color: context.colors.inkMuted),
           ),
         ],
@@ -247,16 +306,32 @@ class ProvenanceFooter extends StatelessWidget {
   }
 }
 
-/// Explicit system state (spec §11.9): a message and an optional action, never numbers.
+/// The system states of spec §11.9, each with its own icon.
+enum StateKind {
+  noData(Icons.event_busy_outlined),
+  notDownloaded(Icons.cloud_download_outlined),
+  offline(Icons.cloud_off_outlined),
+  stale(Icons.update),
+  signatureFailed(Icons.gpp_maybe_outlined),
+  checkClock(Icons.schedule);
+
+  const StateKind(this.icon);
+  final IconData icon;
+}
+
+/// Explicit system state (spec §11.9): an icon, a message and an optional action, never
+/// numbers.
 class StateMessage extends StatelessWidget {
   const StateMessage({
     super.key,
     required this.message,
+    this.kind = StateKind.noData,
     this.actionLabel,
     this.onAction,
   });
 
   final String message;
+  final StateKind kind;
   final String? actionLabel;
   final VoidCallback? onAction;
 
@@ -269,6 +344,10 @@ class StateMessage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ExcludeSemantics(
+              child: Icon(kind.icon, size: 40, color: context.colors.inkMuted),
+            ),
+            const SizedBox(height: Space.l),
             Text(message, style: t.titleLarge, textAlign: TextAlign.center),
             if (actionLabel != null) ...[
               const SizedBox(height: Space.l),
@@ -277,6 +356,85 @@ class StateMessage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Section title in lists and Day detail (spec §12.5, §12.7); sticky headers use it too.
+class SectionHeader extends StatelessWidget {
+  const SectionHeader({super.key, required this.title, this.action});
+
+  final String title;
+  final Widget? action;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    return Semantics(
+      header: true,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: Space.minTouch),
+        child: Row(
+          children: [
+            Expanded(child: Text(title, style: t.titleMedium)),
+            ?action,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Loading placeholder exactly the size of what it stands for, so nothing shifts when
+/// the content arrives (spec §12.5). Text lines take their height from [style] and the
+/// current text scale.
+class Skeleton extends StatelessWidget {
+  const Skeleton.box({super.key, required this.width, required this.height})
+    : style = null,
+      lines = 1;
+
+  /// [lines] lines of text in [style]; [width] is the share of the available width.
+  const Skeleton.text({super.key, required this.style, this.lines = 1})
+    : width = null,
+      height = null;
+
+  final double? width;
+  final double? height;
+  final TextStyle? style;
+  final int lines;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final shape = BoxDecoration(
+      color: c.rule,
+      borderRadius: BorderRadius.circular(Radii.small),
+    );
+    final Widget body;
+    if (style == null) {
+      body = Container(width: width, height: height, decoration: shape);
+    } else {
+      final scaler = MediaQuery.textScalerOf(context);
+      final size = scaler.scale(style!.fontSize ?? 14);
+      final lineHeight = size * (style!.height ?? 1.2);
+      body = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var i = 0; i < lines; i++)
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: (lineHeight - size) / 2),
+              child: FractionallySizedBox(
+                widthFactor: i == lines - 1 && lines > 1 ? 0.6 : 1,
+                child: Container(height: size, decoration: shape),
+              ),
+            ),
+        ],
+      );
+    }
+    return Semantics(
+      label: l.loading,
+      child: ExcludeSemantics(child: body),
     );
   }
 }

@@ -51,3 +51,16 @@ final todayProvider = FutureProvider<DayPanjika?>((ref) async {
   });
   return day;
 });
+
+/// The panjika day whose tithi ring has already filled: it fills once per day, on first
+/// view (spec §12.8).
+final ringFilledForProvider = NotifierProvider<RingFilledFor, CivilDate?>(
+  RingFilledFor.new,
+);
+
+class RingFilledFor extends Notifier<CivilDate?> {
+  @override
+  CivilDate? build() => null;
+
+  void mark(CivilDate date) => state = date;
+}

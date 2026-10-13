@@ -107,4 +107,112 @@ class AppLocalizationsBn extends AppLocalizations {
   String nameWithUntil(String name, String until) {
     return '$name · $until';
   }
+
+  @override
+  String get labelNow => 'এখন';
+
+  @override
+  String get labelToday => 'আজ';
+
+  @override
+  String periodSemantics(String name, String range, String active) {
+    String _temp0 = intl.Intl.selectLogic(active, {
+      'yes': ', এখন চলছে',
+      'other': '',
+    });
+    return '$name, $range$_temp0';
+  }
+
+  @override
+  String get periodShubh => 'শুভ সময়';
+
+  @override
+  String get periodAshubh => 'অশুভ সময়';
+
+  @override
+  String get verificationSample => 'নমুনা তথ্য';
+
+  @override
+  String get verificationComputed => 'গণনা করা, এখনও মেলানো হয়নি';
+
+  @override
+  String get verificationReferenceMatched => 'পঞ্জিকার সঙ্গে মেলানো';
+
+  @override
+  String get verificationExpertReviewed => 'বিশেষজ্ঞ যাচাই করেছেন';
+
+  @override
+  String calendarCellSemantics(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi';
+  }
+
+  @override
+  String calendarCellWithFestival(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+    String festival,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi, $festival';
+  }
+
+  @override
+  String todayPrefix(String label) {
+    return 'আজ, $label';
+  }
+
+  @override
+  String cityChipSemantics(String city) {
+    return 'শহর: $city। বদলাতে ট্যাপ করুন';
+  }
+
+  @override
+  String get glossaryTitle => 'শব্দকোষ';
+
+  @override
+  String get glossaryOpen => 'অর্থ দেখুন';
+
+  @override
+  String get loading => 'লোড হচ্ছে';
+
+  @override
+  String get languageNameBengali => 'বাংলা';
+
+  @override
+  String get languageNameEnglish => 'English';
+
+  @override
+  String termWithName(String term, String name) {
+    return '$term: $name';
+  }
+
+  @override
+  String get stateNotDownloaded => 'এই সময়ের তথ্য ডাউনলোড করা নেই।';
+
+  @override
+  String get stateOffline =>
+      'ইন্টারনেট সংযোগ নেই। সংযোগ পেলে তথ্য ডাউনলোড হবে।';
+
+  @override
+  String get stateStale => 'তথ্য হালনাগাদ প্রয়োজন।';
+
+  @override
+  String get stateSignatureFailed =>
+      'তথ্য যাচাই করা যায়নি, তাই দেখানো হচ্ছে না।';
+
+  @override
+  String get stateUnverified => 'এই তারিখ এখনও পঞ্জিকা মিলিয়ে দেখা হয়নি।';
+
+  @override
+  String get stateCheckClock => 'ফোনের তারিখ ঠিক আছে কিনা দেখুন';
+
+  @override
+  String get actionDownload => 'ডাউনলোড করুন';
+
+  @override
+  String get actionUpdate => 'হালনাগাদ করুন';
 }

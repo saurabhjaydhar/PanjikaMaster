@@ -27,15 +27,15 @@
 ### Frontend (screens & UI)
 | ID | Task | Done when |
 |---|---|---|
-| T-213 | Components (§12.5): `DateHeader`, `TithiSeal`, `NameText`, `PanchangRow`, `TimingStrip`, `PeriodRow`, `CalendarDayCell`, `ObservanceChip`, `FestivalCard`, `VerificationBadge`, `ProvenanceFooter`, `CityChip`, `StateMessage`, `LanguageSwitch`, `GlossaryTerm`, `SectionHeader`, `Skeleton` | Widget tests at 100/130/200 %; golden matrix bn/en × light/dark |
-| T-214 | Motion (§12.8): ring fill, cross-fade, reduced-motion switch | Golden/widget test with `disableAnimations` on and off |
+| T-213 ✅ | Components (§12.5): `DateHeader`, `TithiSeal`, `NameText`, `PanchangRow`, `TimingStrip`, `PeriodRow`, `CalendarDayCell`, `ObservanceChip`, `FestivalCard`, `VerificationBadge`, `ProvenanceFooter`, `CityChip`, `StateMessage`, `LanguageSwitch`, `GlossaryTerm`, `SectionHeader`, `Skeleton` | Widget tests at 100/130/200 %; golden matrix bn/en × light/dark |
+| T-214 ✅ | Motion (§12.8): ring fill, cross-fade, reduced-motion switch | Golden/widget test with `disableAnimations` on and off |
 
 ### Design & content
 | ID | Task | Done when |
 |---|---|---|
 | T-215 | Approved designs for Onboarding, Today, Calendar, Day detail (bn/en × light/dark), starting from `docs/design/today-concept.html` | Sign-off in `docs/design/README.md` |
 | T-216 | App icon (concept choice §23.3), adaptive + monochrome layers, Android 12 splash; moon-phase glyphs and custom icons | Assets in repo; each in `docs/assets.md` |
-| T-217 | `names` table content: tithi, paksha, nakshatra, yoga, karana, months, weekdays, periods in both languages + translit + glosses (drafts per Q5, Q14) | Every row has both languages; marked draft until reviewed |
+| T-217 ✅ | `names` table content: tithi, paksha, nakshatra, yoga, karana, months, weekdays, periods in both languages + translit + glosses (drafts per Q5, Q14) | Every row has both languages; marked draft until reviewed |
 
 ### DevOps
 | ID | Task | Done when |

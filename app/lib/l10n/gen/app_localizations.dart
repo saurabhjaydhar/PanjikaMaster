@@ -253,6 +253,177 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'{name} · {until}'**
   String nameWithUntil(String name, String until);
+
+  /// Tag on the period row that is running right now (not colour alone, spec §12.5).
+  ///
+  /// In bn, this message translates to:
+  /// **'এখন'**
+  String get labelNow;
+
+  /// Screen-reader prefix for today's calendar cell.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজ'**
+  String get labelToday;
+
+  /// Screen-reader label of a period row. active is yes or no.
+  ///
+  /// In bn, this message translates to:
+  /// **'{name}, {range}{active, select, yes{, এখন চলছে} other{}}'**
+  String periodSemantics(String name, String range, String active);
+
+  /// Section title for auspicious periods.
+  ///
+  /// In bn, this message translates to:
+  /// **'শুভ সময়'**
+  String get periodShubh;
+
+  /// Section title for inauspicious periods (Rahu Kaal etc.).
+  ///
+  /// In bn, this message translates to:
+  /// **'অশুভ সময়'**
+  String get periodAshubh;
+
+  /// Verification label: fixture data in debug builds.
+  ///
+  /// In bn, this message translates to:
+  /// **'নমুনা তথ্য'**
+  String get verificationSample;
+
+  /// Verification label: computed but not checked against the reference panjika.
+  ///
+  /// In bn, this message translates to:
+  /// **'গণনা করা, এখনও মেলানো হয়নি'**
+  String get verificationComputed;
+
+  /// Verification label: matches the reference panjika.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার সঙ্গে মেলানো'**
+  String get verificationReferenceMatched;
+
+  /// Verification label: reviewed by the expert.
+  ///
+  /// In bn, this message translates to:
+  /// **'বিশেষজ্ঞ যাচাই করেছেন'**
+  String get verificationExpertReviewed;
+
+  /// Screen-reader label of a calendar day without festivals. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bengaliDate}, {gregorianDate}, {tithi}'**
+  String calendarCellSemantics(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+  );
+
+  /// Screen-reader label of a calendar day with a festival. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bengaliDate}, {gregorianDate}, {tithi}, {festival}'**
+  String calendarCellWithFestival(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+    String festival,
+  );
+
+  /// Screen-reader label for today's calendar cell.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজ, {label}'**
+  String todayPrefix(String label);
+
+  /// Screen-reader label of the city chip.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর: {city}। বদলাতে ট্যাপ করুন'**
+  String cityChipSemantics(String city);
+
+  /// Title of the glossary sheet and screen (FR-SET-07).
+  ///
+  /// In bn, this message translates to:
+  /// **'শব্দকোষ'**
+  String get glossaryTitle;
+
+  /// Tooltip of the (i) button next to a panjika term.
+  ///
+  /// In bn, this message translates to:
+  /// **'অর্থ দেখুন'**
+  String get glossaryOpen;
+
+  /// Screen-reader label of loading placeholders.
+  ///
+  /// In bn, this message translates to:
+  /// **'লোড হচ্ছে'**
+  String get loading;
+
+  /// The Bengali language, always written in Bengali (language switch). Same in both languages on purpose.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা'**
+  String get languageNameBengali;
+
+  /// The English language, always written in English (language switch). Same in both languages on purpose.
+  ///
+  /// In bn, this message translates to:
+  /// **'English'**
+  String get languageNameEnglish;
+
+  /// A term with a name, e.g. 'ক্ষয় তিথি: অষ্টমী'. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{term}: {name}'**
+  String termWithName(String term, String name);
+
+  /// System state (spec §11.9).
+  ///
+  /// In bn, this message translates to:
+  /// **'এই সময়ের তথ্য ডাউনলোড করা নেই।'**
+  String get stateNotDownloaded;
+
+  /// System state (spec §11.9).
+  ///
+  /// In bn, this message translates to:
+  /// **'ইন্টারনেট সংযোগ নেই। সংযোগ পেলে তথ্য ডাউনলোড হবে।'**
+  String get stateOffline;
+
+  /// System state (spec §11.9).
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য হালনাগাদ প্রয়োজন।'**
+  String get stateStale;
+
+  /// System state (spec §11.9).
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য যাচাই করা যায়নি, তাই দেখানো হচ্ছে না।'**
+  String get stateSignatureFailed;
+
+  /// System state for tier 2/3 festivals (spec §11.9).
+  ///
+  /// In bn, this message translates to:
+  /// **'এই তারিখ এখনও পঞ্জিকা মিলিয়ে দেখা হয়নি।'**
+  String get stateUnverified;
+
+  /// Shown when the device date is outside every pack (spec §16).
+  ///
+  /// In bn, this message translates to:
+  /// **'ফোনের তারিখ ঠিক আছে কিনা দেখুন'**
+  String get stateCheckClock;
+
+  /// Button: download data.
+  ///
+  /// In bn, this message translates to:
+  /// **'ডাউনলোড করুন'**
+  String get actionDownload;
+
+  /// Button: update data.
+  ///
+  /// In bn, this message translates to:
+  /// **'হালনাগাদ করুন'**
+  String get actionUpdate;
 }
 
 class _AppLocalizationsDelegate

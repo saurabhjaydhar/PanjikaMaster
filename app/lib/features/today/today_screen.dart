@@ -3,14 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/theme/app_theme.dart';
 import '../../app/theme/tokens.dart';
-import '../../app/widgets/name_text.dart';
+import '../../app/widgets/date_header.dart';
 import '../../app/widgets/panjika_widgets.dart';
-import '../../core/l10n/app_language.dart';
+import '../../app/widgets/tithi_seal.dart';
 import '../../core/l10n/l10n_providers.dart';
-import '../../core/l10n/panjika_formatter.dart';
 import '../../core/time/clock.dart';
+import '../../data/repositories/panjika_providers.dart';
 import '../../domain/engine/day_assembler.dart';
 import '../../domain/entities/panjika.dart';
+import '../../domain/entities/terms.dart';
 import '../../l10n/gen/app_localizations.dart';
 import 'today_providers.dart';
 
@@ -48,17 +49,11 @@ class _TodayContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final t = Theme.of(context).textTheme;
     final c = context.colors;
     final language = ref.watch(appLanguageProvider);
     final f = ref.watch(formatterProvider);
     final now = ref.watch(nowProvider);
-    final showBoth = ref.watch(showBothScriptsProvider);
-    final other = language == AppLanguage.bn ? AppLanguage.en : AppLanguage.bn;
-    final otherF = PanjikaFormatter(
-      language: other,
-      numerals: other.defaultNumerals,
-    );
+    final names = ref.watch(namesProvider).value;
 
     /// "দুপুর ২:৩২ পর্যন্ত", with "(পরদিন)" when it ends after midnight (spec §12.4).
     String until(DateTime end) {
@@ -69,9 +64,26 @@ class _TodayContent extends ConsumerWidget {
     String timeOrNone(DateTime? instant) =>
         instant == null ? l.timeNone : f.time(instant);
 
+    String term(Term t) => names!.of('term', t.index).of(language);
+
     final tithi = d.currentOf(TransitionKind.tithi, now);
-    final tithiUntil = until(tithi.endUtc);
-    final tithiThen = l.thenName(tithi.next.of(language));
+    // Read, not watch: marking the day must not rebuild the screen.
+    final animateFill = ref.read(ringFilledForProvider) != d.date;
+    if (animateFill) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          ref.read(ringFilledForProvider.notifier).mark(d.date);
+        }
+      });
+    }
+    // Kshaya tithis get a second line; a vriddhi tithi is noted (spec §16).
+    final notes = names == null
+        ? const <String>[]
+        : [
+            for (final k in d.kshayaTithis)
+              l.termWithName(term(Term.kshayaTithi), k.span.name.of(language)),
+            if (d.isVriddhi) term(Term.vriddhiTithi),
+          ];
 
     return Stack(
       children: [
@@ -84,88 +96,24 @@ class _TodayContent extends ConsumerWidget {
             ),
             children: [
               // Date header (FR-HOME-01)
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      f.weekday(d.date),
-                      style: t.labelLarge?.copyWith(color: c.inkMuted),
-                    ),
-                  ),
-                  Chip(
-                    avatar: Icon(Icons.place_outlined, size: 18, color: c.ink),
-                    label: Text(d.provenance.city.of(language)),
-                  ),
-                ],
-              ),
-              Text(
-                f.bengaliDate(
-                  d.bengaliDate.day,
-                  d.bengaliMonth.of(language),
-                  d.bengaliDate.year,
-                ),
-                style: t.displaySmall,
-              ),
-              if (showBoth)
-                ExcludeSemantics(
-                  child: Text(
-                    otherF.bengaliDate(
-                      d.bengaliDate.day,
-                      d.bengaliMonth.of(other),
-                      d.bengaliDate.year,
-                    ),
-                    style: t.bodySmall?.copyWith(color: c.inkMuted),
-                  ),
-                ),
-              Text(
-                f.gregorianDate(d.date),
-                style: t.bodyLarge?.copyWith(color: c.inkMuted),
+              DateHeader(
+                date: d.date,
+                bengaliDay: d.bengaliDate.day,
+                bengaliMonth: d.bengaliMonth,
+                bengaliYear: d.bengaliDate.year,
+                city: d.provenance.city,
               ),
               const SizedBox(height: Space.l),
 
               // Tithi seal: the one bold element (FR-HOME-02, spec §12.1)
-              Semantics(
-                container: true,
-                label: l.tithiSealSemantics(
-                  tithi.name.of(language),
-                  tithiUntil,
-                  tithiThen,
-                ),
-                child: ExcludeSemantics(
-                  child: Container(
-                    padding: const EdgeInsets.all(Space.l),
-                    decoration: BoxDecoration(
-                      color: c.haldiContainer,
-                      borderRadius: BorderRadius.circular(Radii.large),
-                    ),
-                    child: Row(
-                      children: [
-                        TithiRing(progress: tithi.progressAt(now)),
-                        const SizedBox(width: Space.l),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              NameText(tithi.name, style: t.headlineSmall),
-                              Text(
-                                tithiUntil,
-                                style: t.bodyLarge?.copyWith(
-                                  color: c.onHaldiContainer,
-                                ),
-                              ),
-                              Text(
-                                tithiThen,
-                                style: t.labelLarge?.copyWith(
-                                  color: c.inkMuted,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              TithiSeal(
+                name: tithi.name,
+                nameText: tithi.name.of(language),
+                until: until(tithi.endUtc),
+                then: l.thenName(tithi.next.of(language)),
+                progress: tithi.progressAt(now),
+                notes: notes,
+                animateFill: animateFill,
               ),
               const SizedBox(height: Space.s),
 
@@ -211,13 +159,7 @@ class _TodayContent extends ConsumerWidget {
                 ],
               ),
 
-              ProvenanceFooter(
-                text: l.provenance(
-                  d.provenance.tradition.of(language),
-                  d.provenance.city.of(language),
-                  l.timeZoneLabel,
-                ),
-              ),
+              ProvenanceFooter(provenance: d.provenance),
             ],
           ),
         ),

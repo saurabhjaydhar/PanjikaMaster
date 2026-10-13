@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/settings/settings.dart';
 import '../../core/time/civil_date.dart';
 import '../../domain/engine/day_assembler.dart';
+import '../../domain/entities/name_table.dart';
 import '../../domain/usecases/get_day_panjika.dart';
 import '../../domain/usecases/get_month_grid.dart';
 import '../../domain/usecases/get_upcoming_observances.dart';
@@ -49,4 +50,9 @@ final monthGridProvider = FutureProvider.family<MonthGrid?, MonthRef>(
         tradition: ref.watch(traditionProvider),
         cityId: ref.watch(cityIdProvider),
       ),
+);
+
+/// Display names and glossary entries from the installed packs.
+final namesProvider = FutureProvider<NameTable>(
+  (ref) => ref.watch(panjikaRepositoryProvider).names(),
 );

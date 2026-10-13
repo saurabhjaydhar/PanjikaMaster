@@ -107,4 +107,114 @@ class AppLocalizationsEn extends AppLocalizations {
   String nameWithUntil(String name, String until) {
     return '$name · $until';
   }
+
+  @override
+  String get labelNow => 'Now';
+
+  @override
+  String get labelToday => 'Today';
+
+  @override
+  String periodSemantics(String name, String range, String active) {
+    String _temp0 = intl.Intl.selectLogic(active, {
+      'yes': ', happening now',
+      'other': '',
+    });
+    return '$name, $range$_temp0';
+  }
+
+  @override
+  String get periodShubh => 'Auspicious times';
+
+  @override
+  String get periodAshubh => 'Inauspicious times';
+
+  @override
+  String get verificationSample => 'Sample data';
+
+  @override
+  String get verificationComputed => 'Calculated, not yet checked';
+
+  @override
+  String get verificationReferenceMatched => 'Checked against the panjika';
+
+  @override
+  String get verificationExpertReviewed => 'Reviewed by an expert';
+
+  @override
+  String calendarCellSemantics(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi';
+  }
+
+  @override
+  String calendarCellWithFestival(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+    String festival,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi, $festival';
+  }
+
+  @override
+  String todayPrefix(String label) {
+    return 'Today, $label';
+  }
+
+  @override
+  String cityChipSemantics(String city) {
+    return 'City: $city. Tap to change';
+  }
+
+  @override
+  String get glossaryTitle => 'Glossary';
+
+  @override
+  String get glossaryOpen => 'What does this mean?';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get languageNameBengali => 'বাংলা';
+
+  @override
+  String get languageNameEnglish => 'English';
+
+  @override
+  String termWithName(String term, String name) {
+    return '$term: $name';
+  }
+
+  @override
+  String get stateNotDownloaded =>
+      'Data for these dates isn\'t downloaded yet.';
+
+  @override
+  String get stateOffline =>
+      'You\'re offline. The data will download when you\'re connected.';
+
+  @override
+  String get stateStale => 'This data needs an update.';
+
+  @override
+  String get stateSignatureFailed =>
+      'We couldn\'t verify this data, so it isn\'t shown.';
+
+  @override
+  String get stateUnverified =>
+      'This date hasn\'t been checked against the panjika yet.';
+
+  @override
+  String get stateCheckClock => 'Please check your phone\'s date';
+
+  @override
+  String get actionDownload => 'Download';
+
+  @override
+  String get actionUpdate => 'Update';
 }
