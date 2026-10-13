@@ -30,7 +30,7 @@ CREATE TABLE packs (
   generated_at       TEXT NOT NULL,
   engine_version     TEXT NOT NULL,
   ephemeris_sha256   TEXT,                       -- NULL for sample packs
-  validation_summary TEXT,
+  validation_summary TEXT,                       -- JSON; `validated_on` (YYYY-MM-DD) once checked against the references (T-503)
   installed_at       TEXT,                       -- set by the app's importer; NULL inside a pack file
   sha256             TEXT,                       -- of the .gz, set by the importer from the manifest
   CHECK (covers_from <= covers_to)
