@@ -47,6 +47,10 @@ def test_rows_cover_the_range_and_match_the_schema(astro, reproducible, tmp_path
         ).fetchall()
         assert rows[0][1] <= start and rows[-1][2] >= end, kind
         assert all(x[2] == y[1] for x, y in pairwise(rows)), kind
+    days = conn.execute("SELECT date FROM bengali_dates ORDER BY date").fetchall()
+    assert [d for (d,) in days] == ["2027-03-10", "2027-03-11", "2027-03-12"]
+    months = conn.execute("SELECT starts_utc, ends_utc FROM lunar_months").fetchall()
+    assert months and months[0][0] <= start and months[-1][1] >= end
     n = conn.execute("SELECT count(*) FROM names").fetchone()[0]
     assert n == len(names.rows(pack[0]))
     assert conn.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -63,7 +67,8 @@ def test_run_metadata(astro, reproducible, tmp_path):
     assert set(meta["libraries"]) == {"skyfield", "jplephem", "numpy"}
     assert len(meta["ephemeris"]["sha256"]) == 64
     assert meta["names_status"] == "draft"
-    assert set(meta["rows"]) == set(KINDS)
+    assert set(meta["rows"]) == set(KINDS) | {"bengali_dates", "lunar_months"}
+    assert meta["rows"]["bengali_dates"] == 3
     locked = meta["ephemeris"]["locked"]
     assert engine_version.endswith("+dev-ephemeris") != locked
     run = json.loads(path.with_suffix(".run.json").read_text())

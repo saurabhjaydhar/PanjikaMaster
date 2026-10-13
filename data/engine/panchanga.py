@@ -1,7 +1,7 @@
 """Tithi, nakshatra, yoga and karana transitions (spec §6.5.1–6.5.4, T-204).
 
 Each kind is an angle that grows steadily and is cut into equal steps. The search
-samples the angle every hour (every day for the Sun's sign), finds where the step index
+samples the angle every six hours (every day for the Sun's sign), finds where the step index
 changes, and bisects each bracket to under half a second (vectorised over all brackets
 at once). Times are
 integer Unix seconds, so the same inputs always give the same output.
@@ -16,7 +16,9 @@ from engine.astro import Astro
 
 HOUR = 3600
 DAY = 86_400
-SCAN = HOUR
+# Six hours: shorter than the shortest span of any kind (a karana, ≈ 9.9 h), so an
+# index changes at most once per step; `crossings` raises if it ever skips one.
+SCAN = 6 * HOUR
 # Bisect until the bracket is under half a second, then round to the second.
 BRACKET = 0.5
 # The longest tithi/nakshatra/yoga/karana span is under 28 h; two days of margin catch
