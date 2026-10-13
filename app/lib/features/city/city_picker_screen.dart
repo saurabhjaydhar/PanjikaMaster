@@ -10,6 +10,7 @@ import '../../core/settings/settings.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../../data/repositories/panjika_providers.dart';
 import 'city_providers.dart';
+import 'use_location_button.dart';
 
 /// City picker (শহর, spec §11.7, §11.12): search in both scripts, recent cities,
 /// West Bengal by district, other cities; each row shows today's sunrise.
@@ -83,6 +84,9 @@ class _CityPickerScreenState extends ConsumerState<CityPickerScreen> {
               horizontal: screenMargin(MediaQuery.sizeOf(context).width),
             ),
             children: [
+              const SizedBox(height: Space.s),
+              UseLocationButton(onChosen: _choose),
+              const SizedBox(height: Space.s),
               TextField(
                 autofocus: false,
                 decoration: InputDecoration(

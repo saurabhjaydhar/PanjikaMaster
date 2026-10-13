@@ -559,4 +559,51 @@ class AppLocalizationsBn extends AppLocalizations {
   ) {
     return '$tradition · প্রতিটি শহরের আজকের সূর্যোদয়, $timeZone · তথ্য: $packs · $status';
   }
+
+  @override
+  String get useMyLocation => 'আমার অবস্থান ব্যবহার করুন';
+
+  @override
+  String get locating => 'অবস্থান খোঁজা হচ্ছে…';
+
+  @override
+  String get locationRationale =>
+      'কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।';
+
+  @override
+  String get actionNotNow => 'এখন নয়';
+
+  @override
+  String nearestCity(String city, String distance) {
+    return 'নিকটতম শহর: $city, $distance কিমি';
+  }
+
+  @override
+  String cityFarWarning(String limit) {
+    return 'এই শহর $limit কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।';
+  }
+
+  @override
+  String get actionChooseCity => 'এই শহর বেছে নিন';
+
+  @override
+  String get locationDenied =>
+      'অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।';
+
+  @override
+  String get locationDeniedForever =>
+      'অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।';
+
+  @override
+  String get actionOpenSettings => 'সেটিংস খুলুন';
+
+  @override
+  String get locationOff => 'ফোনের লোকেশন বন্ধ আছে।';
+
+  @override
+  String get actionTurnOn => 'চালু করুন';
+
+  @override
+  String get locationUnavailable =>
+      'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।';
 }

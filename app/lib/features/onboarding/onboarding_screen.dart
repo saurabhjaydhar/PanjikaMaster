@@ -13,6 +13,7 @@ import '../../data/repositories/panjika_providers.dart';
 import '../../domain/entities/terms.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../city/city_providers.dart';
+import '../city/use_location_button.dart';
 import '../settings/tradition.dart';
 
 /// First run (spec §10, §11.1): language → tradition → city → reminders (optional).
@@ -468,11 +469,12 @@ class _CityStepState extends ConsumerState<_CityStep> {
             : (r.city.popular || r.city.id == current))
           r,
     ];
-    // TODO(T-409): "Use my location" goes above the search field.
     return _StepLayout(
       title: (l) => l.onboardingCityTitle,
       note: (l) => l.onboardingCityNote,
       children: [
+        UseLocationButton(onChosen: (id) => chooseCity(ref, id)),
+        const SizedBox(height: Space.m),
         TextField(
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),

@@ -1,10 +1,18 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- "Use my location" in the city picker: approximate location only, asked for
+         only when the user taps it (FR-LOC-02, spec §19). -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:label="@string/app_name"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:localeConfig="@xml/locales_config"
         android:icon="@mipmap/ic_launcher">
+        <!-- geolocator's background location service: unused (one-shot fix only). -->
+        <service
+            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+            tools:node="remove"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

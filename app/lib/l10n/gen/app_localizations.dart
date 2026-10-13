@@ -1017,6 +1017,84 @@ abstract class AppLocalizations {
     String packs,
     String status,
   );
+
+  /// City picker and onboarding: find the nearest city (FR-LOC-02).
+  ///
+  /// In bn, this message translates to:
+  /// **'আমার অবস্থান ব্যবহার করুন'**
+  String get useMyLocation;
+
+  /// Shown on the Use my location button while waiting for a fix.
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থান খোঁজা হচ্ছে…'**
+  String get locating;
+
+  /// Rationale shown before the system location prompt (§19.1 L18, §19 location row).
+  ///
+  /// In bn, this message translates to:
+  /// **'কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।'**
+  String get locationRationale;
+
+  /// Declines an optional action.
+  ///
+  /// In bn, this message translates to:
+  /// **'এখন নয়'**
+  String get actionNotNow;
+
+  /// Result of Use my location (FR-LOC-02); distance is formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'নিকটতম শহর: {city}, {distance} কিমি'**
+  String nearestCity(String city, String distance);
+
+  /// Warning when the nearest city is far (FR-LOC-03); limit is formatted with the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই শহর {limit} কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।'**
+  String cityFarWarning(String limit);
+
+  /// Confirms the nearest city.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই শহর বেছে নিন'**
+  String get actionChooseCity;
+
+  /// After the location permission is denied (FR-LOC-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।'**
+  String get locationDenied;
+
+  /// After a permanent denial (FR-LOC-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।'**
+  String get locationDeniedForever;
+
+  /// Opens the phone's settings page for the app.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস খুলুন'**
+  String get actionOpenSettings;
+
+  /// When the phone's location service is off.
+  ///
+  /// In bn, this message translates to:
+  /// **'ফোনের লোকেশন বন্ধ আছে।'**
+  String get locationOff;
+
+  /// Opens the phone's location settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'চালু করুন'**
+  String get actionTurnOn;
+
+  /// When no location fix could be had.
+  ///
+  /// In bn, this message translates to:
+  /// **'অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।'**
+  String get locationUnavailable;
 }
 
 class _AppLocalizationsDelegate

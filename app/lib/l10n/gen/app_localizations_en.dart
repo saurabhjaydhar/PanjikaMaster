@@ -561,4 +561,51 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return '$tradition · today\'s sunrise in each city, $timeZone · data: $packs · $status';
   }
+
+  @override
+  String get useMyLocation => 'Use my location';
+
+  @override
+  String get locating => 'Finding your location…';
+
+  @override
+  String get locationRationale =>
+      'To find the nearest city, the app needs your phone\'s approximate location. It is used only on this phone; only the city you choose is remembered.';
+
+  @override
+  String get actionNotNow => 'Not now';
+
+  @override
+  String nearestCity(String city, String distance) {
+    return 'Nearest city: $city, $distance km';
+  }
+
+  @override
+  String cityFarWarning(String limit) {
+    return 'This city is more than $limit km away, so times may differ by a few minutes.';
+  }
+
+  @override
+  String get actionChooseCity => 'Choose this city';
+
+  @override
+  String get locationDenied =>
+      'The app works without it. Choose your city from the list.';
+
+  @override
+  String get locationDeniedForever =>
+      'Location permission is off. Choose your city from the list, or allow it in settings.';
+
+  @override
+  String get actionOpenSettings => 'Open settings';
+
+  @override
+  String get locationOff => 'Location is turned off on this phone.';
+
+  @override
+  String get actionTurnOn => 'Turn on';
+
+  @override
+  String get locationUnavailable =>
+      'Couldn\'t find your location. Choose your city from the list.';
 }
