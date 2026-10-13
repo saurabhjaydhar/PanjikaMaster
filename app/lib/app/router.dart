@@ -16,6 +16,7 @@ import '../features/onboarding/onboarding_screen.dart';
 import '../features/reminders/reminders_screen.dart';
 import '../features/search/search_screen.dart';
 import '../features/settings/settings_screen.dart';
+import '../features/sources/sources_screen.dart';
 import '../features/today/today_screen.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'shell/app_shell.dart';
@@ -46,6 +47,7 @@ abstract final class Routes {
   static const search = '/search';
   static const glossary = '/glossary';
   static const sources = '/sources';
+  static const schools = '/sources/schools';
   static const report = '/report';
   static const removeAds = '/remove-ads';
   static const about = '/about';
@@ -115,12 +117,16 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.about, builder: (_, _) => const AboutScreen()),
       GoRoute(path: Routes.search, builder: (_, _) => const SearchScreen()),
       GoRoute(path: Routes.glossary, builder: (_, _) => const GlossaryScreen()),
+      GoRoute(path: Routes.sources, builder: (_, _) => const SourcesScreen()),
+      GoRoute(
+        path: Routes.schools,
+        builder: (_, _) => const SchoolsExplainerScreen(),
+      ),
       GoRoute(
         path: Routes.reminders,
         builder: (_, _) => const RemindersScreen(),
       ),
       // Screens built by later tasks; until then each says "coming soon".
-      _comingSoon(Routes.sources, (l) => l.menuSources), // TODO(T-609)
       _comingSoon(Routes.report, (l) => l.menuReport), // TODO(T-610), TODO(Q6)
       _comingSoon(Routes.removeAds, (l) => l.menuRemoveAds), // TODO(T-705)
       // The policy depends on what the app collects. TODO(Q8), TODO(T-706)

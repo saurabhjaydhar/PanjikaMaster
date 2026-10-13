@@ -876,4 +876,98 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get searchNoResults =>
       'Nothing found. Check the spelling or the date format.';
+
+  @override
+  String get sourcesTraditionHeading => 'Panjika tradition';
+
+  @override
+  String sourcesTraditionBody(String tradition) {
+    return 'Every date and time in this app follows $tradition, the tradition chosen in Settings.';
+  }
+
+  @override
+  String get sourcesHowHeading => 'How we calculate';
+
+  @override
+  String get sourcesStep1Title => 'Astronomical calculation (NASA JPL)';
+
+  @override
+  String get sourcesStep1Body =>
+      'Positions of the Sun and Moon come from NASA JPL\'s DE440s ephemeris, computed ahead of time with the Skyfield software.';
+
+  @override
+  String get sourcesStep2Title => 'Checked against the Rashtriya Panchang';
+
+  @override
+  String get sourcesStep2Body =>
+      'Tithi, nakshatra and other times are compared with the Government of India\'s national almanac.';
+
+  @override
+  String get sourcesStep3Title => 'Checked against the printed panjika';
+
+  @override
+  String get sourcesStep3Body =>
+      'Bengali dates and festival days are compared with the printed panjika.';
+
+  @override
+  String get sourcesStep4Title => 'Major festivals reviewed by an expert';
+
+  @override
+  String get sourcesStep4Body =>
+      'A panjika expert reviews the rules for the major festivals.';
+
+  @override
+  String get sourcesStepsNote =>
+      'The mark next to each value shows how far it has been checked.';
+
+  @override
+  String get sourcesMarksHeading => 'What the marks mean';
+
+  @override
+  String get sourcesPhoneHeading => 'Data on this phone';
+
+  @override
+  String get packKindGlobal => 'Panchanga data';
+
+  @override
+  String get packKindCities => 'City data';
+
+  @override
+  String get packKindObservances => 'Festival data';
+
+  @override
+  String sourcesPackTitle(String kind, String version) {
+    return '$kind · version $version';
+  }
+
+  @override
+  String sourcesPackScope(String tradition, String range) {
+    return '$tradition · $range';
+  }
+
+  @override
+  String sourcesValidatedOn(String date) {
+    return 'Last checked: $date';
+  }
+
+  @override
+  String get sourcesNotValidated => 'Not yet checked against the references';
+
+  @override
+  String get sourcesNoPacks => 'There\'s no data on this phone yet.';
+
+  @override
+  String get sourcesWhyLink => 'Why do the two schools differ?';
+
+  @override
+  String get schoolsPara1 =>
+      'West Bengal has two panjika traditions. Bishuddha Siddhanta (Drik) works from the modern astronomical positions of the Sun and Moon, the same method as the Government of India\'s national almanac. Surya Siddhanta, followed by Gupta Press and several other almanacs, uses the classical model of the ancient Surya Siddhanta text together with the rules of Raghunandana.';
+
+  @override
+  String get schoolsPara2 =>
+      'The two models place the Sun and Moon slightly differently, so the same tithi ends at a different time in each, sometimes by a few minutes and sometimes by more. A day takes the tithi that is current at sunrise. So when a tithi ends close to sunrise, the two schools can name different tithis for the same morning, and a festival can fall a day earlier or later.';
+
+  @override
+  String get schoolsPara3 =>
+      'Neither is a mistake; both are long-standing ways of reckoning. This app shows which tradition every date follows. It offers Bishuddha Siddhanta now, and Surya Siddhanta will come later. If your family follows a particular panjika, compare with it.';
 }

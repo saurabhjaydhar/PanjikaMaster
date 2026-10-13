@@ -1531,6 +1531,162 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।'**
   String get searchNoResults;
+
+  /// Sources screen: section about the tradition (§11.16).
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার মত'**
+  String get sourcesTraditionHeading;
+
+  /// Sources screen: which tradition the data follows (FR-SET-02). The tradition name comes from the pack.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই অ্যাপের সব তারিখ ও সময় {tradition} মতে, যা সেটিংসে বেছে নেওয়া আছে।'**
+  String sourcesTraditionBody(String tradition);
+
+  /// Sources screen: heading of the numbered steps (§11.16).
+  ///
+  /// In bn, this message translates to:
+  /// **'আমরা কীভাবে হিসাব করি'**
+  String get sourcesHowHeading;
+
+  /// Sources screen, step 1 title.
+  ///
+  /// In bn, this message translates to:
+  /// **'জ্যোতির্বিজ্ঞানের হিসাব (NASA JPL)'**
+  String get sourcesStep1Title;
+
+  /// Sources screen, step 1 explanation. Keep in line with aboutDataBody.
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্য ও চাঁদের অবস্থান NASA JPL-এর DE440s তালিকা থেকে, Skyfield সফটওয়্যারে আগেই হিসাব করা থাকে।'**
+  String get sourcesStep1Body;
+
+  /// Sources screen, step 2 title.
+  ///
+  /// In bn, this message translates to:
+  /// **'রাষ্ট্রীয় পঞ্চাঙ্গের সঙ্গে মিলানো'**
+  String get sourcesStep2Title;
+
+  /// Sources screen, step 2 explanation.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি, নক্ষত্র ও অন্যান্য সময় ভারত সরকারের জাতীয় পঞ্চাঙ্গের সঙ্গে মিলিয়ে দেখা হয়।'**
+  String get sourcesStep2Body;
+
+  /// Sources screen, step 3 title.
+  ///
+  /// In bn, this message translates to:
+  /// **'মুদ্রিত পঞ্জিকার সঙ্গে মিলানো'**
+  String get sourcesStep3Title;
+
+  /// Sources screen, step 3 explanation.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা তারিখ ও উৎসবের দিন মুদ্রিত পঞ্জিকার সঙ্গে মিলিয়ে দেখা হয়।'**
+  String get sourcesStep3Body;
+
+  /// Sources screen, step 4 title.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রধান উৎসব বিশেষজ্ঞের যাচাই'**
+  String get sourcesStep4Title;
+
+  /// Sources screen, step 4 explanation.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রধান উৎসবের নিয়ম একজন পঞ্জিকা-বিশেষজ্ঞ দেখে নেন।'**
+  String get sourcesStep4Body;
+
+  /// Sources screen: note under the steps.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রতিটি তথ্য কোন ধাপ পর্যন্ত যাচাই হয়েছে, তা পাশের চিহ্নে দেখা যায়।'**
+  String get sourcesStepsNote;
+
+  /// Sources screen: heading of the verification marks legend (§12.5).
+  ///
+  /// In bn, this message translates to:
+  /// **'চিহ্নের অর্থ'**
+  String get sourcesMarksHeading;
+
+  /// Sources screen: heading of the installed packs list.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই ফোনের তথ্য'**
+  String get sourcesPhoneHeading;
+
+  /// Kind of data pack: tithi, nakshatra, sunrise and other daily data.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্চাঙ্গের তথ্য'**
+  String get packKindGlobal;
+
+  /// Kind of data pack: cities and their sunrise times.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহরের তথ্য'**
+  String get packKindCities;
+
+  /// Kind of data pack: festivals and observances.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসবের তথ্য'**
+  String get packKindObservances;
+
+  /// Sources screen: an installed pack and its version. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{kind} · সংস্করণ {version}'**
+  String sourcesPackTitle(String kind, String version);
+
+  /// Sources screen: a pack's tradition and the dates it covers. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{tradition} · {range}'**
+  String sourcesPackScope(String tradition, String range);
+
+  /// Sources screen: the date a pack was last checked against the references.
+  ///
+  /// In bn, this message translates to:
+  /// **'শেষ যাচাই: {date}'**
+  String sourcesValidatedOn(String date);
+
+  /// Sources screen: a pack that has not been validated yet.
+  ///
+  /// In bn, this message translates to:
+  /// **'এখনও মিলিয়ে দেখা হয়নি'**
+  String get sourcesNotValidated;
+
+  /// Sources screen: no packs installed.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই ফোনে এখনও কোনো তথ্য নেই।'**
+  String get sourcesNoPacks;
+
+  /// Sources screen: link to the explainer (§11.16).
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই মত কেন আলাদা?'**
+  String get sourcesWhyLink;
+
+  /// Explainer 'Why do the two schools differ?' (§11.16, §5.2), paragraph 1 of 3. About 150 words in total; plain language.
+  ///
+  /// In bn, this message translates to:
+  /// **'পশ্চিমবঙ্গে পঞ্জিকার দুটি মত চালু আছে। বিশুদ্ধ সিদ্ধান্ত (দৃক) মত সূর্য ও চাঁদের আধুনিক জ্যোতির্বিজ্ঞানসম্মত অবস্থান থেকে হিসাব করে; ভারত সরকারের জাতীয় পঞ্চাঙ্গও এই পদ্ধতিতে তৈরি। সূর্যসিদ্ধান্ত মত, যা গুপ্তপ্রেস ও আরও কয়েকটি পঞ্জিকা মেনে চলে, প্রাচীন সূর্যসিদ্ধান্ত গ্রন্থের হিসাব আর রঘুনন্দনের বিধান অনুসরণ করে।'**
+  String get schoolsPara1;
+
+  /// Explainer, paragraph 2 of 3.
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই হিসাবে সূর্য ও চাঁদের অবস্থান সামান্য আলাদা আসে, তাই একই তিথি দুই মতে ভিন্ন সময়ে শেষ হয় — কখনো কয়েক মিনিট, কখনো আরও বেশি তফাতে। সূর্যোদয়ের সময় যে তিথি চলে, সেটাই সেদিনের তিথি। তাই তিথি সূর্যোদয়ের কাছাকাছি শেষ হলে দুই মতে একই সকালের তিথি আলাদা হতে পারে, আর তাতে কোনো উৎসব এক দিন আগে বা পরে পড়ে।'**
+  String get schoolsPara2;
+
+  /// Explainer, paragraph 3 of 3.
+  ///
+  /// In bn, this message translates to:
+  /// **'এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।'**
+  String get schoolsPara3;
 }
 
 class _AppLocalizationsDelegate

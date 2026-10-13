@@ -1338,5 +1338,135 @@
   "searchNoResults": "কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।",
   "@searchNoResults": {
     "description": "Search with no results (spec §11.14)."
+  },
+  "sourcesTraditionHeading": "পঞ্জিকার মত",
+  "@sourcesTraditionHeading": {
+    "description": "Sources screen: section about the tradition (§11.16)."
+  },
+  "sourcesTraditionBody": "এই অ্যাপের সব তারিখ ও সময় {tradition} মতে, যা সেটিংসে বেছে নেওয়া আছে।",
+  "@sourcesTraditionBody": {
+    "description": "Sources screen: which tradition the data follows (FR-SET-02). The tradition name comes from the pack.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesHowHeading": "আমরা কীভাবে হিসাব করি",
+  "@sourcesHowHeading": {
+    "description": "Sources screen: heading of the numbered steps (§11.16)."
+  },
+  "sourcesStep1Title": "জ্যোতির্বিজ্ঞানের হিসাব (NASA JPL)",
+  "@sourcesStep1Title": {
+    "description": "Sources screen, step 1 title."
+  },
+  "sourcesStep1Body": "সূর্য ও চাঁদের অবস্থান NASA JPL-এর DE440s তালিকা থেকে, Skyfield সফটওয়্যারে আগেই হিসাব করা থাকে।",
+  "@sourcesStep1Body": {
+    "description": "Sources screen, step 1 explanation. Keep in line with aboutDataBody."
+  },
+  "sourcesStep2Title": "রাষ্ট্রীয় পঞ্চাঙ্গের সঙ্গে মিলানো",
+  "@sourcesStep2Title": {
+    "description": "Sources screen, step 2 title."
+  },
+  "sourcesStep2Body": "তিথি, নক্ষত্র ও অন্যান্য সময় ভারত সরকারের জাতীয় পঞ্চাঙ্গের সঙ্গে মিলিয়ে দেখা হয়।",
+  "@sourcesStep2Body": {
+    "description": "Sources screen, step 2 explanation."
+  },
+  "sourcesStep3Title": "মুদ্রিত পঞ্জিকার সঙ্গে মিলানো",
+  "@sourcesStep3Title": {
+    "description": "Sources screen, step 3 title."
+  },
+  "sourcesStep3Body": "বাংলা তারিখ ও উৎসবের দিন মুদ্রিত পঞ্জিকার সঙ্গে মিলিয়ে দেখা হয়।",
+  "@sourcesStep3Body": {
+    "description": "Sources screen, step 3 explanation."
+  },
+  "sourcesStep4Title": "প্রধান উৎসব বিশেষজ্ঞের যাচাই",
+  "@sourcesStep4Title": {
+    "description": "Sources screen, step 4 title."
+  },
+  "sourcesStep4Body": "প্রধান উৎসবের নিয়ম একজন পঞ্জিকা-বিশেষজ্ঞ দেখে নেন।",
+  "@sourcesStep4Body": {
+    "description": "Sources screen, step 4 explanation."
+  },
+  "sourcesStepsNote": "প্রতিটি তথ্য কোন ধাপ পর্যন্ত যাচাই হয়েছে, তা পাশের চিহ্নে দেখা যায়।",
+  "@sourcesStepsNote": {
+    "description": "Sources screen: note under the steps."
+  },
+  "sourcesMarksHeading": "চিহ্নের অর্থ",
+  "@sourcesMarksHeading": {
+    "description": "Sources screen: heading of the verification marks legend (§12.5)."
+  },
+  "sourcesPhoneHeading": "এই ফোনের তথ্য",
+  "@sourcesPhoneHeading": {
+    "description": "Sources screen: heading of the installed packs list."
+  },
+  "packKindGlobal": "পঞ্চাঙ্গের তথ্য",
+  "@packKindGlobal": {
+    "description": "Kind of data pack: tithi, nakshatra, sunrise and other daily data."
+  },
+  "packKindCities": "শহরের তথ্য",
+  "@packKindCities": {
+    "description": "Kind of data pack: cities and their sunrise times."
+  },
+  "packKindObservances": "উৎসবের তথ্য",
+  "@packKindObservances": {
+    "description": "Kind of data pack: festivals and observances."
+  },
+  "sourcesPackTitle": "{kind} · সংস্করণ {version}",
+  "@sourcesPackTitle": {
+    "description": "Sources screen: an installed pack and its version. Layout only.",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesPackScope": "{tradition} · {range}",
+  "@sourcesPackScope": {
+    "description": "Sources screen: a pack's tradition and the dates it covers. Layout only.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesValidatedOn": "শেষ যাচাই: {date}",
+  "@sourcesValidatedOn": {
+    "description": "Sources screen: the date a pack was last checked against the references.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesNotValidated": "এখনও মিলিয়ে দেখা হয়নি",
+  "@sourcesNotValidated": {
+    "description": "Sources screen: a pack that has not been validated yet."
+  },
+  "sourcesNoPacks": "এই ফোনে এখনও কোনো তথ্য নেই।",
+  "@sourcesNoPacks": {
+    "description": "Sources screen: no packs installed."
+  },
+  "sourcesWhyLink": "দুই মত কেন আলাদা?",
+  "@sourcesWhyLink": {
+    "description": "Sources screen: link to the explainer (§11.16)."
+  },
+  "schoolsPara1": "পশ্চিমবঙ্গে পঞ্জিকার দুটি মত চালু আছে। বিশুদ্ধ সিদ্ধান্ত (দৃক) মত সূর্য ও চাঁদের আধুনিক জ্যোতির্বিজ্ঞানসম্মত অবস্থান থেকে হিসাব করে; ভারত সরকারের জাতীয় পঞ্চাঙ্গও এই পদ্ধতিতে তৈরি। সূর্যসিদ্ধান্ত মত, যা গুপ্তপ্রেস ও আরও কয়েকটি পঞ্জিকা মেনে চলে, প্রাচীন সূর্যসিদ্ধান্ত গ্রন্থের হিসাব আর রঘুনন্দনের বিধান অনুসরণ করে।",
+  "@schoolsPara1": {
+    "description": "Explainer 'Why do the two schools differ?' (§11.16, §5.2), paragraph 1 of 3. About 150 words in total; plain language."
+  },
+  "schoolsPara2": "দুই হিসাবে সূর্য ও চাঁদের অবস্থান সামান্য আলাদা আসে, তাই একই তিথি দুই মতে ভিন্ন সময়ে শেষ হয় — কখনো কয়েক মিনিট, কখনো আরও বেশি তফাতে। সূর্যোদয়ের সময় যে তিথি চলে, সেটাই সেদিনের তিথি। তাই তিথি সূর্যোদয়ের কাছাকাছি শেষ হলে দুই মতে একই সকালের তিথি আলাদা হতে পারে, আর তাতে কোনো উৎসব এক দিন আগে বা পরে পড়ে।",
+  "@schoolsPara2": {
+    "description": "Explainer, paragraph 2 of 3."
+  },
+  "schoolsPara3": "এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।",
+  "@schoolsPara3": {
+    "description": "Explainer, paragraph 3 of 3."
   }
 }
