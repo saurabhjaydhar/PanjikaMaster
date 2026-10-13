@@ -20,6 +20,7 @@ dependencies:
   go_router: ^18.0.2
   http: ^1.6.0
   intl: any
+  package_info_plus: ^10.2.2
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,7 @@ flutter:
     - assets/fonts/OFL-TiroBangla.txt
     - assets/fonts/OFL-NotoSansBengali.txt
     - assets/fonts/OFL-NotoSans.txt
+    - assets/legal/DATA-NOTICE.txt
 
   # Bundled, subset fonts (spec §12.3, docs/assets.md). Static instances only: Tiro Bangla
   # is regular-only (never synthesise bold); Noto weights 400/500/600.

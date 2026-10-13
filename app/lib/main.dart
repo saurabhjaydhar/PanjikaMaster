@@ -39,7 +39,8 @@ Future<void> main() async {
   );
 }
 
-/// Adds the bundled fonts' SIL OFL texts to the licences page (spec §19.1 L6, L7).
+/// Adds the bundled fonts' SIL OFL texts and the data notice to the licences page
+/// (spec §19.1 L2, L6, L7).
 void _registerFontLicences() {
   const fonts = {
     'Tiro Bangla': 'assets/fonts/OFL-TiroBangla.txt',
@@ -52,5 +53,9 @@ void _registerFontLicences() {
         name,
       ], await rootBundle.loadString(path));
     }
+    // Where the computed data comes from, in both languages (§19.1 L2).
+    yield LicenseEntryWithLineBreaks([
+      'বাংলা পঞ্জিকা: তথ্য · Bangla Panjika data', // both languages
+    ], await rootBundle.loadString('assets/legal/DATA-NOTICE.txt'));
   });
 }

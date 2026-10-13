@@ -28,6 +28,10 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | drift_dev | app (dev) | 2.35.1 | MIT | 2026-09-30 | Build host | Drift code generation | 2026-10-12 |
 | build_runner | app (dev) | 2.16.2 | BSD-3-Clause | 2026-10-07 | Build host | Runs code generation | 2026-10-12 |
 | sqlite3 | app (dev) | 3.5.2 | MIT | 2026-09 (3.x line) | All | Raw SQLite in tests to compare the Drift DB against `schema.sql` (already a runtime transitive dependency) | 2026-10-12 |
+| package_info_plus | app | 10.2.2 | BSD-3-Clause | 2026-10-01 | Android, iOS, desktop, web | App version on the About screen (T-407) | 2026-10-13 |
+| package_info_plus_platform_interface | app (via package_info_plus) | 4.1.0 | BSD-3-Clause | 2026 | All | Platform interface | 2026-10-13 |
+| win32 | app (via package_info_plus) | 6.4.0 | BSD-3-Clause | 2026-08-05 | Windows only (unused on phones) | Windows version lookup | 2026-10-13 |
+| ffi_leak_tracker | app (via win32) | 0.1.2 | BSD-3-Clause | 2026-04-11 | Windows only (unused on phones) | win32 dependency | 2026-10-13 |
 | integration_test | app (dev) | SDK | BSD-3-Clause | with Flutter 3.47.7 | Android | On-device smoke test (T-115) | 2026-10-12 |
 | flutter_lints | app (dev) | 6.0.0 | BSD-3-Clause | 2025-05-27 | All Flutter platforms | Lint rules (T-104) | 2026-10-12 |
 | fake_async | app (dev) | 1.3.3 | Apache-2.0 | 2025-01-28 | All (tests only) | Fake time for the ticking clock tests (T-212); already pinned transitively by `flutter_test` | 2026-10-12 |

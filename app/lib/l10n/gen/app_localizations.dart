@@ -170,7 +170,7 @@ abstract class AppLocalizations {
   /// **'ভাষা'**
   String get languageSetting;
 
-  /// Placeholder body for a tab whose screen is not built yet (Phase 1 only).
+  /// Marks an option that is not available yet.
   ///
   /// In bn, this message translates to:
   /// **'শীঘ্রই আসছে'**
@@ -676,6 +676,252 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই'**
   String get cityChanged;
+
+  /// Title of the Settings screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস'**
+  String get settingsTitle;
+
+  /// Setting: show panchanga and festival names in the other script too (FR-SET-06).
+  ///
+  /// In bn, this message translates to:
+  /// **'নাম দুই লিপিতে'**
+  String get settingNamesBoth;
+
+  /// Setting: which panjika tradition (school) to follow.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার মত'**
+  String get settingTradition;
+
+  /// Setting: the chosen city.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর'**
+  String get settingCity;
+
+  /// Setting: light, dark or follow the phone.
+  ///
+  /// In bn, this message translates to:
+  /// **'থিম'**
+  String get settingTheme;
+
+  /// Theme option: follow the phone.
+  ///
+  /// In bn, this message translates to:
+  /// **'স্বয়ংক্রিয়'**
+  String get themeSystem;
+
+  /// Theme option.
+  ///
+  /// In bn, this message translates to:
+  /// **'হালকা'**
+  String get themeLight;
+
+  /// Theme option.
+  ///
+  /// In bn, this message translates to:
+  /// **'গাঢ়'**
+  String get themeDark;
+
+  /// Setting: text size, on top of the phone's own setting.
+  ///
+  /// In bn, this message translates to:
+  /// **'লেখার আকার'**
+  String get settingTextSize;
+
+  /// Preview line under the text size slider.
+  ///
+  /// In bn, this message translates to:
+  /// **'লেখা এই আকারে দেখাবে'**
+  String get textSizePreview;
+
+  /// Setting: 12- or 24-hour times.
+  ///
+  /// In bn, this message translates to:
+  /// **'সময়ের ধরন'**
+  String get settingTimeFormat;
+
+  /// A time format option; hours is 12 or 24 in the user's numerals.
+  ///
+  /// In bn, this message translates to:
+  /// **'{hours} ঘণ্টা'**
+  String timeFormatHours(String hours);
+
+  /// Setting: Bengali or Latin digits (FR-L10N-04).
+  ///
+  /// In bn, this message translates to:
+  /// **'সংখ্যা'**
+  String get settingNumerals;
+
+  /// Numerals option: Bengali digits in Bengali, Latin in English.
+  ///
+  /// In bn, this message translates to:
+  /// **'ভাষা অনুযায়ী'**
+  String get numeralsAuto;
+
+  /// Numerals option; digits shows Bengali digits as an example.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা ({digits})'**
+  String numeralsBengali(String digits);
+
+  /// Numerals option; digits shows Latin digits as an example.
+  ///
+  /// In bn, this message translates to:
+  /// **'ইংরেজি ({digits})'**
+  String numeralsLatin(String digits);
+
+  /// Settings section about the data packs.
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য'**
+  String get sectionData;
+
+  /// Settings row: check the server for new packs now.
+  ///
+  /// In bn, this message translates to:
+  /// **'নতুন তথ্য আছে কিনা দেখুন'**
+  String get checkDataNow;
+
+  /// Settings row: the dates the installed data covers.
+  ///
+  /// In bn, this message translates to:
+  /// **'ডাউনলোড করা তথ্য'**
+  String get installedData;
+
+  /// A date range. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{from} – {to}'**
+  String dataRange(String from, String to);
+
+  /// Settings section with licences etc.
+  ///
+  /// In bn, this message translates to:
+  /// **'অন্যান্য'**
+  String get sectionOther;
+
+  /// Opens the open-source licences.
+  ///
+  /// In bn, this message translates to:
+  /// **'লাইসেন্স'**
+  String get licences;
+
+  /// Confirm sheet before changing the tradition (spec §11.15).
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার মত বদলালে কিছু উৎসবের তারিখ বদলাতে পারে। অনুস্মারক নতুন করে সাজানো হবে।'**
+  String get traditionConfirm;
+
+  /// Button: confirm a change.
+  ///
+  /// In bn, this message translates to:
+  /// **'বদলান'**
+  String get actionChange;
+
+  /// Button: keep the current choice.
+  ///
+  /// In bn, this message translates to:
+  /// **'থাক'**
+  String get actionKeep;
+
+  /// Title of the More tab (spec §10).
+  ///
+  /// In bn, this message translates to:
+  /// **'আরও'**
+  String get moreTitle;
+
+  /// More menu: reminders screen (§11.13).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক'**
+  String get menuReminders;
+
+  /// More menu: search screen (§11.14).
+  ///
+  /// In bn, this message translates to:
+  /// **'খুঁজুন'**
+  String get menuSearch;
+
+  /// More menu: city picker (§11.12).
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর'**
+  String get menuCity;
+
+  /// More menu: glossary of panjika terms.
+  ///
+  /// In bn, this message translates to:
+  /// **'শব্দকোষ'**
+  String get menuGlossary;
+
+  /// More menu: settings (§11.15).
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস'**
+  String get menuSettings;
+
+  /// More menu: how the data is computed and checked (§11.16).
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্যসূত্র ও যাচাই'**
+  String get menuSources;
+
+  /// More menu: report a wrong date or time (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'ভুল জানান'**
+  String get menuReport;
+
+  /// More menu: remove-ads purchase (§11.18).
+  ///
+  /// In bn, this message translates to:
+  /// **'বিজ্ঞাপন সরান'**
+  String get menuRemoveAds;
+
+  /// More menu and Settings: the About screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'সম্পর্কে'**
+  String get menuAbout;
+
+  /// More menu and Settings: privacy policy.
+  ///
+  /// In bn, this message translates to:
+  /// **'গোপনীয়তা'**
+  String get menuPrivacy;
+
+  /// One-line description of the app on the About screen.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথি, উৎসব ও শুভ সময়ের বাংলা পঞ্জিকা, বাংলা ও ইংরেজিতে।'**
+  String get aboutTagline;
+
+  /// App version on the About screen; version is formatted with the user's numerals, e.g. ১.০.০.
+  ///
+  /// In bn, this message translates to:
+  /// **'সংস্করণ {version}'**
+  String aboutVersion(String version);
+
+  /// About screen section heading.
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য কোথা থেকে আসে'**
+  String get aboutDataHeading;
+
+  /// About screen: how the data is made (spec §6, PRD §1).
+  ///
+  /// In bn, this message translates to:
+  /// **'সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA JPL-এর DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার দিয়ে। হিসাব আগে থেকে করা থাকে; ফোন শুধু সেই তথ্য পড়ে, কিছু আন্দাজ করে না।'**
+  String get aboutDataBody;
+
+  /// About screen: the provenance promise.
+  ///
+  /// In bn, this message translates to:
+  /// **'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।'**
+  String get aboutProvenance;
 }
 
 class _AppLocalizationsDelegate

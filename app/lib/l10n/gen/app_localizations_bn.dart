@@ -361,4 +361,141 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get cityChanged =>
       'সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই';
+
+  @override
+  String get settingsTitle => 'সেটিংস';
+
+  @override
+  String get settingNamesBoth => 'নাম দুই লিপিতে';
+
+  @override
+  String get settingTradition => 'পঞ্জিকার মত';
+
+  @override
+  String get settingCity => 'শহর';
+
+  @override
+  String get settingTheme => 'থিম';
+
+  @override
+  String get themeSystem => 'স্বয়ংক্রিয়';
+
+  @override
+  String get themeLight => 'হালকা';
+
+  @override
+  String get themeDark => 'গাঢ়';
+
+  @override
+  String get settingTextSize => 'লেখার আকার';
+
+  @override
+  String get textSizePreview => 'লেখা এই আকারে দেখাবে';
+
+  @override
+  String get settingTimeFormat => 'সময়ের ধরন';
+
+  @override
+  String timeFormatHours(String hours) {
+    return '$hours ঘণ্টা';
+  }
+
+  @override
+  String get settingNumerals => 'সংখ্যা';
+
+  @override
+  String get numeralsAuto => 'ভাষা অনুযায়ী';
+
+  @override
+  String numeralsBengali(String digits) {
+    return 'বাংলা ($digits)';
+  }
+
+  @override
+  String numeralsLatin(String digits) {
+    return 'ইংরেজি ($digits)';
+  }
+
+  @override
+  String get sectionData => 'তথ্য';
+
+  @override
+  String get checkDataNow => 'নতুন তথ্য আছে কিনা দেখুন';
+
+  @override
+  String get installedData => 'ডাউনলোড করা তথ্য';
+
+  @override
+  String dataRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get sectionOther => 'অন্যান্য';
+
+  @override
+  String get licences => 'লাইসেন্স';
+
+  @override
+  String get traditionConfirm =>
+      'পঞ্জিকার মত বদলালে কিছু উৎসবের তারিখ বদলাতে পারে। অনুস্মারক নতুন করে সাজানো হবে।';
+
+  @override
+  String get actionChange => 'বদলান';
+
+  @override
+  String get actionKeep => 'থাক';
+
+  @override
+  String get moreTitle => 'আরও';
+
+  @override
+  String get menuReminders => 'অনুস্মারক';
+
+  @override
+  String get menuSearch => 'খুঁজুন';
+
+  @override
+  String get menuCity => 'শহর';
+
+  @override
+  String get menuGlossary => 'শব্দকোষ';
+
+  @override
+  String get menuSettings => 'সেটিংস';
+
+  @override
+  String get menuSources => 'তথ্যসূত্র ও যাচাই';
+
+  @override
+  String get menuReport => 'ভুল জানান';
+
+  @override
+  String get menuRemoveAds => 'বিজ্ঞাপন সরান';
+
+  @override
+  String get menuAbout => 'সম্পর্কে';
+
+  @override
+  String get menuPrivacy => 'গোপনীয়তা';
+
+  @override
+  String get aboutTagline =>
+      'তিথি, উৎসব ও শুভ সময়ের বাংলা পঞ্জিকা, বাংলা ও ইংরেজিতে।';
+
+  @override
+  String aboutVersion(String version) {
+    return 'সংস্করণ $version';
+  }
+
+  @override
+  String get aboutDataHeading => 'তথ্য কোথা থেকে আসে';
+
+  @override
+  String get aboutDataBody =>
+      'সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA JPL-এর DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার দিয়ে। হিসাব আগে থেকে করা থাকে; ফোন শুধু সেই তথ্য পড়ে, কিছু আন্দাজ করে না।';
+
+  @override
+  String get aboutProvenance =>
+      'প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।';
 }
