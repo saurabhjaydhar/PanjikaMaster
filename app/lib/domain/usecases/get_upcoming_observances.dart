@@ -11,8 +11,8 @@ class ObservanceList {
   final Provenance provenance;
 }
 
-/// Observances from [from] (inclusive) on: the Festivals list and Today's "upcoming"
-/// card (spec §11.2, §11.5). Null if the city is not installed.
+/// The next observances from [from] (inclusive): Today's "upcoming" card (spec §11.2,
+/// FR-HOME-06). Null if the city is not installed.
 class GetUpcomingObservances {
   const GetUpcomingObservances(this._source, this._catalog);
 
@@ -33,9 +33,16 @@ class GetUpcomingObservances {
       _catalog.names(),
     ).wait;
     if (city == null) return null;
+    // Each observance once, at the first day of its next occurrence: a multi-day
+    // festival shows its start, not every day, and a recurring one (Ekadashi) doesn't
+    // fill the list (T-514).
+    final seen = <String>{};
     final filtered = [
       for (final o in rows)
-        if (maxTier == null || o.observance.tier <= maxTier) o,
+        if ((maxTier == null || o.observance.tier <= maxTier) &&
+            o.dayIndex == 0 &&
+            seen.add(o.observance.id))
+          o,
     ];
     final items = limit == null ? filtered : filtered.take(limit).toList();
     return ObservanceList(

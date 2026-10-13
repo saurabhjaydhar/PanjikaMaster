@@ -239,6 +239,40 @@ void main() {
       expect(major, isNot(contains('bhai_phonta')));
     });
 
+    test(
+      'each observance once, at the first day of a multi-day festival',
+      () async {
+        // Real packs have spans (Durga Puja Shashthi → Dashami) and recurring
+        // observances; add both shapes as sample rows.
+        await db.customStatement(
+          "INSERT INTO observances VALUES ('durga_puja', 'দুর্গাপূজা', 'Durga Puja',"
+          " 'puja', 1, 'নমুনা বিবরণ। (নমুনা বিবরণ)', 'Sample. (Sample)',"
+          " 'sample-observances-drik')",
+        );
+        for (var i = 0; i < 5; i++) {
+          await db.customStatement(
+            'INSERT INTO observance_dates (observance_id, tradition, date, day_index,'
+            " status, pack_id) VALUES ('durga_puja', 'drik_bishuddha',"
+            " '2026-10-${13 + i}', $i, 'sample', 'sample-observances-drik')",
+          );
+        }
+        await db.customStatement(
+          'INSERT INTO observance_dates (observance_id, tradition, date, status, pack_id)'
+          " VALUES ('maha_saptami', 'drik_bishuddha', '2026-12-01', 'sample',"
+          " 'sample-observances-drik')",
+        );
+        final ids = [
+          for (final o in (await upcoming())!.items) o.observance.id,
+        ];
+        expect(ids.where((id) => id == 'durga_puja'), hasLength(1));
+        expect(ids.where((id) => id == 'maha_saptami'), hasLength(1));
+        final durga = (await upcoming())!.items.firstWhere(
+          (o) => o.observance.id == 'durga_puja',
+        );
+        expect(durga.date, const CivilDate(2026, 10, 13));
+      },
+    );
+
     test('empty range and unknown city', () async {
       final none = (await upcoming(to: sampleDay.addDays(-1)))!;
       expect(none.items, isEmpty);
