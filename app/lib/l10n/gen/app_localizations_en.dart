@@ -1039,4 +1039,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportQueued => 'It will be sent when you\'re online.';
+
+  @override
+  String get menuHelp => 'Help';
+
+  @override
+  String get helpVoiceHeading => 'Bengali voice for TalkBack';
+
+  @override
+  String get helpVoiceIntro =>
+      'Many phones come without a Bengali voice, and then TalkBack can\'t read Bengali text properly. Downloading Google\'s Bengali voice once fixes this.';
+
+  @override
+  String get helpVoiceStep1 =>
+      'Open Text-to-speech in your phone\'s settings, or tap the button below.';
+
+  @override
+  String get helpVoiceStep2 =>
+      'Choose Speech Services by Google as the preferred engine.';
+
+  @override
+  String get helpVoiceStep3 =>
+      'Tap the settings icon next to the engine, then Install voice data.';
+
+  @override
+  String get helpVoiceStep4 => 'Choose Bengali (India) and download the voice.';
+
+  @override
+  String get helpOpenTts => 'Open text-to-speech settings';
+
+  @override
+  String get helpRemindersHeading => 'If reminders don\'t arrive on time';
+
+  @override
+  String get helpRemindersIntro =>
+      'Some phones put apps to sleep to save battery, so reminders arrive late or not at all. Check these two things:';
+
+  @override
+  String helpRemindersStep1(String app) {
+    return 'Notifications are turned on for $app.';
+  }
+
+  @override
+  String helpRemindersStep2(String app) {
+    return 'In battery settings, $app is set to Unrestricted.';
+  }
+
+  @override
+  String get helpOpenNotifications => 'Open notification settings';
+
+  @override
+  String get helpOpenBattery => 'Open battery settings';
+
+  @override
+  String get helpXiaomiHeading => 'On Xiaomi, Redmi and POCO phones';
+
+  @override
+  String helpXiaomiStep1(String app) {
+    return 'Open Settings › Apps › Manage apps › $app.';
+  }
+
+  @override
+  String get helpXiaomiStep2 => 'Turn on Autostart.';
+
+  @override
+  String get helpXiaomiStep3 => 'Under Battery saver, choose No restrictions.';
+
+  @override
+  String get helpXiaomiStep4 =>
+      'Under Notifications, allow notifications, including on the lock screen.';
+
+  @override
+  String get helpSamsungHeading => 'On Samsung phones';
+
+  @override
+  String helpSamsungStep1(String app) {
+    return 'Open Settings › Apps › $app › Battery and choose Unrestricted.';
+  }
+
+  @override
+  String helpSamsungStep2(String app) {
+    return 'Open Settings › Battery › Background usage limits and make sure $app isn\'t in Sleeping apps or Deep sleeping apps.';
+  }
+
+  @override
+  String helpSamsungStep3(String app) {
+    return 'If you like, add $app to Never auto sleeping apps.';
+  }
+
+  @override
+  String get helpPathsVary =>
+      'The names and paths of settings can differ a little between phones and versions.';
+
+  @override
+  String get helpOpenFailed =>
+      'Couldn\'t open the settings. Please find them in your phone\'s Settings.';
+
+  @override
+  String get remindersHelpLink => 'Reminders not arriving on time?';
 }

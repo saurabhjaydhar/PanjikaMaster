@@ -1807,6 +1807,162 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'ইন্টারনেট পেলে পাঠানো হবে।'**
   String get reportQueued;
+
+  /// More menu: help with the Bengali voice and reminders on some phones (T-613).
+  ///
+  /// In bn, this message translates to:
+  /// **'সাহায্য'**
+  String get menuHelp;
+
+  /// Help: section about installing a Bengali text-to-speech voice (§13, localisation).
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলায় পড়ে শোনানো'**
+  String get helpVoiceHeading;
+
+  /// Help: why a Bengali voice is needed.
+  ///
+  /// In bn, this message translates to:
+  /// **'অনেক ফোনে বাংলা কণ্ঠ আগে থেকে থাকে না, তখন TalkBack বাংলা লেখা ঠিকমতো পড়তে পারে না। Google-এর বাংলা কণ্ঠ একবার নামিয়ে নিলেই হবে।'**
+  String get helpVoiceIntro;
+
+  /// Help, voice step 1. Android labels are given in English too, as many phones show them in English.
+  ///
+  /// In bn, this message translates to:
+  /// **'ফোনের সেটিংসে ‘টেক্সট-টু-স্পিচ’ (Text-to-speech) খুলুন, অথবা নিচের বোতাম টিপুন।'**
+  String get helpVoiceStep1;
+
+  /// Help, voice step 2.
+  ///
+  /// In bn, this message translates to:
+  /// **'পছন্দের ইঞ্জিন হিসেবে ‘Speech Services by Google’ বেছে নিন।'**
+  String get helpVoiceStep2;
+
+  /// Help, voice step 3.
+  ///
+  /// In bn, this message translates to:
+  /// **'ইঞ্জিনের পাশের সেটিংস চিহ্ন টিপে ‘ভয়েস ডেটা ইনস্টল করুন’ (Install voice data) খুলুন।'**
+  String get helpVoiceStep3;
+
+  /// Help, voice step 4.
+  ///
+  /// In bn, this message translates to:
+  /// **'‘বাংলা (ভারত)’ বেছে নিয়ে কণ্ঠটি নামিয়ে নিন।'**
+  String get helpVoiceStep4;
+
+  /// Help: button that opens the system text-to-speech settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'টেক্সট-টু-স্পিচ সেটিংস খুলুন'**
+  String get helpOpenTts;
+
+  /// Help: section about notification settings (PRD risk: OEM phones).
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক ঠিক সময়ে না এলে'**
+  String get helpRemindersHeading;
+
+  /// Help: why reminders can be late.
+  ///
+  /// In bn, this message translates to:
+  /// **'কিছু ফোন ব্যাটারি বাঁচাতে অ্যাপকে পেছনে ঘুম পাড়িয়ে রাখে, তাতে অনুস্মারক দেরিতে আসে বা আসেই না। এই দুটি জিনিস দেখে নিন:'**
+  String get helpRemindersIntro;
+
+  /// Help, reminders check 1. {app} is the app's name.
+  ///
+  /// In bn, this message translates to:
+  /// **'{app}-এর নোটিফিকেশন চালু আছে।'**
+  String helpRemindersStep1(String app);
+
+  /// Help, reminders check 2.
+  ///
+  /// In bn, this message translates to:
+  /// **'ব্যাটারি সেটিংসে {app} ‘সীমাবদ্ধ নয়’ (Unrestricted) রাখা আছে।'**
+  String helpRemindersStep2(String app);
+
+  /// Help: button that opens this app's notification settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'নোটিফিকেশন সেটিংস খুলুন'**
+  String get helpOpenNotifications;
+
+  /// Help: button that opens the battery optimisation settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'ব্যাটারি সেটিংস খুলুন'**
+  String get helpOpenBattery;
+
+  /// Help: steps for Xiaomi phones (notification restrictions, §22.2).
+  ///
+  /// In bn, this message translates to:
+  /// **'Xiaomi, Redmi ও POCO ফোনে'**
+  String get helpXiaomiHeading;
+
+  /// Help, Xiaomi step 1.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস › অ্যাপস › অ্যাপ ম্যানেজ করুন (Manage apps) › {app} খুলুন।'**
+  String helpXiaomiStep1(String app);
+
+  /// Help, Xiaomi step 2.
+  ///
+  /// In bn, this message translates to:
+  /// **'‘অটোস্টার্ট’ (Autostart) চালু করুন।'**
+  String get helpXiaomiStep2;
+
+  /// Help, Xiaomi step 3.
+  ///
+  /// In bn, this message translates to:
+  /// **'‘ব্যাটারি সেভার’ (Battery saver)-এ ‘কোনো বাধা নেই’ (No restrictions) বেছে নিন।'**
+  String get helpXiaomiStep3;
+
+  /// Help, Xiaomi step 4.
+  ///
+  /// In bn, this message translates to:
+  /// **'‘নোটিফিকেশন’-এ অনুমতি দিন, লক স্ক্রিনে দেখানোও চালু রাখুন।'**
+  String get helpXiaomiStep4;
+
+  /// Help: steps for Samsung phones (aggressive battery management, §22.2).
+  ///
+  /// In bn, this message translates to:
+  /// **'Samsung ফোনে'**
+  String get helpSamsungHeading;
+
+  /// Help, Samsung step 1.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস › অ্যাপস › {app} › ব্যাটারি খুলে ‘সীমাবদ্ধ নয়’ (Unrestricted) বেছে নিন।'**
+  String helpSamsungStep1(String app);
+
+  /// Help, Samsung step 2.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস › ব্যাটারি › ‘পটভূমিতে ব্যবহারের সীমা’ (Background usage limits) খুলুন; {app} যেন ঘুমন্ত বা গভীর ঘুমন্ত অ্যাপের তালিকায় না থাকে।'**
+  String helpSamsungStep2(String app);
+
+  /// Help, Samsung step 3.
+  ///
+  /// In bn, this message translates to:
+  /// **'চাইলে {app}-কে ‘কখনো ঘুমায় না’ (Never auto sleeping apps) তালিকায় যোগ করুন।'**
+  String helpSamsungStep3(String app);
+
+  /// Help: caveat under the steps.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংসের নাম ও পথ ফোন ও সংস্করণভেদে একটু আলাদা হতে পারে।'**
+  String get helpPathsVary;
+
+  /// Help: the system settings page could not be opened.
+  ///
+  /// In bn, this message translates to:
+  /// **'সেটিংস খোলা গেল না। ফোনের সেটিংস থেকে খুঁজে নিন।'**
+  String get helpOpenFailed;
+
+  /// Reminders screen: link to the Help section about phone settings.
+  ///
+  /// In bn, this message translates to:
+  /// **'অনুস্মারক ঠিক সময়ে আসছে না?'**
+  String get remindersHelpLink;
 }
 
 class _AppLocalizationsDelegate

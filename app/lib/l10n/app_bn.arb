@@ -1575,5 +1575,139 @@
   "reportQueued": "ইন্টারনেট পেলে পাঠানো হবে।",
   "@reportQueued": {
     "description": "Report queued offline (§11.17, US-07)."
+  },
+  "menuHelp": "সাহায্য",
+  "@menuHelp": {
+    "description": "More menu: help with the Bengali voice and reminders on some phones (T-613)."
+  },
+  "helpVoiceHeading": "বাংলায় পড়ে শোনানো",
+  "@helpVoiceHeading": {
+    "description": "Help: section about installing a Bengali text-to-speech voice (§13, localisation)."
+  },
+  "helpVoiceIntro": "অনেক ফোনে বাংলা কণ্ঠ আগে থেকে থাকে না, তখন TalkBack বাংলা লেখা ঠিকমতো পড়তে পারে না। Google-এর বাংলা কণ্ঠ একবার নামিয়ে নিলেই হবে।",
+  "@helpVoiceIntro": {
+    "description": "Help: why a Bengali voice is needed."
+  },
+  "helpVoiceStep1": "ফোনের সেটিংসে ‘টেক্সট-টু-স্পিচ’ (Text-to-speech) খুলুন, অথবা নিচের বোতাম টিপুন।",
+  "@helpVoiceStep1": {
+    "description": "Help, voice step 1. Android labels are given in English too, as many phones show them in English."
+  },
+  "helpVoiceStep2": "পছন্দের ইঞ্জিন হিসেবে ‘Speech Services by Google’ বেছে নিন।",
+  "@helpVoiceStep2": {
+    "description": "Help, voice step 2."
+  },
+  "helpVoiceStep3": "ইঞ্জিনের পাশের সেটিংস চিহ্ন টিপে ‘ভয়েস ডেটা ইনস্টল করুন’ (Install voice data) খুলুন।",
+  "@helpVoiceStep3": {
+    "description": "Help, voice step 3."
+  },
+  "helpVoiceStep4": "‘বাংলা (ভারত)’ বেছে নিয়ে কণ্ঠটি নামিয়ে নিন।",
+  "@helpVoiceStep4": {
+    "description": "Help, voice step 4."
+  },
+  "helpOpenTts": "টেক্সট-টু-স্পিচ সেটিংস খুলুন",
+  "@helpOpenTts": {
+    "description": "Help: button that opens the system text-to-speech settings."
+  },
+  "helpRemindersHeading": "অনুস্মারক ঠিক সময়ে না এলে",
+  "@helpRemindersHeading": {
+    "description": "Help: section about notification settings (PRD risk: OEM phones)."
+  },
+  "helpRemindersIntro": "কিছু ফোন ব্যাটারি বাঁচাতে অ্যাপকে পেছনে ঘুম পাড়িয়ে রাখে, তাতে অনুস্মারক দেরিতে আসে বা আসেই না। এই দুটি জিনিস দেখে নিন:",
+  "@helpRemindersIntro": {
+    "description": "Help: why reminders can be late."
+  },
+  "helpRemindersStep1": "{app}-এর নোটিফিকেশন চালু আছে।",
+  "@helpRemindersStep1": {
+    "description": "Help, reminders check 1. {app} is the app's name.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpRemindersStep2": "ব্যাটারি সেটিংসে {app} ‘সীমাবদ্ধ নয়’ (Unrestricted) রাখা আছে।",
+  "@helpRemindersStep2": {
+    "description": "Help, reminders check 2.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpOpenNotifications": "নোটিফিকেশন সেটিংস খুলুন",
+  "@helpOpenNotifications": {
+    "description": "Help: button that opens this app's notification settings."
+  },
+  "helpOpenBattery": "ব্যাটারি সেটিংস খুলুন",
+  "@helpOpenBattery": {
+    "description": "Help: button that opens the battery optimisation settings."
+  },
+  "helpXiaomiHeading": "Xiaomi, Redmi ও POCO ফোনে",
+  "@helpXiaomiHeading": {
+    "description": "Help: steps for Xiaomi phones (notification restrictions, §22.2)."
+  },
+  "helpXiaomiStep1": "সেটিংস › অ্যাপস › অ্যাপ ম্যানেজ করুন (Manage apps) › {app} খুলুন।",
+  "@helpXiaomiStep1": {
+    "description": "Help, Xiaomi step 1.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpXiaomiStep2": "‘অটোস্টার্ট’ (Autostart) চালু করুন।",
+  "@helpXiaomiStep2": {
+    "description": "Help, Xiaomi step 2."
+  },
+  "helpXiaomiStep3": "‘ব্যাটারি সেভার’ (Battery saver)-এ ‘কোনো বাধা নেই’ (No restrictions) বেছে নিন।",
+  "@helpXiaomiStep3": {
+    "description": "Help, Xiaomi step 3."
+  },
+  "helpXiaomiStep4": "‘নোটিফিকেশন’-এ অনুমতি দিন, লক স্ক্রিনে দেখানোও চালু রাখুন।",
+  "@helpXiaomiStep4": {
+    "description": "Help, Xiaomi step 4."
+  },
+  "helpSamsungHeading": "Samsung ফোনে",
+  "@helpSamsungHeading": {
+    "description": "Help: steps for Samsung phones (aggressive battery management, §22.2)."
+  },
+  "helpSamsungStep1": "সেটিংস › অ্যাপস › {app} › ব্যাটারি খুলে ‘সীমাবদ্ধ নয়’ (Unrestricted) বেছে নিন।",
+  "@helpSamsungStep1": {
+    "description": "Help, Samsung step 1.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSamsungStep2": "সেটিংস › ব্যাটারি › ‘পটভূমিতে ব্যবহারের সীমা’ (Background usage limits) খুলুন; {app} যেন ঘুমন্ত বা গভীর ঘুমন্ত অ্যাপের তালিকায় না থাকে।",
+  "@helpSamsungStep2": {
+    "description": "Help, Samsung step 2.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSamsungStep3": "চাইলে {app}-কে ‘কখনো ঘুমায় না’ (Never auto sleeping apps) তালিকায় যোগ করুন।",
+  "@helpSamsungStep3": {
+    "description": "Help, Samsung step 3.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpPathsVary": "সেটিংসের নাম ও পথ ফোন ও সংস্করণভেদে একটু আলাদা হতে পারে।",
+  "@helpPathsVary": {
+    "description": "Help: caveat under the steps."
+  },
+  "helpOpenFailed": "সেটিংস খোলা গেল না। ফোনের সেটিংস থেকে খুঁজে নিন।",
+  "@helpOpenFailed": {
+    "description": "Help: the system settings page could not be opened."
+  },
+  "remindersHelpLink": "অনুস্মারক ঠিক সময়ে আসছে না?",
+  "@remindersHelpLink": {
+    "description": "Reminders screen: link to the Help section about phone settings."
   }
 }
