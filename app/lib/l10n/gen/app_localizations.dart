@@ -514,6 +514,24 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'{coordinates} · তথ্য: {packs} · {status}'**
   String footerDetail(String coordinates, String packs, String status);
+
+  /// Today: section with the next festivals.
+  ///
+  /// In bn, this message translates to:
+  /// **'আসছে'**
+  String get sectionUpcoming;
+
+  /// Today: section with today's festivals.
+  ///
+  /// In bn, this message translates to:
+  /// **'আজ'**
+  String get sectionToday;
+
+  /// Screen-reader hint on the tithi seal: opens Day detail.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের পুরো পঞ্জিকা দেখুন'**
+  String get openDay;
 }
 
 class _AppLocalizationsDelegate

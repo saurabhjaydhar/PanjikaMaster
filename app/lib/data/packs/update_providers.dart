@@ -66,6 +66,9 @@ class UpdateController extends Notifier<UpdateResult?> {
   /// Background check on app open: silent downloads only (spec §18).
   Future<void> checkInBackground() => _run(force: false, confirmed: false);
 
+  /// Pull-to-refresh: check now, still asking before large downloads (spec §11.2).
+  Future<void> refresh() => _run(force: true, confirmed: false);
+
   /// The user tapped Download or Update: fetch now, large packs included.
   Future<void> downloadNow() => _run(force: true, confirmed: true);
 

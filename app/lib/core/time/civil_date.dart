@@ -35,6 +35,13 @@ class CivilDate implements Comparable<CivilDate> {
     return CivilDate(d.year, d.month, d.day);
   }
 
+  /// Whole days from [other] to this date (positive if this is later).
+  int difference(CivilDate other) => DateTime.utc(
+    year,
+    month,
+    day,
+  ).difference(DateTime.utc(other.year, other.month, other.day)).inDays;
+
   String toIso() =>
       '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-'
       '${day.toString().padLeft(2, '0')}';

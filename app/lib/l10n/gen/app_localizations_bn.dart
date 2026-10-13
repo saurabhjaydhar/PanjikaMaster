@@ -269,4 +269,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String footerDetail(String coordinates, String packs, String status) {
     return '$coordinates · তথ্য: $packs · $status';
   }
+
+  @override
+  String get sectionUpcoming => 'আসছে';
+
+  @override
+  String get sectionToday => 'আজ';
+
+  @override
+  String get openDay => 'দিনের পুরো পঞ্জিকা দেখুন';
 }

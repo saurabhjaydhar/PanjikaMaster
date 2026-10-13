@@ -1,14 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/theme/app_theme.dart';
+import '../../app/router.dart';
 import '../../app/theme/tokens.dart';
 import '../../app/widgets/date_header.dart';
+import '../../app/widgets/observance_widgets.dart';
 import '../../app/widgets/panjika_widgets.dart';
+import '../../app/widgets/period_row.dart';
 import '../../app/widgets/system_states.dart';
 import '../../app/widgets/tithi_seal.dart';
 import '../../app/widgets/update_banners.dart';
 import '../../core/l10n/l10n_providers.dart';
+import '../../core/time/civil_date.dart';
 import '../../core/time/clock.dart';
 import '../../data/packs/pack_updater.dart';
 import '../../data/packs/update_providers.dart';
@@ -103,6 +110,7 @@ class _TodayContent extends ConsumerWidget {
     final f = ref.watch(formatterProvider);
     final now = ref.watch(nowProvider);
     final names = ref.watch(namesProvider).value;
+    final upcoming = ref.watch(upcomingProvider).value?.items ?? const [];
 
     /// "দুপুর ২:৩২ পর্যন্ত", with "(পরদিন)" when it ends after midnight (spec §12.4).
     String until(DateTime end) {
@@ -137,8 +145,13 @@ class _TodayContent extends ConsumerWidget {
     return Stack(
       children: [
         RefreshIndicator(
-          // Pull-to-refresh only re-reads local data (spec §11.2).
-          onRefresh: () => ref.refresh(todayProvider.future),
+          // Pull-to-refresh re-reads local data and checks for new packs (§11.2).
+          onRefresh: () async {
+            ref.invalidate(upcomingProvider);
+            unawaited(ref.read(updateControllerProvider.notifier).refresh());
+            ref.invalidate(todayProvider);
+            await ref.read(todayProvider.future);
+          },
           child: ListView(
             padding: EdgeInsets.all(
               screenMargin(MediaQuery.sizeOf(context).width),
@@ -167,6 +180,8 @@ class _TodayContent extends ConsumerWidget {
                 progress: tithi.progressAt(now),
                 notes: notes,
                 animateFill: animateFill,
+                onTap: () => context.push(Routes.day(d.date)),
+                tapHint: l.openDay,
               ),
               const SizedBox(height: Space.s),
 
@@ -211,6 +226,57 @@ class _TodayContent extends ConsumerWidget {
                   ),
                 ],
               ),
+
+              // Today's periods, the running one tagged (FR-HOME-07)
+              if (names != null)
+                for (final (title, kind) in [
+                  (l.periodAshubh, PeriodKind.ashubh),
+                  (l.periodShubh, PeriodKind.shubh),
+                ])
+                  if (d.periods.any((p) => p.kind == kind)) ...[
+                    const SizedBox(height: Space.xl),
+                    SectionHeader(title: title),
+                    for (final p in d.periods)
+                      if (p.kind == kind)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: Space.xs),
+                          child: PeriodRow(
+                            name: names.of('period', p.periodId),
+                            kind: p.kind,
+                            start: p.startUtc,
+                            end: p.endUtc,
+                            active: identical(p, d.activePeriod(now)),
+                          ),
+                        ),
+                  ],
+
+              // Today's observances (FR-HOME-05)
+              if (d.observances.isNotEmpty) ...[
+                const SizedBox(height: Space.xl),
+                SectionHeader(title: l.sectionToday),
+                Wrap(
+                  spacing: Space.s,
+                  runSpacing: Space.s,
+                  children: [
+                    for (final o in d.observances)
+                      ObservanceChip(observance: o),
+                  ],
+                ),
+              ],
+
+              // The next three (FR-HOME-06)
+              if (upcoming.isNotEmpty) ...[
+                const SizedBox(height: Space.xl),
+                SectionHeader(title: l.sectionUpcoming),
+                for (final o in upcoming)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: Space.s),
+                    child: FestivalCard(
+                      observance: o,
+                      daysLeft: o.date.difference(CivilDate.ofInstant(now)),
+                    ),
+                  ),
+              ],
 
               ProvenanceFooter(provenance: d.provenance),
             ],

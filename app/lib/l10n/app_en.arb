@@ -67,5 +67,8 @@
   "previousDay": "Previous day",
   "nextDay": "Next day",
   "coordinates": "{lat}° N, {lon}° E",
-  "footerDetail": "{coordinates} · data: {packs} · {status}"
+  "footerDetail": "{coordinates} · data: {packs} · {status}",
+  "sectionUpcoming": "Coming up",
+  "sectionToday": "Today",
+  "openDay": "Open the full day"
 }

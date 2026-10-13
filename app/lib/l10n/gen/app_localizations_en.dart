@@ -271,4 +271,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String footerDetail(String coordinates, String packs, String status) {
     return '$coordinates · data: $packs · $status';
   }
+
+  @override
+  String get sectionUpcoming => 'Coming up';
+
+  @override
+  String get sectionToday => 'Today';
+
+  @override
+  String get openDay => 'Open the full day';
 }
