@@ -26,6 +26,8 @@ flutter test --update-goldens   # only when a visual change is intended
 flutter test integration_test
 ```
 
+Determinism (T-218): goldens load the bundled subset fonts and the icon font of the pinned Flutter SDK (`test/helpers/fonts.dart`), and every golden test fixes the view size, pixel ratio and text scale, so images are identical on every Linux run; CI uploads the diff images when one fails. Generate goldens on Linux with the CI's Flutter version. Python property tests use Hypothesis profiles: `dev` (50 examples, random) locally and `ci` (500 examples, derandomised, no deadline) in ci-data via `HYPOTHESIS_PROFILE=ci`.
+
 ### 22.2 Manual
 
 - Compare 60 random days on device vs printed panjika (two testers, independently).
