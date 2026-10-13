@@ -17,11 +17,13 @@ import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
 import 'package:panjika/features/city/city_picker_screen.dart';
+import 'package:panjika/features/glossary/glossary_screen.dart';
 import 'package:panjika/features/more/about_screen.dart';
 import 'package:panjika/features/more/app_version.dart';
 import 'package:panjika/features/more/coming_soon_screen.dart';
 import 'package:panjika/features/more/more_screen.dart';
 import 'package:panjika/features/reminders/reminders_screen.dart';
+import 'package:panjika/features/search/search_screen.dart';
 import 'package:panjika/features/settings/settings_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
@@ -89,9 +91,9 @@ void main() {
     await open(tester, language: 'en');
     final destinations = <String, Type>{
       'Reminders': RemindersScreen,
-      'Search': ComingSoonScreen,
+      'Search': SearchScreen,
       'City': CityPickerScreen,
-      'Glossary': ComingSoonScreen,
+      'Glossary': GlossaryScreen,
       'Settings': SettingsScreen,
       'Sources & verification': ComingSoonScreen,
       'Report an error': ComingSoonScreen,

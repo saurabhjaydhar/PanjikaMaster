@@ -225,5 +225,15 @@
   "shareDayMessage": "{date} · {tithi}",
   "shareAction": "Share",
   "shareSheetTitle": "Share card",
-  "shareInBoth": "Both"
+  "shareInBoth": "Both",
+  "sectionTerms": "Panjika terms",
+  "sectionPeriods": "Periods of the day",
+  "glossarySearchHint": "Search terms",
+  "noGlossaryMatches": "No term matches that",
+  "searchHint": "A date or festival name",
+  "searchExamples": "For example: 25 Ashwin 1433 · 12/10/2026 · Kali Puja",
+  "searchResults": "Results",
+  "searchDateEquals": "{bengali} = {gregorian}",
+  "searchDateNotInstalled": "{date}: this date isn't in the data on this phone",
+  "searchNoResults": "Nothing found. Check the spelling or the date format."
 }

@@ -96,6 +96,23 @@ class DriftPanjikaRepository implements PanjikaSource, CatalogSource {
     return {for (final r in rows) CivilDate.parse(r.date): _bengali(r)};
   }
 
+  /// Every installed date with this Bengali day and month, in date order (search).
+  Future<Map<CivilDate, BengaliDate>> bengaliDatesOf(
+    String tradition,
+    int monthIdx,
+    int day,
+  ) async => {
+    for (final r in await _db.bengaliDatesOf(tradition, monthIdx, day).get())
+      CivilDate.parse(r.date): _bengali(r),
+  };
+
+  /// The first day of every installed observance date, in date order (search index).
+  Future<List<ObservanceDate>> observanceStarts(String tradition) async => [
+    for (final ObservanceStartsResult(:o, :d)
+        in await _db.observanceStarts(tradition).get())
+      _observanceDate(o, d),
+  ];
+
   @override
   Future<List<CivilDate>> bengaliMonthDates(
     String tradition,

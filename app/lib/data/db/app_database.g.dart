@@ -7090,6 +7090,35 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ).asyncMap(this.observanceWindows.mapFromRow);
   }
 
+  Selectable<ObservanceStartsResult> observanceStarts(String tradition) {
+    return customSelect(
+      'SELECT"o"."id" AS "nested_0.id", "o"."name_bn" AS "nested_0.name_bn", "o"."name_en" AS "nested_0.name_en", "o"."category" AS "nested_0.category", "o"."tier" AS "nested_0.tier", "o"."description_bn" AS "nested_0.description_bn", "o"."description_en" AS "nested_0.description_en", "o"."pack_id" AS "nested_0.pack_id","d"."observance_id" AS "nested_1.observance_id", "d"."tradition" AS "nested_1.tradition", "d"."date" AS "nested_1.date", "d"."day_index" AS "nested_1.day_index", "d"."status" AS "nested_1.status", "d"."reviewed_by" AS "nested_1.reviewed_by", "d"."reviewed_on" AS "nested_1.reviewed_on", "d"."note_bn" AS "nested_1.note_bn", "d"."note_en" AS "nested_1.note_en", "d"."pack_id" AS "nested_1.pack_id" FROM observance_dates AS d JOIN observances AS o ON o.id = d.observance_id WHERE d.tradition = ?1 AND d.day_index = 0 ORDER BY d.date',
+      variables: [Variable<String>(tradition)],
+      readsFrom: {this.observanceDates, this.observances},
+    ).asyncMap(
+      (QueryRow row) async => ObservanceStartsResult(
+        o: await this.observances.mapFromRow(row, tablePrefix: 'nested_0'),
+        d: await this.observanceDates.mapFromRow(row, tablePrefix: 'nested_1'),
+      ),
+    );
+  }
+
+  Selectable<BengaliDateRow> bengaliDatesOf(
+    String tradition,
+    int monthIdx,
+    int day,
+  ) {
+    return customSelect(
+      'SELECT * FROM bengali_dates WHERE tradition = ?1 AND bn_month_idx = ?2 AND bn_day = ?3 ORDER BY date',
+      variables: [
+        Variable<String>(tradition),
+        Variable<int>(monthIdx),
+        Variable<int>(day),
+      ],
+      readsFrom: {this.bengaliDates},
+    ).asyncMap(this.bengaliDates.mapFromRow);
+  }
+
   Selectable<ObservanceRow> observanceById(String id) {
     return customSelect(
       'SELECT * FROM observances WHERE id = ?1',
@@ -13158,4 +13187,10 @@ class ObservanceDatesOfResult {
   final ObservanceRow o;
   final ObservanceDateRow d;
   ObservanceDatesOfResult({required this.o, required this.d});
+}
+
+class ObservanceStartsResult {
+  final ObservanceRow o;
+  final ObservanceDateRow d;
+  ObservanceStartsResult({required this.o, required this.d});
 }

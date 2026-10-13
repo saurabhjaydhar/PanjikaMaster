@@ -1,6 +1,7 @@
 /// Search normalisation (spec §13.6): case-, diacritic-, space- and hyphen-insensitive,
-/// Bengali and Latin digits alike, and the composed and decomposed forms of য়, ড়, ঢ়
-/// treated as one. Compare keys with [String.contains].
+/// Bengali and Latin digits alike, the composed and decomposed forms of য়, ড়, ঢ়
+/// treated as one, and common spelling variants folded together. Compare keys with
+/// [String.contains].
 String searchKey(String text) {
   final out = StringBuffer();
   for (final rune in text.toLowerCase().runes) {
@@ -8,8 +9,25 @@ String searchKey(String text) {
     if (_skip.contains(ch)) continue;
     out.write(_fold[ch] ?? ch);
   }
-  return out.toString();
+  var key = out.toString();
+  for (final (from, to) in _spellings) {
+    key = key.replaceAll(from, to);
+  }
+  return key;
 }
+
+/// Common spelling variants, folded the same way on both sides of a match (spec
+/// §13.6): লক্ষ্মী / লক্ষী, Lakshmi / Laxmi, Vishwakarma / Bishwakarma, Phalgun / Falgun,
+/// doubled vowels in romanisations.
+const _spellings = [
+  ('ক্ষ্ম', 'ক্ষ'),
+  ('ksh', 'x'),
+  ('ph', 'f'),
+  ('v', 'b'),
+  ('aa', 'a'),
+  ('ee', 'i'),
+  ('oo', 'u'),
+];
 
 /// Spaces, hyphens, punctuation and joiners that never matter for a match.
 const _skip = {' ', '-', '‐', '–', '.', ',', "'", '’', '‌', '‍'};

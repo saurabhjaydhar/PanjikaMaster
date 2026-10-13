@@ -1285,5 +1285,58 @@
   "shareInBoth": "দুই ভাষায়",
   "@shareInBoth": {
     "description": "Share language option: Bengali and English together; shown with the other language's word beside it."
+  },
+  "sectionTerms": "পঞ্জিকার শব্দ",
+  "@sectionTerms": {
+    "description": "Glossary section: panchanga terms (FR-SET-07)."
+  },
+  "sectionPeriods": "দিনের নানা সময়",
+  "@sectionPeriods": {
+    "description": "Glossary section: Rahu Kaal, Barabela etc."
+  },
+  "glossarySearchHint": "শব্দ খুঁজুন",
+  "@glossarySearchHint": {
+    "description": "Glossary search field hint."
+  },
+  "noGlossaryMatches": "এই নামে কোনো শব্দ পাওয়া যায়নি",
+  "@noGlossaryMatches": {
+    "description": "Glossary search with no results."
+  },
+  "searchHint": "তারিখ বা উৎসবের নাম",
+  "@searchHint": {
+    "description": "Search field hint (spec §11.14)."
+  },
+  "searchExamples": "উদাহরণ: ২৫ আশ্বিন ১৪৩৩ · ১২/১০/২০২৬ · কালীপূজা",
+  "@searchExamples": {
+    "description": "Search examples line: kinds of input, not data (spec §11.14)."
+  },
+  "searchResults": "ফলাফল",
+  "@searchResults": {
+    "description": "Search results section header."
+  },
+  "searchDateEquals": "{bengali} = {gregorian}",
+  "@searchDateEquals": {
+    "description": "A date result: the Bengali date and the Gregorian date it is.",
+    "placeholders": {
+      "bengali": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      }
+    }
+  },
+  "searchDateNotInstalled": "{date}: এই তারিখের তথ্য এই ফোনে নেই",
+  "@searchDateNotInstalled": {
+    "description": "A date result outside the installed packs (spec §11.9); no conversion is shown.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResults": "কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।",
+  "@searchNoResults": {
+    "description": "Search with no results (spec §11.14)."
   }
 }

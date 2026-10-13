@@ -1471,6 +1471,66 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'দুই ভাষায়'**
   String get shareInBoth;
+
+  /// Glossary section: panchanga terms (FR-SET-07).
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার শব্দ'**
+  String get sectionTerms;
+
+  /// Glossary section: Rahu Kaal, Barabela etc.
+  ///
+  /// In bn, this message translates to:
+  /// **'দিনের নানা সময়'**
+  String get sectionPeriods;
+
+  /// Glossary search field hint.
+  ///
+  /// In bn, this message translates to:
+  /// **'শব্দ খুঁজুন'**
+  String get glossarySearchHint;
+
+  /// Glossary search with no results.
+  ///
+  /// In bn, this message translates to:
+  /// **'এই নামে কোনো শব্দ পাওয়া যায়নি'**
+  String get noGlossaryMatches;
+
+  /// Search field hint (spec §11.14).
+  ///
+  /// In bn, this message translates to:
+  /// **'তারিখ বা উৎসবের নাম'**
+  String get searchHint;
+
+  /// Search examples line: kinds of input, not data (spec §11.14).
+  ///
+  /// In bn, this message translates to:
+  /// **'উদাহরণ: ২৫ আশ্বিন ১৪৩৩ · ১২/১০/২০২৬ · কালীপূজা'**
+  String get searchExamples;
+
+  /// Search results section header.
+  ///
+  /// In bn, this message translates to:
+  /// **'ফলাফল'**
+  String get searchResults;
+
+  /// A date result: the Bengali date and the Gregorian date it is.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bengali} = {gregorian}'**
+  String searchDateEquals(String bengali, String gregorian);
+
+  /// A date result outside the installed packs (spec §11.9); no conversion is shown.
+  ///
+  /// In bn, this message translates to:
+  /// **'{date}: এই তারিখের তথ্য এই ফোনে নেই'**
+  String searchDateNotInstalled(String date);
+
+  /// Search with no results (spec §11.14).
+  ///
+  /// In bn, this message translates to:
+  /// **'কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।'**
+  String get searchNoResults;
 }
 
 class _AppLocalizationsDelegate

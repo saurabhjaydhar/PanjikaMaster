@@ -15,7 +15,7 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-604 | Error-report queue: works offline, sends when online | US-07 |
-| T-605 | Search: normaliser (both scripts, both numeral systems, transliteration, spelling variants, dd/mm/yyyy) and index | FR-SRCH-01, FR-L10N-07, §13.6 cases |
+| T-605 ✅ | Search: normaliser (both scripts, both numeral systems, transliteration, spelling variants, dd/mm/yyyy) and index | FR-SRCH-01, FR-L10N-07, §13.6 cases |
 | T-606 | Bengal periods computed from `period_rules`, behind a flag until validated | Flag off in release until T-602 passes |
 | T-607 | Crash reporting (Sentry or Crashlytics, chosen and disclosed) and analytics per Q8 | Events per §21 in debug; nothing with identifiers unless decided |
 | T-608 | Performance: cold start < 1.5 s, app size < 30 MB, font subsetting, R8 rules incl. Drift | §3.3 measured on the low-end phone |
@@ -25,8 +25,8 @@
 |---|---|---|
 | T-609 | Sources & verification screen + "why do the two schools differ?" explainer | FR-SET-02 |
 | T-610 | Report-an-error form, pre-filled, no personal data | FR-SET-03 |
-| T-611 | Search screen with examples, results, empty state | §11.14 |
-| T-612 | Glossary screen and long-press term sheets | FR-SET-07, FR-L10N-05 |
+| T-611 ✅ | Search screen with examples, results, empty state | §11.14 |
+| T-612 ✅ | Glossary screen and long-press term sheets | FR-SET-07, FR-L10N-05 |
 | T-613 | Help: install Bengali TTS voice; OEM notification settings guides (Xiaomi, Samsung) | Both languages |
 | T-614 | "সংশোধিত / Corrected" label on changed observances; Bengal periods UI | Goldens |
 
