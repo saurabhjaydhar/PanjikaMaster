@@ -8,7 +8,7 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-301 🟡 | `bengali.py`: Bengal midnight rule as a pure function (Q4 behind config); lunar months incl. মলমাস (Q2) | Edge tests ±1 s around midnight and before sunrise; full-year match vs `reference/bengali_dates.csv` — *rule, dates and lunar months done; the match waits for the reference file (columns `date,bn_day,bn_month_idx,bn_year`)* |
-| T-302 | Validation harness → HTML diff report in `validate/reports/` (§6.7) | Every mismatch listed with tolerance; CI fails beyond tolerance |
+| T-302 ✅ | Validation harness → HTML diff report in `validate/reports/` (§6.7) | Every mismatch listed with tolerance; CI fails beyond tolerance |
 | T-303 | Pack builder: global, cities and observances packs; SQLite + gzip + Ed25519 (key from env) + `manifest.json`; refuses rows missing either language (FR-L10N-09) | App-side test imports the produced pack |
 | T-304 | Hosting: HTTPS static site on the VPS behind a CDN serving `/v1/manifest.json` and `/v1/packs/*`; staging and production paths; cache headers (manifest short, packs immutable) | `curl` of staging manifest returns the built manifest; pack SHA-256 matches |
 | T-305 | Publish script (pipeline → staging → production), never overwriting a published pack version | Dry run and staging publish work; production needs a manual confirm |

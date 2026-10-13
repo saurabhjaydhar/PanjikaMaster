@@ -224,7 +224,7 @@ Tier list for MVP:
 | Tier-2 dates | Printed panjika | All | Exact | Yes (or hidden) |
 | Bengal periods | Printed panjika | 30 days | Exact window | Feature-flagged until pass |
 
-Every validation run produces an HTML diff report kept in `validate/reports/`. A mismatch is never "fixed" by editing output data; it is fixed by changing a rule, a config value or an override with a written reason.
+Every validation run produces an HTML diff report kept in `validate/reports/`. The harness is `python -m validate --pack <pack>`; reference file formats are documented in `data/validate/checks.py`. A mismatch is never "fixed" by editing output data; it is fixed by changing a rule, a config value or an override with a written reason.
 ### 6.8 Verification status model (shown to users)
 
 | Status | Bengali label | English label | Meaning | Shown how |
