@@ -24,8 +24,31 @@ class ReminderService {
   ReminderService(this._ref);
 
   final Ref _ref;
+  Future<void>? _running;
+  bool _again = false;
 
-  Future<void> reschedule() async {
+  /// One reschedule at a time; calls that arrive meanwhile are folded into one more
+  /// run, so the last state always wins.
+  Future<void> reschedule() {
+    if (_running != null) {
+      _again = true;
+      return _running!;
+    }
+    return _running = _loop();
+  }
+
+  Future<void> _loop() async {
+    try {
+      do {
+        _again = false;
+        await _once();
+      } while (_again);
+    } finally {
+      _running = null;
+    }
+  }
+
+  Future<void> _once() async {
     try {
       final config = _ref.read(reminderConfigProvider);
       final language = _ref.read(appLanguageProvider);
