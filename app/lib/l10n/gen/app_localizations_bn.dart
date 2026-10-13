@@ -215,4 +215,27 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get actionUpdate => 'হালনাগাদ করুন';
+
+  @override
+  String sizeMegabytes(String size) {
+    return '$size এমবি';
+  }
+
+  @override
+  String downloadPrompt(String size) {
+    return 'নতুন তথ্য পাওয়া যাচ্ছে ($size)। এখন ডাউনলোড করবেন?';
+  }
+
+  @override
+  String get actionLater => 'পরে';
+
+  @override
+  String get noticeDismiss => 'বুঝেছি';
+
+  @override
+  String get updateFailed =>
+      'তথ্য ডাউনলোড করা যায়নি। পরে আবার চেষ্টা করা হবে।';
+
+  @override
+  String get appUpdateRequired => 'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।';
 }

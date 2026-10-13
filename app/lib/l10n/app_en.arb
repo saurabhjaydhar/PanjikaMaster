@@ -52,5 +52,11 @@
   "stateUnverified": "This date hasn't been checked against the panjika yet.",
   "stateCheckClock": "Please check your phone's date",
   "actionDownload": "Download",
-  "actionUpdate": "Update"
+  "actionUpdate": "Update",
+  "sizeMegabytes": "{size} MB",
+  "downloadPrompt": "New data is available ({size}). Download now?",
+  "actionLater": "Later",
+  "noticeDismiss": "Got it",
+  "updateFailed": "Couldn't download the data. We'll try again later.",
+  "appUpdateRequired": "Update the app to get new data."
 }

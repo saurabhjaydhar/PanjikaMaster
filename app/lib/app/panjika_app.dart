@@ -5,6 +5,7 @@ import '../core/l10n/app_language.dart';
 import '../core/l10n/l10n_providers.dart';
 import '../core/settings/settings.dart';
 import '../core/time/clock.dart';
+import '../data/packs/update_providers.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
@@ -24,6 +25,12 @@ class _PanjikaAppState extends ConsumerState<PanjikaApp>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     ref.read(appLanguageProvider.notifier).syncFromSystem();
+    // Background pack check on open (spec §18); a no-op without a pack server.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        ref.read(updateControllerProvider.notifier).checkInBackground();
+      }
+    });
   }
 
   @override

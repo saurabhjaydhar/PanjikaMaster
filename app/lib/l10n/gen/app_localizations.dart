@@ -424,6 +424,42 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'হালনাগাদ করুন'**
   String get actionUpdate;
+
+  /// A download size; size is formatted with the user's numerals, e.g. ৩.১.
+  ///
+  /// In bn, this message translates to:
+  /// **'{size} এমবি'**
+  String sizeMegabytes(String size);
+
+  /// Asked before downloading a pack of 2 MB or more (spec §18).
+  ///
+  /// In bn, this message translates to:
+  /// **'নতুন তথ্য পাওয়া যাচ্ছে ({size})। এখন ডাউনলোড করবেন?'**
+  String downloadPrompt(String size);
+
+  /// Button: decide later.
+  ///
+  /// In bn, this message translates to:
+  /// **'পরে'**
+  String get actionLater;
+
+  /// Button that hides a notice from the server.
+  ///
+  /// In bn, this message translates to:
+  /// **'বুঝেছি'**
+  String get noticeDismiss;
+
+  /// Shown when a pack download or import fails.
+  ///
+  /// In bn, this message translates to:
+  /// **'তথ্য ডাউনলোড করা যায়নি। পরে আবার চেষ্টা করা হবে।'**
+  String get updateFailed;
+
+  /// The data server needs a newer app version (min_app_version).
+  ///
+  /// In bn, this message translates to:
+  /// **'নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।'**
+  String get appUpdateRequired;
 }
 
 class _AppLocalizationsDelegate

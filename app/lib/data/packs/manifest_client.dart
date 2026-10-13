@@ -64,6 +64,7 @@ class ManifestClient {
     required this.settings,
     required this.now,
     required this.appVersion,
+    this.silentLimit = silentDownloadLimit,
   });
 
   final http.Client client;
@@ -71,6 +72,9 @@ class ManifestClient {
   final SettingsSource settings;
   final DateTime Function() now;
   final String appVersion;
+
+  /// Packs below this many bytes download without asking.
+  final int silentLimit;
 
   /// The last manifest fetched, kept for offline use (offers, notices, coverage).
   Manifest? cached() {
@@ -123,7 +127,14 @@ class ManifestClient {
     final today = CivilDate.ofInstant(t);
     return ManifestChecked(
       manifest,
-      offersFor(manifest, installed, tradition, cityPackId, today),
+      offersFor(
+        manifest,
+        installed,
+        tradition,
+        cityPackId,
+        today,
+        silentLimit: silentLimit,
+      ),
       [
         for (final n in manifest.notices)
           if (n.until == null || n.until!.compareTo(today) >= 0) n,
@@ -139,8 +150,9 @@ List<PackOffer> offersFor(
   List<PackRange> installed,
   String tradition,
   String? cityPackId,
-  CivilDate today,
-) {
+  CivilDate today, {
+  int silentLimit = silentDownloadLimit,
+}) {
   final out = <PackOffer>[];
   for (final e in manifest.packs) {
     final relevant = e.kind == 'cities'
@@ -148,7 +160,7 @@ List<PackOffer> offersFor(
         : e.tradition == tradition;
     if (!relevant) continue;
     final mine = installed.where((p) => p.id == e.id);
-    final action = e.size < silentDownloadLimit
+    final action = e.size < silentLimit
         ? OfferAction.downloadSilently
         : OfferAction.ask;
     if (mine.isNotEmpty) {

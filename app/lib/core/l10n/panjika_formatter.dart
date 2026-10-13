@@ -197,6 +197,10 @@ class PanjikaFormatter {
 
   /// Count as shown inside the `countdownDays` message.
   String countText(int count) => number(count);
+
+  /// Megabytes with one decimal, for the `sizeMegabytes` message: "৩.১" / "3.1".
+  String megabytes(int bytes) =>
+      digits((bytes / (1024 * 1024)).toStringAsFixed(1));
 }
 
 /// The traditional suffix for a Bengali day of month: ১লা, ২রা, ৩রা, ৪ঠা, ৫ই–১৮ই, ১৯শে–৩২শে.
