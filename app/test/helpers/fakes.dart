@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:panjika/core/l10n/app_locale_channel.dart';
 import 'package:panjika/data/notifications/notification_permission.dart';
 import 'package:panjika/data/notifications/notification_scheduler.dart';
 import 'package:panjika/domain/location/location.dart';
 import 'package:panjika/domain/reminders/plan_reminders.dart';
+import 'package:panjika/features/share/share_render.dart';
 
 /// Stands in for the Android per-app language channel in widget tests: a real platform
 /// call never completes inside the test's fake clock.
@@ -89,4 +92,16 @@ class FakeNotificationPermission implements NotificationPermission {
 
   @override
   Future<void> openSettings() async => settingsOpened++;
+}
+
+/// Records what would be shared.
+class FakeSharer implements Sharer {
+  final shared = <({Uint8List png, String text, String fileName})>[];
+
+  @override
+  Future<void> shareImage(
+    Uint8List png, {
+    required String text,
+    required String fileName,
+  }) async => shared.add((png: png, text: text, fileName: fileName));
 }

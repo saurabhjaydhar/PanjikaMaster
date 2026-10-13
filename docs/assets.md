@@ -8,5 +8,6 @@ Source and licence of every font, icon, image and illustration (PRD §19.1 L6, L
 | Noto Sans Bengali 3.011 | Google (Noto), via github.com/google/fonts `ofl/notosansbengali` | SIL OFL 1.1 | Bengali body/label/caption | Static 400/500/600 instances of the variable font, subset (~120 KB each) |
 | Noto Sans 2.015 | Google (Noto), via github.com/google/fonts `ofl/notosans` | SIL OFL 1.1 | English body/label/caption | Static 400/500/600 instances, subset (~82 KB each). Fonts total 788 KB of the 1.5 MB budget |
 | Data notice (`app/assets/legal/DATA-NOTICE.txt`) | Written for this project | Project text | Licences page | Credits the computation sources (Skyfield, NASA JPL DE440s) in Bengali and English; the ephemeris file itself is not shipped (§19.1 L2) |
+| Alpona-inspired share-card motif (`app/lib/features/share/alpona_motif.dart`) | Drawn in code by us (`CustomPainter`: centre dot, eight petals, a ring of dots, a scalloped edge) | Project code | Share cards (§11.8) | No religious imagery (§19.1 L23); colours from theme tokens |
 | Material Symbols Rounded | Google | Apache-2.0 | UI icons | Planned (PRD §12.9) |
 | Launcher icons (`app/android/app/src/main/res/mipmap-*`) | Flutter project template | BSD-3-Clause (Flutter) | Android launcher | **Placeholder** until the real icon (T-216) |

@@ -12,6 +12,11 @@ import '../../core/l10n/app_language.dart';
 /// Share cards are 1080 × 1350 px (spec §11.8), whatever the screen or text size.
 const shareCardSize = Size(1080, 1350);
 
+/// Cards are laid out on a 360 × 450 canvas and rendered at 3×, so they use the
+/// theme's own text styles and spacing tokens, as a 360 dp phone screen does.
+const shareCardPixelRatio = 3.0;
+final shareCardCanvas = shareCardSize / shareCardPixelRatio;
+
 /// Which language a share card and its message use (spec §11.8): Bengali, English,
 /// or both (the Bengali name as the hero with the English below).
 enum ShareLanguage {
@@ -53,7 +58,7 @@ class ShareCardFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MediaQuery(
     data: MediaQuery.of(context).copyWith(
-      size: shareCardSize,
+      size: shareCardCanvas,
       textScaler: TextScaler.noScaling,
       disableAnimations: true,
     ),
@@ -65,7 +70,7 @@ class ShareCardFrame extends StatelessWidget {
         child: RepaintBoundary(
           key: boundaryKey,
           child: SizedBox.fromSize(
-            size: shareCardSize,
+            size: shareCardCanvas,
             child: Material(child: child),
           ),
         ),
@@ -78,7 +83,7 @@ class ShareCardFrame extends StatelessWidget {
 Future<Uint8List> renderSharePng(GlobalKey boundaryKey) async {
   final boundary =
       boundaryKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-  final image = await boundary.toImage();
+  final image = await boundary.toImage(pixelRatio: shareCardPixelRatio);
   try {
     final data = await image.toByteData(format: ui.ImageByteFormat.png);
     return data!.buffer.asUint8List();

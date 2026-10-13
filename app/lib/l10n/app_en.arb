@@ -222,5 +222,8 @@
   "shareProvenance": "As per {tradition}",
   "shareProvenanceWithPlace": "As per {tradition} · {city} · {timeZone}",
   "shareFestivalMessage": "{name}: {date}",
-  "shareDayMessage": "{date} · {tithi}"
+  "shareDayMessage": "{date} · {tithi}",
+  "shareAction": "Share",
+  "shareSheetTitle": "Share card",
+  "shareInBoth": "Both"
 }

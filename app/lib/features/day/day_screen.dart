@@ -9,20 +9,23 @@ import '../../core/time/clock.dart';
 import '../../data/packs/update_providers.dart';
 import '../../data/repositories/panjika_providers.dart';
 import '../../l10n/gen/app_localizations.dart';
+import '../share/share_cards.dart';
+import '../share/share_render.dart';
+import '../share/share_sheet.dart';
 import 'day_sections.dart';
 
 /// Day detail (দিন, spec §11.4, §11.10): any date, every section, swipe or arrows for
 /// the previous and next day (FR-DAY-01..05).
-class DayScreen extends StatefulWidget {
+class DayScreen extends ConsumerStatefulWidget {
   const DayScreen({super.key, required this.date});
 
   final CivilDate date;
 
   @override
-  State<DayScreen> createState() => _DayScreenState();
+  ConsumerState<DayScreen> createState() => _DayScreenState();
 }
 
-class _DayScreenState extends State<DayScreen> {
+class _DayScreenState extends ConsumerState<DayScreen> {
   /// Pages are days relative to [DayScreen.date]; the middle page is that date.
   static const _origin = 100000;
   late final PageController _pages = PageController(initialPage: _origin);
@@ -41,6 +44,21 @@ class _DayScreenState extends State<DayScreen> {
     curve: Curves.easeOutCubic,
   );
 
+  /// Shares the day on screen as a card (FR-DAY-06, spec §11.8).
+  void _share() {
+    final date = _dateAt(_pages.page?.round() ?? _origin);
+    final day = ref.read(dayPanjikaProvider(date)).value;
+    final names = ref.read(namesProvider).value;
+    if (day == null || names == null) return;
+    final data = DayShareData(day: day, names: names);
+    showShareSheet(
+      context,
+      card: (share) => DayShareCard(data: data, share: share),
+      message: (share) => data.message(share, link: shareLink(data.path)),
+      fileName: 'panjika-${date.toIso()}.png',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -48,6 +66,11 @@ class _DayScreenState extends State<DayScreen> {
       appBar: AppBar(
         title: Text(l.dayTitle),
         actions: [
+          IconButton(
+            tooltip: l.shareAction,
+            icon: const Icon(Icons.share),
+            onPressed: _share,
+          ),
           IconButton(
             tooltip: l.previousDay,
             icon: const Icon(Icons.chevron_left),

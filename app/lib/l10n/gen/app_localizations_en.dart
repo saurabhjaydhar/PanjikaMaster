@@ -831,4 +831,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String shareDayMessage(String date, String tithi) {
     return '$date · $tithi';
   }
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
+  String get shareSheetTitle => 'Share card';
+
+  @override
+  String get shareInBoth => 'Both';
 }

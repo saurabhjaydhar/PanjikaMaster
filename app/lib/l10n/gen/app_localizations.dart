@@ -1453,6 +1453,24 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'{date} · {tithi}'**
   String shareDayMessage(String date, String tithi);
+
+  /// Share button and tooltip (FR-DAY-06, FR-FEST-03).
+  ///
+  /// In bn, this message translates to:
+  /// **'শেয়ার করুন'**
+  String get shareAction;
+
+  /// Share sheet title (spec §11.8).
+  ///
+  /// In bn, this message translates to:
+  /// **'শেয়ার কার্ড'**
+  String get shareSheetTitle;
+
+  /// Share language option: Bengali and English together; shown with the other language's word beside it.
+  ///
+  /// In bn, this message translates to:
+  /// **'দুই ভাষায়'**
+  String get shareInBoth;
 }
 
 class _AppLocalizationsDelegate

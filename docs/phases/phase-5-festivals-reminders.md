@@ -25,9 +25,9 @@
 | ID | Task | Done when |
 |---|---|---|
 | T-510 ✅ | Festival list: grouped by Bengali month, sticky headers, filters (month, category, tier), auto-scroll to current month, badges | FR-FEST-01..02 |
-| T-511 ✅ (share with T-513) | Festival detail: category band, multi-day selector, windows, tithi span, description, verification card, reminder toggle, share | FR-FEST-03..04 |
+| T-511 ✅ | Festival detail: category band, multi-day selector, windows, tithi span, description, verification card, reminder toggle, share | FR-FEST-03..04 |
 | T-512 ✅ | Reminders screen: recurring rows with timing pickers, festival reminders, add-festival, empty state, "notifications off" banner | §11.13 |
-| T-513 | Share sheet (bn / en / both) and card layouts for festival and day | §11.8 goldens with the longest names |
+| T-513 ✅ | Share sheet (bn / en / both) and card layouts for festival and day | §11.8 goldens with the longest names |
 | T-514 | Observances shown on Today, Day detail and calendar markers from real data | FR-HOME-05..06 |
 
 ### QA
