@@ -9,26 +9,76 @@ import '../../l10n/gen/app_localizations.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 
-/// Thin moon-phase ring showing progress through the tithi (spec §12.1, §12.5).
-class TithiRing extends StatelessWidget {
-  const TithiRing({super.key, required this.progress, this.size = 64});
+/// Thin moon-phase ring showing progress through the tithi (spec §12.1, §12.5). With
+/// [animateFill] it fills from empty on first build (500 ms, emphasised easing); after
+/// that, and whenever reduced motion is on, it follows [progress] without animating
+/// (spec §12.8).
+class TithiRing extends StatefulWidget {
+  const TithiRing({
+    super.key,
+    required this.progress,
+    this.size = 64,
+    this.animateFill = false,
+  });
 
   final double progress;
   final double size;
+  final bool animateFill;
+
+  @override
+  State<TithiRing> createState() => TithiRingState();
+}
+
+class TithiRingState extends State<TithiRing>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fill = AnimationController(
+    vsync: this,
+    duration: Motion.emphasis,
+    value: 1,
+  );
+  late final Animation<double> _curve = CurvedAnimation(
+    parent: _fill,
+    curve: Motion.emphasisedDecelerate,
+  );
+
+  /// What the ring shows right now.
+  @visibleForTesting
+  double get displayedProgress => widget.progress * _curve.value;
+
+  bool _started = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // MediaQuery is not available in initState.
+    if (widget.animateFill && !_started) {
+      _started = true;
+      if (!MediaQuery.disableAnimationsOf(context)) _fill.forward(from: 0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _fill.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     return ExcludeSemantics(
       child: SizedBox.square(
-        dimension: size,
-        child: CustomPaint(
-          painter: _RingPainter(
-            progress: progress,
-            track: c.haldiStrong.withValues(alpha: 0.22),
-            fill: c.haldiStrong,
-            moon: c.haldiStrong,
-            disc: c.paper,
+        dimension: widget.size,
+        child: AnimatedBuilder(
+          animation: _curve,
+          builder: (context, _) => CustomPaint(
+            painter: _RingPainter(
+              progress: displayedProgress,
+              track: c.haldiStrong.withValues(alpha: 0.22),
+              fill: c.haldiStrong,
+              moon: c.haldiStrong,
+              disc: c.paper,
+            ),
           ),
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:flutter/animation.dart';
+
 /// Spacing, shape and motion tokens (spec §12.7, §12.8). 4 dp grid.
 abstract final class Space {
   static const xs = 4.0;
@@ -29,4 +31,7 @@ abstract final class Motion {
   static const micro = Duration(milliseconds: 150);
   static const standard = Duration(milliseconds: 250);
   static const emphasis = Duration(milliseconds: 500);
+
+  /// Material 3 emphasised easing (decelerate variant for things entering).
+  static const emphasisedDecelerate = Cubic(0.05, 0.7, 0.1, 1.0);
 }

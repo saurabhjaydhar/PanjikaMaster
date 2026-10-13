@@ -21,6 +21,7 @@ Future<ProviderContainer> pumpComponent(
   double textScale = 1.0,
   Size size = const Size(360, 640),
   double devicePixelRatio = 1,
+  bool settle = true,
 }) async {
   tester.view
     ..physicalSize = size * devicePixelRatio
@@ -55,6 +56,13 @@ Future<ProviderContainer> pumpComponent(
       ),
     ),
   );
-  await tester.pumpAndSettle();
+  if (settle) await tester.pumpAndSettle();
   return container;
 }
+
+/// [pumpComponent] without settling, to watch animations frame by frame.
+Future<ProviderContainer> pumpComponentNoSettle(
+  WidgetTester tester,
+  Widget child, {
+  required AppDatabase db,
+}) => pumpComponent(tester, child, db: db, settle: false);

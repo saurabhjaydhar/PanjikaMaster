@@ -140,6 +140,8 @@ void main() {
     now = ending.endUtc;
     await tester.pump(const Duration(milliseconds: 1));
     expect(find.text(following.name.en), findsOneWidget);
+    // The old name cross-fades out over 250 ms (spec §12.8).
+    await tester.pump(const Duration(milliseconds: 300));
     expect(find.text(ending.name.en), findsNothing);
   });
 

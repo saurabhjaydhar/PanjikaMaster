@@ -84,6 +84,10 @@ ThemeData buildPanjikaTheme(Brightness brightness, AppLanguage language) {
 /// Convenience accessor for widgets.
 extension PanjikaThemeX on BuildContext {
   PanjikaColors get colors => Theme.of(this).extension<PanjikaColors>()!;
+
+  /// [duration], or zero when the system asks for reduced motion (spec §12.6, §12.8).
+  Duration motion(Duration duration) =>
+      MediaQuery.disableAnimationsOf(this) ? Duration.zero : duration;
 }
 
 /// The minimum content padding for the current width class (§12.7).

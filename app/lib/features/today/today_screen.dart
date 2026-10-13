@@ -67,6 +67,15 @@ class _TodayContent extends ConsumerWidget {
     String term(Term t) => names!.of('term', t.index).of(language);
 
     final tithi = d.currentOf(TransitionKind.tithi, now);
+    // Read, not watch: marking the day must not rebuild the screen.
+    final animateFill = ref.read(ringFilledForProvider) != d.date;
+    if (animateFill) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          ref.read(ringFilledForProvider.notifier).mark(d.date);
+        }
+      });
+    }
     // Kshaya tithis get a second line; a vriddhi tithi is noted (spec §16).
     final notes = names == null
         ? const <String>[]
@@ -104,6 +113,7 @@ class _TodayContent extends ConsumerWidget {
                 then: l.thenName(tithi.next.of(language)),
                 progress: tithi.progressAt(now),
                 notes: notes,
+                animateFill: animateFill,
               ),
               const SizedBox(height: Space.s),
 

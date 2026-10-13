@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n/app_language.dart';
@@ -27,8 +28,10 @@ class LanguageSwitch extends ConsumerWidget {
         ),
       ],
       selected: {current},
-      onSelectionChanged: (s) =>
-          ref.read(appLanguageProvider.notifier).select(s.single),
+      onSelectionChanged: (s) {
+        HapticFeedback.selectionClick(); // spec §12.8
+        ref.read(appLanguageProvider.notifier).select(s.single);
+      },
     );
   }
 }

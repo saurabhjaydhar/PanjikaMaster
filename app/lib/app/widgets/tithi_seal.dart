@@ -19,6 +19,7 @@ class TithiSeal extends StatelessWidget {
     required this.then,
     required this.progress,
     this.notes = const [],
+    this.animateFill = false,
   });
 
   final NameRef name;
@@ -31,6 +32,9 @@ class TithiSeal extends StatelessWidget {
 
   /// Extra lines such as "ক্ষয় তিথি: অষ্টমী".
   final List<String> notes;
+
+  /// Fill the ring from empty: once per day, on first view (spec §12.8).
+  final bool animateFill;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,7 @@ class TithiSeal extends StatelessWidget {
         ),
         child: Row(
           children: [
-            TithiRing(progress: progress),
+            TithiRing(progress: progress, animateFill: animateFill),
             const SizedBox(width: Space.l),
             Expanded(
               child: Column(
@@ -59,7 +63,19 @@ class TithiSeal extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        NameText(name, style: t.headlineSmall),
+                        // The name never moves; old and new cross-fade (§12.8).
+                        AnimatedSwitcher(
+                          duration: context.motion(Motion.standard),
+                          layoutBuilder: (current, previous) => Stack(
+                            alignment: AlignmentDirectional.topStart,
+                            children: [...previous, ?current],
+                          ),
+                          child: NameText(
+                            name,
+                            key: ValueKey(name),
+                            style: t.headlineSmall,
+                          ),
+                        ),
                         Text(
                           until,
                           style: t.bodyLarge?.copyWith(

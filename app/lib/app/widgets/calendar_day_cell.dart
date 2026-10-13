@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n/l10n_providers.dart';
@@ -59,7 +60,13 @@ class CalendarDayCell extends ConsumerWidget {
       label: semanticsLabel,
       excludeSemantics: true,
       child: InkWell(
-        onTap: onTap,
+        // Light selection click on day selection (spec §12.8).
+        onTap: onTap == null
+            ? null
+            : () {
+                HapticFeedback.selectionClick();
+                onTap!();
+              },
         borderRadius: BorderRadius.circular(Radii.small),
         child: Container(
           constraints: const BoxConstraints(
