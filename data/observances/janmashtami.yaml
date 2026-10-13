@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Krishna Ashtami (amanta Srabon) at nishita; whether Rohini nakshatra is also required (the engine has no nakshatra condition yet).
+id: janmashtami
+name_bn: জন্মাষ্টমী
+name_en: Janmashtami
+category: vrata
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: srabon
+  paksha: krishna
+  tithi: ashtami
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+review:
+  status: draft

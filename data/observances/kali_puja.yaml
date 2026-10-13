@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the amavasya ending amanta Ashwin (called Kartik amavasya in Bengal, spec §6.6 example) prevailing at nishita; tie-breaker earlier_day as in the spec.
+id: kali_puja
+name_bn: কালীপূজা
+name_en: Kali Puja
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: ashwin
+  paksha: krishna
+  tithi: amavasya
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+review:
+  status: draft

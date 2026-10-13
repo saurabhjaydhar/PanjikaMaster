@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the five days Shashthi → Dashami.
+id: durga_puja
+name_bn: দুর্গাপূজা
+name_en: Durga Puja
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: span
+  days: [durga_shashthi, durga_saptami, durga_ashtami, durga_navami, vijaya_dashami]
+  within_days: 7
+review:
+  status: draft

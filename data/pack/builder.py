@@ -101,6 +101,15 @@ def check_releasable(info: PackInfo, *, release: bool, allow_sample: bool, allow
         raise PackRejected(f"{info.id}: computed on a dev ephemeris")
     if release and info.kind == "global" and not eph.get("confirmed_by_human"):
         raise PackRejected(f"{info.id}: ephemeris checksum not confirmed by a human")
+    if info.kind == "observances":
+        if info.summary.get("dev_ephemeris") and not allow_dev:
+            raise PackRejected(f"{info.id}: computed on a dev ephemeris")
+        # Draft rules and draft moment definitions never reach production (T-502).
+        drafts = info.summary.get("draft_rules")
+        if release and (drafts is None or drafts):
+            raise PackRejected(f"{info.id}: draft observance rules {drafts or '(unknown)'}")
+        if release and info.summary.get("moments_review") != "reviewed":
+            raise PackRejected(f"{info.id}: moment definitions are not reviewed")
 
 
 def manifest_id(info: PackInfo) -> str:

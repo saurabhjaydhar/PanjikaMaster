@@ -1,0 +1,18 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Dwitiya of amanta Kartik.
+id: bhai_phonta
+name_bn: ভাইফোঁটা
+name_en: Bhai Phonta
+category: utsav
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: kartik
+  paksha: shukla
+  tithi: dwitiya
+  on_vriddhi: first
+  include_mala: false
+review:
+  status: draft

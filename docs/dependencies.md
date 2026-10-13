@@ -13,6 +13,7 @@ Record every package before adding it (CLAUDE.md, §19.1 L8). No AGPL/GPL, no Sw
 | numpy | data (via skyfield) | 2.5.4 | BSD-3-Clause and permissive (bundled runtime libraries under their own permissive or runtime-exception licences) | 2026-10-10 | Wheels for all major platforms | Vectorised time grids for the transition search | 2026-10-13 |
 | certifi | data (via skyfield) | 2026.7.22 | MPL-2.0 (file-level; pipeline only, not shipped) | 2026-07-22 | Pure Python | CA bundle | 2026-10-13 |
 | astronomy-engine | data (dev) | 2.1.19 | MIT | 2023-12-14 | Pure Python | Independent analytic cross-check of Sun/Moon positions and rise/set (T-202, T-206); no JPL data | 2026-10-13 |
+| PyYAML | data | 6.0.3 | MIT | 2025-09-25 | Wheels for all major platforms, pure-Python fallback | Observance rule files, one YAML file per observance (spec §6.6, T-501); read with `safe_load` only | 2026-10-13 |
 | cryptography (Python) | data | 50.0.2 | Apache-2.0 OR BSD-3-Clause | 2026-09-30 | Wheels for all major platforms | Ed25519 signing of packs (T-303) | 2026-10-13 |
 | cffi | data (via cryptography) | 2.1.1 | MIT-0 | 2026-08-03 | Wheels for all major platforms | cryptography dependency | 2026-10-13 |
 | pycparser | data (via cryptography) | 3.11 | BSD-3-Clause | 2026-10-09 | Pure Python | cffi dependency | 2026-10-13 |

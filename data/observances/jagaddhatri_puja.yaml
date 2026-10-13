@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Navami of amanta Kartik.
+id: jagaddhatri_puja
+name_bn: জগদ্ধাত্রী পূজা
+name_en: Jagaddhatri Puja
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: kartik
+  paksha: shukla
+  tithi: navami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+review:
+  status: draft

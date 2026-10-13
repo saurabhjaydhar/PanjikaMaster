@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 1 Boishakh as computed by the Bengal midnight rule (Q4).
+id: poila_boishakh
+name_bn: পয়লা বৈশাখ
+name_en: Poila Boishakh
+category: utsav
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_bengali_date
+  month: boishakh
+  day: 1
+review:
+  status: draft

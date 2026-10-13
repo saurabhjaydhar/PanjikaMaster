@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Amavasya every month, including মলমাস.
+id: amavasya
+name_bn: অমাবস্যা
+name_en: Amavasya
+category: tithi
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: every
+  paksha: krishna
+  tithi: amavasya
+  on_vriddhi: first
+  include_mala: true
+windows: [tithi_span]
+review:
+  status: draft

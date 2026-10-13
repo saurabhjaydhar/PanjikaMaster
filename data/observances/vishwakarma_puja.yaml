@@ -1,0 +1,15 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the Bhadro sankranti day.
+id: vishwakarma_puja
+name_bn: বিশ্বকর্মা পূজা
+name_en: Vishwakarma Puja
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: sankranti_day
+  month: bhadro
+  day: last
+review:
+  status: draft

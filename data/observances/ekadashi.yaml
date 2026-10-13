@@ -1,0 +1,16 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: which day a two-sunrise Ekadashi is kept, and Ekadashis of মলমাস.
+id: ekadashi
+name_bn: একাদশী
+name_en: Ekadashi
+category: vrata
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: ekadashi_smarta
+  paksha: both
+  on_vriddhi: first
+  include_mala: true
+review:
+  status: draft
