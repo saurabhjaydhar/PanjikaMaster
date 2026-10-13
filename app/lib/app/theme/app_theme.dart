@@ -56,6 +56,11 @@ ThemeData buildPanjikaTheme(Brightness brightness, AppLanguage language) {
     scaffoldBackgroundColor: c.paper,
     textTheme: panjikaTextTheme(language, c.ink),
     dividerTheme: DividerThemeData(color: c.rule, space: 1, thickness: 1),
+    // Buttons grow with their label at large text sizes instead of pressing it against
+    // the border (§12.11: min heights and padding, never fixed heights).
+    filledButtonTheme: const FilledButtonThemeData(style: _buttonStyle),
+    outlinedButtonTheme: const OutlinedButtonThemeData(style: _buttonStyle),
+    textButtonTheme: const TextButtonThemeData(style: _textButtonStyle),
     // Flat by default: hierarchy from tonal surfaces, not shadows (§12.7).
     cardTheme: CardThemeData(
       color: c.paperRaised,
@@ -108,3 +113,15 @@ bool isShortLandscape(BuildContext context) {
 /// screen margin (§12.7, §12.10). Lists stay full width, so they scroll from anywhere.
 double contentInset(double width) =>
     math.max(screenMargin(width), (width - Space.maxContentWidth) / 2);
+
+const _buttonStyle = ButtonStyle(
+  padding: WidgetStatePropertyAll(
+    EdgeInsets.symmetric(horizontal: Space.xl, vertical: Space.s),
+  ),
+);
+
+const _textButtonStyle = ButtonStyle(
+  padding: WidgetStatePropertyAll(
+    EdgeInsets.symmetric(horizontal: Space.m, vertical: Space.s),
+  ),
+);
