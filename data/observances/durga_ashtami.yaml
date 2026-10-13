@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Ashtami; Sandhi Puja as the last danda of Ashtami and the first of Navami.
+id: durga_ashtami
+name_bn: মহাষ্টমী
+name_en: Maha Ashtami
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: ashtami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span, sandhi_puja]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "মহাষ্টমী দুর্গাপূজার সবচেয়ে গুরুত্বপূর্ণ দিনগুলির একটি। সকালে নতুন জামা পরে বহু মানুষ মণ্ডপে এসে পুষ্পাঞ্জলি দেন; অনেকে অঞ্জলির আগে পর্যন্ত উপবাস রাখেন। কোনো কোনো জায়গায়, বিশেষত বেলুড় মঠে, কুমারী পূজা হয়, যেখানে একটি ছোট মেয়েকে দেবী রূপে পূজা করা হয়। অষ্টমী ও নবমীর সন্ধিক্ষণে হয় সন্ধিপূজা: অষ্টমীর শেষ চব্বিশ মিনিট ও নবমীর প্রথম চব্বিশ মিনিট জুড়ে। এই সময় একশো আটটি প্রদীপ জ্বালানো হয় এবং একশো আটটি পদ্ম নিবেদন করা হয়। প্রচলিত বিশ্বাস, এই মুহূর্তে দেবী চামুণ্ডা রূপে চণ্ড ও মুণ্ড অসুরকে বধ করেছিলেন। সন্ধিপূজার সময় পঞ্জিকা থেকে নির্ভুল জানা জরুরি, তাই এই অ্যাপ তা আলাদা করে দেখায়।"
+description_en: "Maha Ashtami is among the most important days of Durga Puja. In the morning people come to the pandal in new clothes to offer pushpanjali, a handful of flowers with prayers, and many fast until they have done so. Some places, Belur Math among them, hold Kumari Puja, in which a young girl is worshipped as the goddess. At the junction of Ashtami and Navami comes Sandhi Puja, spanning the last twenty-four minutes of Ashtami and the first twenty-four of Navami. A hundred and eight lamps are lit and a hundred and eight lotuses offered; tradition holds that at this moment the goddess, as Chamunda, slew the demons Chanda and Munda. Because the timing must be exact, this app shows the Sandhi Puja window separately."
+description_review: pending
+review:
+  status: draft

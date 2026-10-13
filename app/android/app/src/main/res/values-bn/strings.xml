@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO(Q11): final display name is the owner's decision (PRD §26). -->
+    <string name="app_name">বাংলা পঞ্জিকা</string>
+</resources>

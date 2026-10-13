@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Amavasya every month, including মলমাস.
+id: amavasya
+name_bn: অমাবস্যা
+name_en: Amavasya
+category: tithi
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: every
+  paksha: krishna
+  tithi: amavasya
+  on_vriddhi: first
+  include_mala: true
+windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "অমাবস্যা চান্দ্র মাসের কৃষ্ণপক্ষের শেষ তিথি, যখন চাঁদ দেখা যায় না। বাংলায় চান্দ্র মাস অমাবস্যায় শেষ হয় এবং পরদিন থেকে নতুন মাস শুরু হয়। অমাবস্যায় পূর্বপুরুষদের উদ্দেশে তর্পণ ও শ্রাদ্ধ করার রীতি আছে; পিতৃপক্ষের শেষে মহালয়ার অমাবস্যা এর সবচেয়ে পরিচিত উদাহরণ। কালীপূজা ও ফলহারিণী কালীপূজার মতো দেবী কালীর বিশেষ পূজাও অমাবস্যার রাতে হয়। অনেক পরিবারে অমাবস্যায় নতুন কাজ শুরু না করার প্রথা আছে, আবার কেউ কেউ এই দিন উপবাস রাখেন। অমাবস্যা কখন শুরু ও শেষ হয় তা জানতে এই অ্যাপ তিথির সময় দেখায়।"
+description_en: "Amavasya is the last tithi of the dark half of the lunar month, when the Moon cannot be seen. In Bengal the lunar month ends with Amavasya and the new month begins the next day. Offerings to the ancestors, tarpan and shraddha, are traditionally made on Amavasya; the Amavasya of Mahalaya at the end of Pitri Paksha is the best known. Special worship of Kali, as on Kali Puja and Phalaharini Kali Puja, also takes place on new-moon nights. Some families avoid starting new ventures on Amavasya, while others keep a fast. This app shows when the tithi begins and ends."
+description_review: pending
+review:
+  status: draft

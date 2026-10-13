@@ -1,0 +1,27 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Krishna Chaturdashi of amanta Magh at nishita.
+id: shivaratri
+name_bn: শিবরাত্রি
+name_en: Shivaratri
+category: vrata
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: magh
+  paksha: krishna
+  tithi: chaturdashi
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "শিবরাত্রি দেবাদিদেব শিবের আরাধনার রাত, ফাল্গুন মাসের কৃষ্ণা চতুর্দশীর রাতে; অনেকে একে মহাশিবরাত্রি বলেন। ভক্তরা দিনভর উপবাস রাখেন এবং রাতের চার প্রহরে শিবলিঙ্গে জল, দুধ, বেলপাতা ও ধুতুরা ফুল দিয়ে পূজা করেন। অনেকে সারারাত জেগে শিবের নাম করেন, পরদিন সকালে উপবাস ভাঙেন। বাংলায় অবিবাহিত মেয়েরা শিবের মতো স্বামী কামনায় এই ব্রত রাখেন, আর বিবাহিতারা সংসারের মঙ্গল চান। তারকেশ্বরের মতো শিবমন্দিরে এই রাতে বহু মানুষের সমাগম হয়। পুরাণমতে এই রাতে শিব ও পার্বতীর বিবাহ হয়েছিল; অন্য এক মতে এই রাতেই শিব তাণ্ডব নৃত্য করেছিলেন। পরদিন সকালে পূজার প্রসাদ বিলিয়ে উপবাস ভাঙা হয়।"
+description_en: "Shivaratri is the night of the worship of Shiva, on the dark-fortnight Chaturdashi of Falgun, as Bengal counts it; many call it Maha Shivaratri. Devotees fast through the day and, over the four watches of the night, bathe the Shiva linga with water and milk and offer bel leaves and dhutura flowers. Many stay awake all night chanting his name and break the fast the next morning. In Bengal unmarried girls traditionally keep the fast praying for a husband like Shiva, while married women pray for the wellbeing of the family. Shiva temples such as Tarakeswar draw large crowds through the night."
+description_review: pending
+review:
+  status: draft

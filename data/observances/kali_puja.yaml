@@ -1,0 +1,27 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the amavasya ending amanta Ashwin (called Kartik amavasya in Bengal, spec §6.6 example) prevailing at nishita; tie-breaker earlier_day as in the spec.
+id: kali_puja
+name_bn: কালীপূজা
+name_en: Kali Puja
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: ashwin
+  paksha: krishna
+  tithi: amavasya
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "কালীপূজা হয় কার্তিক মাসের অমাবস্যার রাতে, যাকে বাংলায় দীপান্বিতা অমাবস্যা বলা হয়; এই একই রাতে ভারতের অনেক জায়গায় দীপাবলি পালিত হয়। অন্ধকার রাতে দেবী কালীর আরাধনা হয়, যিনি অশুভ শক্তির বিনাশ করেন। তাঁকে শ্যামা নামেও ডাকা হয়, তাই এই পূজার আর এক নাম শ্যামাপূজা। পূজা সাধারণত মধ্যরাতের কাছাকাছি সময়ে হয়, তাই এই অ্যাপ নিশীথের সময় আলাদা করে দেখায়। ঘরে ঘরে প্রদীপ আর মোমবাতি জ্বালানো হয়, আগের দিন চোদ্দো প্রদীপ জ্বালিয়ে চোদ্দো শাক খাওয়ার রীতিও আছে। দক্ষিণেশ্বর, কালীঘাট ও তারাপীঠের মতো কালীমন্দিরে এই রাতে প্রচুর ভক্তের সমাগম হয়।"
+description_en: "Kali Puja is held on the new-moon night of the month of Kartik, known in Bengal as Dipanwita Amavasya, the same night on which much of India celebrates Diwali. In the darkness the goddess Kali, destroyer of evil, is worshipped; she is also called Shyama, so the festival is known as Shyama Puja too. The worship usually takes place close to midnight, which is why this app shows the nishita window separately. Homes are lit with lamps and candles, and on the evening before, many families light fourteen lamps and eat fourteen kinds of greens. Kali temples such as Dakshineswar, Kalighat and Tarapith draw huge crowds through the night."
+description_review: pending
+review:
+  status: draft

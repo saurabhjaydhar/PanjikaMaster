@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Saptami.
+id: durga_saptami
+name_bn: মহাসপ্তমী
+name_en: Maha Saptami
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: saptami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "মহাসপ্তমীর ভোরে নবপত্রিকা স্নানের মধ্য দিয়ে দুর্গাপূজার মূল আরাধনা শুরু হয়। কলা গাছের সঙ্গে আরও আটটি গাছের ডাল বা পাতা বেঁধে তৈরি নবপত্রিকাকে, যাকে চলতি কথায় কলাবউ বলা হয়, নদী বা পুকুরে স্নান করিয়ে লালপাড় শাড়ি পরিয়ে গণেশের পাশে রাখা হয়। নবপত্রিকা দেবী দুর্গার নয়টি রূপের প্রতীক এবং ফসল ও প্রকৃতির সঙ্গে পূজার গভীর যোগের কথা মনে করিয়ে দেয়। এর পর প্রতিমায় প্রাণপ্রতিষ্ঠা হয় এবং দিনভর পূজা, অঞ্জলি ও ভোগ নিবেদন চলে। মণ্ডপে মণ্ডপে ঢাক, কাঁসর আর শঙ্খের আওয়াজ, আর সন্ধ্যায় আরতি দেখতে মানুষের ঢল নামে।"
+description_en: "Maha Saptami begins at dawn with the bathing of the nabapatrika, which opens the main worship of Durga Puja. A banana plant bound with eight other plants, popularly called kola bou, is bathed in a river or pond, wrapped in a red-bordered sari and placed beside the image of Ganesh. The nine plants stand for nine forms of the goddess and recall the old link between the puja, the harvest and the land. The image is then consecrated, and worship, flower offerings and bhog continue through the day. Pandals ring with dhak drums, bell-metal gongs and conch shells, and crowds gather for the evening aarti."
+description_review: pending
+review:
+  status: draft

@@ -1,0 +1,1721 @@
+{
+  "@@locale": "bn",
+  "appTitle": "বাংলা পঞ্জিকা",
+  "@appTitle": {
+    "description": "App name in the task switcher and app bar. Placeholder until Q11."
+  },
+  "navToday": "আজ",
+  "@navToday": {
+    "description": "Bottom navigation tab: today's panjika. Max ~8 characters."
+  },
+  "navCalendar": "পঞ্জিকা",
+  "@navCalendar": {
+    "description": "Bottom navigation tab: month calendar. Max ~8 characters."
+  },
+  "navFestivals": "পার্বণ",
+  "@navFestivals": {
+    "description": "Bottom navigation tab: festival list. Max ~8 characters."
+  },
+  "navMore": "আরও",
+  "@navMore": {
+    "description": "Bottom navigation tab: more options. Max ~8 characters."
+  },
+  "untilTime": "{time} পর্যন্ত",
+  "@untilTime": {
+    "description": "How long a tithi/nakshatra/period lasts, e.g. 'দুপুর ২:৩২ পর্যন্ত'. The time is already formatted.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "দুপুর ২:৩২"
+      }
+    }
+  },
+  "thenName": "তারপর {name}",
+  "@thenName": {
+    "description": "The next tithi after the current one ends, e.g. 'তারপর অষ্টমী'.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "অষ্টমী"
+      }
+    }
+  },
+  "nextDayTime": "{time} (পরদিন)",
+  "@nextDayTime": {
+    "description": "A time after midnight that still belongs to this panjika day (spec §12.4).",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "রাত ১:১০"
+      }
+    }
+  },
+  "countdownDays": "{count, plural, =0{আজ} =1{আগামীকাল} other{{countText} দিন বাকি}}",
+  "@countdownDays": {
+    "description": "Days until an observance. count picks the form; countText is count formatted with the user's numerals.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      },
+      "countText": {
+        "type": "String",
+        "example": "৩"
+      }
+    }
+  },
+  "timeZoneLabel": "IST",
+  "@timeZoneLabel": {
+    "description": "Label shown with every panjika time (Indian Standard Time). Same in both languages."
+  },
+  "sampleWatermark": "নমুনা · SAMPLE",
+  "@sampleWatermark": {
+    "description": "Diagonal watermark on sample (fixture) data, debug builds only. Same in both languages on purpose."
+  },
+  "languageSetting": "ভাষা",
+  "@languageSetting": {
+    "description": "Settings row label for choosing the app language."
+  },
+  "comingSoon": "শীঘ্রই আসছে",
+  "@comingSoon": {
+    "description": "Marks an option that is not available yet."
+  },
+  "labelNakshatra": "নক্ষত্র",
+  "@labelNakshatra": {
+    "description": "Row label on Today/Day: the lunar mansion (nakshatra)."
+  },
+  "labelYoga": "যোগ",
+  "@labelYoga": {
+    "description": "Row label: the yoga (sum of Sun and Moon longitudes)."
+  },
+  "labelKarana": "করণ",
+  "@labelKarana": {
+    "description": "Row label: the karana (half-tithi)."
+  },
+  "labelSunrise": "সূর্যোদয়",
+  "@labelSunrise": {
+    "description": "Timing strip label: sunrise for the selected city."
+  },
+  "labelSunset": "সূর্যাস্ত",
+  "@labelSunset": {
+    "description": "Timing strip label: sunset."
+  },
+  "labelMoonrise": "চন্দ্রোদয়",
+  "@labelMoonrise": {
+    "description": "Timing strip label: moonrise."
+  },
+  "labelMoonset": "চন্দ্রাস্ত",
+  "@labelMoonset": {
+    "description": "Timing strip label: moonset."
+  },
+  "timeNone": "নেই",
+  "@timeNone": {
+    "description": "Shown instead of a time when there is no moonrise/moonset that day (spec §16)."
+  },
+  "todayDataMissing": "আজকের তথ্য পাওয়া যায়নি",
+  "@todayDataMissing": {
+    "description": "Shown on Today when no data covers today (US-01). Never show numbers in this state."
+  },
+  "retry": "আবার চেষ্টা করুন",
+  "@retry": {
+    "description": "Button: try loading the data again."
+  },
+  "provenance": "{tradition} · {city} · {timeZone}",
+  "@provenance": {
+    "description": "Footer on every date screen (spec §6.8, FR-DAY-04).",
+    "placeholders": {
+      "tradition": {
+        "type": "String",
+        "example": "দৃক (বিশুদ্ধ)"
+      },
+      "city": {
+        "type": "String",
+        "example": "কলকাতা"
+      },
+      "timeZone": {
+        "type": "String",
+        "example": "IST"
+      }
+    }
+  },
+  "tithiSealSemantics": "তিথি {tithi}, {until}, {then}",
+  "@tithiSealSemantics": {
+    "description": "Screen-reader sentence for the tithi seal (spec §13.7).",
+    "placeholders": {
+      "tithi": {
+        "type": "String",
+        "example": "শুক্লা সপ্তমী"
+      },
+      "until": {
+        "type": "String",
+        "example": "দুপুর ২:৩২ পর্যন্ত"
+      },
+      "then": {
+        "type": "String",
+        "example": "তারপর অষ্টমী"
+      }
+    }
+  },
+  "nameWithUntil": "{name} · {until}",
+  "@nameWithUntil": {
+    "description": "A name followed by how long it lasts, e.g. 'মূলা · বিকেল ৪:১০ পর্যন্ত'.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "মূলা"
+      },
+      "until": {
+        "type": "String",
+        "example": "বিকেল ৪:১০ পর্যন্ত"
+      }
+    }
+  },
+  "labelNow": "এখন",
+  "@labelNow": {
+    "description": "Tag on the period row that is running right now (not colour alone, spec §12.5)."
+  },
+  "labelToday": "আজ",
+  "@labelToday": {
+    "description": "Screen-reader prefix for today's calendar cell."
+  },
+  "periodSemantics": "{name}, {range}{active, select, yes{, এখন চলছে} other{}}",
+  "@periodSemantics": {
+    "description": "Screen-reader label of a period row. active is yes or no.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      },
+      "active": {
+        "type": "String"
+      }
+    }
+  },
+  "periodShubh": "শুভ সময়",
+  "@periodShubh": {
+    "description": "Section title for auspicious periods."
+  },
+  "periodAshubh": "অশুভ সময়",
+  "@periodAshubh": {
+    "description": "Section title for inauspicious periods (Rahu Kaal etc.)."
+  },
+  "verificationSample": "নমুনা তথ্য",
+  "@verificationSample": {
+    "description": "Verification label: fixture data in debug builds."
+  },
+  "verificationComputed": "গণনা করা, এখনও মেলানো হয়নি",
+  "@verificationComputed": {
+    "description": "Verification label: computed but not checked against the reference panjika."
+  },
+  "verificationReferenceMatched": "পঞ্জিকার সঙ্গে মেলানো",
+  "@verificationReferenceMatched": {
+    "description": "Verification label: matches the reference panjika."
+  },
+  "verificationExpertReviewed": "বিশেষজ্ঞ যাচাই করেছেন",
+  "@verificationExpertReviewed": {
+    "description": "Verification label: reviewed by the expert."
+  },
+  "calendarCellSemantics": "{bengaliDate}, {gregorianDate}, {tithi}",
+  "@calendarCellSemantics": {
+    "description": "Screen-reader label of a calendar day without festivals. Layout only.",
+    "placeholders": {
+      "bengaliDate": {
+        "type": "String"
+      },
+      "gregorianDate": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarCellWithFestival": "{bengaliDate}, {gregorianDate}, {tithi}, {festival}",
+  "@calendarCellWithFestival": {
+    "description": "Screen-reader label of a calendar day with a festival. Layout only.",
+    "placeholders": {
+      "bengaliDate": {
+        "type": "String"
+      },
+      "gregorianDate": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      },
+      "festival": {
+        "type": "String"
+      }
+    }
+  },
+  "todayPrefix": "আজ, {label}",
+  "@todayPrefix": {
+    "description": "Screen-reader label for today's calendar cell.",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cityChipSemantics": "শহর: {city}। বদলাতে ট্যাপ করুন",
+  "@cityChipSemantics": {
+    "description": "Screen-reader label of the city chip.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "glossaryTitle": "শব্দকোষ",
+  "@glossaryTitle": {
+    "description": "Title of the glossary sheet and screen (FR-SET-07)."
+  },
+  "glossaryOpen": "অর্থ দেখুন",
+  "@glossaryOpen": {
+    "description": "Tooltip of the (i) button next to a panjika term."
+  },
+  "loading": "লোড হচ্ছে",
+  "@loading": {
+    "description": "Screen-reader label of loading placeholders."
+  },
+  "languageNameBengali": "বাংলা",
+  "@languageNameBengali": {
+    "description": "The Bengali language, always written in Bengali (language switch). Same in both languages on purpose."
+  },
+  "languageNameEnglish": "English",
+  "@languageNameEnglish": {
+    "description": "The English language, always written in English (language switch). Same in both languages on purpose."
+  },
+  "termWithName": "{term}: {name}",
+  "@termWithName": {
+    "description": "A term with a name, e.g. 'ক্ষয় তিথি: অষ্টমী'. Layout only.",
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "stateNotDownloaded": "এই সময়ের তথ্য ডাউনলোড করা নেই।",
+  "@stateNotDownloaded": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateOffline": "ইন্টারনেট সংযোগ নেই। সংযোগ পেলে তথ্য ডাউনলোড হবে।",
+  "@stateOffline": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateStale": "তথ্য হালনাগাদ প্রয়োজন।",
+  "@stateStale": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateSignatureFailed": "তথ্য যাচাই করা যায়নি, তাই দেখানো হচ্ছে না।",
+  "@stateSignatureFailed": {
+    "description": "System state (spec §11.9)."
+  },
+  "stateUnverified": "এই তারিখ এখনও পঞ্জিকা মিলিয়ে দেখা হয়নি।",
+  "@stateUnverified": {
+    "description": "System state for tier 2/3 festivals (spec §11.9)."
+  },
+  "stateCheckClock": "ফোনের তারিখ ঠিক আছে কিনা দেখুন",
+  "@stateCheckClock": {
+    "description": "Shown when the device date is outside every pack (spec §16)."
+  },
+  "actionDownload": "ডাউনলোড করুন",
+  "@actionDownload": {
+    "description": "Button: download data."
+  },
+  "actionUpdate": "হালনাগাদ করুন",
+  "@actionUpdate": {
+    "description": "Button: update data."
+  },
+  "sizeMegabytes": "{size} এমবি",
+  "@sizeMegabytes": {
+    "description": "A download size; size is formatted with the user's numerals, e.g. ৩.১.",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "downloadPrompt": "নতুন তথ্য পাওয়া যাচ্ছে ({size})। এখন ডাউনলোড করবেন?",
+  "@downloadPrompt": {
+    "description": "Asked before downloading a pack of 2 MB or more (spec §18).",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "actionLater": "পরে",
+  "@actionLater": {
+    "description": "Button: decide later."
+  },
+  "noticeDismiss": "বুঝেছি",
+  "@noticeDismiss": {
+    "description": "Button that hides a notice from the server."
+  },
+  "updateFailed": "তথ্য ডাউনলোড করা যায়নি। পরে আবার চেষ্টা করা হবে।",
+  "@updateFailed": {
+    "description": "Shown when a pack download or import fails."
+  },
+  "appUpdateRequired": "নতুন তথ্যের জন্য অ্যাপটি হালনাগাদ করুন।",
+  "@appUpdateRequired": {
+    "description": "The data server needs a newer app version (min_app_version)."
+  },
+  "labelTithi": "তিথি",
+  "@labelTithi": {
+    "description": "Row label: tithi."
+  },
+  "labelPaksha": "পক্ষ",
+  "@labelPaksha": {
+    "description": "Row label: paksha (fortnight)."
+  },
+  "sectionSunMoon": "সূর্য ও চন্দ্র",
+  "@sectionSunMoon": {
+    "description": "Day detail section title."
+  },
+  "sectionObservances": "উৎসব ও ব্রত",
+  "@sectionObservances": {
+    "description": "Day detail section title."
+  },
+  "dayTitle": "দিনের পঞ্জিকা",
+  "@dayTitle": {
+    "description": "Title of the Day detail screen."
+  },
+  "previousDay": "আগের দিন",
+  "@previousDay": {
+    "description": "Button / screen-reader label: go to the previous day."
+  },
+  "nextDay": "পরের দিন",
+  "@nextDay": {
+    "description": "Button / screen-reader label: go to the next day."
+  },
+  "coordinates": "{lat}° উ, {lon}° পূ",
+  "@coordinates": {
+    "description": "A city's latitude (north) and longitude (east), numbers already formatted.",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
+  "footerDetail": "{coordinates} · তথ্য: {packs} · {status}",
+  "@footerDetail": {
+    "description": "Second provenance line on Day detail: coordinates, data packs, verification status.",
+    "placeholders": {
+      "coordinates": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionUpcoming": "আসছে",
+  "@sectionUpcoming": {
+    "description": "Today: section with the next festivals."
+  },
+  "sectionToday": "আজ",
+  "@sectionToday": {
+    "description": "Today: section with today's festivals."
+  },
+  "openDay": "দিনের পুরো পঞ্জিকা দেখুন",
+  "@openDay": {
+    "description": "Screen-reader hint on the tithi seal: opens Day detail."
+  },
+  "calendarModeBengali": "বাংলা মাস",
+  "@calendarModeBengali": {
+    "description": "Calendar mode: months of the Bengali calendar."
+  },
+  "calendarModeGregorian": "ইংরেজি মাস",
+  "@calendarModeGregorian": {
+    "description": "Calendar mode: Gregorian months."
+  },
+  "monthTitle": "{month} {year}",
+  "@monthTitle": {
+    "description": "Calendar title, e.g. আশ্বিন ১৪৩৩. Layout only.",
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "previousMonth": "আগের মাস",
+  "@previousMonth": {
+    "description": "Button: previous month."
+  },
+  "nextMonth": "পরের মাস",
+  "@nextMonth": {
+    "description": "Button: next month."
+  },
+  "previousYear": "আগের বছর",
+  "@previousYear": {
+    "description": "Button in the month chooser."
+  },
+  "nextYear": "পরের বছর",
+  "@nextYear": {
+    "description": "Button in the month chooser."
+  },
+  "chooseMonth": "মাস বেছে নিন",
+  "@chooseMonth": {
+    "description": "Title of the jump-to-month sheet; also the hint on the calendar title."
+  },
+  "legendTitle": "চিহ্নের অর্থ",
+  "@legendTitle": {
+    "description": "Title of the calendar legend sheet."
+  },
+  "legendFestival": "উৎসব (রং বিভাগ অনুযায়ী)",
+  "@legendFestival": {
+    "description": "Legend: the coloured bar under a day."
+  },
+  "legendSelected": "নির্বাচিত দিন",
+  "@legendSelected": {
+    "description": "Legend: the filled day."
+  },
+  "legendEither": "{first} / {second}",
+  "@legendEither": {
+    "description": "Two names for one mark, e.g. both Ekadashis. Layout only.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "selectedDay": "নির্বাচিত: {date}",
+  "@selectedDay": {
+    "description": "Calendar strip under the grid.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "actionView": "দেখুন",
+  "@actionView": {
+    "description": "Button: open the day."
+  },
+  "cityPickerTitle": "শহর বেছে নিন",
+  "@cityPickerTitle": {
+    "description": "Title of the city picker."
+  },
+  "citySearchHint": "শহরের নাম লিখুন",
+  "@citySearchHint": {
+    "description": "Hint in the city search field (Bengali or English)."
+  },
+  "sectionRecent": "সাম্প্রতিক",
+  "@sectionRecent": {
+    "description": "City picker section: recently chosen cities."
+  },
+  "sectionWestBengal": "পশ্চিমবঙ্গ",
+  "@sectionWestBengal": {
+    "description": "City picker section: cities in West Bengal."
+  },
+  "sectionOtherCities": "অন্যান্য শহর",
+  "@sectionOtherCities": {
+    "description": "City picker section: cities outside West Bengal."
+  },
+  "sunriseAt": "সূর্যোদয় {time}",
+  "@sunriseAt": {
+    "description": "Today's sunrise in a city row.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "cityRowSemantics": "{city}, {district}, {sunrise}",
+  "@cityRowSemantics": {
+    "description": "Screen-reader label of a city row. Layout only.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "district": {
+        "type": "String"
+      },
+      "sunrise": {
+        "type": "String"
+      }
+    }
+  },
+  "currentCity": "বর্তমান শহর",
+  "@currentCity": {
+    "description": "Screen-reader state of the chosen city's row."
+  },
+  "noCityMatches": "এই নামে কোনো শহর পাওয়া যায়নি",
+  "@noCityMatches": {
+    "description": "City search with no results."
+  },
+  "cityChanged": "সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই",
+  "@cityChanged": {
+    "description": "Toast after changing the city (FR-LOC-05)."
+  },
+  "settingsTitle": "সেটিংস",
+  "@settingsTitle": {
+    "description": "Title of the Settings screen."
+  },
+  "settingNamesBoth": "নাম দুই লিপিতে",
+  "@settingNamesBoth": {
+    "description": "Setting: show panchanga and festival names in the other script too (FR-SET-06)."
+  },
+  "settingTradition": "পঞ্জিকার মত",
+  "@settingTradition": {
+    "description": "Setting: which panjika tradition (school) to follow."
+  },
+  "settingCity": "শহর",
+  "@settingCity": {
+    "description": "Setting: the chosen city."
+  },
+  "settingTheme": "থিম",
+  "@settingTheme": {
+    "description": "Setting: light, dark or follow the phone."
+  },
+  "themeSystem": "স্বয়ংক্রিয়",
+  "@themeSystem": {
+    "description": "Theme option: follow the phone."
+  },
+  "themeLight": "হালকা",
+  "@themeLight": {
+    "description": "Theme option."
+  },
+  "themeDark": "গাঢ়",
+  "@themeDark": {
+    "description": "Theme option."
+  },
+  "settingTextSize": "লেখার আকার",
+  "@settingTextSize": {
+    "description": "Setting: text size, on top of the phone's own setting."
+  },
+  "textSizePreview": "লেখা এই আকারে দেখাবে",
+  "@textSizePreview": {
+    "description": "Preview line under the text size slider."
+  },
+  "settingTimeFormat": "সময়ের ধরন",
+  "@settingTimeFormat": {
+    "description": "Setting: 12- or 24-hour times."
+  },
+  "timeFormatHours": "{hours} ঘণ্টা",
+  "@timeFormatHours": {
+    "description": "A time format option; hours is 12 or 24 in the user's numerals.",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "settingNumerals": "সংখ্যা",
+  "@settingNumerals": {
+    "description": "Setting: Bengali or Latin digits (FR-L10N-04)."
+  },
+  "numeralsAuto": "ভাষা অনুযায়ী",
+  "@numeralsAuto": {
+    "description": "Numerals option: Bengali digits in Bengali, Latin in English."
+  },
+  "numeralsBengali": "বাংলা ({digits})",
+  "@numeralsBengali": {
+    "description": "Numerals option; digits shows Bengali digits as an example.",
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "numeralsLatin": "ইংরেজি ({digits})",
+  "@numeralsLatin": {
+    "description": "Numerals option; digits shows Latin digits as an example.",
+    "placeholders": {
+      "digits": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionData": "তথ্য",
+  "@sectionData": {
+    "description": "Settings section about the data packs."
+  },
+  "checkDataNow": "নতুন তথ্য আছে কিনা দেখুন",
+  "@checkDataNow": {
+    "description": "Settings row: check the server for new packs now."
+  },
+  "installedData": "ডাউনলোড করা তথ্য",
+  "@installedData": {
+    "description": "Settings row: the dates the installed data covers."
+  },
+  "dataRange": "{from} – {to}",
+  "@dataRange": {
+    "description": "A date range. Layout only.",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionOther": "অন্যান্য",
+  "@sectionOther": {
+    "description": "Settings section with licences etc."
+  },
+  "licences": "লাইসেন্স",
+  "@licences": {
+    "description": "Opens the open-source licences."
+  },
+  "traditionConfirm": "পঞ্জিকার মত বদলালে কিছু উৎসবের তারিখ বদলাতে পারে। অনুস্মারক নতুন করে সাজানো হবে।",
+  "@traditionConfirm": {
+    "description": "Confirm sheet before changing the tradition (spec §11.15)."
+  },
+  "actionChange": "বদলান",
+  "@actionChange": {
+    "description": "Button: confirm a change."
+  },
+  "actionKeep": "থাক",
+  "@actionKeep": {
+    "description": "Button: keep the current choice."
+  },
+  "moreTitle": "আরও",
+  "@moreTitle": {
+    "description": "Title of the More tab (spec §10)."
+  },
+  "menuReminders": "অনুস্মারক",
+  "@menuReminders": {
+    "description": "More menu: reminders screen (§11.13)."
+  },
+  "menuSearch": "খুঁজুন",
+  "@menuSearch": {
+    "description": "More menu: search screen (§11.14)."
+  },
+  "menuCity": "শহর",
+  "@menuCity": {
+    "description": "More menu: city picker (§11.12)."
+  },
+  "menuGlossary": "শব্দকোষ",
+  "@menuGlossary": {
+    "description": "More menu: glossary of panjika terms."
+  },
+  "menuSettings": "সেটিংস",
+  "@menuSettings": {
+    "description": "More menu: settings (§11.15)."
+  },
+  "menuSources": "তথ্যসূত্র ও যাচাই",
+  "@menuSources": {
+    "description": "More menu: how the data is computed and checked (§11.16)."
+  },
+  "menuReport": "ভুল জানান",
+  "@menuReport": {
+    "description": "More menu: report a wrong date or time (§11.17)."
+  },
+  "menuRemoveAds": "বিজ্ঞাপন সরান",
+  "@menuRemoveAds": {
+    "description": "More menu: remove-ads purchase (§11.18)."
+  },
+  "menuAbout": "সম্পর্কে",
+  "@menuAbout": {
+    "description": "More menu and Settings: the About screen."
+  },
+  "menuPrivacy": "গোপনীয়তা",
+  "@menuPrivacy": {
+    "description": "More menu and Settings: privacy policy."
+  },
+  "aboutTagline": "তিথি, উৎসব ও শুভ সময়ের বাংলা পঞ্জিকা, বাংলা ও ইংরেজিতে।",
+  "@aboutTagline": {
+    "description": "One-line description of the app on the About screen."
+  },
+  "aboutVersion": "সংস্করণ {version}",
+  "@aboutVersion": {
+    "description": "App version on the About screen; version is formatted with the user's numerals, e.g. ১.০.০.",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutDataHeading": "তথ্য কোথা থেকে আসে",
+  "@aboutDataHeading": {
+    "description": "About screen section heading."
+  },
+  "aboutDataBody": "সূর্য ও চাঁদের অবস্থান হিসাব করা হয় NASA JPL-এর DE440s এফেমেরিস থেকে, Skyfield সফটওয়্যার দিয়ে। হিসাব আগে থেকে করা থাকে; ফোন শুধু সেই তথ্য পড়ে, কিছু আন্দাজ করে না।",
+  "@aboutDataBody": {
+    "description": "About screen: how the data is made (spec §6, PRD §1)."
+  },
+  "aboutProvenance": "প্রতিটি তথ্যের সঙ্গে তার পঞ্জিকার মত, শহর, সময় অঞ্চল ও যাচাইয়ের অবস্থা দেখানো হয়।",
+  "@aboutProvenance": {
+    "description": "About screen: the provenance promise."
+  },
+  "bothLanguages": "{bn} · {en}",
+  "@bothLanguages": {
+    "description": "Layout pattern: the same text in Bengali then English, on the first onboarding step before a language is chosen.",
+    "placeholders": {
+      "bn": {
+        "type": "String"
+      },
+      "en": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingStep": "ধাপ {step}/{total}",
+  "@onboardingStep": {
+    "description": "Screen-reader label of the onboarding progress dots; numbers are formatted with the user's numerals.",
+    "placeholders": {
+      "step": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChooseLanguage": "ভাষা বেছে নিন",
+  "@onboardingChooseLanguage": {
+    "description": "Onboarding step 1 heading (spec §11.1)."
+  },
+  "onboardingLanguagePreview": "যেমন: {tithi}",
+  "@onboardingLanguagePreview": {
+    "description": "Preview line under each language option; tithi is a tithi name from the pack's names table (not today's data).",
+    "placeholders": {
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingChangeLater": "পরে সেটিংসে বদলানো যাবে।",
+  "@onboardingChangeLater": {
+    "description": "Onboarding step 1 note."
+  },
+  "actionContinue": "এগিয়ে যান",
+  "@actionContinue": {
+    "description": "Onboarding primary button."
+  },
+  "onboardingTraditionTitle": "কোন পঞ্জিকা মেনে চলেন?",
+  "@onboardingTraditionTitle": {
+    "description": "Onboarding step 2 heading (spec §11.1, US-02)."
+  },
+  "onboardingTraditionNote": "দুই মতে কখনো উৎসবের দিন আলাদা হয়। পরে সেটিংসে বদলাতে পারবেন।",
+  "@onboardingTraditionNote": {
+    "description": "Onboarding step 2 note (spec §11.1)."
+  },
+  "onboardingCityTitle": "আপনার শহর কোনটি?",
+  "@onboardingCityTitle": {
+    "description": "Onboarding step 3 heading."
+  },
+  "onboardingCityNote": "সূর্যোদয়, সূর্যাস্ত ও রাহুকাল শহর অনুযায়ী বদলায়। তিথি ও উৎসবের দিন বদলায় না।",
+  "@onboardingCityNote": {
+    "description": "Onboarding step 3 note (FR-LOC-05)."
+  },
+  "onboardingRemindersTitle": "অনুস্মারক চান?",
+  "@onboardingRemindersTitle": {
+    "description": "Onboarding step 4 heading (optional step)."
+  },
+  "onboardingRemindersBody": "উৎসব, একাদশী, পূর্ণিমা ও অমাবস্যার আগে মনে করিয়ে দেওয়া যায়। কোনগুলি চান, তা অনুস্মারক অংশে বেছে নেবেন। প্রথম অনুস্মারক রাখার সময় ফোন অনুমতি চাইবে।",
+  "@onboardingRemindersBody": {
+    "description": "Onboarding step 4 explanation; the permission prompt comes later (T-507)."
+  },
+  "onboardingRemindersYes": "হ্যাঁ, মনে করিয়ে দিন",
+  "@onboardingRemindersYes": {
+    "description": "Onboarding step 4: opt in to reminders."
+  },
+  "onboardingRemindersNo": "এখন নয়",
+  "@onboardingRemindersNo": {
+    "description": "Onboarding step 4: skip reminders."
+  },
+  "cityListProvenance": "{tradition} · প্রতিটি শহরের আজকের সূর্যোদয়, {timeZone} · তথ্য: {packs} · {status}",
+  "@cityListProvenance": {
+    "description": "Provenance footer of the city picker, whose rows show each city's sunrise (CLAUDE.md: no datum without its provenance).",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      },
+      "packs": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "useMyLocation": "আমার অবস্থান ব্যবহার করুন",
+  "@useMyLocation": {
+    "description": "City picker and onboarding: find the nearest city (FR-LOC-02)."
+  },
+  "locating": "অবস্থান খোঁজা হচ্ছে…",
+  "@locating": {
+    "description": "Shown on the Use my location button while waiting for a fix."
+  },
+  "locationRationale": "কাছের শহর খুঁজে দিতে ফোনের আনুমানিক অবস্থান লাগবে। অবস্থান শুধু এই ফোনেই ব্যবহার হয়; মনে রাখা হয় শুধু আপনার বেছে নেওয়া শহর।",
+  "@locationRationale": {
+    "description": "Rationale shown before the system location prompt (§19.1 L18, §19 location row)."
+  },
+  "actionNotNow": "এখন নয়",
+  "@actionNotNow": {
+    "description": "Declines an optional action."
+  },
+  "nearestCity": "নিকটতম শহর: {city}, {distance} কিমি",
+  "@nearestCity": {
+    "description": "Result of Use my location (FR-LOC-02); distance is formatted with the user's numerals.",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "cityFarWarning": "এই শহর {limit} কিমির বেশি দূরে, তাই সময় কয়েক মিনিট আলাদা হতে পারে।",
+  "@cityFarWarning": {
+    "description": "Warning when the nearest city is far (FR-LOC-03); limit is formatted with the user's numerals.",
+    "placeholders": {
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "actionChooseCity": "এই শহর বেছে নিন",
+  "@actionChooseCity": {
+    "description": "Confirms the nearest city."
+  },
+  "locationDenied": "অনুমতি ছাড়াও অ্যাপ চলবে। তালিকা থেকে শহর বেছে নিন।",
+  "@locationDenied": {
+    "description": "After the location permission is denied (FR-LOC-04)."
+  },
+  "locationDeniedForever": "অবস্থানের অনুমতি বন্ধ আছে। তালিকা থেকে শহর বেছে নিন, বা সেটিংসে অনুমতি দিন।",
+  "@locationDeniedForever": {
+    "description": "After a permanent denial (FR-LOC-04)."
+  },
+  "actionOpenSettings": "সেটিংস খুলুন",
+  "@actionOpenSettings": {
+    "description": "Opens the phone's settings page for the app."
+  },
+  "locationOff": "ফোনের লোকেশন বন্ধ আছে।",
+  "@locationOff": {
+    "description": "When the phone's location service is off."
+  },
+  "actionTurnOn": "চালু করুন",
+  "@actionTurnOn": {
+    "description": "Opens the phone's location settings."
+  },
+  "locationUnavailable": "অবস্থান পাওয়া যায়নি। তালিকা থেকে শহর বেছে নিন।",
+  "@locationUnavailable": {
+    "description": "When no location fix could be had."
+  },
+  "linkNotFound": "এই পাতাটি পাওয়া যায়নি।",
+  "@linkNotFound": {
+    "description": "Shown for a link or address the app doesn't know (T-411)."
+  },
+  "festivalNotFound": "এই উৎসবের তথ্য এই ফোনে নেই।",
+  "@festivalNotFound": {
+    "description": "A festival link whose id is not in the installed packs (T-411)."
+  },
+  "goToToday": "আজকের পঞ্জিকা দেখুন",
+  "@goToToday": {
+    "description": "Button that opens the Today tab."
+  },
+  "numeralsBengaliSemantics": "বাংলা সংখ্যা",
+  "@numeralsBengaliSemantics": {
+    "description": "Screen-reader label of the Bengali numerals option; the visible label's sample digits would be read in the wrong voice (FR-L10N-08)."
+  },
+  "numeralsLatinSemantics": "ইংরেজি সংখ্যা",
+  "@numeralsLatinSemantics": {
+    "description": "Screen-reader label of the Latin numerals option."
+  },
+  "festivalsTitle": "পার্বণ {year}",
+  "@festivalsTitle": {
+    "description": "Festivals tab title with the Bengali year (formatted with the user's numerals), spec §11.5.",
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "filterAll": "সব",
+  "@filterAll": {
+    "description": "Filter chip that shows every category."
+  },
+  "filterTitle": "বাছাই",
+  "@filterTitle": {
+    "description": "Festivals filter sheet title and button tooltip (FR-FEST-02)."
+  },
+  "filterMonth": "মাস",
+  "@filterMonth": {
+    "description": "Filter sheet section: Bengali month."
+  },
+  "filterImportance": "গুরুত্ব",
+  "@filterImportance": {
+    "description": "Filter sheet section: observance tier."
+  },
+  "tierMajor": "প্রধান উৎসব",
+  "@tierMajor": {
+    "description": "Tier 1 observances (spec §6.6)."
+  },
+  "tierOther": "অন্যান্য পার্বণ ও তিথি",
+  "@tierOther": {
+    "description": "Tier 2 observances."
+  },
+  "tierCivic": "জয়ন্তী ও স্মরণীয় দিন",
+  "@tierCivic": {
+    "description": "Tier 3 observances."
+  },
+  "showAll": "সব দেখান",
+  "@showAll": {
+    "description": "Clears every festival filter."
+  },
+  "noFestivalsMatch": "এই বাছাইয়ে কোনো পার্বণ নেই।",
+  "@noFestivalsMatch": {
+    "description": "Festival list empty after filtering."
+  },
+  "festivalYearPartial": "এই বছরের কয়েকটি মাসের তথ্য এই ফোনে নেই।",
+  "@festivalYearPartial": {
+    "description": "Festival list note when only part of the Bengali year is installed."
+  },
+  "festivalRowDates": "{gregorian} · {bengali}",
+  "@festivalRowDates": {
+    "description": "Festival row: Gregorian date, then Bengali date (FR-FEST-01).",
+    "placeholders": {
+      "gregorian": {
+        "type": "String"
+      },
+      "bengali": {
+        "type": "String"
+      }
+    }
+  },
+  "festivalDayOf": "দিন {day}",
+  "@festivalDayOf": {
+    "description": "Which day of a multi-day festival a row is (FR-FEST-04); day is formatted with the user's numerals.",
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "windowSandhiPuja": "সন্ধিপূজা",
+  "@windowSandhiPuja": {
+    "description": "Window name (spec §11.6)."
+  },
+  "windowSandhiPujaHint": "অষ্টমীর শেষ {minutes} মিনিট ও নবমীর প্রথম {minutes} মিনিট",
+  "@windowSandhiPujaHint": {
+    "description": "Explains the Sandhi Puja window; minutes is formatted with the user's numerals (24).",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "windowNishita": "নিশীথ",
+  "@windowNishita": {
+    "description": "Window name: the midnight muhurta."
+  },
+  "windowPratah": "প্রাতঃকাল",
+  "@windowPratah": {
+    "description": "Window name."
+  },
+  "windowMadhyahna": "মধ্যাহ্ন",
+  "@windowMadhyahna": {
+    "description": "Window name."
+  },
+  "windowAparahna": "অপরাহ্ণ",
+  "@windowAparahna": {
+    "description": "Window name."
+  },
+  "windowPradosha": "প্রদোষ",
+  "@windowPradosha": {
+    "description": "Window name."
+  },
+  "festivalTithiSpan": "{name} · {start} থেকে {end}",
+  "@festivalTithiSpan": {
+    "description": "The tithi a festival depends on and its span.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "checkedOn": "যাচাই: {date}",
+  "@checkedOn": {
+    "description": "Verification card: when the date was checked; date in the UI language.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderOff": "মনে করিয়ে দিন",
+  "@reminderOff": {
+    "description": "Festival detail: turn on a reminder (FR-FEST-03)."
+  },
+  "reminderOn": "অনুস্মারক চালু আছে",
+  "@reminderOn": {
+    "description": "Festival detail: the reminder is on; tap to turn it off."
+  },
+  "festivalDaysLabel": "দিনগুলি",
+  "@festivalDaysLabel": {
+    "description": "Screen-reader label of the multi-day selector (FR-FEST-04)."
+  },
+  "reminderTomorrow": "আগামীকাল {name}",
+  "@reminderTomorrow": {
+    "description": "Reminder title the evening before (FR-REM-04).",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderToday": "আজ {name}",
+  "@reminderToday": {
+    "description": "Reminder title on the morning of the day.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderTithiBegun": "{name} শুরু হলো",
+  "@reminderTithiBegun": {
+    "description": "Reminder title at tithi start.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderTithiBegins": "তিথি শুরু {time}",
+  "@reminderTithiBegins": {
+    "description": "Reminder detail: when the tithi begins, e.g. 'তিথি শুরু রাত ৯:১৪'.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderBody": "{detail} · {tradition} · {timeZone}",
+  "@reminderBody": {
+    "description": "Reminder body: the detail, then its provenance (tradition, IST).",
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      },
+      "tradition": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      }
+    }
+  },
+  "channelFestival": "উৎসব অনুস্মারক",
+  "@channelFestival": {
+    "description": "Android notification channel name (spec §17)."
+  },
+  "channelFestivalDescription": "আপনার বেছে নেওয়া পার্বণের আগে মনে করিয়ে দেয়।",
+  "@channelFestivalDescription": {
+    "description": "Android notification channel description."
+  },
+  "channelTithi": "তিথি অনুস্মারক",
+  "@channelTithi": {
+    "description": "Android notification channel name (spec §17)."
+  },
+  "channelTithiDescription": "একাদশী, পূর্ণিমা ও অমাবস্যার অনুস্মারক।",
+  "@channelTithiDescription": {
+    "description": "Android notification channel description."
+  },
+  "notificationsOff": "বিজ্ঞপ্তির অনুমতি নেই, তাই অনুস্মারক দেখানো যাবে না। ফোনের সেটিংসে এই অ্যাপের বিজ্ঞপ্তি চালু করুন।",
+  "@notificationsOff": {
+    "description": "Inline help after the notification permission is refused (US-03, T-507)."
+  },
+  "sectionRecurring": "নিয়মিত",
+  "@sectionRecurring": {
+    "description": "Reminders screen section (spec §11.13)."
+  },
+  "sectionFestivalReminders": "উৎসব",
+  "@sectionFestivalReminders": {
+    "description": "Reminders screen section: festival reminders."
+  },
+  "recurringEkadashi": "একাদশী",
+  "@recurringEkadashi": {
+    "description": "Recurring reminder row (FR-REM-02)."
+  },
+  "recurringPurnima": "পূর্ণিমা",
+  "@recurringPurnima": {
+    "description": "Recurring reminder row."
+  },
+  "recurringAmavasya": "অমাবস্যা",
+  "@recurringAmavasya": {
+    "description": "Recurring reminder row."
+  },
+  "timingDayBefore": "আগের দিন {time}",
+  "@timingDayBefore": {
+    "description": "Reminder timing summary; time in the user's format, e.g. 'রাত ৮:০০'.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "timingMorningOf": "সেদিন {time}",
+  "@timingMorningOf": {
+    "description": "Reminder timing summary.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "timingTithiStart": "তিথি শুরুর সময়",
+  "@timingTithiStart": {
+    "description": "Reminder timing (only where exact alarms are allowed, spec §17)."
+  },
+  "timingBoth": "{first} ও {second}",
+  "@timingBoth": {
+    "description": "Two reminder timings together.",
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "addFestivalReminder": "উৎসব যোগ করুন",
+  "@addFestivalReminder": {
+    "description": "Opens the festival list to choose one (spec §11.13)."
+  },
+  "remindersEmpty": "এখনো কোনো অনুস্মারক নেই। একাদশী বা কোনো উৎসবের জন্য চালু করুন।",
+  "@remindersEmpty": {
+    "description": "Reminders empty state (spec §11.13)."
+  },
+  "timingSheetTitle": "কখন মনে করাবে?",
+  "@timingSheetTitle": {
+    "description": "Reminder timing sheet title."
+  },
+  "timingDayBeforeOption": "আগের দিন",
+  "@timingDayBeforeOption": {
+    "description": "Timing option."
+  },
+  "timingMorningOption": "সেদিন সকালে",
+  "@timingMorningOption": {
+    "description": "Timing option."
+  },
+  "changeTime": "সময় বদলান",
+  "@changeTime": {
+    "description": "Button tooltip that opens the time picker."
+  },
+  "shareProvenance": "{tradition} মতে",
+  "@shareProvenance": {
+    "description": "Share card and message provenance line (spec §11.8), e.g. 'বিশুদ্ধ সিদ্ধান্ত মতে'.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      }
+    }
+  },
+  "shareProvenanceWithPlace": "{tradition} মতে · {city} · {timeZone}",
+  "@shareProvenanceWithPlace": {
+    "description": "Provenance for shared times (day card): tradition, city and time zone.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "city": {
+        "type": "String"
+      },
+      "timeZone": {
+        "type": "String"
+      }
+    }
+  },
+  "shareFestivalMessage": "{name}: {date}",
+  "@shareFestivalMessage": {
+    "description": "Share message line for a festival.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "shareDayMessage": "{date} · {tithi}",
+  "@shareDayMessage": {
+    "description": "Share message line for a day: its date and tithi with end time.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "tithi": {
+        "type": "String"
+      }
+    }
+  },
+  "shareAction": "শেয়ার করুন",
+  "@shareAction": {
+    "description": "Share button and tooltip (FR-DAY-06, FR-FEST-03)."
+  },
+  "shareSheetTitle": "শেয়ার কার্ড",
+  "@shareSheetTitle": {
+    "description": "Share sheet title (spec §11.8)."
+  },
+  "shareInBoth": "দুই ভাষায়",
+  "@shareInBoth": {
+    "description": "Share language option: Bengali and English together; shown with the other language's word beside it."
+  },
+  "sectionTerms": "পঞ্জিকার শব্দ",
+  "@sectionTerms": {
+    "description": "Glossary section: panchanga terms (FR-SET-07)."
+  },
+  "sectionPeriods": "দিনের নানা সময়",
+  "@sectionPeriods": {
+    "description": "Glossary section: Rahu Kaal, Barabela etc."
+  },
+  "glossarySearchHint": "শব্দ খুঁজুন",
+  "@glossarySearchHint": {
+    "description": "Glossary search field hint."
+  },
+  "noGlossaryMatches": "এই নামে কোনো শব্দ পাওয়া যায়নি",
+  "@noGlossaryMatches": {
+    "description": "Glossary search with no results."
+  },
+  "searchHint": "তারিখ বা উৎসবের নাম",
+  "@searchHint": {
+    "description": "Search field hint (spec §11.14)."
+  },
+  "searchExamples": "উদাহরণ: ২৫ আশ্বিন ১৪৩৩ · ১২/১০/২০২৬ · কালীপূজা",
+  "@searchExamples": {
+    "description": "Search examples line: kinds of input, not data (spec §11.14)."
+  },
+  "searchResults": "ফলাফল",
+  "@searchResults": {
+    "description": "Search results section header."
+  },
+  "searchDateEquals": "{bengali} = {gregorian}",
+  "@searchDateEquals": {
+    "description": "A date result: the Bengali date and the Gregorian date it is.",
+    "placeholders": {
+      "bengali": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      }
+    }
+  },
+  "searchDateNotInstalled": "{date}: এই তারিখের তথ্য এই ফোনে নেই",
+  "@searchDateNotInstalled": {
+    "description": "A date result outside the installed packs (spec §11.9); no conversion is shown.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "searchNoResults": "কিছু পাওয়া যায়নি। বানান বা তারিখের ধরন দেখে নিন।",
+  "@searchNoResults": {
+    "description": "Search with no results (spec §11.14)."
+  },
+  "sourcesTraditionHeading": "পঞ্জিকার মত",
+  "@sourcesTraditionHeading": {
+    "description": "Sources screen: section about the tradition (§11.16)."
+  },
+  "sourcesTraditionBody": "এই অ্যাপের সব তারিখ ও সময় {tradition} মতে, যা সেটিংসে বেছে নেওয়া আছে।",
+  "@sourcesTraditionBody": {
+    "description": "Sources screen: which tradition the data follows (FR-SET-02). The tradition name comes from the pack.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesHowHeading": "আমরা কীভাবে হিসাব করি",
+  "@sourcesHowHeading": {
+    "description": "Sources screen: heading of the numbered steps (§11.16)."
+  },
+  "sourcesStep1Title": "জ্যোতির্বিজ্ঞানের হিসাব (NASA JPL)",
+  "@sourcesStep1Title": {
+    "description": "Sources screen, step 1 title."
+  },
+  "sourcesStep1Body": "সূর্য ও চাঁদের অবস্থান NASA JPL-এর DE440s তালিকা থেকে, Skyfield সফটওয়্যারে আগেই হিসাব করা থাকে।",
+  "@sourcesStep1Body": {
+    "description": "Sources screen, step 1 explanation. Keep in line with aboutDataBody."
+  },
+  "sourcesStep2Title": "রাষ্ট্রীয় পঞ্চাঙ্গের সঙ্গে মিলানো",
+  "@sourcesStep2Title": {
+    "description": "Sources screen, step 2 title."
+  },
+  "sourcesStep2Body": "তিথি, নক্ষত্র ও অন্যান্য সময় ভারত সরকারের জাতীয় পঞ্চাঙ্গের সঙ্গে মিলিয়ে দেখা হয়।",
+  "@sourcesStep2Body": {
+    "description": "Sources screen, step 2 explanation."
+  },
+  "sourcesStep3Title": "মুদ্রিত পঞ্জিকার সঙ্গে মিলানো",
+  "@sourcesStep3Title": {
+    "description": "Sources screen, step 3 title."
+  },
+  "sourcesStep3Body": "বাংলা তারিখ ও উৎসবের দিন মুদ্রিত পঞ্জিকার সঙ্গে মিলিয়ে দেখা হয়।",
+  "@sourcesStep3Body": {
+    "description": "Sources screen, step 3 explanation."
+  },
+  "sourcesStep4Title": "প্রধান উৎসব বিশেষজ্ঞের যাচাই",
+  "@sourcesStep4Title": {
+    "description": "Sources screen, step 4 title."
+  },
+  "sourcesStep4Body": "প্রধান উৎসবের নিয়ম একজন পঞ্জিকা-বিশেষজ্ঞ দেখে নেন।",
+  "@sourcesStep4Body": {
+    "description": "Sources screen, step 4 explanation."
+  },
+  "sourcesStepsNote": "প্রতিটি তথ্য কোন ধাপ পর্যন্ত যাচাই হয়েছে, তা পাশের চিহ্নে দেখা যায়।",
+  "@sourcesStepsNote": {
+    "description": "Sources screen: note under the steps."
+  },
+  "sourcesMarksHeading": "চিহ্নের অর্থ",
+  "@sourcesMarksHeading": {
+    "description": "Sources screen: heading of the verification marks legend (§12.5)."
+  },
+  "sourcesPhoneHeading": "এই ফোনের তথ্য",
+  "@sourcesPhoneHeading": {
+    "description": "Sources screen: heading of the installed packs list."
+  },
+  "packKindGlobal": "পঞ্চাঙ্গের তথ্য",
+  "@packKindGlobal": {
+    "description": "Kind of data pack: tithi, nakshatra, sunrise and other daily data."
+  },
+  "packKindCities": "শহরের তথ্য",
+  "@packKindCities": {
+    "description": "Kind of data pack: cities and their sunrise times."
+  },
+  "packKindObservances": "উৎসবের তথ্য",
+  "@packKindObservances": {
+    "description": "Kind of data pack: festivals and observances."
+  },
+  "sourcesPackTitle": "{kind} · সংস্করণ {version}",
+  "@sourcesPackTitle": {
+    "description": "Sources screen: an installed pack and its version. Layout only.",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesPackScope": "{tradition} · {range}",
+  "@sourcesPackScope": {
+    "description": "Sources screen: a pack's tradition and the dates it covers. Layout only.",
+    "placeholders": {
+      "tradition": {
+        "type": "String"
+      },
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesValidatedOn": "শেষ যাচাই: {date}",
+  "@sourcesValidatedOn": {
+    "description": "Sources screen: the date a pack was last checked against the references.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesNotValidated": "এখনও মিলিয়ে দেখা হয়নি",
+  "@sourcesNotValidated": {
+    "description": "Sources screen: a pack that has not been validated yet."
+  },
+  "sourcesNoPacks": "এই ফোনে এখনও কোনো তথ্য নেই।",
+  "@sourcesNoPacks": {
+    "description": "Sources screen: no packs installed."
+  },
+  "sourcesWhyLink": "দুই মত কেন আলাদা?",
+  "@sourcesWhyLink": {
+    "description": "Sources screen: link to the explainer (§11.16)."
+  },
+  "schoolsPara1": "পশ্চিমবঙ্গে পঞ্জিকার দুটি মত চালু আছে। বিশুদ্ধ সিদ্ধান্ত (দৃক) মত সূর্য ও চাঁদের আধুনিক জ্যোতির্বিজ্ঞানসম্মত অবস্থান থেকে হিসাব করে; ভারত সরকারের জাতীয় পঞ্চাঙ্গও এই পদ্ধতিতে তৈরি। সূর্যসিদ্ধান্ত মত, যা গুপ্তপ্রেস ও আরও কয়েকটি পঞ্জিকা মেনে চলে, প্রাচীন সূর্যসিদ্ধান্ত গ্রন্থের হিসাব আর রঘুনন্দনের বিধান অনুসরণ করে।",
+  "@schoolsPara1": {
+    "description": "Explainer 'Why do the two schools differ?' (§11.16, §5.2), paragraph 1 of 3. About 150 words in total; plain language."
+  },
+  "schoolsPara2": "দুই হিসাবে সূর্য ও চাঁদের অবস্থান সামান্য আলাদা আসে, তাই একই তিথি দুই মতে ভিন্ন সময়ে শেষ হয় — কখনো কয়েক মিনিট, কখনো আরও বেশি তফাতে। সূর্যোদয়ের সময় যে তিথি চলে, সেটাই সেদিনের তিথি। তাই তিথি সূর্যোদয়ের কাছাকাছি শেষ হলে দুই মতে একই সকালের তিথি আলাদা হতে পারে, আর তাতে কোনো উৎসব এক দিন আগে বা পরে পড়ে।",
+  "@schoolsPara2": {
+    "description": "Explainer, paragraph 2 of 3."
+  },
+  "schoolsPara3": "এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।",
+  "@schoolsPara3": {
+    "description": "Explainer, paragraph 3 of 3."
+  },
+  "reportDateLabel": "কোন তারিখ?",
+  "@reportDateLabel": {
+    "description": "Report form: the date the report is about (§11.17)."
+  },
+  "reportDateBoth": "{bengali} ({gregorian})",
+  "@reportDateBoth": {
+    "description": "Report form: the chosen date in both calendars. Layout only.",
+    "placeholders": {
+      "bengali": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      }
+    }
+  },
+  "reportChangeDate": "তারিখ বদলান",
+  "@reportChangeDate": {
+    "description": "Report form: button that opens the date picker."
+  },
+  "reportKindLabel": "কী ভুল?",
+  "@reportKindLabel": {
+    "description": "Report form: what kind of error (§11.17)."
+  },
+  "reportKindTithiTime": "তিথির সময়",
+  "@reportKindTithiTime": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindFestivalDay": "উৎসবের দিন",
+  "@reportKindFestivalDay": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindBengaliDate": "বাংলা তারিখ",
+  "@reportKindBengaliDate": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindOther": "অন্য কিছু",
+  "@reportKindOther": {
+    "description": "Report form: kind of error."
+  },
+  "reportPanjikaSaysLabel": "আপনার পঞ্জিকায় কী আছে?",
+  "@reportPanjikaSaysLabel": {
+    "description": "Report form: free-text field label (§11.17)."
+  },
+  "reportPanjikaSaysHint": "পঞ্জিকায় যা লেখা আছে, নিজের ভাষায় লিখুন",
+  "@reportPanjikaSaysHint": {
+    "description": "Report form: hint inside the free-text field."
+  },
+  "reportPanjikaNameLabel": "পঞ্জিকার নাম (ঐচ্ছিক)",
+  "@reportPanjikaNameLabel": {
+    "description": "Report form: optional field for the printed panjika's name."
+  },
+  "packKindShortGlobal": "পঞ্চাঙ্গ",
+  "@packKindShortGlobal": {
+    "description": "Short name of the daily-data pack, in lists of versions."
+  },
+  "packKindShortCities": "শহর",
+  "@packKindShortCities": {
+    "description": "Short name of the city pack, in lists of versions."
+  },
+  "packKindShortObservances": "উৎসব",
+  "@packKindShortObservances": {
+    "description": "Short name of the festival pack, in lists of versions."
+  },
+  "reportPackVersion": "{kind} সংস্করণ {version}",
+  "@reportPackVersion": {
+    "description": "A pack and its version in the report form, e.g. 'পঞ্চাঙ্গ সংস্করণ ৩'.",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "reportSentWith": "সঙ্গে যাবে: {city} · {tradition} · {versions}",
+  "@reportSentWith": {
+    "description": "Report form: exactly what is sent besides the user's text (§11.17, §15.3).",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "tradition": {
+        "type": "String"
+      },
+      "versions": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPrivacy": "আপনার নাম, ফোন নম্বর বা ইমেল চাওয়া হয় না, পাঠানোও হয় না।",
+  "@reportPrivacy": {
+    "description": "Report form: no personal data (FR-SET-03)."
+  },
+  "reportSend": "পাঠান",
+  "@reportSend": {
+    "description": "Report form: submit button."
+  },
+  "reportSent": "পাঠানো হয়েছে। যাচাই করে প্রয়োজনে সংশোধন করা হবে।",
+  "@reportSent": {
+    "description": "Report sent (§11.17)."
+  },
+  "reportQueued": "ইন্টারনেট পেলে পাঠানো হবে।",
+  "@reportQueued": {
+    "description": "Report queued offline (§11.17, US-07)."
+  },
+  "menuHelp": "সাহায্য",
+  "@menuHelp": {
+    "description": "More menu: help with the Bengali voice and reminders on some phones (T-613)."
+  },
+  "helpVoiceHeading": "বাংলায় পড়ে শোনানো",
+  "@helpVoiceHeading": {
+    "description": "Help: section about installing a Bengali text-to-speech voice (§13, localisation)."
+  },
+  "helpVoiceIntro": "অনেক ফোনে বাংলা কণ্ঠ আগে থেকে থাকে না, তখন TalkBack বাংলা লেখা ঠিকমতো পড়তে পারে না। Google-এর বাংলা কণ্ঠ একবার নামিয়ে নিলেই হবে।",
+  "@helpVoiceIntro": {
+    "description": "Help: why a Bengali voice is needed."
+  },
+  "helpVoiceStep1": "ফোনের সেটিংসে ‘টেক্সট-টু-স্পিচ’ (Text-to-speech) খুলুন, অথবা নিচের বোতাম টিপুন।",
+  "@helpVoiceStep1": {
+    "description": "Help, voice step 1. Android labels are given in English too, as many phones show them in English."
+  },
+  "helpVoiceStep2": "পছন্দের ইঞ্জিন হিসেবে ‘Speech Services by Google’ বেছে নিন।",
+  "@helpVoiceStep2": {
+    "description": "Help, voice step 2."
+  },
+  "helpVoiceStep3": "ইঞ্জিনের পাশের সেটিংস চিহ্ন টিপে ‘ভয়েস ডেটা ইনস্টল করুন’ (Install voice data) খুলুন।",
+  "@helpVoiceStep3": {
+    "description": "Help, voice step 3."
+  },
+  "helpVoiceStep4": "‘বাংলা (ভারত)’ বেছে নিয়ে কণ্ঠটি নামিয়ে নিন।",
+  "@helpVoiceStep4": {
+    "description": "Help, voice step 4."
+  },
+  "helpOpenTts": "টেক্সট-টু-স্পিচ সেটিংস খুলুন",
+  "@helpOpenTts": {
+    "description": "Help: button that opens the system text-to-speech settings."
+  },
+  "helpRemindersHeading": "অনুস্মারক ঠিক সময়ে না এলে",
+  "@helpRemindersHeading": {
+    "description": "Help: section about notification settings (PRD risk: OEM phones)."
+  },
+  "helpRemindersIntro": "কিছু ফোন ব্যাটারি বাঁচাতে অ্যাপকে পেছনে ঘুম পাড়িয়ে রাখে, তাতে অনুস্মারক দেরিতে আসে বা আসেই না। এই দুটি জিনিস দেখে নিন:",
+  "@helpRemindersIntro": {
+    "description": "Help: why reminders can be late."
+  },
+  "helpRemindersStep1": "{app}-এর নোটিফিকেশন চালু আছে।",
+  "@helpRemindersStep1": {
+    "description": "Help, reminders check 1. {app} is the app's name.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpRemindersStep2": "ব্যাটারি সেটিংসে {app} ‘সীমাবদ্ধ নয়’ (Unrestricted) রাখা আছে।",
+  "@helpRemindersStep2": {
+    "description": "Help, reminders check 2.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpOpenNotifications": "নোটিফিকেশন সেটিংস খুলুন",
+  "@helpOpenNotifications": {
+    "description": "Help: button that opens this app's notification settings."
+  },
+  "helpOpenBattery": "ব্যাটারি সেটিংস খুলুন",
+  "@helpOpenBattery": {
+    "description": "Help: button that opens the battery optimisation settings."
+  },
+  "helpXiaomiHeading": "Xiaomi, Redmi ও POCO ফোনে",
+  "@helpXiaomiHeading": {
+    "description": "Help: steps for Xiaomi phones (notification restrictions, §22.2)."
+  },
+  "helpXiaomiStep1": "সেটিংস › অ্যাপস › অ্যাপ ম্যানেজ করুন (Manage apps) › {app} খুলুন।",
+  "@helpXiaomiStep1": {
+    "description": "Help, Xiaomi step 1.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpXiaomiStep2": "‘অটোস্টার্ট’ (Autostart) চালু করুন।",
+  "@helpXiaomiStep2": {
+    "description": "Help, Xiaomi step 2."
+  },
+  "helpXiaomiStep3": "‘ব্যাটারি সেভার’ (Battery saver)-এ ‘কোনো বাধা নেই’ (No restrictions) বেছে নিন।",
+  "@helpXiaomiStep3": {
+    "description": "Help, Xiaomi step 3."
+  },
+  "helpXiaomiStep4": "‘নোটিফিকেশন’-এ অনুমতি দিন, লক স্ক্রিনে দেখানোও চালু রাখুন।",
+  "@helpXiaomiStep4": {
+    "description": "Help, Xiaomi step 4."
+  },
+  "helpSamsungHeading": "Samsung ফোনে",
+  "@helpSamsungHeading": {
+    "description": "Help: steps for Samsung phones (aggressive battery management, §22.2)."
+  },
+  "helpSamsungStep1": "সেটিংস › অ্যাপস › {app} › ব্যাটারি খুলে ‘সীমাবদ্ধ নয়’ (Unrestricted) বেছে নিন।",
+  "@helpSamsungStep1": {
+    "description": "Help, Samsung step 1.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSamsungStep2": "সেটিংস › ব্যাটারি › ‘পটভূমিতে ব্যবহারের সীমা’ (Background usage limits) খুলুন; {app} যেন ঘুমন্ত বা গভীর ঘুমন্ত অ্যাপের তালিকায় না থাকে।",
+  "@helpSamsungStep2": {
+    "description": "Help, Samsung step 2.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSamsungStep3": "চাইলে {app}-কে ‘কখনো ঘুমায় না’ (Never auto sleeping apps) তালিকায় যোগ করুন।",
+  "@helpSamsungStep3": {
+    "description": "Help, Samsung step 3.",
+    "placeholders": {
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "helpPathsVary": "সেটিংসের নাম ও পথ ফোন ও সংস্করণভেদে একটু আলাদা হতে পারে।",
+  "@helpPathsVary": {
+    "description": "Help: caveat under the steps."
+  },
+  "helpOpenFailed": "সেটিংস খোলা গেল না। ফোনের সেটিংস থেকে খুঁজে নিন।",
+  "@helpOpenFailed": {
+    "description": "Help: the system settings page could not be opened."
+  },
+  "remindersHelpLink": "অনুস্মারক ঠিক সময়ে আসছে না?",
+  "@remindersHelpLink": {
+    "description": "Reminders screen: link to the Help section about phone settings."
+  },
+  "correctedLabel": "সংশোধিত",
+  "@correctedLabel": {
+    "description": "Tag on an observance whose date was changed by a correction in the last 7 days (§18)."
+  },
+  "correctedNote": "এই উৎসবের তারিখ সম্প্রতি সংশোধন করা হয়েছে। আগের তারিখ মনে রাখলে মিলিয়ে নিন।",
+  "@correctedNote": {
+    "description": "Festival detail: explains the Corrected tag (§18)."
+  }
+}

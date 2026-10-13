@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-12T00:00:00Z",
+  "min_app_version": "1.0.0",
+  "packs": [
+    {
+      "id": "sample-observances-drik",
+      "kind": "observances",
+      "tradition": "drik_bishuddha",
+      "version": 2,
+      "covers": [
+        "2026-09-01",
+        "2026-12-31"
+      ],
+      "url": "/v1/packs/sample-observances-drik-v2.sqlite.gz",
+      "size": 3970,
+      "sha256": "7667f93c0fd7068d2cdaa801de581641b7cbca4838aaa2097682f4c175f4f11e",
+      "sig_url": "/v1/packs/sample-observances-drik-v2.sqlite.gz.sig"
+    }
+  ],
+  "notices": []
+}

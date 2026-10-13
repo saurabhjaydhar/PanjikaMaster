@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Purnima every month, including মলমাস.
+id: purnima
+name_bn: পূর্ণিমা
+name_en: Purnima
+category: tithi
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: every
+  paksha: shukla
+  tithi: purnima
+  on_vriddhi: first
+  include_mala: true
+windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "পূর্ণিমা চান্দ্র মাসের শুক্লপক্ষের শেষ তিথি, যখন চাঁদ পূর্ণ আকারে দেখা যায়। বাঙালি হিন্দু পরিবারে অনেকে পূর্ণিমায় সত্যনারায়ণের পূজা বা শিরনি দেন, কেউ উপবাস বা ব্রত রাখেন। বছরের বহু উৎসব কোনো না কোনো পূর্ণিমায় পড়ে: দোলযাত্রা, কোজাগরী লক্ষ্মীপূজা, রাসযাত্রা, ঝুলনযাত্রা, গুরুপূর্ণিমা আর বুদ্ধপূর্ণিমা। পূর্ণিমা কখন শুরু ও শেষ হয় তা অনেক পূজা ও ব্রতের সময় ঠিক করতে কাজে লাগে, তাই এই অ্যাপ তিথির সময় স্পষ্ট করে দেখায়। জোয়ার-ভাটা আর চাঁদের আলোর সঙ্গে জড়িয়ে গ্রামবাংলার নানা লোকাচারও পূর্ণিমাকে ঘিরে গড়ে উঠেছে।"
+description_en: "Purnima is the last tithi of the bright half of the lunar month, when the Moon is full. In many Bengali Hindu homes Satyanarayan puja is held on Purnima, and some keep a fast or vow. Many of the year's festivals fall on a full moon: Dol Jatra, Kojagari Lakshmi Puja, Rash Jatra, Jhulan Jatra, Guru Purnima and Buddha Purnima. Because the start and end of Purnima set the time of many pujas and vows, this app shows the tithi's timings clearly. Village Bengal has many customs of its own around the full moon, tied to the tides and to moonlit nights."
+description_review: pending
+review:
+  status: draft

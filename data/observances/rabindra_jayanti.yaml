@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 25 Boishakh; cite the source.
+id: rabindra_jayanti
+name_bn: রবীন্দ্র জয়ন্তী
+name_en: Rabindra Jayanti
+category: jayanti
+tier: 3
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_bengali_date
+  month: boishakh
+  day: 25
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "রবীন্দ্রজয়ন্তী বিশ্বকবি রবীন্দ্রনাথ ঠাকুরের জন্মদিন, পঁচিশে বৈশাখ। কবি, গীতিকার, নাট্যকার, চিত্রশিল্পী ও শিক্ষাবিদ রবীন্দ্রনাথ ১৯১৩ সালে সাহিত্যে নোবেল পুরস্কার পান, প্রথম এশীয় হিসেবে। তাঁর লেখা গান ভারত ও বাংলাদেশ দুই দেশেরই জাতীয় সংগীত। এই দিন সকাল থেকে বাড়িতে, পাড়ায়, স্কুলে আর সাংস্কৃতিক মঞ্চে রবীন্দ্রসংগীত, আবৃত্তি ও নৃত্যনাট্যের অনুষ্ঠান হয়। কলকাতার জোড়াসাঁকো ঠাকুরবাড়ি আর শান্তিনিকেতনে বিশেষ উৎসব হয়। বাঙালির কাছে পঁচিশে বৈশাখ শুধু একটি তারিখ নয়, নিজের ভাষা ও সংস্কৃতিকে উদযাপনের দিন। শান্তিনিকেতনে তাঁর প্রতিষ্ঠিত বিশ্বভারতী আজও তাঁর শিক্ষাভাবনার সাক্ষী। পাড়ার অনুষ্ঠানে প্রথম গান গাওয়া বা কবিতা বলার অভিজ্ঞতা অনেকেরই এই দিনে।"
+description_en: "Rabindra Jayanti is the birth anniversary of Rabindranath Tagore, celebrated on 25 Boishakh. Poet, songwriter, playwright, painter and educator, Tagore won the Nobel Prize in Literature in 1913, the first Asian to do so, and his songs are the national anthems of both India and Bangladesh. From the morning, homes, neighbourhoods, schools and cultural halls hold programmes of Rabindrasangeet, recitation and dance drama, with special celebrations at Jorasanko Thakurbari in Kolkata and at Santiniketan. For Bengalis, 25 Boishakh is more than a date: it is a day to celebrate their own language and culture."
+description_review: pending
+review:
+  status: draft

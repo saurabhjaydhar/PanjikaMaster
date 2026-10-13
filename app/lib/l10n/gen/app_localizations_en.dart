@@ -1,0 +1,1147 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'Bangla Panjika';
+
+  @override
+  String get navToday => 'Today';
+
+  @override
+  String get navCalendar => 'Calendar';
+
+  @override
+  String get navFestivals => 'Festivals';
+
+  @override
+  String get navMore => 'More';
+
+  @override
+  String untilTime(String time) {
+    return 'until $time';
+  }
+
+  @override
+  String thenName(String name) {
+    return 'then $name';
+  }
+
+  @override
+  String nextDayTime(String time) {
+    return '$time (next day)';
+  }
+
+  @override
+  String countdownDays(int count, String countText) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'in $countText days',
+      one: 'Tomorrow',
+      zero: 'Today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get timeZoneLabel => 'IST';
+
+  @override
+  String get sampleWatermark => 'নমুনা · SAMPLE';
+
+  @override
+  String get languageSetting => 'Language';
+
+  @override
+  String get comingSoon => 'Coming soon';
+
+  @override
+  String get labelNakshatra => 'Nakshatra';
+
+  @override
+  String get labelYoga => 'Yoga';
+
+  @override
+  String get labelKarana => 'Karana';
+
+  @override
+  String get labelSunrise => 'Sunrise';
+
+  @override
+  String get labelSunset => 'Sunset';
+
+  @override
+  String get labelMoonrise => 'Moonrise';
+
+  @override
+  String get labelMoonset => 'Moonset';
+
+  @override
+  String get timeNone => 'None';
+
+  @override
+  String get todayDataMissing => 'Today\'s data isn\'t available';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String provenance(String tradition, String city, String timeZone) {
+    return '$tradition · $city · $timeZone';
+  }
+
+  @override
+  String tithiSealSemantics(String tithi, String until, String then) {
+    return 'Tithi $tithi, $until, $then';
+  }
+
+  @override
+  String nameWithUntil(String name, String until) {
+    return '$name · $until';
+  }
+
+  @override
+  String get labelNow => 'Now';
+
+  @override
+  String get labelToday => 'Today';
+
+  @override
+  String periodSemantics(String name, String range, String active) {
+    String _temp0 = intl.Intl.selectLogic(active, {
+      'yes': ', happening now',
+      'other': '',
+    });
+    return '$name, $range$_temp0';
+  }
+
+  @override
+  String get periodShubh => 'Auspicious times';
+
+  @override
+  String get periodAshubh => 'Inauspicious times';
+
+  @override
+  String get verificationSample => 'Sample data';
+
+  @override
+  String get verificationComputed => 'Calculated, not yet checked';
+
+  @override
+  String get verificationReferenceMatched => 'Checked against the panjika';
+
+  @override
+  String get verificationExpertReviewed => 'Reviewed by an expert';
+
+  @override
+  String calendarCellSemantics(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi';
+  }
+
+  @override
+  String calendarCellWithFestival(
+    String bengaliDate,
+    String gregorianDate,
+    String tithi,
+    String festival,
+  ) {
+    return '$bengaliDate, $gregorianDate, $tithi, $festival';
+  }
+
+  @override
+  String todayPrefix(String label) {
+    return 'Today, $label';
+  }
+
+  @override
+  String cityChipSemantics(String city) {
+    return 'City: $city. Tap to change';
+  }
+
+  @override
+  String get glossaryTitle => 'Glossary';
+
+  @override
+  String get glossaryOpen => 'What does this mean?';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get languageNameBengali => 'বাংলা';
+
+  @override
+  String get languageNameEnglish => 'English';
+
+  @override
+  String termWithName(String term, String name) {
+    return '$term: $name';
+  }
+
+  @override
+  String get stateNotDownloaded =>
+      'Data for these dates isn\'t downloaded yet.';
+
+  @override
+  String get stateOffline =>
+      'You\'re offline. The data will download when you\'re connected.';
+
+  @override
+  String get stateStale => 'This data needs an update.';
+
+  @override
+  String get stateSignatureFailed =>
+      'We couldn\'t verify this data, so it isn\'t shown.';
+
+  @override
+  String get stateUnverified =>
+      'This date hasn\'t been checked against the panjika yet.';
+
+  @override
+  String get stateCheckClock => 'Please check your phone\'s date';
+
+  @override
+  String get actionDownload => 'Download';
+
+  @override
+  String get actionUpdate => 'Update';
+
+  @override
+  String sizeMegabytes(String size) {
+    return '$size MB';
+  }
+
+  @override
+  String downloadPrompt(String size) {
+    return 'New data is available ($size). Download now?';
+  }
+
+  @override
+  String get actionLater => 'Later';
+
+  @override
+  String get noticeDismiss => 'Got it';
+
+  @override
+  String get updateFailed =>
+      'Couldn\'t download the data. We\'ll try again later.';
+
+  @override
+  String get appUpdateRequired => 'Update the app to get new data.';
+
+  @override
+  String get labelTithi => 'Tithi';
+
+  @override
+  String get labelPaksha => 'Paksha';
+
+  @override
+  String get sectionSunMoon => 'Sun and moon';
+
+  @override
+  String get sectionObservances => 'Festivals and vratas';
+
+  @override
+  String get dayTitle => 'Day';
+
+  @override
+  String get previousDay => 'Previous day';
+
+  @override
+  String get nextDay => 'Next day';
+
+  @override
+  String coordinates(String lat, String lon) {
+    return '$lat° N, $lon° E';
+  }
+
+  @override
+  String footerDetail(String coordinates, String packs, String status) {
+    return '$coordinates · data: $packs · $status';
+  }
+
+  @override
+  String get sectionUpcoming => 'Coming up';
+
+  @override
+  String get sectionToday => 'Today';
+
+  @override
+  String get openDay => 'Open the full day';
+
+  @override
+  String get calendarModeBengali => 'Bengali month';
+
+  @override
+  String get calendarModeGregorian => 'Gregorian month';
+
+  @override
+  String monthTitle(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get previousMonth => 'Previous month';
+
+  @override
+  String get nextMonth => 'Next month';
+
+  @override
+  String get previousYear => 'Previous year';
+
+  @override
+  String get nextYear => 'Next year';
+
+  @override
+  String get chooseMonth => 'Choose a month';
+
+  @override
+  String get legendTitle => 'What the marks mean';
+
+  @override
+  String get legendFestival => 'Festival (colour by category)';
+
+  @override
+  String get legendSelected => 'Selected day';
+
+  @override
+  String legendEither(String first, String second) {
+    return '$first / $second';
+  }
+
+  @override
+  String selectedDay(String date) {
+    return 'Selected: $date';
+  }
+
+  @override
+  String get actionView => 'View';
+
+  @override
+  String get cityPickerTitle => 'Choose a city';
+
+  @override
+  String get citySearchHint => 'Type a city name';
+
+  @override
+  String get sectionRecent => 'Recent';
+
+  @override
+  String get sectionWestBengal => 'West Bengal';
+
+  @override
+  String get sectionOtherCities => 'Other cities';
+
+  @override
+  String sunriseAt(String time) {
+    return 'Sunrise $time';
+  }
+
+  @override
+  String cityRowSemantics(String city, String district, String sunrise) {
+    return '$city, $district, $sunrise';
+  }
+
+  @override
+  String get currentCity => 'Current city';
+
+  @override
+  String get noCityMatches => 'No city matches that name';
+
+  @override
+  String get cityChanged =>
+      'Sunrise and Rahu Kaal times changed; tithi and festival dates stay the same';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingNamesBoth => 'Names in both scripts';
+
+  @override
+  String get settingTradition => 'Panjika tradition';
+
+  @override
+  String get settingCity => 'City';
+
+  @override
+  String get settingTheme => 'Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get settingTextSize => 'Text size';
+
+  @override
+  String get textSizePreview => 'Text will look like this';
+
+  @override
+  String get settingTimeFormat => 'Time format';
+
+  @override
+  String timeFormatHours(String hours) {
+    return '$hours-hour';
+  }
+
+  @override
+  String get settingNumerals => 'Numerals';
+
+  @override
+  String get numeralsAuto => 'Follow language';
+
+  @override
+  String numeralsBengali(String digits) {
+    return 'Bengali ($digits)';
+  }
+
+  @override
+  String numeralsLatin(String digits) {
+    return 'Latin ($digits)';
+  }
+
+  @override
+  String get sectionData => 'Data';
+
+  @override
+  String get checkDataNow => 'Check for new data';
+
+  @override
+  String get installedData => 'Downloaded data';
+
+  @override
+  String dataRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get sectionOther => 'Other';
+
+  @override
+  String get licences => 'Licences';
+
+  @override
+  String get traditionConfirm =>
+      'Changing the tradition can change some festival dates. Reminders will be rescheduled.';
+
+  @override
+  String get actionChange => 'Change';
+
+  @override
+  String get actionKeep => 'Keep';
+
+  @override
+  String get moreTitle => 'More';
+
+  @override
+  String get menuReminders => 'Reminders';
+
+  @override
+  String get menuSearch => 'Search';
+
+  @override
+  String get menuCity => 'City';
+
+  @override
+  String get menuGlossary => 'Glossary';
+
+  @override
+  String get menuSettings => 'Settings';
+
+  @override
+  String get menuSources => 'Sources & verification';
+
+  @override
+  String get menuReport => 'Report an error';
+
+  @override
+  String get menuRemoveAds => 'Remove ads';
+
+  @override
+  String get menuAbout => 'About';
+
+  @override
+  String get menuPrivacy => 'Privacy';
+
+  @override
+  String get aboutTagline =>
+      'The Bengali panjika of tithis, festivals and auspicious times, in Bengali and English.';
+
+  @override
+  String aboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get aboutDataHeading => 'Where the data comes from';
+
+  @override
+  String get aboutDataBody =>
+      'Positions of the Sun and Moon are computed from NASA JPL\'s DE440s ephemeris with the Skyfield software. The computation is done ahead of time; the phone only reads that data and never guesses.';
+
+  @override
+  String get aboutProvenance =>
+      'Every value is shown with its panjika tradition, city, time zone and verification status.';
+
+  @override
+  String bothLanguages(String bn, String en) {
+    return '$bn · $en';
+  }
+
+  @override
+  String onboardingStep(String step, String total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get onboardingChooseLanguage => 'Choose your language';
+
+  @override
+  String onboardingLanguagePreview(String tithi) {
+    return 'For example: $tithi';
+  }
+
+  @override
+  String get onboardingChangeLater => 'You can change this later.';
+
+  @override
+  String get actionContinue => 'Continue';
+
+  @override
+  String get onboardingTraditionTitle => 'Which panjika do you follow?';
+
+  @override
+  String get onboardingTraditionNote =>
+      'The two can put a festival on different days. You can change this in Settings.';
+
+  @override
+  String get onboardingCityTitle => 'Which is your city?';
+
+  @override
+  String get onboardingCityNote =>
+      'Sunrise, sunset and Rahu Kaal depend on your city. Tithis and festival dates don\'t.';
+
+  @override
+  String get onboardingRemindersTitle => 'Would you like reminders?';
+
+  @override
+  String get onboardingRemindersBody =>
+      'The app can remind you before festivals, Ekadashi, Purnima and Amavasya. You\'ll choose which ones under Reminders. Your phone will ask for permission when the first reminder is set.';
+
+  @override
+  String get onboardingRemindersYes => 'Yes, remind me';
+
+  @override
+  String get onboardingRemindersNo => 'Not now';
+
+  @override
+  String cityListProvenance(
+    String tradition,
+    String timeZone,
+    String packs,
+    String status,
+  ) {
+    return '$tradition · today\'s sunrise in each city, $timeZone · data: $packs · $status';
+  }
+
+  @override
+  String get useMyLocation => 'Use my location';
+
+  @override
+  String get locating => 'Finding your location…';
+
+  @override
+  String get locationRationale =>
+      'To find the nearest city, the app needs your phone\'s approximate location. It is used only on this phone; only the city you choose is remembered.';
+
+  @override
+  String get actionNotNow => 'Not now';
+
+  @override
+  String nearestCity(String city, String distance) {
+    return 'Nearest city: $city, $distance km';
+  }
+
+  @override
+  String cityFarWarning(String limit) {
+    return 'This city is more than $limit km away, so times may differ by a few minutes.';
+  }
+
+  @override
+  String get actionChooseCity => 'Choose this city';
+
+  @override
+  String get locationDenied =>
+      'The app works without it. Choose your city from the list.';
+
+  @override
+  String get locationDeniedForever =>
+      'Location permission is off. Choose your city from the list, or allow it in settings.';
+
+  @override
+  String get actionOpenSettings => 'Open settings';
+
+  @override
+  String get locationOff => 'Location is turned off on this phone.';
+
+  @override
+  String get actionTurnOn => 'Turn on';
+
+  @override
+  String get locationUnavailable =>
+      'Couldn\'t find your location. Choose your city from the list.';
+
+  @override
+  String get linkNotFound => 'This page couldn\'t be found.';
+
+  @override
+  String get festivalNotFound =>
+      'This festival isn\'t in the data on this phone.';
+
+  @override
+  String get goToToday => 'Go to Today';
+
+  @override
+  String get numeralsBengaliSemantics => 'Bengali numerals';
+
+  @override
+  String get numeralsLatinSemantics => 'Latin numerals';
+
+  @override
+  String festivalsTitle(String year) {
+    return 'Festivals $year';
+  }
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterTitle => 'Filter';
+
+  @override
+  String get filterMonth => 'Month';
+
+  @override
+  String get filterImportance => 'Importance';
+
+  @override
+  String get tierMajor => 'Major festivals';
+
+  @override
+  String get tierOther => 'Other observances';
+
+  @override
+  String get tierCivic => 'Anniversaries and civic days';
+
+  @override
+  String get showAll => 'Show all';
+
+  @override
+  String get noFestivalsMatch => 'No observances match these filters.';
+
+  @override
+  String get festivalYearPartial =>
+      'Some months of this year aren\'t downloaded.';
+
+  @override
+  String festivalRowDates(String gregorian, String bengali) {
+    return '$gregorian · $bengali';
+  }
+
+  @override
+  String festivalDayOf(String day) {
+    return 'Day $day';
+  }
+
+  @override
+  String get windowSandhiPuja => 'Sandhi Puja';
+
+  @override
+  String windowSandhiPujaHint(String minutes) {
+    return 'The last $minutes minutes of Ashtami and the first $minutes of Navami';
+  }
+
+  @override
+  String get windowNishita => 'Nishita (midnight)';
+
+  @override
+  String get windowPratah => 'Pratah (early morning)';
+
+  @override
+  String get windowMadhyahna => 'Madhyahna (midday)';
+
+  @override
+  String get windowAparahna => 'Aparahna (afternoon)';
+
+  @override
+  String get windowPradosha => 'Pradosha (dusk)';
+
+  @override
+  String festivalTithiSpan(String name, String start, String end) {
+    return '$name · $start to $end';
+  }
+
+  @override
+  String checkedOn(String date) {
+    return 'Checked: $date';
+  }
+
+  @override
+  String get reminderOff => 'Remind me';
+
+  @override
+  String get reminderOn => 'Reminder on';
+
+  @override
+  String get festivalDaysLabel => 'Days';
+
+  @override
+  String reminderTomorrow(String name) {
+    return '$name tomorrow';
+  }
+
+  @override
+  String reminderToday(String name) {
+    return '$name today';
+  }
+
+  @override
+  String reminderTithiBegun(String name) {
+    return '$name has begun';
+  }
+
+  @override
+  String reminderTithiBegins(String time) {
+    return 'Tithi begins $time';
+  }
+
+  @override
+  String reminderBody(String detail, String tradition, String timeZone) {
+    return '$detail · $tradition · $timeZone';
+  }
+
+  @override
+  String get channelFestival => 'Festival reminders';
+
+  @override
+  String get channelFestivalDescription =>
+      'Reminders before the festivals you chose.';
+
+  @override
+  String get channelTithi => 'Tithi reminders';
+
+  @override
+  String get channelTithiDescription =>
+      'Ekadashi, Purnima and Amavasya reminders.';
+
+  @override
+  String get notificationsOff =>
+      'Notifications are off, so reminders can\'t be shown. Turn on notifications for this app in your phone\'s settings.';
+
+  @override
+  String get sectionRecurring => 'Recurring';
+
+  @override
+  String get sectionFestivalReminders => 'Festivals';
+
+  @override
+  String get recurringEkadashi => 'Ekadashi';
+
+  @override
+  String get recurringPurnima => 'Purnima';
+
+  @override
+  String get recurringAmavasya => 'Amavasya';
+
+  @override
+  String timingDayBefore(String time) {
+    return 'The day before, $time';
+  }
+
+  @override
+  String timingMorningOf(String time) {
+    return 'On the day, $time';
+  }
+
+  @override
+  String get timingTithiStart => 'When the tithi begins';
+
+  @override
+  String timingBoth(String first, String second) {
+    return '$first and $second';
+  }
+
+  @override
+  String get addFestivalReminder => 'Add a festival';
+
+  @override
+  String get remindersEmpty =>
+      'No reminders yet. Turn one on for Ekadashi or a festival.';
+
+  @override
+  String get timingSheetTitle => 'When should we remind you?';
+
+  @override
+  String get timingDayBeforeOption => 'The day before';
+
+  @override
+  String get timingMorningOption => 'On the morning of the day';
+
+  @override
+  String get changeTime => 'Change the time';
+
+  @override
+  String shareProvenance(String tradition) {
+    return 'As per $tradition';
+  }
+
+  @override
+  String shareProvenanceWithPlace(
+    String tradition,
+    String city,
+    String timeZone,
+  ) {
+    return 'As per $tradition · $city · $timeZone';
+  }
+
+  @override
+  String shareFestivalMessage(String name, String date) {
+    return '$name: $date';
+  }
+
+  @override
+  String shareDayMessage(String date, String tithi) {
+    return '$date · $tithi';
+  }
+
+  @override
+  String get shareAction => 'Share';
+
+  @override
+  String get shareSheetTitle => 'Share card';
+
+  @override
+  String get shareInBoth => 'Both';
+
+  @override
+  String get sectionTerms => 'Panjika terms';
+
+  @override
+  String get sectionPeriods => 'Periods of the day';
+
+  @override
+  String get glossarySearchHint => 'Search terms';
+
+  @override
+  String get noGlossaryMatches => 'No term matches that';
+
+  @override
+  String get searchHint => 'A date or festival name';
+
+  @override
+  String get searchExamples =>
+      'For example: 25 Ashwin 1433 · 12/10/2026 · Kali Puja';
+
+  @override
+  String get searchResults => 'Results';
+
+  @override
+  String searchDateEquals(String bengali, String gregorian) {
+    return '$bengali = $gregorian';
+  }
+
+  @override
+  String searchDateNotInstalled(String date) {
+    return '$date: this date isn\'t in the data on this phone';
+  }
+
+  @override
+  String get searchNoResults =>
+      'Nothing found. Check the spelling or the date format.';
+
+  @override
+  String get sourcesTraditionHeading => 'Panjika tradition';
+
+  @override
+  String sourcesTraditionBody(String tradition) {
+    return 'Every date and time in this app follows $tradition, the tradition chosen in Settings.';
+  }
+
+  @override
+  String get sourcesHowHeading => 'How we calculate';
+
+  @override
+  String get sourcesStep1Title => 'Astronomical calculation (NASA JPL)';
+
+  @override
+  String get sourcesStep1Body =>
+      'Positions of the Sun and Moon come from NASA JPL\'s DE440s ephemeris, computed ahead of time with the Skyfield software.';
+
+  @override
+  String get sourcesStep2Title => 'Checked against the Rashtriya Panchang';
+
+  @override
+  String get sourcesStep2Body =>
+      'Tithi, nakshatra and other times are compared with the Government of India\'s national almanac.';
+
+  @override
+  String get sourcesStep3Title => 'Checked against the printed panjika';
+
+  @override
+  String get sourcesStep3Body =>
+      'Bengali dates and festival days are compared with the printed panjika.';
+
+  @override
+  String get sourcesStep4Title => 'Major festivals reviewed by an expert';
+
+  @override
+  String get sourcesStep4Body =>
+      'A panjika expert reviews the rules for the major festivals.';
+
+  @override
+  String get sourcesStepsNote =>
+      'The mark next to each value shows how far it has been checked.';
+
+  @override
+  String get sourcesMarksHeading => 'What the marks mean';
+
+  @override
+  String get sourcesPhoneHeading => 'Data on this phone';
+
+  @override
+  String get packKindGlobal => 'Panchanga data';
+
+  @override
+  String get packKindCities => 'City data';
+
+  @override
+  String get packKindObservances => 'Festival data';
+
+  @override
+  String sourcesPackTitle(String kind, String version) {
+    return '$kind · version $version';
+  }
+
+  @override
+  String sourcesPackScope(String tradition, String range) {
+    return '$tradition · $range';
+  }
+
+  @override
+  String sourcesValidatedOn(String date) {
+    return 'Last checked: $date';
+  }
+
+  @override
+  String get sourcesNotValidated => 'Not yet checked against the references';
+
+  @override
+  String get sourcesNoPacks => 'There\'s no data on this phone yet.';
+
+  @override
+  String get sourcesWhyLink => 'Why do the two schools differ?';
+
+  @override
+  String get schoolsPara1 =>
+      'West Bengal has two panjika traditions. Bishuddha Siddhanta (Drik) works from the modern astronomical positions of the Sun and Moon, the same method as the Government of India\'s national almanac. Surya Siddhanta, followed by Gupta Press and several other almanacs, uses the classical model of the ancient Surya Siddhanta text together with the rules of Raghunandana.';
+
+  @override
+  String get schoolsPara2 =>
+      'The two models place the Sun and Moon slightly differently, so the same tithi ends at a different time in each, sometimes by a few minutes and sometimes by more. A day takes the tithi that is current at sunrise. So when a tithi ends close to sunrise, the two schools can name different tithis for the same morning, and a festival can fall a day earlier or later.';
+
+  @override
+  String get schoolsPara3 =>
+      'Neither is a mistake; both are long-standing ways of reckoning. This app shows which tradition every date follows. It offers Bishuddha Siddhanta now, and Surya Siddhanta will come later. If your family follows a particular panjika, compare with it.';
+
+  @override
+  String get reportDateLabel => 'Which date?';
+
+  @override
+  String reportDateBoth(String bengali, String gregorian) {
+    return '$bengali ($gregorian)';
+  }
+
+  @override
+  String get reportChangeDate => 'Change date';
+
+  @override
+  String get reportKindLabel => 'What\'s wrong?';
+
+  @override
+  String get reportKindTithiTime => 'Tithi time';
+
+  @override
+  String get reportKindFestivalDay => 'Festival day';
+
+  @override
+  String get reportKindBengaliDate => 'Bengali date';
+
+  @override
+  String get reportKindOther => 'Something else';
+
+  @override
+  String get reportPanjikaSaysLabel => 'What does your panjika say?';
+
+  @override
+  String get reportPanjikaSaysHint =>
+      'Write what your panjika says, in your own words';
+
+  @override
+  String get reportPanjikaNameLabel => 'Name of the panjika (optional)';
+
+  @override
+  String get packKindShortGlobal => 'Panchanga';
+
+  @override
+  String get packKindShortCities => 'Cities';
+
+  @override
+  String get packKindShortObservances => 'Festivals';
+
+  @override
+  String reportPackVersion(String kind, String version) {
+    return '$kind version $version';
+  }
+
+  @override
+  String reportSentWith(String city, String tradition, String versions) {
+    return 'Sent with it: $city · $tradition · $versions';
+  }
+
+  @override
+  String get reportPrivacy =>
+      'We don\'t ask for or send your name, phone number or e-mail.';
+
+  @override
+  String get reportSend => 'Send';
+
+  @override
+  String get reportSent =>
+      'Sent. We\'ll check it and correct the data if needed.';
+
+  @override
+  String get reportQueued => 'It will be sent when you\'re online.';
+
+  @override
+  String get menuHelp => 'Help';
+
+  @override
+  String get helpVoiceHeading => 'Bengali voice for TalkBack';
+
+  @override
+  String get helpVoiceIntro =>
+      'Many phones come without a Bengali voice, and then TalkBack can\'t read Bengali text properly. Downloading Google\'s Bengali voice once fixes this.';
+
+  @override
+  String get helpVoiceStep1 =>
+      'Open Text-to-speech in your phone\'s settings, or tap the button below.';
+
+  @override
+  String get helpVoiceStep2 =>
+      'Choose Speech Services by Google as the preferred engine.';
+
+  @override
+  String get helpVoiceStep3 =>
+      'Tap the settings icon next to the engine, then Install voice data.';
+
+  @override
+  String get helpVoiceStep4 => 'Choose Bengali (India) and download the voice.';
+
+  @override
+  String get helpOpenTts => 'Open text-to-speech settings';
+
+  @override
+  String get helpRemindersHeading => 'If reminders don\'t arrive on time';
+
+  @override
+  String get helpRemindersIntro =>
+      'Some phones put apps to sleep to save battery, so reminders arrive late or not at all. Check these two things:';
+
+  @override
+  String helpRemindersStep1(String app) {
+    return 'Notifications are turned on for $app.';
+  }
+
+  @override
+  String helpRemindersStep2(String app) {
+    return 'In battery settings, $app is set to Unrestricted.';
+  }
+
+  @override
+  String get helpOpenNotifications => 'Open notification settings';
+
+  @override
+  String get helpOpenBattery => 'Open battery settings';
+
+  @override
+  String get helpXiaomiHeading => 'On Xiaomi, Redmi and POCO phones';
+
+  @override
+  String helpXiaomiStep1(String app) {
+    return 'Open Settings › Apps › Manage apps › $app.';
+  }
+
+  @override
+  String get helpXiaomiStep2 => 'Turn on Autostart.';
+
+  @override
+  String get helpXiaomiStep3 => 'Under Battery saver, choose No restrictions.';
+
+  @override
+  String get helpXiaomiStep4 =>
+      'Under Notifications, allow notifications, including on the lock screen.';
+
+  @override
+  String get helpSamsungHeading => 'On Samsung phones';
+
+  @override
+  String helpSamsungStep1(String app) {
+    return 'Open Settings › Apps › $app › Battery and choose Unrestricted.';
+  }
+
+  @override
+  String helpSamsungStep2(String app) {
+    return 'Open Settings › Battery › Background usage limits and make sure $app isn\'t in Sleeping apps or Deep sleeping apps.';
+  }
+
+  @override
+  String helpSamsungStep3(String app) {
+    return 'If you like, add $app to Never auto sleeping apps.';
+  }
+
+  @override
+  String get helpPathsVary =>
+      'The names and paths of settings can differ a little between phones and versions.';
+
+  @override
+  String get helpOpenFailed =>
+      'Couldn\'t open the settings. Please find them in your phone\'s Settings.';
+
+  @override
+  String get remindersHelpLink => 'Reminders not arriving on time?';
+
+  @override
+  String get correctedLabel => 'Corrected';
+
+  @override
+  String get correctedNote =>
+      'This festival\'s date was recently corrected. If you noted the old date, please check it again.';
+}

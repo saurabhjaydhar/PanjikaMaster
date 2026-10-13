@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the Shashthi day rule (udaya, or sayahna for the bodhon).
+id: durga_shashthi
+name_bn: দুর্গাষষ্ঠী
+name_en: Durga Shashthi
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: ashwin
+  paksha: shukla
+  tithi: shashthi
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "দুর্গাষষ্ঠী দুর্গাপূজার প্রথম প্রধান দিন। আশ্বিনের শুক্লা ষষ্ঠীতে সন্ধ্যায় বেলগাছের তলায় দেবীর বোধন হয়, অর্থাৎ দেবীকে জাগিয়ে তোলা হয়। এর পর হয় আমন্ত্রণ আর অধিবাস: দেবীকে পূজা গ্রহণের নিমন্ত্রণ জানিয়ে পূজার উপকরণ পবিত্র করা হয়। অনেক মণ্ডপে এই দিনেই প্রতিমার মুখের আবরণ খোলা হয় এবং ঢাকের বাজনায় উৎসবের শুরু ঘোষণা হয়। বিশ্বাস অনুযায়ী এই সময় দেবী সন্তানদের নিয়ে বাপের বাড়ি আসেন, তাই ঘরে ঘরে আনন্দ আর অতিথি আপ্যায়নের প্রস্তুতি চলে। অনেক মা এই দিনে সন্তানের মঙ্গল কামনায় ষষ্ঠীর ব্রত রাখেন। শহরে আর গ্রামে প্যান্ডেল ঘোরা শুরু হয় এই সন্ধ্যা থেকেই।"
+description_en: "Durga Shashthi is the first of the main days of Durga Puja, on the bright-fortnight Shashthi of Ashwin. In the evening the goddess is ritually awakened beneath a bel tree, a rite called bodhon, followed by amontron and adhibas, in which she is invited to accept worship and the offerings are consecrated. In many pandals the veil is lifted from the face of the image this day, and the dhak drums announce that the festival has begun. Tradition holds that Durga is now visiting her parents' home with her children, so households prepare to welcome guests. Many mothers also keep a Shashthi fast for the wellbeing of their children. For city and village alike, this is the evening when pandal-hopping begins."
+description_review: pending
+review:
+  status: draft

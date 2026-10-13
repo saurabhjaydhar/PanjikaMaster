@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the last day of each Bengali month (Bengal midnight rule, Q4).
+id: sankranti
+name_bn: সংক্রান্তি
+name_en: Sankranti
+category: tithi
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: sankranti_day
+  month: every
+  day: last
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "সংক্রান্তি বাংলা মাসের শেষ দিন, যখন সূর্য এক রাশি থেকে পরের রাশিতে যায়। সংক্রান্তির মুহূর্ত দিনের কোন সময়ে পড়ছে তার উপর বাংলা পঞ্জিকার নিয়মে ঠিক হয় পরের মাস কবে শুরু হবে। কয়েকটি সংক্রান্তি নিজেই বড় উৎসব। পৌষ সংক্রান্তিতে, যাকে মকর সংক্রান্তিও বলে, ঘরে ঘরে পিঠেপুলি তৈরি হয় আর গঙ্গাসাগরে মেলা বসে। চৈত্র সংক্রান্তিতে বছরের শেষ দিনে গাজন ও চড়ক উৎসব হয়। ভাদ্র সংক্রান্তিতে বিশ্বকর্মা পূজা, আর শ্রাবণ সংক্রান্তিতে অনেক জায়গায় মনসা পূজা হয়। গ্রামবাংলার কৃষিকাজের ছন্দও এই মাসভিত্তিক হিসাবের সঙ্গে জড়িত।"
+description_en: "Sankranti is the last day of a Bengali month, when the Sun passes from one zodiac sign into the next. Under the Bengal rule, the time of day at which that moment falls decides when the next month begins. Several sankrantis are festivals in their own right. On Poush Sankranti, also called Makar Sankranti, homes make pithe-puli, rice cakes and sweets, and a great fair gathers at Gangasagar. Chaitra Sankranti, the last day of the year, brings the Gajan and Charak festivals; Bhadra Sankranti is Vishwakarma Puja, and in many places Manasa is worshipped on Srabon Sankranti. The rhythm of farm work in rural Bengal follows these months too."
+description_review: pending
+review:
+  status: draft

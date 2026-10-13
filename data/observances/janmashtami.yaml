@@ -1,0 +1,27 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: Krishna Ashtami (amanta Srabon) at nishita; whether Rohini nakshatra is also required (the engine has no nakshatra condition yet).
+id: janmashtami
+name_bn: জন্মাষ্টমী
+name_en: Janmashtami
+category: vrata
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: prevails_at
+  lunar_month: srabon
+  paksha: krishna
+  tithi: ashtami
+  moment: nishita
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
+  include_mala: false
+windows: [tithi_span, nishita]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "জন্মাষ্টমী শ্রীকৃষ্ণের জন্মতিথি। প্রচলিত কাহিনি অনুযায়ী মথুরার কারাগারে ভাদ্র মাসের কৃষ্ণা অষ্টমীর মধ্যরাতে তাঁর জন্ম হয়েছিল; ভক্তরা দিনভর উপবাস রেখে মধ্যরাতে কৃষ্ণের জন্মমুহূর্তে পূজা ও আরতি করেন, তার পর উপবাস ভাঙেন। বাংলায় এই সময় তালের মরসুম, তাই তালের বড়া ও তালের ক্ষীর জন্মাষ্টমীর বিশেষ পদ। মন্দিরে ও বাড়িতে কৃষ্ণের বালরূপ সাজিয়ে দোলনায় দোলানো হয়। পরদিন নন্দোৎসবে নন্দরাজের ঘরে কৃষ্ণের আগমন উদযাপন করা হয়। বৈষ্ণব মন্দিরগুলিতে সারাদিন কীর্তন, ভাগবত পাঠ আর কৃষ্ণলীলার নাটক হয়; নবদ্বীপ ও মায়াপুরে উৎসব বিশেষ জাঁকজমকে পালিত হয়। ছোটদের কাছে কৃষ্ণের জন্মকাহিনি গল্পের মতো করে শোনানো হয়।"
+description_en: "Janmashtami marks the birth of Krishna, who by tradition was born at midnight in a prison cell in Mathura on the dark-fortnight Ashtami of Bhadro. Devotees fast through the day and worship at midnight, the moment of his birth, before breaking the fast. In Bengal this is the season of the palmyra palm, so taler bora, palm-fruit fritters, and taler kheer are the dishes of the day. Images of the infant Krishna are decorated and rocked in cradles at home and in temples, and the next day Nandotsav celebrates his arrival in the house of Nanda."
+description_review: pending
+review:
+  status: draft

@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: the Srabon sankranti day.
+id: manasa_puja
+name_bn: মনসা পূজা
+name_en: Manasa Puja
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: sankranti_day
+  month: srabon
+  day: last
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "মনসা পূজা হয় শ্রাবণ সংক্রান্তিতে, বর্ষার মাঝখানে। দেবী মনসা সাপের দেবী; বর্ষায় সাপের উপদ্রব বাড়ে, তাই গ্রামবাংলায় তাঁর পূজার বিশেষ গুরুত্ব। অনেক জায়গায় মনসার ঘট, সিজ গাছের ডাল বা মাটির প্রতিমায় পূজা হয়, আর পরিবারের মঙ্গল ও সাপের ভয় থেকে মুক্তি চাওয়া হয়। মধ্যযুগের মনসামঙ্গল কাব্যে চাঁদ সওদাগর, বেহুলা ও লখিন্দরের কাহিনি বাংলার লোকসংস্কৃতির অংশ; এই সময়ে তার পালাগান হয়। বেহুলার স্বামীকে বাঁচাতে কলার ভেলায় যাত্রার গল্প আজও মানুষের মুখে মুখে ফেরে। অঞ্চলভেদে বর্ষার অন্য দিনেও মনসার পূজা হয়। পূজায় দুধ, কলা আর খই নিবেদনের রীতি আছে।"
+description_en: "Manasa Puja is held on Srabon Sankranti, in the middle of the monsoon. Manasa is the goddess of snakes, and since snakes are most often met in the rains, her worship matters especially in rural Bengal. In many places she is worshipped in a pot, a branch of the sij plant or a clay image, with prayers for the family's wellbeing and protection from snakebite. The medieval Manasamangal poems, telling of Chand Saudagar, Behula and Lakhindar, are part of Bengal's folk heritage and are sung at this time; Behula's journey on a banana-stem raft to bring her husband back to life is still widely told. In some areas Manasa is worshipped on other days of the monsoon as well."
+description_review: pending
+review:
+  status: draft

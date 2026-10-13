@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-12T00:00:00Z",
+  "min_app_version": "1.0.0",
+  "packs": [
+    {
+      "id": "sample-cities",
+      "kind": "cities",
+      "tradition": "drik_bishuddha",
+      "version": 1,
+      "covers": [
+        "2026-09-01",
+        "2026-12-31"
+      ],
+      "url": "/v1/packs/sample-cities.sqlite.gz",
+      "size": 14149,
+      "sha256": "ea3c7efea9e8eed29943ecf87d1653f6e7eb78258a340d7a6b753ff876ae3c5b",
+      "sig_url": "/v1/packs/sample-cities.sqlite.gz.sig"
+    },
+    {
+      "id": "sample-global-drik",
+      "kind": "global",
+      "tradition": "drik_bishuddha",
+      "version": 1,
+      "covers": [
+        "2026-09-01",
+        "2026-12-31"
+      ],
+      "url": "/v1/packs/sample-global-drik.sqlite.gz",
+      "size": 31148,
+      "sha256": "c2be8641d2f40b10efbb0616038213a7fae921b1bb6140d446061f33716f3f78",
+      "sig_url": "/v1/packs/sample-global-drik.sqlite.gz.sig"
+    },
+    {
+      "id": "sample-observances-drik",
+      "kind": "observances",
+      "tradition": "drik_bishuddha",
+      "version": 1,
+      "covers": [
+        "2026-09-01",
+        "2026-12-31"
+      ],
+      "url": "/v1/packs/sample-observances-drik.sqlite.gz",
+      "size": 3922,
+      "sha256": "358186b66ac8c065d288ba85e345594d4681ac8de3851c65ec89ff24cda6964f",
+      "sig_url": "/v1/packs/sample-observances-drik.sqlite.gz.sig"
+    }
+  ],
+  "notices": []
+}

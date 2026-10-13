@@ -1,0 +1,19 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: 11 Jyoishtho; cite the source.
+id: nazrul_jayanti
+name_bn: নজরুল জয়ন্তী
+name_en: Nazrul Jayanti
+category: jayanti
+tier: 3
+traditions: [drik_bishuddha]
+decision:
+  type: fixed_bengali_date
+  month: jyoishtho
+  day: 11
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "নজরুলজয়ন্তী বিদ্রোহী কবি কাজী নজরুল ইসলামের জন্মদিন, এগারোই জ্যৈষ্ঠ। \"বিদ্রোহী\" কবিতার মতো তাঁর লেখা ব্রিটিশ শাসনের বিরুদ্ধে প্রতিবাদ, সাম্য ও মানবতার কথা বলে। তিনি কয়েক হাজার গান লিখেছেন ও সুর দিয়েছেন, যা নজরুলগীতি নামে পরিচিত; তাতে শ্যামাসংগীত থেকে গজল পর্যন্ত নানা ধারা মিশেছে। নজরুল বাংলাদেশের জাতীয় কবি। এই দিন পশ্চিমবঙ্গ ও বাংলাদেশে তাঁর গান, কবিতা আর আলোচনার অনুষ্ঠান হয়, বিশেষ করে বর্ধমানের চুরুলিয়ায়, তাঁর জন্মস্থানে। তাঁর লেখা আজও অন্যায়ের বিরুদ্ধে সাহসের প্রেরণা জোগায়। জীবনের শেষ পর্ব তাঁর কেটেছে ঢাকায়, সেখানেই তিনি সমাধিস্থ।"
+description_en: "Nazrul Jayanti is the birth anniversary of Kazi Nazrul Islam, the rebel poet, celebrated on 11 Jyoishtho. Poems such as \"Bidrohi\", The Rebel, voiced protest against British rule and spoke for equality and humanity. He wrote and set to music thousands of songs, known as Nazrul Geeti, ranging from devotional songs to Kali to ghazals. Nazrul is the national poet of Bangladesh. On this day West Bengal and Bangladesh hold programmes of his songs, poems and talks, notably at Churulia in Bardhaman, where he was born. His writing still inspires the courage to stand up to injustice."
+description_review: pending
+review:
+  status: draft

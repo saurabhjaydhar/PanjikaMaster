@@ -1,0 +1,88 @@
+name: ci-data
+
+on:
+  push:
+    branches: [main]
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", "scripts/gen_test_packs.py", "app/test/fixtures/packs/**", ".github/workflows/ci-data.yml"]
+  workflow_dispatch:
+  pull_request:
+    paths: ["data/**", "app/lib/data/db/*.drift", "app/lib/data/fixtures/**", "scripts/sync_drift_schema.py", "scripts/gen_sample_fixture.py", "scripts/gen_test_packs.py", "app/test/fixtures/packs/**", ".github/workflows/ci-data.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    env:
+      # More examples and a fixed seed (data/tests/conftest.py, T-218).
+      HYPOTHESIS_PROFILE: ci
+    defaults:
+      run:
+        working-directory: data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      # JPL DE440s (~32 MB), cached by the lock file. The first run records its SHA-256
+      # as UNCONFIRMED and prints it here; a human then confirms it (T-201 gate).
+      - uses: actions/cache@v4
+        with:
+          path: data/ephem/de440s.bsp
+          key: ephemeris-${{ hashFiles('data/ephem/ephemeris.lock.json') }}
+      - name: Fetch and verify the ephemeris
+        run: |
+          uv run python -m ephem.fetch
+          echo "### Ephemeris lock" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat ephem/ephemeris.lock.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest
+      # The app's Drift tables are generated from data/pack/schema.sql (T-106).
+      - run: python ../scripts/sync_drift_schema.py --check
+      # The app's debug-only sample fixture is generated from pack/sample.py (T-110).
+      - run: uv run python ../scripts/gen_sample_fixture.py --check
+      # The app's importer tests use signed sample packs from the pack builder (T-303).
+      - run: uv run python ../scripts/gen_test_packs.py --check
+
+  # T-207: the full 2020–2045 build on the locked DE440s; its run time goes in the job
+  # summary and the database is kept for the validation work (Phase 3). Main and manual
+  # runs only, to keep PR checks fast.
+  full-build:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - uses: actions/cache@v4
+        with:
+          path: data/ephem/de440s.bsp
+          key: ephemeris-${{ hashFiles('data/ephem/ephemeris.lock.json') }}
+      - run: uv run python -m ephem.fetch
+      - name: Build 2020–2045
+        run: |
+          SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) \
+            uv run python -m engine build --from 2020-01-01 --to 2045-12-31 --out dist
+          echo "### Full build" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat dist/*.run.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          sha256sum dist/*.sqlite >> "$GITHUB_STEP_SUMMARY"
+      # T-302: compare with the human-entered references; fails beyond tolerance.
+      - name: Validate against references
+        run: uv run python -m validate --pack dist/global-*.sqlite
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: global-2020-2045
+          path: |
+            data/dist/
+            data/validate/reports/
+          retention-days: 14

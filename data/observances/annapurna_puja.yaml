@@ -1,0 +1,22 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Ashtami of Chaitra.
+id: annapurna_puja
+name_bn: অন্নপূর্ণা পূজা
+name_en: Annapurna Puja
+category: puja
+tier: 2
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: chaitra
+  paksha: shukla
+  tithi: ashtami
+  on_vriddhi: first
+  include_mala: false
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "অন্নপূর্ণা পূজা হয় চৈত্র মাসের শুক্লা অষ্টমীতে। দেবী অন্নপূর্ণা অন্নের দেবী, যিনি জগতের সবাইকে অন্ন জোগান; প্রচলিত কাহিনিতে স্বয়ং শিব ভিক্ষাপাত্র হাতে তাঁর কাছে অন্ন চেয়েছিলেন। বাংলায় অনেক বাড়ি ও মন্দিরে এই পূজা হয়, আর ঘরে যেন কখনো অন্নের অভাব না হয় সেই প্রার্থনা জানানো হয়। এই সময়েই বাসন্তী পূজা হয়, তাই চৈত্রের শুক্লপক্ষ বাংলায় দেবী আরাধনার আর এক মরসুম। ভারতচন্দ্রের \"অন্নদামঙ্গল\" কাব্যে দেবী অন্নদার কাছে ঈশ্বরী পাটনীর প্রার্থনা, \"আমার সন্তান যেন থাকে দুধেভাতে\", বাঙালির মনে আজও গেঁথে আছে। এই দিনে ক্ষুধার্তকে অন্নদান করাকে বিশেষ পুণ্যের কাজ বলে মনে করা হয়।"
+description_en: "Annapurna Puja falls on the bright-fortnight Ashtami of Chaitra. The goddess Annapurna is the giver of food, who feeds the whole world; in the old story Shiva himself came to her with a begging bowl. Many homes and temples in Bengal hold her worship and pray that their kitchens will never lack food. Basanti Puja is held in the same season, so the bright fortnight of Chaitra is another time of goddess worship in Bengal. Bengalis still quote the boatman Ishwari Patni's prayer to the goddess in Bharatchandra's Annadamangal: may my children always have milk and rice."
+description_review: pending
+review:
+  status: draft

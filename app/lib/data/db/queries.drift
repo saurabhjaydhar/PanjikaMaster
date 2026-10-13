@@ -1,0 +1,88 @@
+-- Named queries the Today screen needs (spec §14.4). Drift generates typed methods.
+import 'pack_tables.drift';
+
+-- Transitions of one kind overlapping [fromUtc, toUtc), e.g. a panjika day (sunrise → next sunrise).
+transitionsOverlapping:
+SELECT * FROM transitions
+ WHERE tradition = :tradition AND kind = :kind
+   AND ends_utc > :from_utc AND starts_utc < :to_utc
+ ORDER BY starts_utc;
+
+cityDay:
+SELECT * FROM city_days WHERE city_id = :city_id AND date = :date;
+
+bengaliDateOn:
+SELECT * FROM bengali_dates WHERE tradition = :tradition AND date = :date;
+
+namesOfKind:
+SELECT * FROM names WHERE kind = :kind ORDER BY idx;
+
+observancesBetween:
+SELECT o.**, d.** FROM observance_dates d
+  JOIN observances o ON o.id = d.observance_id
+ WHERE d.tradition = :tradition AND d.date BETWEEN :from_date AND :to_date
+ ORDER BY d.date, o.tier, o.id;
+
+observanceDatesOf:
+SELECT o.**, d.** FROM observance_dates d
+  JOIN observances o ON o.id = d.observance_id
+ WHERE d.tradition = :tradition AND d.observance_id = :id
+ ORDER BY d.date;
+
+windowsOf:
+SELECT * FROM observance_windows
+ WHERE tradition = :tradition AND observance_id = :id
+ ORDER BY date, start_utc;
+
+observanceStarts:
+SELECT o.**, d.** FROM observance_dates d
+  JOIN observances o ON o.id = d.observance_id
+ WHERE d.tradition = :tradition AND d.day_index = 0
+ ORDER BY d.date;
+
+bengaliDatesOf:
+SELECT * FROM bengali_dates
+ WHERE tradition = :tradition AND bn_month_idx = :month_idx AND bn_day = :day
+ ORDER BY date;
+
+observanceById:
+SELECT * FROM observances WHERE id = :id;
+
+windowsOn:
+SELECT * FROM observance_windows WHERE tradition = :tradition AND date = :date ORDER BY start_utc;
+
+packById:
+SELECT * FROM packs WHERE id = :id;
+
+-- Range reads for the month grid (spec §11.3).
+cityDaysBetween:
+SELECT * FROM city_days WHERE city_id = :city_id AND date BETWEEN :from_date AND :to_date ORDER BY date;
+
+bengaliDatesBetween:
+SELECT * FROM bengali_dates WHERE tradition = :tradition AND date BETWEEN :from_date AND :to_date ORDER BY date;
+
+bengaliMonthDates:
+SELECT * FROM bengali_dates
+ WHERE tradition = :tradition AND bn_year = :bn_year AND bn_month_idx = :bn_month_idx
+ ORDER BY date;
+
+lunarMonthsOverlapping:
+SELECT * FROM lunar_months
+ WHERE tradition = :tradition AND ends_utc > :from_utc AND starts_utc < :to_utc
+ ORDER BY starts_utc;
+
+-- Only validated Bengal periods are enabled (spec §6.5.9); the standard table is in code.
+enabledPeriodRules:
+SELECT * FROM period_rules WHERE tradition = :tradition AND enabled = 1;
+
+cityById:
+SELECT * FROM cities WHERE id = :id;
+
+allNames:
+SELECT * FROM names ORDER BY kind, idx;
+
+packsOfTradition:
+SELECT * FROM packs WHERE tradition = :tradition AND kind = :kind;
+
+allCities:
+SELECT * FROM cities ORDER BY name_en;

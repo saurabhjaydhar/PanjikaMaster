@@ -1,0 +1,176 @@
+-- Bangla Panjika pack schema (spec §15.1). The single source of truth:
+-- the app's Drift tables mirror the pack tables below, and a test on each side
+-- checks that the column lists match.
+--
+-- A pack file contains these tables (a subset may be empty) plus exactly one
+-- `packs` row describing itself. Device-only tables (reminders, settings,
+-- error_reports_queue) are defined in the app, not here.
+--
+-- Conventions
+--   * Instants are INTEGER unix seconds UTC (`*_utc`). Dates are TEXT 'YYYY-MM-DD'
+--     (civil date, IST). Datetimes are TEXT ISO 8601 UTC.
+--   * Every `idx` / `*_idx` column is 0-based (spec §15.1 "Index convention").
+--   * Every table except `packs` carries `pack_id`, so each datum can be traced
+--     to the pack that delivered it.
+--   * Names and descriptions are required in both Bengali and English (FR-L10N-09).
+--   * Tables are STRICT (SQLite ≥ 3.37) so column types are enforced.
+
+PRAGMA user_version = 1;
+
+CREATE TABLE packs (
+  id                 TEXT PRIMARY KEY,
+  tradition          TEXT NOT NULL,              -- e.g. 'drik_bishuddha'
+  kind               TEXT NOT NULL CHECK (kind IN ('global', 'cities', 'observances')),
+  is_sample          INTEGER NOT NULL DEFAULT 0 CHECK (is_sample IN (0, 1)),
+  covers_from        TEXT NOT NULL,
+  covers_to          TEXT NOT NULL,
+  version            INTEGER NOT NULL CHECK (version >= 1),
+  generated_at       TEXT NOT NULL,
+  engine_version     TEXT NOT NULL,
+  ephemeris_sha256   TEXT,                       -- NULL for sample packs
+  validation_summary TEXT,                       -- JSON; `validated_on` (YYYY-MM-DD) once checked against the references (T-503)
+  installed_at       TEXT,                       -- set by the app's importer; NULL inside a pack file
+  sha256             TEXT,                       -- of the .gz, set by the importer from the manifest
+  CHECK (covers_from <= covers_to)
+) STRICT;
+
+CREATE TABLE transitions (
+  id         INTEGER PRIMARY KEY,
+  pack_id    TEXT NOT NULL REFERENCES packs(id),
+  tradition  TEXT NOT NULL,
+  kind       TEXT NOT NULL CHECK (kind IN ('tithi', 'nakshatra', 'yoga', 'karana', 'sankranti')),
+  idx        INTEGER NOT NULL,
+  starts_utc INTEGER NOT NULL,
+  ends_utc   INTEGER NOT NULL,
+  CHECK (starts_utc < ends_utc),
+  CHECK (idx >= 0 AND idx <= CASE kind
+           WHEN 'tithi' THEN 29
+           WHEN 'nakshatra' THEN 26
+           WHEN 'yoga' THEN 26
+           WHEN 'karana' THEN 59      -- k from spec §6.5.4
+           WHEN 'sankranti' THEN 11   -- 0 = entry into Mesha (বৈশাখ)
+         END)
+) STRICT;
+CREATE INDEX transitions_by_start ON transitions (tradition, kind, starts_utc);
+CREATE INDEX transitions_by_end   ON transitions (tradition, kind, ends_utc);
+
+CREATE TABLE lunar_months (
+  tradition  TEXT NOT NULL,
+  month_idx  INTEGER NOT NULL CHECK (month_idx BETWEEN 0 AND 11),  -- naming per Q2
+  is_adhik   INTEGER NOT NULL CHECK (is_adhik IN (0, 1)),          -- 1 = মলমাস
+  starts_utc INTEGER NOT NULL,
+  ends_utc   INTEGER NOT NULL,
+  pack_id    TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (tradition, starts_utc),
+  CHECK (starts_utc < ends_utc)
+) STRICT;
+
+CREATE TABLE cities (
+  id          TEXT PRIMARY KEY,
+  name_bn     TEXT NOT NULL CHECK (length(name_bn) > 0),
+  name_en     TEXT NOT NULL CHECK (length(name_en) > 0),
+  aliases     TEXT NOT NULL DEFAULT '',       -- both scripts + romanisations, '|' separated
+  district_bn TEXT NOT NULL,
+  district_en TEXT NOT NULL,
+  state       TEXT NOT NULL,
+  lat         REAL NOT NULL CHECK (lat BETWEEN -90 AND 90),
+  lon         REAL NOT NULL CHECK (lon BETWEEN -180 AND 180),
+  elevation_m INTEGER NOT NULL DEFAULT 0,
+  tz          TEXT NOT NULL,
+  popular     INTEGER NOT NULL DEFAULT 0 CHECK (popular IN (0, 1)),
+  pack_id     TEXT NOT NULL REFERENCES packs(id)
+) STRICT;
+
+CREATE TABLE city_days (
+  city_id      TEXT NOT NULL REFERENCES cities(id),
+  date         TEXT NOT NULL,
+  sunrise_utc  INTEGER NOT NULL,
+  sunset_utc   INTEGER NOT NULL,
+  moonrise_utc INTEGER,                        -- NULL = no moonrise that day
+  moonset_utc  INTEGER,
+  pack_id      TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (city_id, date),
+  CHECK (sunrise_utc < sunset_utc)
+) STRICT;
+
+CREATE TABLE bengali_dates (
+  tradition    TEXT NOT NULL,
+  date         TEXT NOT NULL,
+  bn_day       INTEGER NOT NULL CHECK (bn_day BETWEEN 1 AND 32),
+  bn_month_idx INTEGER NOT NULL CHECK (bn_month_idx BETWEEN 0 AND 11),
+  bn_year      INTEGER NOT NULL,
+  pack_id      TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (tradition, date)
+) STRICT;
+
+CREATE TABLE names (
+  kind     TEXT NOT NULL CHECK (kind IN ('tithi', 'paksha', 'nakshatra', 'yoga', 'karana',
+                                         'solar_month', 'lunar_month', 'weekday',
+                                         'gregorian_month', 'period', 'tradition', 'category',
+                                         'term')),       -- term = glossary entries (FR-SET-07)
+  idx      INTEGER NOT NULL CHECK (idx >= 0),
+  name_bn  TEXT NOT NULL CHECK (length(name_bn) > 0),
+  name_en  TEXT NOT NULL CHECK (length(name_en) > 0),
+  translit TEXT NOT NULL,
+  gloss_bn TEXT,
+  gloss_en TEXT,
+  pack_id  TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (kind, idx),
+  CHECK ((gloss_bn IS NULL) = (gloss_en IS NULL))  -- glosses come in pairs
+) STRICT;
+
+CREATE TABLE observances (
+  id             TEXT PRIMARY KEY,
+  name_bn        TEXT NOT NULL CHECK (length(name_bn) > 0),
+  name_en        TEXT NOT NULL CHECK (length(name_en) > 0),
+  category       TEXT NOT NULL CHECK (category IN ('puja', 'vrata', 'tithi', 'utsav', 'jayanti')),
+  tier           INTEGER NOT NULL CHECK (tier IN (1, 2, 3)),
+  description_bn TEXT NOT NULL CHECK (length(description_bn) > 0),
+  description_en TEXT NOT NULL CHECK (length(description_en) > 0),
+  pack_id        TEXT NOT NULL REFERENCES packs(id)
+) STRICT;
+
+CREATE TABLE observance_dates (
+  observance_id TEXT NOT NULL REFERENCES observances(id),
+  tradition     TEXT NOT NULL,
+  date          TEXT NOT NULL,
+  day_index     INTEGER NOT NULL DEFAULT 0 CHECK (day_index >= 0),  -- multi-day festivals
+  status        TEXT NOT NULL CHECK (status IN ('computed', 'reference_matched',
+                                                'expert_reviewed', 'sample')),
+  reviewed_by   TEXT,
+  reviewed_on   TEXT,
+  note_bn       TEXT,
+  note_en       TEXT,
+  pack_id       TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (observance_id, tradition, date),
+  CHECK ((note_bn IS NULL) = (note_en IS NULL)),                     -- notes come in pairs
+  CHECK (status <> 'expert_reviewed' OR (reviewed_by IS NOT NULL AND reviewed_on IS NOT NULL))
+) STRICT;
+
+CREATE TABLE observance_windows (
+  observance_id TEXT NOT NULL,
+  tradition     TEXT NOT NULL,
+  date          TEXT NOT NULL,
+  window_kind   TEXT NOT NULL,                 -- sandhi_puja | nishita | purnima_span …
+  start_utc     INTEGER NOT NULL,
+  end_utc       INTEGER NOT NULL,
+  pack_id       TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (observance_id, tradition, date, window_kind),
+  FOREIGN KEY (observance_id, tradition, date)
+    REFERENCES observance_dates (observance_id, tradition, date),
+  CHECK (start_utc < end_utc)
+) STRICT;
+
+CREATE TABLE period_rules (
+  tradition TEXT NOT NULL,
+  name_idx  INTEGER NOT NULL,                  -- names(kind = 'period')
+  kind      TEXT NOT NULL CHECK (kind IN ('shubh', 'ashubh')),
+  weekday   INTEGER NOT NULL CHECK (weekday BETWEEN 0 AND 6),  -- 0 = Sunday
+  basis     TEXT NOT NULL CHECK (basis IN ('day', 'night')),
+  divisions INTEGER NOT NULL CHECK (divisions >= 1),
+  part      INTEGER NOT NULL,                  -- 1-based part number, as in spec §6.5.8
+  enabled   INTEGER NOT NULL DEFAULT 0 CHECK (enabled IN (0, 1)),
+  pack_id   TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (tradition, name_idx, weekday, basis),
+  CHECK (part BETWEEN 1 AND divisions)
+) STRICT;

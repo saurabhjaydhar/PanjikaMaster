@@ -1,0 +1,92 @@
+name: pack-build
+
+# T-312: build → validate → sign → upload, on demand. Publishing to staging joins once
+# the hosting exists (T-304); until then the signed packs and manifest are artifacts.
+on:
+  workflow_dispatch:
+    inputs:
+      from:
+        description: First date (YYYY-MM-DD)
+        default: "2020-01-01"
+        required: true
+      to:
+        description: Last date (YYYY-MM-DD)
+        default: "2045-12-31"
+        required: true
+      version:
+        description: Pack version (never reuse a published one)
+        default: "1"
+        required: true
+      release:
+        description: Release mode (needs a human-confirmed ephemeris checksum and every reference)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - uses: actions/cache@v4
+        with:
+          path: data/ephem/de440s.bsp
+          key: ephemeris-${{ hashFiles('data/ephem/ephemeris.lock.json') }}
+      - name: Ephemeris
+        run: |
+          if [ "${{ inputs.release }}" = "true" ]; then
+            uv run python -m ephem.fetch --require-confirmed
+          else
+            uv run python -m ephem.fetch
+          fi
+      - name: Build
+        env:
+          FROM: ${{ inputs.from }}
+          TO: ${{ inputs.to }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          SOURCE_DATE_EPOCH=$(git log -1 --format=%ct) \
+            uv run python -m engine build --from "$FROM" --to "$TO" --version "$VERSION" --out dist
+          cat dist/*.run.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Validate
+        run: |
+          if [ "${{ inputs.release }}" = "true" ]; then
+            uv run python -m validate --pack dist/global-*.sqlite --release
+          else
+            uv run python -m validate --pack dist/global-*.sqlite
+          fi
+      # TODO(Q12): which key signs staging and production. The dev key lives only in the
+      # repository secret PANJIKA_SIGNING_KEY (base64 of the 32-byte Ed25519 seed).
+      - name: Sign and write the manifest
+        env:
+          PANJIKA_SIGNING_KEY: ${{ secrets.PANJIKA_SIGNING_KEY }}
+        run: |
+          if [ -z "$PANJIKA_SIGNING_KEY" ]; then
+            echo "::error::Set the PANJIKA_SIGNING_KEY repository secret (Q12) to sign packs."
+            exit 1
+          fi
+          if [ "${{ inputs.release }}" = "true" ]; then
+            uv run python -m pack.builder --in dist/global-*.sqlite --out dist/v1 --release
+          else
+            uv run python -m pack.builder --in dist/global-*.sqlite --out dist/v1
+          fi
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat dist/v1/manifest.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: packs-${{ inputs.from }}-${{ inputs.to }}-v${{ inputs.version }}
+          path: |
+            data/dist/
+            data/validate/reports/
+          retention-days: 30
+      # TODO(T-304): publish dist/v1 to the staging host once it exists.

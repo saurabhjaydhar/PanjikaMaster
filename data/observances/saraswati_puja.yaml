@@ -1,0 +1,23 @@
+# DRAFT (T-502): not reviewed, so production packs refuse it.
+# Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
+# Expert to confirm: udaya Panchami of Magh, or Panchami prevailing in the forenoon.
+id: saraswati_puja
+name_bn: সরস্বতী পূজা
+name_en: Saraswati Puja
+category: puja
+tier: 1
+traditions: [drik_bishuddha]
+decision:
+  type: udaya
+  lunar_month: magh
+  paksha: shukla
+  tithi: panchami
+  on_vriddhi: first
+  include_mala: false
+windows: [tithi_span]
+# Written for this app (T-504); not reviewed yet (spec §13.8).
+description_bn: "সরস্বতী পূজা হয় মাঘ মাসের শুক্লা পঞ্চমীতে, যা বসন্ত পঞ্চমী নামেও পরিচিত। বিদ্যা, সংগীত ও শিল্পের দেবী সরস্বতীর আরাধনা হয় বাড়িতে, স্কুলে, কলেজে আর পাড়ায়। ছাত্রছাত্রীরা দেবীর পায়ের কাছে বই, খাতা, কলম আর বাদ্যযন্ত্র রাখে এবং এই দিনে সাধারণত পড়াশোনা করে না। ছোট শিশুদের হাতেখড়ি, অর্থাৎ প্রথম অক্ষর লেখা, এই দিনেই অনেকে দেন। হলুদ বা বাসন্তী রঙের পোশাক পরার রীতি আছে, আর পূজার আগে কুল না খাওয়ার প্রচলিত প্রথা অনেকে মানেন। অঞ্জলি দেওয়ার পর খিচুড়ি ভোগ, আর বিকেলে বন্ধুদের সঙ্গে পাড়ায় ঘোরা এই দিনের পরিচিত ছবি।"
+description_en: "Saraswati Puja falls on the bright-fortnight Panchami of Magh, also known as Basanta Panchami. Saraswati, goddess of learning, music and the arts, is worshipped at home, in schools and colleges and in neighbourhood pandals. Students place their books, pens and musical instruments at her feet and by custom do not study that day. Many families hold hate khori, a small child's first writing of letters, on this day. Yellow clothes are traditional, and many people keep the old custom of not eating kul, the jujube fruit, until after the puja. After the flower offering comes khichuri bhog, and the afternoon is for visiting friends and pandals."
+description_review: pending
+review:
+  status: draft

@@ -1,0 +1,281 @@
+# Panchanga names in Bengali and English (spec §13.1, §27.1).
+#
+# DRAFT: Bengali spellings await the reviewer (Q5); English romanisation awaits Q14.
+# These are names, not calendar data. Order = index (0-based, spec §15.1).
+# `translit` is optional; when absent the pack builder uses a lower-case ASCII form of `en`.
+
+status = "draft"
+
+tithi = [
+  { bn = "শুক্লা প্রতিপদ", en = "Shukla Pratipada" },
+  { bn = "শুক্লা দ্বিতীয়া", en = "Shukla Dwitiya" },
+  { bn = "শুক্লা তৃতীয়া", en = "Shukla Tritiya" },
+  { bn = "শুক্লা চতুর্থী", en = "Shukla Chaturthi" },
+  { bn = "শুক্লা পঞ্চমী", en = "Shukla Panchami" },
+  { bn = "শুক্লা ষষ্ঠী", en = "Shukla Shashthi" },
+  { bn = "শুক্লা সপ্তমী", en = "Shukla Saptami" },
+  { bn = "শুক্লা অষ্টমী", en = "Shukla Ashtami" },
+  { bn = "শুক্লা নবমী", en = "Shukla Navami" },
+  { bn = "শুক্লা দশমী", en = "Shukla Dashami" },
+  { bn = "শুক্লা একাদশী", en = "Shukla Ekadashi" },
+  { bn = "শুক্লা দ্বাদশী", en = "Shukla Dwadashi" },
+  { bn = "শুক্লা ত্রয়োদশী", en = "Shukla Trayodashi" },
+  { bn = "শুক্লা চতুর্দশী", en = "Shukla Chaturdashi" },
+  { bn = "পূর্ণিমা", en = "Purnima" },
+  { bn = "কৃষ্ণা প্রতিপদ", en = "Krishna Pratipada" },
+  { bn = "কৃষ্ণা দ্বিতীয়া", en = "Krishna Dwitiya" },
+  { bn = "কৃষ্ণা তৃতীয়া", en = "Krishna Tritiya" },
+  { bn = "কৃষ্ণা চতুর্থী", en = "Krishna Chaturthi" },
+  { bn = "কৃষ্ণা পঞ্চমী", en = "Krishna Panchami" },
+  { bn = "কৃষ্ণা ষষ্ঠী", en = "Krishna Shashthi" },
+  { bn = "কৃষ্ণা সপ্তমী", en = "Krishna Saptami" },
+  { bn = "কৃষ্ণা অষ্টমী", en = "Krishna Ashtami" },
+  { bn = "কৃষ্ণা নবমী", en = "Krishna Navami" },
+  { bn = "কৃষ্ণা দশমী", en = "Krishna Dashami" },
+  { bn = "কৃষ্ণা একাদশী", en = "Krishna Ekadashi" },
+  { bn = "কৃষ্ণা দ্বাদশী", en = "Krishna Dwadashi" },
+  { bn = "কৃষ্ণা ত্রয়োদশী", en = "Krishna Trayodashi" },
+  { bn = "কৃষ্ণা চতুর্দশী", en = "Krishna Chaturdashi" },
+  { bn = "অমাবস্যা", en = "Amavasya" },
+]
+
+paksha = [
+  { bn = "শুক্লপক্ষ", en = "Shukla Paksha" },
+  { bn = "কৃষ্ণপক্ষ", en = "Krishna Paksha" },
+]
+
+nakshatra = [
+  { bn = "অশ্বিনী", en = "Ashwini" }, { bn = "ভরণী", en = "Bharani" }, { bn = "কৃত্তিকা", en = "Krittika" },
+  { bn = "রোহিণী", en = "Rohini" }, { bn = "মৃগশিরা", en = "Mrigashira" }, { bn = "আর্দ্রা", en = "Ardra" },
+  { bn = "পুনর্বসু", en = "Punarvasu" }, { bn = "পুষ্যা", en = "Pushya" }, { bn = "অশ্লেষা", en = "Ashlesha" },
+  { bn = "মঘা", en = "Magha" }, { bn = "পূর্বফাল্গুনী", en = "Purva Phalguni" }, { bn = "উত্তরফাল্গুনী", en = "Uttara Phalguni" },
+  { bn = "হস্তা", en = "Hasta" }, { bn = "চিত্রা", en = "Chitra" }, { bn = "স্বাতী", en = "Swati" },
+  { bn = "বিশাখা", en = "Vishakha" }, { bn = "অনুরাধা", en = "Anuradha" }, { bn = "জ্যেষ্ঠা", en = "Jyeshtha" },
+  { bn = "মূলা", en = "Mula" }, { bn = "পূর্বাষাঢ়া", en = "Purva Ashadha" }, { bn = "উত্তরাষাঢ়া", en = "Uttara Ashadha" },
+  { bn = "শ্রবণা", en = "Shravana" }, { bn = "ধনিষ্ঠা", en = "Dhanishtha" }, { bn = "শতভিষা", en = "Shatabhisha" },
+  { bn = "পূর্বভাদ্রপদ", en = "Purva Bhadrapada" }, { bn = "উত্তরভাদ্রপদ", en = "Uttara Bhadrapada" }, { bn = "রেবতী", en = "Revati" },
+]
+
+yoga = [
+  { bn = "বিষ্কম্ভ", en = "Vishkambha" }, { bn = "প্রীতি", en = "Priti" }, { bn = "আয়ুষ্মান", en = "Ayushman" },
+  { bn = "সৌভাগ্য", en = "Saubhagya" }, { bn = "শোভন", en = "Shobhana" }, { bn = "অতিগণ্ড", en = "Atiganda" },
+  { bn = "সুকর্মা", en = "Sukarma" }, { bn = "ধৃতি", en = "Dhriti" }, { bn = "শূল", en = "Shula" },
+  { bn = "গণ্ড", en = "Ganda" }, { bn = "বৃদ্ধি", en = "Vriddhi" }, { bn = "ধ্রুব", en = "Dhruva" },
+  { bn = "ব্যাঘাত", en = "Vyaghata" }, { bn = "হর্ষণ", en = "Harshana" }, { bn = "বজ্র", en = "Vajra" },
+  { bn = "সিদ্ধি", en = "Siddhi" }, { bn = "ব্যতীপাত", en = "Vyatipata" }, { bn = "বরীয়ান", en = "Variyan" },
+  { bn = "পরিঘ", en = "Parigha" }, { bn = "শিব", en = "Shiva" }, { bn = "সিদ্ধ", en = "Siddha" },
+  { bn = "সাধ্য", en = "Sadhya" }, { bn = "শুভ", en = "Shubha" }, { bn = "শুক্ল", en = "Shukla" },
+  { bn = "ব্রহ্ম", en = "Brahma" }, { bn = "ইন্দ্র", en = "Indra" }, { bn = "বৈধৃতি", en = "Vaidhriti" },
+]
+
+# 0–6 movable karanas, then the fixed ones. Transitions store k (0–59); the app maps k to these (spec §6.5.4).
+karana = [
+  { bn = "বব", en = "Bava" }, { bn = "বালব", en = "Balava" }, { bn = "কৌলব", en = "Kaulava" },
+  { bn = "তৈতিল", en = "Taitila" }, { bn = "গর", en = "Gara" }, { bn = "বণিজ", en = "Vanija" },
+  { bn = "বিষ্টি (ভদ্রা)", en = "Vishti (Bhadra)" }, { bn = "শকুনি", en = "Shakuni" },
+  { bn = "চতুষ্পদ", en = "Chatushpada" }, { bn = "নাগ", en = "Naga" }, { bn = "কিংস্তুঘ্ন", en = "Kimstughna" },
+]
+
+solar_month = [
+  { bn = "বৈশাখ", en = "Boishakh" }, { bn = "জ্যৈষ্ঠ", en = "Jyoishtho" }, { bn = "আষাঢ়", en = "Asharh" },
+  { bn = "শ্রাবণ", en = "Srabon" }, { bn = "ভাদ্র", en = "Bhadro" }, { bn = "আশ্বিন", en = "Ashwin" },
+  { bn = "কার্তিক", en = "Kartik" }, { bn = "অগ্রহায়ণ", en = "Agrahayan" }, { bn = "পৌষ", en = "Poush" },
+  { bn = "মাঘ", en = "Magh" }, { bn = "ফাল্গুন", en = "Falgun" }, { bn = "চৈত্র", en = "Chaitra" },
+]
+
+# TODO(Q2): lunar month naming (amanta) to be confirmed by the expert; same names as solar months for now.
+lunar_month = [
+  { bn = "বৈশাখ", en = "Boishakh" }, { bn = "জ্যৈষ্ঠ", en = "Jyoishtho" }, { bn = "আষাঢ়", en = "Asharh" },
+  { bn = "শ্রাবণ", en = "Srabon" }, { bn = "ভাদ্র", en = "Bhadro" }, { bn = "আশ্বিন", en = "Ashwin" },
+  { bn = "কার্তিক", en = "Kartik" }, { bn = "অগ্রহায়ণ", en = "Agrahayan" }, { bn = "পৌষ", en = "Poush" },
+  { bn = "মাঘ", en = "Magh" }, { bn = "ফাল্গুন", en = "Falgun" }, { bn = "চৈত্র", en = "Chaitra" },
+]
+
+weekday = [
+  { bn = "রবিবার", en = "Sunday", translit = "robibar" }, { bn = "সোমবার", en = "Monday", translit = "sombar" },
+  { bn = "মঙ্গলবার", en = "Tuesday", translit = "mongolbar" }, { bn = "বুধবার", en = "Wednesday", translit = "budhbar" },
+  { bn = "বৃহস্পতিবার", en = "Thursday", translit = "brihaspatibar" }, { bn = "শুক্রবার", en = "Friday", translit = "shukrobar" },
+  { bn = "শনিবার", en = "Saturday", translit = "shonibar" },
+]
+
+# TODO(Q5): Bengali spellings of Gregorian months.
+gregorian_month = [
+  { bn = "জানুয়ারি", en = "January" }, { bn = "ফেব্রুয়ারি", en = "February" }, { bn = "মার্চ", en = "March" },
+  { bn = "এপ্রিল", en = "April" }, { bn = "মে", en = "May" }, { bn = "জুন", en = "June" },
+  { bn = "জুলাই", en = "July" }, { bn = "আগস্ট", en = "August" }, { bn = "সেপ্টেম্বর", en = "September" },
+  { bn = "অক্টোবর", en = "October" }, { bn = "নভেম্বর", en = "November" }, { bn = "ডিসেম্বর", en = "December" },
+]
+
+
+tradition = [
+  { bn = "বিশুদ্ধ সিদ্ধান্ত (দৃক)", en = "Bishuddha Siddhanta (Drik)", translit = "drik_bishuddha" },
+  { bn = "গুপ্তপ্রেস (সূর্যসিদ্ধান্ত)", en = "Gupta Press (Surya Siddhanta)", translit = "surya_siddhanta" },
+]
+
+# Same order as the observances.category CHECK in schema.sql.
+category = [
+  { bn = "পূজা", en = "Puja", translit = "puja" }, { bn = "ব্রত ও উপবাস", en = "Vrata & fasts", translit = "vrata" },
+  { bn = "তিথি", en = "Tithi", translit = "tithi" }, { bn = "উৎসব", en = "Festival", translit = "utsav" },
+  { bn = "জয়ন্তী", en = "Jayanti", translit = "jayanti" },
+]
+
+# ---------------------------------------------------------------------------------------
+# Entries with glosses (FR-SET-07) are written as tables so the text can wrap. Glosses are
+# one or two plain sentences, numbers spelt out so they never clash with the numeral
+# setting. DRAFT, like everything here, until the reviewer signs off (Q5, Q14).
+# Tables must stay at the end of the file: keys after them would belong to the last one.
+
+[[period]]
+bn = "রাহুকাল"
+en = "Rahu Kaal"
+gloss_bn = "দিনের (সূর্যোদয় থেকে সূর্যাস্ত) আট ভাগের এক ভাগ, প্রথা অনুযায়ী নতুন কাজ শুরুর জন্য বর্জনীয়। কোন ভাগ, তা বার অনুযায়ী বদলায়।"
+gloss_en = "One eighth of the daytime, from sunrise to sunset, traditionally avoided for starting new work. Which eighth it is depends on the weekday."
+
+[[period]]
+bn = "যমগণ্ড"
+en = "Yamaganda"
+gloss_bn = "দিনের আরেকটি অষ্টমাংশ, প্রথা অনুযায়ী অশুভ। এরও স্থান বার অনুযায়ী বদলায়।"
+gloss_en = "Another eighth of the daytime, traditionally considered inauspicious. Its place also changes with the weekday."
+
+[[period]]
+bn = "গুলিক"
+en = "Gulika Kaal"
+gloss_bn = "দিনের আরেকটি অষ্টমাংশ, প্রথা অনুযায়ী কিছু কাজের জন্য বর্জনীয়। এর স্থানও বার অনুযায়ী বদলায়।"
+gloss_en = "Another eighth of the daytime, traditionally avoided for certain tasks. Its place also changes with the weekday."
+
+[[period]]
+bn = "বারবেলা"
+en = "Barabela"
+gloss_bn = "বাংলার প্রথা: বার অনুযায়ী নির্দিষ্ট দিনের একটি অংশ, যাত্রা ও নতুন কাজের জন্য অশুভ ধরা হয়।"
+gloss_en = "A Bengal tradition: a part of the daytime, fixed by the weekday, considered inauspicious for travel and new work."
+
+[[period]]
+bn = "কালবেলা"
+en = "Kalabela"
+gloss_bn = "বাংলার প্রথা: বার অনুযায়ী দিনের আরেকটি অশুভ অংশ। পঞ্জিকায় সাধারণত বারবেলার সঙ্গেই ছাপা হয়।"
+gloss_en = "A Bengal tradition: another inauspicious part of the daytime, fixed by the weekday. Panjikas usually print it next to Barabela."
+
+[[period]]
+bn = "কালরাত্রি"
+en = "Kalaratri"
+gloss_bn = "বাংলার প্রথা: বার অনুযায়ী রাতের একটি অশুভ অংশ।"
+gloss_en = "A Bengal tradition: an inauspicious part of the night, fixed by the weekday."
+
+[[period]]
+bn = "অমৃতযোগ"
+en = "Amrita Yoga"
+gloss_bn = "বাংলার প্রথা: দিন ও রাতের যে সময়গুলিকে পঞ্জিকা কাজ শুরুর জন্য শুভ বলে উল্লেখ করে।"
+gloss_en = "A Bengal tradition: times of day and night that panjikas list as auspicious for beginning work."
+
+[[period]]
+bn = "মাহেন্দ্রযোগ"
+en = "Mahendra Yoga"
+gloss_bn = "বাংলার প্রথা: অমৃতযোগের পাশাপাশি পঞ্জিকায় দেওয়া আরও কিছু শুভ সময়।"
+gloss_en = "A Bengal tradition: further auspicious times that panjikas list alongside Amrita Yoga."
+
+# Glossary terms (spec §27.1). `translit` is the stable term id the app uses.
+
+[[term]]
+bn = "তিথি"
+en = "Tithi"
+translit = "tithi"
+gloss_bn = "চান্দ্র দিন: সূর্যের তুলনায় চাঁদ বারো ডিগ্রি এগোতে যে সময় নেয়। এক চান্দ্র মাসে ত্রিশটি তিথি; গড়ে একেকটি এক দিনের চেয়ে একটু ছোট, তাই তিথি সাধারণত ক্যালেন্ডারের দিনের সঙ্গে মেলে না।"
+gloss_en = "A lunar day: the time the Moon takes to gain twelve degrees on the Sun. A lunar month has thirty, each a little shorter than a day on average, so a tithi seldom lines up with a calendar day."
+
+[[term]]
+bn = "পক্ষ"
+en = "Paksha"
+translit = "paksha"
+gloss_bn = "পনেরোটি তিথি নিয়ে এক পক্ষ। অমাবস্যা থেকে পূর্ণিমা পর্যন্ত চাঁদ বাড়ে, সেটি শুক্লপক্ষ; পূর্ণিমা থেকে অমাবস্যা পর্যন্ত কৃষ্ণপক্ষ।"
+gloss_en = "A fortnight of fifteen tithis. Shukla Paksha is the waxing half, from new moon to full moon; Krishna Paksha is the waning half."
+
+[[term]]
+bn = "নক্ষত্র"
+en = "Nakshatra"
+translit = "nakshatra"
+gloss_bn = "চাঁদের চলার পথে আকাশের সাতাশটি সমান ভাগের একটি। যে ভাগের মধ্য দিয়ে চাঁদ এখন যাচ্ছে, সেটিই এখনকার নক্ষত্র।"
+gloss_en = "One of twenty-seven equal sections of the sky along the Moon's path. The nakshatra of the moment is the section the Moon is passing through."
+
+[[term]]
+bn = "যোগ"
+en = "Yoga"
+translit = "yoga"
+gloss_bn = "সূর্য ও চাঁদের অবস্থান যোগ করে পাওয়া একটি মাপ; যোগফলকে সাতাশটি সমান ভাগে ভাগ করা হয়, প্রতিটির আলাদা নাম। প্রথা অনুযায়ী কয়েকটি শুভ, কয়েকটি অশুভ।"
+gloss_en = "A measure made by adding the positions of the Sun and the Moon, split into twenty-seven equal parts, each with its own name. By tradition some are auspicious and some are not."
+
+[[term]]
+bn = "করণ"
+en = "Karana"
+translit = "karana"
+gloss_bn = "তিথির অর্ধেক। করণের নাম এগারোটি: সাতটি মাস জুড়ে পালা করে আসে, আর চারটি অমাবস্যার আশেপাশে একবার করে।"
+gloss_en = "Half a tithi. There are eleven karana names: seven take turns through the month and four come once each, around the new moon."
+
+[[term]]
+bn = "সংক্রান্তি"
+en = "Sankranti"
+translit = "sankranti"
+gloss_bn = "সূর্য যে মুহূর্তে নতুন রাশিতে প্রবেশ করে। বাংলা মাস সংক্রান্তি ধরে চলে: চৈত্র সংক্রান্তিতে বছর শেষ হয়, তারপর আসে পয়লা বৈশাখ।"
+gloss_en = "The moment the Sun enters a new zodiac sign. Bengali months follow the sankrantis: the year ends with Chaitra Sankranti, then comes Poila Boishakh."
+
+[[term]]
+bn = "উদয়া তিথি"
+en = "Udaya Tithi"
+translit = "udaya_tithi"
+gloss_bn = "সূর্যোদয়ের সময় যে তিথি চলে। তিথিটি কয়েক ঘণ্টা পরে শেষ হয়ে গেলেও সারা দিন সেই তিথির নামেই পরিচিত।"
+gloss_en = "The tithi in force at sunrise. The whole day is known by it, even if it ends a few hours later."
+
+[[term]]
+bn = "ক্ষয় তিথি"
+en = "Kshaya Tithi"
+translit = "kshaya_tithi"
+gloss_bn = "যে তিথি এক সূর্যোদয়ের পরে শুরু হয়ে পরের সূর্যোদয়ের আগেই শেষ হয়, তাই কোনো দিন তার নামে হয় না। তবু সেটি দ্বিতীয় লাইনে দেখানো হয়।"
+gloss_en = "A tithi that begins after one sunrise and ends before the next, so no day is named after it. It is still shown, on a second line."
+
+[[term]]
+bn = "বৃদ্ধি তিথি"
+en = "Vriddhi Tithi"
+translit = "vriddhi_tithi"
+gloss_bn = "যে তিথি পরপর দুটি সূর্যোদয়ে থাকে, তাই পরপর দুই দিন একই তিথির নামে হয়।"
+gloss_en = "A tithi in force at two sunrises in a row, so two consecutive days carry its name."
+
+[[term]]
+bn = "মলমাস"
+en = "Mala Masa"
+translit = "mala_masa"
+gloss_bn = "অতিরিক্ত চান্দ্র মাস, যে চান্দ্র মাসে কোনো সংক্রান্তি পড়ে না। মোটামুটি তিন বছরে একবার আসে; এই মাসে পূজা-পার্বণ হয় না।"
+gloss_en = "An extra lunar month, one in which no sankranti falls. It comes about once in three years, and festivals are not held in it."
+
+[[term]]
+bn = "অয়নাংশ"
+en = "Ayanamsa"
+translit = "ayanamsa"
+gloss_bn = "পৃথিবীর অক্ষের ধীর দোলনের ফলে নক্ষত্র-ভিত্তিক আর ঋতু-ভিত্তিক রাশিচক্রের মধ্যে যে ফারাক ক্রমশ বাড়ে। পঞ্জিকা নক্ষত্র-ভিত্তিক রাশিচক্র ব্যবহার করে, তাই গণনায় এই ফারাক বাদ দেওয়া হয়।"
+gloss_en = "The slowly growing gap between the star-based zodiac and the season-based one, caused by the slow wobble of the Earth's axis. Panjikas use the star-based zodiac, so calculations correct for it."
+
+[[term]]
+bn = "দণ্ড, পল"
+en = "Danda, Pala"
+translit = "danda_pala"
+gloss_bn = "সময়ের প্রচলিত একক: এক দণ্ড চব্বিশ মিনিট, এক পল চব্বিশ সেকেন্ড। ষাট দণ্ডে এক দিন।"
+gloss_en = "Traditional units of time: one danda is twenty-four minutes and one pala is twenty-four seconds. Sixty dandas make a day."
+
+[[term]]
+bn = "পঞ্জিকা"
+en = "Panjika"
+translit = "panjika"
+gloss_bn = "বাংলা বর্ষপঞ্জি: প্রতিদিনের বাংলা তারিখ, তিথি, নক্ষত্র, সূর্যোদয়-সূর্যাস্ত, শুভ-অশুভ সময় আর পূজা-পার্বণ।"
+gloss_en = "The Bengali almanac: for every day, the Bengali date, tithi, nakshatra, sunrise and sunset, good and bad times, and festivals."
+
+[[term]]
+bn = "বিশুদ্ধ সিদ্ধান্ত"
+en = "Bishuddha Siddhanta"
+translit = "bishuddha_siddhanta"
+gloss_bn = "পশ্চিমবঙ্গের দুটি পঞ্জিকা-ধারার একটি। এটি আধুনিক জ্যোতির্বিজ্ঞান (দৃক) থেকে গণনা করে, তাই সময় আকাশে যা দেখা যায় তার সঙ্গে মেলে।"
+gloss_en = "One of the two panjika schools in West Bengal. It calculates from modern astronomy (drik), so its times match what is seen in the sky."
+
+[[term]]
+bn = "সূর্যসিদ্ধান্ত"
+en = "Surya Siddhanta"
+translit = "surya_siddhanta"
+gloss_bn = "পশ্চিমবঙ্গের অন্য পঞ্জিকা-ধারা। এটি প্রাচীন সূর্যসিদ্ধান্ত গ্রন্থের নিয়মে গণনা করে, তাই এর সময় বিশুদ্ধ সিদ্ধান্তের থেকে আলাদা হতে পারে।"
+gloss_en = "The other West Bengal school. It calculates by the rules of the classical Surya Siddhanta text, so its times can differ from Bishuddha Siddhanta's."
