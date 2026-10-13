@@ -18,7 +18,7 @@ import 'package:panjika/core/time/clock.dart';
 import 'package:panjika/data/db/app_database.dart';
 import 'package:panjika/data/db/database_provider.dart';
 import 'package:panjika/data/fixtures/sample_loader.dart';
-import 'package:panjika/features/more/coming_soon_screen.dart';
+import 'package:panjika/features/report/report_screen.dart';
 import 'package:panjika/features/sources/sources_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 import 'package:panjika/l10n/gen/app_localizations.dart';
@@ -132,7 +132,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Report an error'));
     await tester.pumpAndSettle();
-    expect(find.byType(ComingSoonScreen), findsOneWidget); // TODO(T-610)
+    expect(find.byType(ReportScreen), findsOneWidget);
   });
 
   test('the explainer is about 150 words in each language', () {

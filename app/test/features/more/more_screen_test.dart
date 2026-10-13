@@ -23,9 +23,10 @@ import 'package:panjika/features/more/app_version.dart';
 import 'package:panjika/features/more/coming_soon_screen.dart';
 import 'package:panjika/features/more/more_screen.dart';
 import 'package:panjika/features/reminders/reminders_screen.dart';
+import 'package:panjika/features/report/report_screen.dart';
 import 'package:panjika/features/search/search_screen.dart';
-import 'package:panjika/features/sources/sources_screen.dart';
 import 'package:panjika/features/settings/settings_screen.dart';
+import 'package:panjika/features/sources/sources_screen.dart';
 import 'package:panjika/features/today/today_screen.dart';
 
 import '../../helpers/fakes.dart';
@@ -97,7 +98,7 @@ void main() {
       'Glossary': GlossaryScreen,
       'Settings': SettingsScreen,
       'Sources & verification': SourcesScreen,
-      'Report an error': ComingSoonScreen,
+      'Report an error': ReportScreen,
       'Remove ads': ComingSoonScreen,
       'About': AboutScreen,
       'Privacy': ComingSoonScreen,

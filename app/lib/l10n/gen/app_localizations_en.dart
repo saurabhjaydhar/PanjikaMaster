@@ -970,4 +970,73 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get schoolsPara3 =>
       'Neither is a mistake; both are long-standing ways of reckoning. This app shows which tradition every date follows. It offers Bishuddha Siddhanta now, and Surya Siddhanta will come later. If your family follows a particular panjika, compare with it.';
+
+  @override
+  String get reportDateLabel => 'Which date?';
+
+  @override
+  String reportDateBoth(String bengali, String gregorian) {
+    return '$bengali ($gregorian)';
+  }
+
+  @override
+  String get reportChangeDate => 'Change date';
+
+  @override
+  String get reportKindLabel => 'What\'s wrong?';
+
+  @override
+  String get reportKindTithiTime => 'Tithi time';
+
+  @override
+  String get reportKindFestivalDay => 'Festival day';
+
+  @override
+  String get reportKindBengaliDate => 'Bengali date';
+
+  @override
+  String get reportKindOther => 'Something else';
+
+  @override
+  String get reportPanjikaSaysLabel => 'What does your panjika say?';
+
+  @override
+  String get reportPanjikaSaysHint =>
+      'Write what your panjika says, in your own words';
+
+  @override
+  String get reportPanjikaNameLabel => 'Name of the panjika (optional)';
+
+  @override
+  String get packKindShortGlobal => 'Panchanga';
+
+  @override
+  String get packKindShortCities => 'Cities';
+
+  @override
+  String get packKindShortObservances => 'Festivals';
+
+  @override
+  String reportPackVersion(String kind, String version) {
+    return '$kind version $version';
+  }
+
+  @override
+  String reportSentWith(String city, String tradition, String versions) {
+    return 'Sent with it: $city · $tradition · $versions';
+  }
+
+  @override
+  String get reportPrivacy =>
+      'We don\'t ask for or send your name, phone number or e-mail.';
+
+  @override
+  String get reportSend => 'Send';
+
+  @override
+  String get reportSent =>
+      'Sent. We\'ll check it and correct the data if needed.';
+
+  @override
+  String get reportQueued => 'It will be sent when you\'re online.';
 }

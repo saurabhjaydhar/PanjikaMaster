@@ -1468,5 +1468,112 @@
   "schoolsPara3": "এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।",
   "@schoolsPara3": {
     "description": "Explainer, paragraph 3 of 3."
+  },
+  "reportDateLabel": "কোন তারিখ?",
+  "@reportDateLabel": {
+    "description": "Report form: the date the report is about (§11.17)."
+  },
+  "reportDateBoth": "{bengali} ({gregorian})",
+  "@reportDateBoth": {
+    "description": "Report form: the chosen date in both calendars. Layout only.",
+    "placeholders": {
+      "bengali": {
+        "type": "String"
+      },
+      "gregorian": {
+        "type": "String"
+      }
+    }
+  },
+  "reportChangeDate": "তারিখ বদলান",
+  "@reportChangeDate": {
+    "description": "Report form: button that opens the date picker."
+  },
+  "reportKindLabel": "কী ভুল?",
+  "@reportKindLabel": {
+    "description": "Report form: what kind of error (§11.17)."
+  },
+  "reportKindTithiTime": "তিথির সময়",
+  "@reportKindTithiTime": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindFestivalDay": "উৎসবের দিন",
+  "@reportKindFestivalDay": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindBengaliDate": "বাংলা তারিখ",
+  "@reportKindBengaliDate": {
+    "description": "Report form: kind of error."
+  },
+  "reportKindOther": "অন্য কিছু",
+  "@reportKindOther": {
+    "description": "Report form: kind of error."
+  },
+  "reportPanjikaSaysLabel": "আপনার পঞ্জিকায় কী আছে?",
+  "@reportPanjikaSaysLabel": {
+    "description": "Report form: free-text field label (§11.17)."
+  },
+  "reportPanjikaSaysHint": "পঞ্জিকায় যা লেখা আছে, নিজের ভাষায় লিখুন",
+  "@reportPanjikaSaysHint": {
+    "description": "Report form: hint inside the free-text field."
+  },
+  "reportPanjikaNameLabel": "পঞ্জিকার নাম (ঐচ্ছিক)",
+  "@reportPanjikaNameLabel": {
+    "description": "Report form: optional field for the printed panjika's name."
+  },
+  "packKindShortGlobal": "পঞ্চাঙ্গ",
+  "@packKindShortGlobal": {
+    "description": "Short name of the daily-data pack, in lists of versions."
+  },
+  "packKindShortCities": "শহর",
+  "@packKindShortCities": {
+    "description": "Short name of the city pack, in lists of versions."
+  },
+  "packKindShortObservances": "উৎসব",
+  "@packKindShortObservances": {
+    "description": "Short name of the festival pack, in lists of versions."
+  },
+  "reportPackVersion": "{kind} সংস্করণ {version}",
+  "@reportPackVersion": {
+    "description": "A pack and its version in the report form, e.g. 'পঞ্চাঙ্গ সংস্করণ ৩'.",
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "reportSentWith": "সঙ্গে যাবে: {city} · {tradition} · {versions}",
+  "@reportSentWith": {
+    "description": "Report form: exactly what is sent besides the user's text (§11.17, §15.3).",
+    "placeholders": {
+      "city": {
+        "type": "String"
+      },
+      "tradition": {
+        "type": "String"
+      },
+      "versions": {
+        "type": "String"
+      }
+    }
+  },
+  "reportPrivacy": "আপনার নাম, ফোন নম্বর বা ইমেল চাওয়া হয় না, পাঠানোও হয় না।",
+  "@reportPrivacy": {
+    "description": "Report form: no personal data (FR-SET-03)."
+  },
+  "reportSend": "পাঠান",
+  "@reportSend": {
+    "description": "Report form: submit button."
+  },
+  "reportSent": "পাঠানো হয়েছে। যাচাই করে প্রয়োজনে সংশোধন করা হবে।",
+  "@reportSent": {
+    "description": "Report sent (§11.17)."
+  },
+  "reportQueued": "ইন্টারনেট পেলে পাঠানো হবে।",
+  "@reportQueued": {
+    "description": "Report queued offline (§11.17, US-07)."
   }
 }

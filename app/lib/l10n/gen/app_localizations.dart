@@ -1687,6 +1687,126 @@ abstract class AppLocalizations {
   /// In bn, this message translates to:
   /// **'এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।'**
   String get schoolsPara3;
+
+  /// Report form: the date the report is about (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'কোন তারিখ?'**
+  String get reportDateLabel;
+
+  /// Report form: the chosen date in both calendars. Layout only.
+  ///
+  /// In bn, this message translates to:
+  /// **'{bengali} ({gregorian})'**
+  String reportDateBoth(String bengali, String gregorian);
+
+  /// Report form: button that opens the date picker.
+  ///
+  /// In bn, this message translates to:
+  /// **'তারিখ বদলান'**
+  String get reportChangeDate;
+
+  /// Report form: what kind of error (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'কী ভুল?'**
+  String get reportKindLabel;
+
+  /// Report form: kind of error.
+  ///
+  /// In bn, this message translates to:
+  /// **'তিথির সময়'**
+  String get reportKindTithiTime;
+
+  /// Report form: kind of error.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসবের দিন'**
+  String get reportKindFestivalDay;
+
+  /// Report form: kind of error.
+  ///
+  /// In bn, this message translates to:
+  /// **'বাংলা তারিখ'**
+  String get reportKindBengaliDate;
+
+  /// Report form: kind of error.
+  ///
+  /// In bn, this message translates to:
+  /// **'অন্য কিছু'**
+  String get reportKindOther;
+
+  /// Report form: free-text field label (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'আপনার পঞ্জিকায় কী আছে?'**
+  String get reportPanjikaSaysLabel;
+
+  /// Report form: hint inside the free-text field.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকায় যা লেখা আছে, নিজের ভাষায় লিখুন'**
+  String get reportPanjikaSaysHint;
+
+  /// Report form: optional field for the printed panjika's name.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্জিকার নাম (ঐচ্ছিক)'**
+  String get reportPanjikaNameLabel;
+
+  /// Short name of the daily-data pack, in lists of versions.
+  ///
+  /// In bn, this message translates to:
+  /// **'পঞ্চাঙ্গ'**
+  String get packKindShortGlobal;
+
+  /// Short name of the city pack, in lists of versions.
+  ///
+  /// In bn, this message translates to:
+  /// **'শহর'**
+  String get packKindShortCities;
+
+  /// Short name of the festival pack, in lists of versions.
+  ///
+  /// In bn, this message translates to:
+  /// **'উৎসব'**
+  String get packKindShortObservances;
+
+  /// A pack and its version in the report form, e.g. 'পঞ্চাঙ্গ সংস্করণ ৩'.
+  ///
+  /// In bn, this message translates to:
+  /// **'{kind} সংস্করণ {version}'**
+  String reportPackVersion(String kind, String version);
+
+  /// Report form: exactly what is sent besides the user's text (§11.17, §15.3).
+  ///
+  /// In bn, this message translates to:
+  /// **'সঙ্গে যাবে: {city} · {tradition} · {versions}'**
+  String reportSentWith(String city, String tradition, String versions);
+
+  /// Report form: no personal data (FR-SET-03).
+  ///
+  /// In bn, this message translates to:
+  /// **'আপনার নাম, ফোন নম্বর বা ইমেল চাওয়া হয় না, পাঠানোও হয় না।'**
+  String get reportPrivacy;
+
+  /// Report form: submit button.
+  ///
+  /// In bn, this message translates to:
+  /// **'পাঠান'**
+  String get reportSend;
+
+  /// Report sent (§11.17).
+  ///
+  /// In bn, this message translates to:
+  /// **'পাঠানো হয়েছে। যাচাই করে প্রয়োজনে সংশোধন করা হবে।'**
+  String get reportSent;
+
+  /// Report queued offline (§11.17, US-07).
+  ///
+  /// In bn, this message translates to:
+  /// **'ইন্টারনেট পেলে পাঠানো হবে।'**
+  String get reportQueued;
 }
 
 class _AppLocalizationsDelegate

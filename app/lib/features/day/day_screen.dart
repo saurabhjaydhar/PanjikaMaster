@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
+import '../../app/theme/tokens.dart';
 import '../../app/widgets/panjika_widgets.dart';
 import '../../app/widgets/system_states.dart';
 import '../../core/time/civil_date.dart';
@@ -109,7 +112,18 @@ class _DayPage extends ConsumerWidget {
               horizontal: contentInset(MediaQuery.sizeOf(context).width),
               vertical: screenMargin(MediaQuery.sizeOf(context).width),
             ),
-            children: [DaySections(d, now: now)],
+            children: [
+              DaySections(d, now: now),
+              const SizedBox(height: Space.l),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: TextButton.icon(
+                  icon: const Icon(Icons.flag_outlined),
+                  label: Text(AppLocalizations.of(context).menuReport),
+                  onPressed: () => context.push(Routes.reportFor(date)),
+                ),
+              ),
+            ],
           ),
           if (d.provenance.isSample) const SampleWatermark(),
         ],

@@ -965,4 +965,72 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get schoolsPara3 =>
       'এর কোনোটিই ভুল নয়; দুটিই দীর্ঘদিনের প্রচলিত গণনারীতি। এই অ্যাপ প্রতিটি তারিখের সঙ্গে জানায় সেটি কোন মতে। এখন অ্যাপে বিশুদ্ধ সিদ্ধান্ত মত আছে, সূর্যসিদ্ধান্ত মত পরে আসবে। আপনার পরিবার যে পঞ্জিকা মানে, তার সঙ্গে মিলিয়ে নিন।';
+
+  @override
+  String get reportDateLabel => 'কোন তারিখ?';
+
+  @override
+  String reportDateBoth(String bengali, String gregorian) {
+    return '$bengali ($gregorian)';
+  }
+
+  @override
+  String get reportChangeDate => 'তারিখ বদলান';
+
+  @override
+  String get reportKindLabel => 'কী ভুল?';
+
+  @override
+  String get reportKindTithiTime => 'তিথির সময়';
+
+  @override
+  String get reportKindFestivalDay => 'উৎসবের দিন';
+
+  @override
+  String get reportKindBengaliDate => 'বাংলা তারিখ';
+
+  @override
+  String get reportKindOther => 'অন্য কিছু';
+
+  @override
+  String get reportPanjikaSaysLabel => 'আপনার পঞ্জিকায় কী আছে?';
+
+  @override
+  String get reportPanjikaSaysHint =>
+      'পঞ্জিকায় যা লেখা আছে, নিজের ভাষায় লিখুন';
+
+  @override
+  String get reportPanjikaNameLabel => 'পঞ্জিকার নাম (ঐচ্ছিক)';
+
+  @override
+  String get packKindShortGlobal => 'পঞ্চাঙ্গ';
+
+  @override
+  String get packKindShortCities => 'শহর';
+
+  @override
+  String get packKindShortObservances => 'উৎসব';
+
+  @override
+  String reportPackVersion(String kind, String version) {
+    return '$kind সংস্করণ $version';
+  }
+
+  @override
+  String reportSentWith(String city, String tradition, String versions) {
+    return 'সঙ্গে যাবে: $city · $tradition · $versions';
+  }
+
+  @override
+  String get reportPrivacy =>
+      'আপনার নাম, ফোন নম্বর বা ইমেল চাওয়া হয় না, পাঠানোও হয় না।';
+
+  @override
+  String get reportSend => 'পাঠান';
+
+  @override
+  String get reportSent => 'পাঠানো হয়েছে। যাচাই করে প্রয়োজনে সংশোধন করা হবে।';
+
+  @override
+  String get reportQueued => 'ইন্টারনেট পেলে পাঠানো হবে।';
 }
