@@ -52,15 +52,28 @@ def _events(astro, place, body, start, end, rising, horizon):
     return _unix(t[real]) if len(t) else np.array([], dtype=np.int64)
 
 
-def city_days(
+@dataclass(frozen=True)
+class DayEvents:
+    """The first of each event inside one IST day; None when there is none. Far from
+    IST (e.g. west of about 8° E) a sunset can fall outside the IST day (Q16)."""
+
+    date: date
+    sunrise: int | None
+    sunset: int | None
+    moonrise: int | None
+    moonset: int | None
+
+
+def day_events(
     astro: Astro,
     lat: float,
     lon: float,
     first: date,
     last: date,
     definition: SunriseDefinition = SUNRISE_DEFINITION,
-) -> list[CityDay]:
-    """One row per IST date in [first, last]."""
+) -> list[DayEvents]:
+    """One row per IST date in [first, last], every event optional. The reference for
+    the phone's own rise/set computation (§6.5.5, T-315)."""
     place = astro._earth + wgs84.latlon(lat, lon)
     start = _ist_midnight(first)
     end = _ist_midnight(last + timedelta(days=1))
@@ -81,9 +94,23 @@ def city_days(
     d = first
     while d <= last:
         s = _ist_midnight(d)
-        rise, set_ = on("sunrise", s), on("sunset", s)
-        if rise is None or set_ is None:
-            raise ValueError(f"no sunrise or sunset at ({lat}, {lon}) on {d}")
-        out.append(CityDay(d, rise, set_, on("moonrise", s), on("moonset", s)))
+        out.append(DayEvents(d, *(on(n, s) for n in events)))
         d += timedelta(days=1)
+    return out
+
+
+def city_days(
+    astro: Astro,
+    lat: float,
+    lon: float,
+    first: date,
+    last: date,
+    definition: SunriseDefinition = SUNRISE_DEFINITION,
+) -> list[CityDay]:
+    """One row per IST date in [first, last]; sunrise and sunset are required."""
+    out = []
+    for e in day_events(astro, lat, lon, first, last, definition):
+        if e.sunrise is None or e.sunset is None:
+            raise ValueError(f"no sunrise or sunset at ({lat}, {lon}) on {e.date}")
+        out.append(CityDay(e.date, e.sunrise, e.sunset, e.moonrise, e.moonset))
     return out
