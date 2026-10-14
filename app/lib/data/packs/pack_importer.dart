@@ -14,6 +14,7 @@ const packTablesInOrder = [
   'cities',
   'city_days',
   'bengali_dates',
+  'body_positions',
   'names',
   'observances',
   'observance_dates',
@@ -184,6 +185,18 @@ class PackImporter {
     });
   }
 
+  /// Pack tables present in the incoming file. A pack built before a table was added
+  /// to the schema (e.g. `body_positions`, pack schema 2) simply has none of its rows.
+  Future<Set<String>> _incomingTables() async => {
+    for (final r
+        in await _db
+            .customSelect(
+              "SELECT name FROM incoming.sqlite_master WHERE type = 'table'",
+            )
+            .get())
+      r.read<String>('name'),
+  };
+
   Future<void> _replace(List<String> old) async {
     for (final table in packTablesInOrder.reversed) {
       for (final oldId in old) {
@@ -193,7 +206,9 @@ class PackImporter {
         );
       }
     }
+    final present = await _incomingTables();
     for (final table in packTablesInOrder) {
+      if (!present.contains(table)) continue;
       await _db.customStatement(
         'INSERT INTO main.$table SELECT * FROM incoming.$table',
       );
@@ -253,7 +268,15 @@ class PackImporter {
     await _db.customStatement(
       'INSERT INTO main.packs SELECT * FROM incoming.packs',
     );
+    final present = await _incomingTables();
     for (final table in packTablesInOrder.skip(1).toList().reversed) {
+      if (!present.contains(table)) {
+        await _db.customStatement(
+          'DELETE FROM main.$table WHERE pack_id IN ($oldIds)',
+          old,
+        );
+        continue;
+      }
       final cols = await columns(table);
       await _db.customStatement(
         'DELETE FROM main.$table WHERE pack_id IN ($oldIds) AND NOT EXISTS '
@@ -262,6 +285,7 @@ class PackImporter {
       );
     }
     for (final table in packTablesInOrder.skip(1)) {
+      if (!present.contains(table)) continue; // its old rows are gone (above)
       final cols = await columns(table);
       await _db.customStatement(
         'UPDATE main.$table SET pack_id = ? WHERE pack_id IN ($oldIds)',

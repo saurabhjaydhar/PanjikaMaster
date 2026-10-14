@@ -4,7 +4,7 @@ import sqlite3
 from pathlib import Path
 
 SCHEMA_PATH = Path(__file__).with_name("schema.sql")
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # 2: body_positions (T-314)
 
 # Tables a pack may contain, in dependency order (parents before children).
 PACK_TABLES = (
@@ -14,6 +14,7 @@ PACK_TABLES = (
     "cities",
     "city_days",
     "bengali_dates",
+    "body_positions",
     "names",
     "observances",
     "observance_dates",

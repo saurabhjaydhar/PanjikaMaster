@@ -5,6 +5,7 @@ import pytest
 
 from engine.observances import load_rules
 from engine.observances.build import RULES_DIR
+from engine.observances.rules import PrevailsAt
 from pack import builder
 
 RULES = {r.id: r for r in load_rules(RULES_DIR)}
@@ -38,6 +39,14 @@ def test_every_rule_is_a_draft_with_names_in_both_languages():
 
 def test_sandhi_puja_rides_on_maha_ashtami():
     assert "sandhi_puja" in RULES["durga_ashtami"].windows
+
+
+def test_vijaya_dashami_is_dashami_prevailing_at_aparahna():
+    # Owner's decision 2026-10-13 (udaya put it a day after the Bengali panjikas).
+    d = RULES["vijaya_dashami"].decision
+    assert isinstance(d, PrevailsAt)
+    assert (d.moment, d.coverage, d.tie_breaker) == ("aparahna", "any", "earlier_day")
+    assert "aparahna" in RULES["vijaya_dashami"].windows
 
 
 def test_draft_files_say_so_and_name_the_open_questions():

@@ -23,7 +23,8 @@
 |---|---|---|
 | Default tradition | Drik / Bishuddha Siddhanta. Surya Siddhanta (Gupta Press) follows in v1.1 | §5.2–5.3 |
 | Where data comes from | Computed offline with Skyfield + JPL DE440s, validated against Rashtriya Panchang and the printed panjika, shipped as signed SQLite packs. The phone reads data; it never guesses | §6 |
-| Ayanamsa, time zone | Lahiri; IST, shown with an "IST" label | §5.3 |
+| Ayanamsa, time zone | Lahiri; IST, shown with an "IST" label (places outside India: Q16) | §5.3 |
+| Location | Any place on Earth up to ±60° latitude: sunrise, sunset, moonrise, moonset, periods and the tithi at sunrise are computed on the phone for the place's own coordinates, from a Sun/Moon table in the signed pack. Festival and Bengali dates follow one reference place (Q1) for everyone | §6.2, §8.5 |
 | Trust | Every date screen shows tradition, city and time zone; every festival shows a verification status | §6.8 |
 | Languages | Bengali and English both complete at launch; optional "names in both scripts" | §13 |
 | Ads | Never above the fold on Today, never full-screen; nothing religious behind a paywall | §20 |
@@ -101,9 +102,9 @@ Crash-free sessions ≥ 99.5%. Cold start to Today screen < 1.5 s on a ₹10k An
 | Monthly calendar (Bengali + Gregorian) | ✅ | | | |
 | Day detail | ✅ | | | |
 | Festival list, month filter, details | ✅ | | | |
-| City picker (West Bengal + metros) | ✅ | | | |
-| Device location → nearest supported city | ✅ | | | |
-| Exact-coordinate on-device rise/set | | ✅ | | |
+| Place picker (India + major cities abroad, searchable) | ✅ | | | |
+| Device location → timings for the exact coordinates, anywhere up to ±60° latitude | ✅ | | | |
+| Exact-coordinate on-device rise/set (from the pack's Sun/Moon table) | ✅ (moved from v1.1, decision 2026-10-13) | | | |
 | Offline data (3 years bundled) | ✅ | | | |
 | Festival + tithi reminders (Ekadashi, Purnima, Amavasya) | ✅ | | | |
 | Custom reminders | | ✅ | | |
@@ -138,7 +139,7 @@ IDs are referenced by tests and tickets.
 - **FR-HOME-01** Show Gregorian date, weekday, Bengali date (day, month, year) in Bengali numerals.
 - **FR-HOME-02** Show current tithi with paksha, end time, and progress through the tithi. If the tithi changes later today, show the next tithi and its start.
 - **FR-HOME-03** Show nakshatra, yoga, karana with end times.
-- **FR-HOME-04** Show sunrise, sunset, moonrise, moonset for the selected city; label city and "IST".
+- **FR-HOME-04** Show sunrise, sunset, moonrise, moonset for the selected place; label the place and "IST".
 - **FR-HOME-05** Show today's observances with verification badge.
 - **FR-HOME-06** Show the next 3 upcoming tier-1/2 observances with "N দিন বাকি".
 - **FR-HOME-07** Show today's inauspicious and auspicious periods; highlight the one currently active.
@@ -169,23 +170,28 @@ IDs are referenced by tests and tickets.
 - **FR-FEST-04** Multi-day festivals show each day (e.g. Durga Puja Shashthi→Dashami).
 
 ### 8.5 Location
-- **FR-LOC-01** Manual city picker with search in Bengali and English (e.g. "হাওড়া", "howrah").
-- **FR-LOC-02** "Use my location" requests coarse location only after the user taps it; maps to nearest supported city and shows the distance ("নিকটতম শহর: বর্ধমান, ১২ কিমি").
-- **FR-LOC-03** If the nearest city is > 50 km away, show a warning that timings may differ by a few minutes.
+A "place" is either a listed city (name + coordinates from the place list, Q13) or the user's own location (coordinates only). Both are computed the same way.
+
+- **FR-LOC-01** Manual place picker with search in Bengali and English (e.g. "হাওড়া", "howrah", "nainital"): West Bengal by district, the rest of India, and major cities abroad with Bengali communities.
+- **FR-LOC-02** "Use my location" requests coarse location only after the user taps it. Timings are computed for those coordinates (rounded to 0.01°, about 1 km), not for the nearest listed city. The place is labelled with the nearest listed name and the coordinates ("নৈনিতালের কাছে · ২৯.৩৮° উ, ৭৯.৪৬° পূ").
+- **FR-LOC-03** Sunrise, sunset, moonrise, moonset, the daily periods and the tithi at sunrise are computed on the phone for the place's coordinates (§6.5.5). Tithi, nakshatra, yoga and karana moments, Bengali dates and festival dates do not depend on the place; festival dates follow the reference place (Q1), and the place screen and Sources screen say so.
 - **FR-LOC-04** Denied permission never blocks the app; Kolkata is the default.
-- **FR-LOC-05** After a city change, show a one-time toast listing what changed ("সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই").
+- **FR-LOC-05** After a place change, show a one-time toast listing what changed ("সূর্যোদয় ও রাহুকাল বদলেছে; তিথি ও উৎসবের তারিখ একই").
+- **FR-LOC-06** The user's coordinates stay on the phone. They are never sent anywhere; an error report carries the nearest listed city id and a "own location" flag instead (§15.3).
+- **FR-LOC-07** Places beyond ±60° latitude, where the Sun may not rise or set on some days, are refused with an explanation in both languages; the previous place stays selected.
+- **FR-LOC-08** Outside India the times are still shown in IST with the "IST" label until Q16 is decided, and the place screen says so.
 
 ### 8.6 Reminders
 - **FR-REM-01** Per-festival reminder: day before at 20:00 and/or morning of at 06:00 (defaults editable).
 - **FR-REM-02** Recurring: every Ekadashi / Purnima / Amavasya, with an option "at tithi start" or "morning of udaya day".
-- **FR-REM-03** Reminders are scheduled locally for the next 60 days and rescheduled on app open, data-pack update, city change, and device reboot.
+- **FR-REM-03** Reminders are scheduled locally for the next 60 days and rescheduled on app open, data-pack update, place change, and device reboot.
 - **FR-REM-04** Notification text in the UI language, e.g. "আগামীকাল একাদশী। তিথি শুরু রাত ৯:১৪" / "Ekadashi tomorrow. Tithi begins 9:14 PM" (sample).
 
 ### 8.7 Search
 - **FR-SRCH-01** Search by Gregorian date ("12/10/2026"), Bengali date ("২৫ আশ্বিন ১৪৩৩"), or festival name in either script.
 
 ### 8.8 Settings & trust
-- **FR-SET-01** Language, tradition, city, theme, text size, 12/24 h, numeral style (Bengali/Latin).
+- **FR-SET-01** Language, tradition, place, theme, text size, 12/24 h, numeral style (Bengali/Latin).
 - **FR-SET-02** "তথ্যসূত্র ও যাচাই" (Sources & verification) screen: explains tradition, pipeline, references, pack versions, last validation date.
 - **FR-SET-03** "ভুল জানান" (Report an error): pre-filled form with date, city, tradition, pack version and a free-text field; works offline (queued).
 - **FR-SET-04** Remove ads (premium purchase / restore).
@@ -224,6 +230,12 @@ IDs are referenced by tests and tickets.
 
 **US-04 City change.** As Riya in Siliguri, I want sunrise for my city.
 - When I pick শিলিগুড়ি, then sunrise/sunset/moonrise/moonset and Rahu Kaal update; tithi end times and festival dates do not change; a toast says so.
+
+**US-12 Anywhere.** As Anirban in Nainital (not in any list), I want sunrise and Rahu Kaal for where I actually am.
+- When I tap "আমার অবস্থান ব্যবহার করুন" and allow coarse location, then Today shows sunrise and sunset computed for my coordinates (equal, within the §6.7 tolerance, to the pipeline's values for the same coordinates in the shared rise/set fixture), labelled "নৈনিতালের কাছে" with the coordinates.
+- Festival dates are the same as for Kolkata, and the place screen says they follow the reference place.
+- With location denied, I can still type "nainital" or "নৈনিতাল" and get the same result.
+- The coordinates are not in any network request (checked by a test).
 
 **US-05 Offline.** As any user, I want the app to work without internet.
 - Given airplane mode and a fresh install, then Today, Calendar, Day and Festivals work for every date covered by the bundled pack (3 Bengali years).
@@ -288,6 +300,7 @@ Only the owner decides these. Until then the code puts the behaviour behind a fl
 | Q10 | Reuse terms of the Rashtriya Panchang e-version | Saurabh / counsel | Phase 3 |
 | Q11 | App ID / package name (e.g. `com.scaleroot.panjika`) and display name | Saurabh | Phase 1 uses a placeholder; final before the first Play upload (Phase 7) |
 | Q12 | Who holds the pack-signing and Play upload keys; where backups live | Saurabh | Phase 3 (dev key), Phase 7 (production key) |
-| Q13 | Source for city coordinates (GeoNames, Survey of India, open map) | Saurabh | Phase 2 |
+| Q13 | Source for the place list's names and coordinates (GeoNames, Survey of India, open map) | Saurabh | Phase 2 |
 | Q14 | English romanisation standard ("Boishakh" vs "Vaishakha"; diacritics or not) | Saurabh + reviewer | Phase 3 |
 | Q15 | Language defaults: UI language for non-bn/en devices; default of "names in both scripts" | Saurabh | Phase 4 |
+| Q16 | Places outside India: show times in IST (as now) or in the place's own time zone (then also: which zone database, and how the Bengali date is labelled) | Saurabh | Phase 4 |

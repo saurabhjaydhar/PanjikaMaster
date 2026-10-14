@@ -51,6 +51,9 @@ def test_rows_cover_the_range_and_match_the_schema(astro, reproducible, tmp_path
     assert [d for (d,) in days] == ["2027-03-10", "2027-03-11", "2027-03-12"]
     months = conn.execute("SELECT starts_utc, ends_utc FROM lunar_months").fetchall()
     assert months and months[0][0] <= start and months[-1][1] >= end
+    bodies = conn.execute("SELECT date, start_utc FROM body_positions ORDER BY date").fetchall()
+    assert [d for d, _ in bodies] == ["2027-03-10", "2027-03-11", "2027-03-12", "2027-03-13"]
+    assert bodies[0][1] == start  # one past the range: the last day's next sunrise
     n = conn.execute("SELECT count(*) FROM names").fetchone()[0]
     assert n == len(names.rows(pack[0]))
     assert conn.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -67,8 +70,10 @@ def test_run_metadata(astro, reproducible, tmp_path):
     assert set(meta["libraries"]) == {"skyfield", "jplephem", "numpy"}
     assert len(meta["ephemeris"]["sha256"]) == 64
     assert meta["names_status"] == "draft"
-    assert set(meta["rows"]) == set(KINDS) | {"bengali_dates", "lunar_months"}
+    assert set(meta["rows"]) == set(KINDS) | {"bengali_dates", "lunar_months", "body_positions"}
     assert meta["rows"]["bengali_dates"] == 3
+    assert meta["rows"]["body_positions"] == 4
+    assert meta["models"]["body_positions"]["degrees"] == {"sun": 3, "moon": 6, "gast": 3}
     locked = meta["ephemeris"]["locked"]
     assert engine_version.endswith("+dev-ephemeris") != locked
     run = json.loads(path.with_suffix(".run.json").read_text())

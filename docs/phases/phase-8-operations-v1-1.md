@@ -21,7 +21,7 @@
 | T-808 | app | Custom reminders (premium) |
 | T-809 | app | Android home-screen widget (bn/en) |
 | T-810 | app | দণ্ড-পল time display |
-| T-811 | app | Exact-coordinate rise/set on device (Astronomy Engine) |
+| T-811 | app | ~~Exact-coordinate rise/set on device (Astronomy Engine)~~ Moved into v1.0 on 2026-10-13 (Phase 3 and 4), computed from the pack's Sun/Moon table instead of Astronomy Engine. Nothing left here |
 | T-812 | app | Two-pane tablet/foldable layout |
 | T-813 | backend + app | Vaishnava Ekadashi (`ekadashi_vaishnava`) |
 

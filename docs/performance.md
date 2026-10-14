@@ -9,6 +9,8 @@ what a person measures on a device.
 | Fonts | ≤ 1.5 MB of the app (§12) | Subset by `scripts/build_fonts.sh`; 788 KB today (`docs/assets.md`). |
 | Code shrinking | R8 on in release | `android/app/build.gradle.kts` turns on code and resource shrinking; rules in `android/app/proguard-rules.pro`, with the reason for each; kept resources in `res/raw/keep.xml`. Drift needs no rules (SQL goes through `dart:ffi` on native SQLite). |
 | Cold start to Today | < 1.5 s on a ₹10k Android phone | **Measured by a person** on the low-end phone of the device matrix (§22.2, T-616); see below. |
+| On-device rise/set (§6.5.5) | < 2 ms per place per day on the low-end phone; a month grid (≤ 32 days + 1) < 60 ms | Benchmark test in `ci-app` (desktop VM, scaled limit) + the person's measurement with T-616 |
+| Sun/Moon table | ≤ 200 KB per year compressed | Pack builder prints the size; T-314 test fails above it |
 | Background work | none except scheduled notifications | No background services or work managers; the pack check runs on app open (§18). |
 
 ## Measuring cold start

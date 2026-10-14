@@ -6,7 +6,7 @@
 
 | Item | Approach |
 |---|---|
-| Location | Coarse only (`ACCESS_COARSE_LOCATION`), on tap, never in background; stored as chosen city id, not coordinates |
+| Location | Coarse only (`ACCESS_COARSE_LOCATION`), on tap, never in background. Stored on the phone as coordinates rounded to 0.01° (about 1 km) so timings can be computed for the exact place; never sent anywhere: not in error reports (they carry the nearest listed city), not in analytics (FR-LOC-06). Decision 2026-10-13 (was: city id only) |
 | Notifications | Runtime permission on first reminder |
 | Personal data | None collected by us; no accounts |
 | Ads | AdMob collects device identifiers; disclose in Play Data safety; non-personalised ads option; UMP consent where required |
@@ -79,7 +79,7 @@ North-star: **days per month a user opens Today** (habit). Watch: correctness re
 
 - **Android**: app bundle (AAB), Play App Signing, **target Android 16 (API 36)** — required for new apps and updates on Google Play since 31 Aug 2026; test edge-to-edge layout (cannot be opted out) and predictive back (use `PopScope`, not legacy back handling), R8 shrinking with Drift rules verified, release build tested on a physical device (sqlite native library present).
 - **Store listing** (Bengali + English): title idea "বাংলা পঞ্জিকা — বিশুদ্ধ মতে" (check trademark/name conflicts); screenshots: Today, Calendar, Festival list, Day detail, Dark mode, "Sources & verification" (trust as a selling point).
-- **Data safety**: declare AdMob identifiers, crash data (if any), coarse location *not collected* (used on device only — confirm with how the SDKs behave).
+- **Data safety**: declare AdMob identifiers, crash data (if any), coarse location *not collected* (used and stored on device only, rounded to 0.01° — confirm with how the SDKs behave, and whether Android Auto Backup copies the settings database; if it does, exclude it or say so in the privacy text).
 - **Permissions copy** shown before system prompts.
 - **Launch checklist**: privacy policy live; error-report path tested; packs signed with production key (key stored offline, backup in two places); tier-1 festivals expert-reviewed; release notes in Bengali; staged rollout 10% → 50% → 100% over a week.
 - **iOS** (later): App Store privacy labels, ATT prompt only if personalised ads are used.
@@ -104,7 +104,7 @@ Keep every claim true at launch. If the Bengal periods (§6.5.9) are not validat
 > প্রতিদিনের পঞ্জিকা, এখন ফোনে — পরিষ্কার, বাংলায়, আর বিশ্বাসযোগ্য।
 >
 > • আজকের তিথি, নক্ষত্র, যোগ ও করণ — কখন শেষ, তারপর কী
-> • সূর্যোদয়, সূর্যাস্ত, চন্দ্রোদয়, চন্দ্রাস্ত — আপনার শহরের হিসাবে
+> • সূর্যোদয়, সূর্যাস্ত, চন্দ্রোদয়, চন্দ্রাস্ত — আপনি যেখানেই থাকুন, সেখানকার হিসাবে
 > • রাহুকাল, যমগণ্ড, গুলিক কাল
 > • বাংলা ও ইংরেজি তারিখ একসঙ্গে মাসের পাতায়; পূর্ণিমা, অমাবস্যা, একাদশী এক নজরে
 > • দুর্গাপূজা, লক্ষ্মীপূজা, কালীপূজা, সরস্বতীপূজা, পয়লা বৈশাখ সহ সারা বছরের পার্বণ
@@ -120,7 +120,7 @@ Keep every claim true at launch. If the Bengal periods (§6.5.9) are not validat
 > Your daily Bengali panjika, clear and trustworthy.
 >
 > • Today's tithi, nakshatra, yoga and karana with end times
-> • Sunrise, sunset, moonrise and moonset for your city
+> • Sunrise, sunset, moonrise and moonset for wherever you are
 > • Rahu Kaal, Yamaganda and Gulika Kaal
 > • Monthly calendar with Bengali and English dates; Purnima, Amavasya and Ekadashi at a glance
 > • Durga Puja, Lakshmi Puja, Kali Puja, Saraswati Puja, Poila Boishakh and the full festival year

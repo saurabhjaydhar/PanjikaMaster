@@ -7275,6 +7275,669 @@ class ObservanceCorrectionsCompanion
   }
 }
 
+class BodyPositions extends Table
+    with TableInfo<BodyPositions, BodyPositionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  BodyPositions(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _traditionMeta = const VerificationMeta(
+    'tradition',
+  );
+  late final GeneratedColumn<String> tradition = GeneratedColumn<String>(
+    'tradition',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _startUtcMeta = const VerificationMeta(
+    'startUtc',
+  );
+  late final GeneratedColumn<int> startUtc = GeneratedColumn<int>(
+    'start_utc',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const VerificationMeta _sunRaMeta = const VerificationMeta('sunRa');
+  late final GeneratedColumn<Uint8List> sunRa = GeneratedColumn<Uint8List>(
+    'sun_ra',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(sun_ra) >= 8 AND length(sun_ra) % 8 = 0)',
+  );
+  static const VerificationMeta _sunDecMeta = const VerificationMeta('sunDec');
+  late final GeneratedColumn<Uint8List> sunDec = GeneratedColumn<Uint8List>(
+    'sun_dec',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(sun_dec) >= 8 AND length(sun_dec) % 8 = 0)',
+  );
+  static const VerificationMeta _sunDistMeta = const VerificationMeta(
+    'sunDist',
+  );
+  late final GeneratedColumn<Uint8List> sunDist = GeneratedColumn<Uint8List>(
+    'sun_dist',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(sun_dist) >= 8 AND length(sun_dist) % 8 = 0)',
+  );
+  static const VerificationMeta _moonRaMeta = const VerificationMeta('moonRa');
+  late final GeneratedColumn<Uint8List> moonRa = GeneratedColumn<Uint8List>(
+    'moon_ra',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(moon_ra) >= 8 AND length(moon_ra) % 8 = 0)',
+  );
+  static const VerificationMeta _moonDecMeta = const VerificationMeta(
+    'moonDec',
+  );
+  late final GeneratedColumn<Uint8List> moonDec = GeneratedColumn<Uint8List>(
+    'moon_dec',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(moon_dec) >= 8 AND length(moon_dec) % 8 = 0)',
+  );
+  static const VerificationMeta _moonDistMeta = const VerificationMeta(
+    'moonDist',
+  );
+  late final GeneratedColumn<Uint8List> moonDist = GeneratedColumn<Uint8List>(
+    'moon_dist',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(moon_dist) >= 8 AND length(moon_dist) % 8 = 0)',
+  );
+  static const VerificationMeta _gastMeta = const VerificationMeta('gast');
+  late final GeneratedColumn<Uint8List> gast = GeneratedColumn<Uint8List>(
+    'gast',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+    $customConstraints:
+        'NOT NULL CHECK (length(gast) >= 8 AND length(gast) % 8 = 0)',
+  );
+  static const VerificationMeta _packIdMeta = const VerificationMeta('packId');
+  late final GeneratedColumn<String> packId = GeneratedColumn<String>(
+    'pack_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL REFERENCES packs(id)',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    tradition,
+    date,
+    startUtc,
+    sunRa,
+    sunDec,
+    sunDist,
+    moonRa,
+    moonDec,
+    moonDist,
+    gast,
+    packId,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'body_positions';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<BodyPositionRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('tradition')) {
+      context.handle(
+        _traditionMeta,
+        tradition.isAcceptableOrUnknown(data['tradition']!, _traditionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_traditionMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('start_utc')) {
+      context.handle(
+        _startUtcMeta,
+        startUtc.isAcceptableOrUnknown(data['start_utc']!, _startUtcMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startUtcMeta);
+    }
+    if (data.containsKey('sun_ra')) {
+      context.handle(
+        _sunRaMeta,
+        sunRa.isAcceptableOrUnknown(data['sun_ra']!, _sunRaMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sunRaMeta);
+    }
+    if (data.containsKey('sun_dec')) {
+      context.handle(
+        _sunDecMeta,
+        sunDec.isAcceptableOrUnknown(data['sun_dec']!, _sunDecMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sunDecMeta);
+    }
+    if (data.containsKey('sun_dist')) {
+      context.handle(
+        _sunDistMeta,
+        sunDist.isAcceptableOrUnknown(data['sun_dist']!, _sunDistMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sunDistMeta);
+    }
+    if (data.containsKey('moon_ra')) {
+      context.handle(
+        _moonRaMeta,
+        moonRa.isAcceptableOrUnknown(data['moon_ra']!, _moonRaMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_moonRaMeta);
+    }
+    if (data.containsKey('moon_dec')) {
+      context.handle(
+        _moonDecMeta,
+        moonDec.isAcceptableOrUnknown(data['moon_dec']!, _moonDecMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_moonDecMeta);
+    }
+    if (data.containsKey('moon_dist')) {
+      context.handle(
+        _moonDistMeta,
+        moonDist.isAcceptableOrUnknown(data['moon_dist']!, _moonDistMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_moonDistMeta);
+    }
+    if (data.containsKey('gast')) {
+      context.handle(
+        _gastMeta,
+        gast.isAcceptableOrUnknown(data['gast']!, _gastMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_gastMeta);
+    }
+    if (data.containsKey('pack_id')) {
+      context.handle(
+        _packIdMeta,
+        packId.isAcceptableOrUnknown(data['pack_id']!, _packIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_packIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {tradition, date};
+  @override
+  BodyPositionRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return BodyPositionRow(
+      tradition: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tradition'],
+      )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      startUtc: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}start_utc'],
+      )!,
+      sunRa: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}sun_ra'],
+      )!,
+      sunDec: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}sun_dec'],
+      )!,
+      sunDist: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}sun_dist'],
+      )!,
+      moonRa: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}moon_ra'],
+      )!,
+      moonDec: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}moon_dec'],
+      )!,
+      moonDist: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}moon_dist'],
+      )!,
+      gast: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}gast'],
+      )!,
+      packId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}pack_id'],
+      )!,
+    );
+  }
+
+  @override
+  BodyPositions createAlias(String alias) {
+    return BodyPositions(attachedDatabase, alias);
+  }
+
+  @override
+  bool get isStrict => true;
+  @override
+  List<String> get customConstraints => const ['PRIMARY KEY(tradition, date)'];
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class BodyPositionRow extends DataClass implements Insertable<BodyPositionRow> {
+  final String tradition;
+  final String date;
+  final int startUtc;
+  final Uint8List sunRa;
+  final Uint8List sunDec;
+  final Uint8List sunDist;
+  final Uint8List moonRa;
+  final Uint8List moonDec;
+  final Uint8List moonDist;
+  final Uint8List gast;
+  final String packId;
+  const BodyPositionRow({
+    required this.tradition,
+    required this.date,
+    required this.startUtc,
+    required this.sunRa,
+    required this.sunDec,
+    required this.sunDist,
+    required this.moonRa,
+    required this.moonDec,
+    required this.moonDist,
+    required this.gast,
+    required this.packId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['tradition'] = Variable<String>(tradition);
+    map['date'] = Variable<String>(date);
+    map['start_utc'] = Variable<int>(startUtc);
+    map['sun_ra'] = Variable<Uint8List>(sunRa);
+    map['sun_dec'] = Variable<Uint8List>(sunDec);
+    map['sun_dist'] = Variable<Uint8List>(sunDist);
+    map['moon_ra'] = Variable<Uint8List>(moonRa);
+    map['moon_dec'] = Variable<Uint8List>(moonDec);
+    map['moon_dist'] = Variable<Uint8List>(moonDist);
+    map['gast'] = Variable<Uint8List>(gast);
+    map['pack_id'] = Variable<String>(packId);
+    return map;
+  }
+
+  BodyPositionsCompanion toCompanion(bool nullToAbsent) {
+    return BodyPositionsCompanion(
+      tradition: Value(tradition),
+      date: Value(date),
+      startUtc: Value(startUtc),
+      sunRa: Value(sunRa),
+      sunDec: Value(sunDec),
+      sunDist: Value(sunDist),
+      moonRa: Value(moonRa),
+      moonDec: Value(moonDec),
+      moonDist: Value(moonDist),
+      gast: Value(gast),
+      packId: Value(packId),
+    );
+  }
+
+  factory BodyPositionRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return BodyPositionRow(
+      tradition: serializer.fromJson<String>(json['tradition']),
+      date: serializer.fromJson<String>(json['date']),
+      startUtc: serializer.fromJson<int>(json['start_utc']),
+      sunRa: serializer.fromJson<Uint8List>(json['sun_ra']),
+      sunDec: serializer.fromJson<Uint8List>(json['sun_dec']),
+      sunDist: serializer.fromJson<Uint8List>(json['sun_dist']),
+      moonRa: serializer.fromJson<Uint8List>(json['moon_ra']),
+      moonDec: serializer.fromJson<Uint8List>(json['moon_dec']),
+      moonDist: serializer.fromJson<Uint8List>(json['moon_dist']),
+      gast: serializer.fromJson<Uint8List>(json['gast']),
+      packId: serializer.fromJson<String>(json['pack_id']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'tradition': serializer.toJson<String>(tradition),
+      'date': serializer.toJson<String>(date),
+      'start_utc': serializer.toJson<int>(startUtc),
+      'sun_ra': serializer.toJson<Uint8List>(sunRa),
+      'sun_dec': serializer.toJson<Uint8List>(sunDec),
+      'sun_dist': serializer.toJson<Uint8List>(sunDist),
+      'moon_ra': serializer.toJson<Uint8List>(moonRa),
+      'moon_dec': serializer.toJson<Uint8List>(moonDec),
+      'moon_dist': serializer.toJson<Uint8List>(moonDist),
+      'gast': serializer.toJson<Uint8List>(gast),
+      'pack_id': serializer.toJson<String>(packId),
+    };
+  }
+
+  BodyPositionRow copyWith({
+    String? tradition,
+    String? date,
+    int? startUtc,
+    Uint8List? sunRa,
+    Uint8List? sunDec,
+    Uint8List? sunDist,
+    Uint8List? moonRa,
+    Uint8List? moonDec,
+    Uint8List? moonDist,
+    Uint8List? gast,
+    String? packId,
+  }) => BodyPositionRow(
+    tradition: tradition ?? this.tradition,
+    date: date ?? this.date,
+    startUtc: startUtc ?? this.startUtc,
+    sunRa: sunRa ?? this.sunRa,
+    sunDec: sunDec ?? this.sunDec,
+    sunDist: sunDist ?? this.sunDist,
+    moonRa: moonRa ?? this.moonRa,
+    moonDec: moonDec ?? this.moonDec,
+    moonDist: moonDist ?? this.moonDist,
+    gast: gast ?? this.gast,
+    packId: packId ?? this.packId,
+  );
+  BodyPositionRow copyWithCompanion(BodyPositionsCompanion data) {
+    return BodyPositionRow(
+      tradition: data.tradition.present ? data.tradition.value : this.tradition,
+      date: data.date.present ? data.date.value : this.date,
+      startUtc: data.startUtc.present ? data.startUtc.value : this.startUtc,
+      sunRa: data.sunRa.present ? data.sunRa.value : this.sunRa,
+      sunDec: data.sunDec.present ? data.sunDec.value : this.sunDec,
+      sunDist: data.sunDist.present ? data.sunDist.value : this.sunDist,
+      moonRa: data.moonRa.present ? data.moonRa.value : this.moonRa,
+      moonDec: data.moonDec.present ? data.moonDec.value : this.moonDec,
+      moonDist: data.moonDist.present ? data.moonDist.value : this.moonDist,
+      gast: data.gast.present ? data.gast.value : this.gast,
+      packId: data.packId.present ? data.packId.value : this.packId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BodyPositionRow(')
+          ..write('tradition: $tradition, ')
+          ..write('date: $date, ')
+          ..write('startUtc: $startUtc, ')
+          ..write('sunRa: $sunRa, ')
+          ..write('sunDec: $sunDec, ')
+          ..write('sunDist: $sunDist, ')
+          ..write('moonRa: $moonRa, ')
+          ..write('moonDec: $moonDec, ')
+          ..write('moonDist: $moonDist, ')
+          ..write('gast: $gast, ')
+          ..write('packId: $packId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    tradition,
+    date,
+    startUtc,
+    $driftBlobEquality.hash(sunRa),
+    $driftBlobEquality.hash(sunDec),
+    $driftBlobEquality.hash(sunDist),
+    $driftBlobEquality.hash(moonRa),
+    $driftBlobEquality.hash(moonDec),
+    $driftBlobEquality.hash(moonDist),
+    $driftBlobEquality.hash(gast),
+    packId,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BodyPositionRow &&
+          other.tradition == this.tradition &&
+          other.date == this.date &&
+          other.startUtc == this.startUtc &&
+          $driftBlobEquality.equals(other.sunRa, this.sunRa) &&
+          $driftBlobEquality.equals(other.sunDec, this.sunDec) &&
+          $driftBlobEquality.equals(other.sunDist, this.sunDist) &&
+          $driftBlobEquality.equals(other.moonRa, this.moonRa) &&
+          $driftBlobEquality.equals(other.moonDec, this.moonDec) &&
+          $driftBlobEquality.equals(other.moonDist, this.moonDist) &&
+          $driftBlobEquality.equals(other.gast, this.gast) &&
+          other.packId == this.packId);
+}
+
+class BodyPositionsCompanion extends UpdateCompanion<BodyPositionRow> {
+  final Value<String> tradition;
+  final Value<String> date;
+  final Value<int> startUtc;
+  final Value<Uint8List> sunRa;
+  final Value<Uint8List> sunDec;
+  final Value<Uint8List> sunDist;
+  final Value<Uint8List> moonRa;
+  final Value<Uint8List> moonDec;
+  final Value<Uint8List> moonDist;
+  final Value<Uint8List> gast;
+  final Value<String> packId;
+  final Value<int> rowid;
+  const BodyPositionsCompanion({
+    this.tradition = const Value.absent(),
+    this.date = const Value.absent(),
+    this.startUtc = const Value.absent(),
+    this.sunRa = const Value.absent(),
+    this.sunDec = const Value.absent(),
+    this.sunDist = const Value.absent(),
+    this.moonRa = const Value.absent(),
+    this.moonDec = const Value.absent(),
+    this.moonDist = const Value.absent(),
+    this.gast = const Value.absent(),
+    this.packId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  BodyPositionsCompanion.insert({
+    required String tradition,
+    required String date,
+    required int startUtc,
+    required Uint8List sunRa,
+    required Uint8List sunDec,
+    required Uint8List sunDist,
+    required Uint8List moonRa,
+    required Uint8List moonDec,
+    required Uint8List moonDist,
+    required Uint8List gast,
+    required String packId,
+    this.rowid = const Value.absent(),
+  }) : tradition = Value(tradition),
+       date = Value(date),
+       startUtc = Value(startUtc),
+       sunRa = Value(sunRa),
+       sunDec = Value(sunDec),
+       sunDist = Value(sunDist),
+       moonRa = Value(moonRa),
+       moonDec = Value(moonDec),
+       moonDist = Value(moonDist),
+       gast = Value(gast),
+       packId = Value(packId);
+  static Insertable<BodyPositionRow> custom({
+    Expression<String>? tradition,
+    Expression<String>? date,
+    Expression<int>? startUtc,
+    Expression<Uint8List>? sunRa,
+    Expression<Uint8List>? sunDec,
+    Expression<Uint8List>? sunDist,
+    Expression<Uint8List>? moonRa,
+    Expression<Uint8List>? moonDec,
+    Expression<Uint8List>? moonDist,
+    Expression<Uint8List>? gast,
+    Expression<String>? packId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (tradition != null) 'tradition': tradition,
+      if (date != null) 'date': date,
+      if (startUtc != null) 'start_utc': startUtc,
+      if (sunRa != null) 'sun_ra': sunRa,
+      if (sunDec != null) 'sun_dec': sunDec,
+      if (sunDist != null) 'sun_dist': sunDist,
+      if (moonRa != null) 'moon_ra': moonRa,
+      if (moonDec != null) 'moon_dec': moonDec,
+      if (moonDist != null) 'moon_dist': moonDist,
+      if (gast != null) 'gast': gast,
+      if (packId != null) 'pack_id': packId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  BodyPositionsCompanion copyWith({
+    Value<String>? tradition,
+    Value<String>? date,
+    Value<int>? startUtc,
+    Value<Uint8List>? sunRa,
+    Value<Uint8List>? sunDec,
+    Value<Uint8List>? sunDist,
+    Value<Uint8List>? moonRa,
+    Value<Uint8List>? moonDec,
+    Value<Uint8List>? moonDist,
+    Value<Uint8List>? gast,
+    Value<String>? packId,
+    Value<int>? rowid,
+  }) {
+    return BodyPositionsCompanion(
+      tradition: tradition ?? this.tradition,
+      date: date ?? this.date,
+      startUtc: startUtc ?? this.startUtc,
+      sunRa: sunRa ?? this.sunRa,
+      sunDec: sunDec ?? this.sunDec,
+      sunDist: sunDist ?? this.sunDist,
+      moonRa: moonRa ?? this.moonRa,
+      moonDec: moonDec ?? this.moonDec,
+      moonDist: moonDist ?? this.moonDist,
+      gast: gast ?? this.gast,
+      packId: packId ?? this.packId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (tradition.present) {
+      map['tradition'] = Variable<String>(tradition.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (startUtc.present) {
+      map['start_utc'] = Variable<int>(startUtc.value);
+    }
+    if (sunRa.present) {
+      map['sun_ra'] = Variable<Uint8List>(sunRa.value);
+    }
+    if (sunDec.present) {
+      map['sun_dec'] = Variable<Uint8List>(sunDec.value);
+    }
+    if (sunDist.present) {
+      map['sun_dist'] = Variable<Uint8List>(sunDist.value);
+    }
+    if (moonRa.present) {
+      map['moon_ra'] = Variable<Uint8List>(moonRa.value);
+    }
+    if (moonDec.present) {
+      map['moon_dec'] = Variable<Uint8List>(moonDec.value);
+    }
+    if (moonDist.present) {
+      map['moon_dist'] = Variable<Uint8List>(moonDist.value);
+    }
+    if (gast.present) {
+      map['gast'] = Variable<Uint8List>(gast.value);
+    }
+    if (packId.present) {
+      map['pack_id'] = Variable<String>(packId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BodyPositionsCompanion(')
+          ..write('tradition: $tradition, ')
+          ..write('date: $date, ')
+          ..write('startUtc: $startUtc, ')
+          ..write('sunRa: $sunRa, ')
+          ..write('sunDec: $sunDec, ')
+          ..write('sunDist: $sunDist, ')
+          ..write('moonRa: $moonRa, ')
+          ..write('moonDec: $moonDec, ')
+          ..write('moonDist: $moonDist, ')
+          ..write('gast: $gast, ')
+          ..write('packId: $packId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -7302,6 +7965,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'transitions_by_end',
     'CREATE INDEX transitions_by_end ON transitions (tradition, kind, ends_utc)',
   );
+  late final BodyPositions bodyPositions = BodyPositions(this);
   Selectable<TransitionRow> transitionsOverlapping(
     String tradition,
     String kind,
@@ -7568,6 +8232,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     observanceCorrections,
     transitionsByStart,
     transitionsByEnd,
+    bodyPositions,
   ];
 }
 
@@ -7791,6 +8456,24 @@ final class $PacksReferences
     ).filter((f) => f.packId.id.sqlEquals($_itemColumn<String>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_periodRulesRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<BodyPositions, List<BodyPositionRow>>
+  _bodyPositionsRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.bodyPositions,
+    aliasName: 'packs__id__body_positions__pack_id',
+  );
+
+  $BodyPositionsProcessedTableManager get bodyPositionsRefs {
+    final manager = $BodyPositionsTableManager(
+      $_db,
+      $_db.bodyPositions,
+    ).filter((f) => f.packId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_bodyPositionsRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -8111,6 +8794,31 @@ class $PacksFilterComposer extends Composer<_$AppDatabase, Packs> {
           }) => $PeriodRulesFilterComposer(
             $db: $db,
             $table: $db.periodRules,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> bodyPositionsRefs(
+    Expression<bool> Function($BodyPositionsFilterComposer f) f,
+  ) {
+    final $BodyPositionsFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.bodyPositions,
+      getReferencedColumn: (t) => t.packId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $BodyPositionsFilterComposer(
+            $db: $db,
+            $table: $db.bodyPositions,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -8503,6 +9211,31 @@ class $PacksAnnotationComposer extends Composer<_$AppDatabase, Packs> {
     );
     return f(composer);
   }
+
+  Expression<T> bodyPositionsRefs<T extends Object>(
+    Expression<T> Function($BodyPositionsAnnotationComposer a) f,
+  ) {
+    final $BodyPositionsAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.bodyPositions,
+      getReferencedColumn: (t) => t.packId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $BodyPositionsAnnotationComposer(
+            $db: $db,
+            $table: $db.bodyPositions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $PacksTableManager
@@ -8529,6 +9262,7 @@ class $PacksTableManager
             bool observanceWindowsRefs,
             bool lunarMonthsRefs,
             bool periodRulesRefs,
+            bool bodyPositionsRefs,
           })
         > {
   $PacksTableManager(_$AppDatabase db, Packs table)
@@ -8626,6 +9360,7 @@ class $PacksTableManager
                 observanceWindowsRefs = false,
                 lunarMonthsRefs = false,
                 periodRulesRefs = false,
+                bodyPositionsRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -8640,6 +9375,7 @@ class $PacksTableManager
                     if (observanceWindowsRefs) db.observanceWindows,
                     if (lunarMonthsRefs) db.lunarMonths,
                     if (periodRulesRefs) db.periodRules,
+                    if (bodyPositionsRefs) db.bodyPositions,
                   ],
                   addJoins: null,
                   getPrefetchedDataCallback: (items) async {
@@ -8809,6 +9545,23 @@ class $PacksTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (bodyPositionsRefs)
+                        await $_getPrefetchedData<
+                          PackRow,
+                          Packs,
+                          BodyPositionRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $PacksReferences
+                              ._bodyPositionsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $PacksReferences(db, table, p0).bodyPositionsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.packId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -8840,6 +9593,7 @@ typedef $PacksProcessedTableManager =
         bool observanceWindowsRefs,
         bool lunarMonthsRefs,
         bool periodRulesRefs,
+        bool bodyPositionsRefs,
       })
     >;
 typedef $TransitionsCreateCompanionBuilder = TransitionsCompanion Function({
@@ -13633,6 +14387,434 @@ typedef $ObservanceCorrectionsProcessedTableManager =
       ObservanceCorrectionRow,
       PrefetchHooks Function()
     >;
+typedef $BodyPositionsCreateCompanionBuilder = BodyPositionsCompanion Function({
+  required String tradition,
+  required String date,
+  required int startUtc,
+  required Uint8List sunRa,
+  required Uint8List sunDec,
+  required Uint8List sunDist,
+  required Uint8List moonRa,
+  required Uint8List moonDec,
+  required Uint8List moonDist,
+  required Uint8List gast,
+  required String packId,
+  Value<int> rowid,
+});
+typedef $BodyPositionsUpdateCompanionBuilder = BodyPositionsCompanion Function({
+  Value<String> tradition,
+  Value<String> date,
+  Value<int> startUtc,
+  Value<Uint8List> sunRa,
+  Value<Uint8List> sunDec,
+  Value<Uint8List> sunDist,
+  Value<Uint8List> moonRa,
+  Value<Uint8List> moonDec,
+  Value<Uint8List> moonDist,
+  Value<Uint8List> gast,
+  Value<String> packId,
+  Value<int> rowid,
+});
+
+final class $BodyPositionsReferences
+    extends BaseReferences<_$AppDatabase, BodyPositions, BodyPositionRow> {
+  $BodyPositionsReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static Packs _packIdTable(_$AppDatabase db) =>
+      db.packs.createAlias('body_positions__pack_id__packs__id');
+
+  $PacksProcessedTableManager get packId {
+    final $_column = $_itemColumn<String>('pack_id')!;
+
+    final manager = $PacksTableManager(
+      $_db,
+      $_db.packs,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_packIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $BodyPositionsFilterComposer
+    extends Composer<_$AppDatabase, BodyPositions> {
+  $BodyPositionsFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get tradition => $composableBuilder(
+    column: $table.tradition,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get startUtc => $composableBuilder(
+    column: $table.startUtc,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get sunRa => $composableBuilder(
+    column: $table.sunRa,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get sunDec => $composableBuilder(
+    column: $table.sunDec,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get sunDist => $composableBuilder(
+    column: $table.sunDist,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get moonRa => $composableBuilder(
+    column: $table.moonRa,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get moonDec => $composableBuilder(
+    column: $table.moonDec,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get moonDist => $composableBuilder(
+    column: $table.moonDist,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<Uint8List> get gast => $composableBuilder(
+    column: $table.gast,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $PacksFilterComposer get packId {
+    final $PacksFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.packId,
+      referencedTable: $db.packs,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $PacksFilterComposer(
+            $db: $db,
+            $table: $db.packs,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $BodyPositionsOrderingComposer
+    extends Composer<_$AppDatabase, BodyPositions> {
+  $BodyPositionsOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get tradition => $composableBuilder(
+    column: $table.tradition,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get startUtc => $composableBuilder(
+    column: $table.startUtc,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get sunRa => $composableBuilder(
+    column: $table.sunRa,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get sunDec => $composableBuilder(
+    column: $table.sunDec,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get sunDist => $composableBuilder(
+    column: $table.sunDist,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get moonRa => $composableBuilder(
+    column: $table.moonRa,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get moonDec => $composableBuilder(
+    column: $table.moonDec,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get moonDist => $composableBuilder(
+    column: $table.moonDist,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<Uint8List> get gast => $composableBuilder(
+    column: $table.gast,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $PacksOrderingComposer get packId {
+    final $PacksOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.packId,
+      referencedTable: $db.packs,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $PacksOrderingComposer(
+            $db: $db,
+            $table: $db.packs,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $BodyPositionsAnnotationComposer
+    extends Composer<_$AppDatabase, BodyPositions> {
+  $BodyPositionsAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get tradition =>
+      $composableBuilder(column: $table.tradition, builder: (column) => column);
+
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<int> get startUtc =>
+      $composableBuilder(column: $table.startUtc, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get sunRa =>
+      $composableBuilder(column: $table.sunRa, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get sunDec =>
+      $composableBuilder(column: $table.sunDec, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get sunDist =>
+      $composableBuilder(column: $table.sunDist, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get moonRa =>
+      $composableBuilder(column: $table.moonRa, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get moonDec =>
+      $composableBuilder(column: $table.moonDec, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get moonDist =>
+      $composableBuilder(column: $table.moonDist, builder: (column) => column);
+
+  GeneratedColumn<Uint8List> get gast =>
+      $composableBuilder(column: $table.gast, builder: (column) => column);
+
+  $PacksAnnotationComposer get packId {
+    final $PacksAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.packId,
+      referencedTable: $db.packs,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $PacksAnnotationComposer(
+            $db: $db,
+            $table: $db.packs,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $BodyPositionsTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          BodyPositions,
+          BodyPositionRow,
+          $BodyPositionsFilterComposer,
+          $BodyPositionsOrderingComposer,
+          $BodyPositionsAnnotationComposer,
+          $BodyPositionsCreateCompanionBuilder,
+          $BodyPositionsUpdateCompanionBuilder,
+          (BodyPositionRow, $BodyPositionsReferences),
+          BodyPositionRow,
+          PrefetchHooks Function({bool packId})
+        > {
+  $BodyPositionsTableManager(_$AppDatabase db, BodyPositions table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $BodyPositionsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $BodyPositionsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $BodyPositionsAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> tradition = const Value.absent(),
+                Value<String> date = const Value.absent(),
+                Value<int> startUtc = const Value.absent(),
+                Value<Uint8List> sunRa = const Value.absent(),
+                Value<Uint8List> sunDec = const Value.absent(),
+                Value<Uint8List> sunDist = const Value.absent(),
+                Value<Uint8List> moonRa = const Value.absent(),
+                Value<Uint8List> moonDec = const Value.absent(),
+                Value<Uint8List> moonDist = const Value.absent(),
+                Value<Uint8List> gast = const Value.absent(),
+                Value<String> packId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => BodyPositionsCompanion(
+                tradition: tradition,
+                date: date,
+                startUtc: startUtc,
+                sunRa: sunRa,
+                sunDec: sunDec,
+                sunDist: sunDist,
+                moonRa: moonRa,
+                moonDec: moonDec,
+                moonDist: moonDist,
+                gast: gast,
+                packId: packId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String tradition,
+                required String date,
+                required int startUtc,
+                required Uint8List sunRa,
+                required Uint8List sunDec,
+                required Uint8List sunDist,
+                required Uint8List moonRa,
+                required Uint8List moonDec,
+                required Uint8List moonDist,
+                required Uint8List gast,
+                required String packId,
+                Value<int> rowid = const Value.absent(),
+              }) => BodyPositionsCompanion.insert(
+                tradition: tradition,
+                date: date,
+                startUtc: startUtc,
+                sunRa: sunRa,
+                sunDec: sunDec,
+                sunDist: sunDist,
+                moonRa: moonRa,
+                moonDec: moonDec,
+                moonDist: moonDist,
+                gast: gast,
+                packId: packId,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<BodyPositions, BodyPositionRow>(table),
+                  $BodyPositionsReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({packId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (packId) {
+                      state = state.withJoin(
+                        currentTable: table,
+                        currentColumn: table.packId,
+                        referencedTable: $BodyPositionsReferences._packIdTable(
+                          db,
+                        ),
+                        referencedColumn: $BodyPositionsReferences
+                            ._packIdTable(db)
+                            .id,
+                      ) as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $BodyPositionsProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      BodyPositions,
+      BodyPositionRow,
+      $BodyPositionsFilterComposer,
+      $BodyPositionsOrderingComposer,
+      $BodyPositionsAnnotationComposer,
+      $BodyPositionsCreateCompanionBuilder,
+      $BodyPositionsUpdateCompanionBuilder,
+      (BodyPositionRow, $BodyPositionsReferences),
+      BodyPositionRow,
+      PrefetchHooks Function({bool packId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -13664,6 +14846,8 @@ class $AppDatabaseManager {
       $ErrorReportsQueueTableManager(_db, _db.errorReportsQueue);
   $ObservanceCorrectionsTableManager get observanceCorrections =>
       $ObservanceCorrectionsTableManager(_db, _db.observanceCorrections);
+  $BodyPositionsTableManager get bodyPositions =>
+      $BodyPositionsTableManager(_db, _db.bodyPositions);
 }
 
 class ObservancesBetweenResult {

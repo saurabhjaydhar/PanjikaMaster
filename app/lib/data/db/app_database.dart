@@ -15,10 +15,10 @@ class AppDatabase extends _$AppDatabase {
   factory AppDatabase.open() => AppDatabase(driftDatabase(name: 'panjika'));
 
   /// Must equal `PRAGMA user_version` in `data/pack/schema.sql`; a test checks it.
-  static const packSchemaVersion = 1;
+  static const packSchemaVersion = 2;
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -26,6 +26,7 @@ class AppDatabase extends _$AppDatabase {
     onUpgrade: (m, from, to) async {
       // One step per schema version, each covered by test/data/db/migration_test.dart.
       if (from < 2) await m.createTable(observanceCorrections); // T-603
+      if (from < 3) await m.createTable(bodyPositions); // T-314
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');

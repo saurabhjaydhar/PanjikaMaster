@@ -161,6 +161,19 @@ def test_prevails_at_on_no_day_falls_back_or_skips():
     assert run(a, rule({**PREVAILS, "if_none": "skip"})) == []
 
 
+def test_aparahna_picks_the_afternoon_day_where_udaya_picks_the_next():
+    # Day 06:00 → 18:00 = 15 muhurtas of 48 min; aparahna is the 10th–12th, 13:12–15:36.
+    # A tithi starting at midday and ending after the next sunrise: udaya takes day 4,
+    # aparahna (covered on both days, earlier wins) takes day 3. Vijaya Dashami's case.
+    a = almanac([(AMAVASYA, t(3, 12.5), t(4, 14))])
+    aparahna = {**PREVAILS, "moment": "aparahna"}
+    rows = run(a, rule(aparahna, windows=["aparahna"]))
+    assert [r.date for r in rows] == [day(3)]
+    w = rows[0].windows[0]
+    assert (w.kind, w.start, w.end) == ("aparahna", t(3, 13.2), t(3, 15.6))
+    assert [r.date for r in run(a, rule(UDAYA))] == [day(4)]
+
+
 def test_whole_coverage_needs_the_whole_moment():
     a = almanac([(AMAVASYA, t(3, 23.9), t(4, 3))])  # starts inside nishita
     assert [r.date for r in run(a, rule(PREVAILS))] == [day(3)]
