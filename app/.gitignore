@@ -49,3 +49,6 @@ app.*.map.json
 
 # Golden test diff output
 test/**/failures/
+
+# FVM Version Cache
+.fvm/
