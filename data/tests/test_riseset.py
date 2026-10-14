@@ -9,7 +9,7 @@ from datetime import UTC, date, datetime
 import astronomy
 import pytest
 
-from engine.riseset import IST_OFFSET, SunriseDefinition, city_days
+from engine.riseset import IST_OFFSET, SunriseDefinition, city_days, day_events
 
 PLACES = {
     "kolkata": (22.5726, 88.3639),
@@ -79,6 +79,27 @@ def test_q3_flag_centre_rises_later_than_upper_limb(astro):
     for u, c in zip(upper, centre, strict=True):
         assert 40 < c.sunrise - u.sunrise < 150
         assert 40 < u.sunset - c.sunset < 150
+
+
+def test_day_events_allow_a_missing_sun_event_and_city_days_refuses_it(astro):
+    # London: sunset near 18:30 UTC (IST midnight) in spring, so some IST days hold none.
+    lat, lon = 51.5074, -0.1278
+    rows = day_events(astro, lat, lon, date(2026, 3, 20), date(2026, 4, 30))
+    assert any(r.sunset is None for r in rows)
+    assert all(r.sunrise is not None for r in rows)
+    missing = next(r.date for r in rows if r.sunset is None)
+    with pytest.raises(ValueError, match="no sunrise or sunset"):
+        city_days(astro, lat, lon, missing, missing)
+    kolkata = PLACES["kolkata"]
+    d = date(2026, 6, 1)
+    (e,) = day_events(astro, *kolkata, d, d)
+    (c,) = city_days(astro, *kolkata, d, d)
+    assert (e.sunrise, e.sunset, e.moonrise, e.moonset) == (
+        c.sunrise,
+        c.sunset,
+        c.moonrise,
+        c.moonset,
+    )
 
 
 def test_some_days_have_no_moonrise(astro):
