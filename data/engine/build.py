@@ -22,7 +22,7 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 import engine
-from engine import bengali, ephemeris
+from engine import bengali, ephemeris, positions
 from engine.astro import Astro
 from engine.panchanga import KINDS, search_in_chunks
 from engine.riseset import IST_OFFSET, SUNRISE_DEFINITION
@@ -59,6 +59,15 @@ def metadata(path: Path, *, dev: bool, counts: dict[str, int]) -> dict:
         },
         "models": {
             "positions": "apparent geocentric, true ecliptic and equinox of date",
+            "body_positions": {
+                "content": "apparent geocentric RA/Dec (true equator and equinox of date,"
+                " no deflection), distance, GAST; Chebyshev per IST day",
+                "degrees": {
+                    "sun": positions.SUN_DEGREE,
+                    "moon": positions.MOON_DEGREE,
+                    "gast": positions.GAST_DEGREE,
+                },
+            },
             "ayanamsa": "Lahiri: 23°15′00.658″ at 1956-03-21 0h TT + IAU 2006 p_A; true = + Δψ",
             "nutation": "IAU 2000B (ayanamsa); IAU 2000A (Skyfield frames)",
             "sunrise": SUNRISE_DEFINITION.name,  # TODO(Q3)
@@ -113,8 +122,14 @@ def build(
         )
         if m.end > start and m.start < end
     ]
+    # One day past `last`, so the last day's next sunrise can be computed on the phone.
+    bodies = positions.rows(astro, first, last + timedelta(days=1))
     counts = {kind: sum(1 for r in rows if r[2] == kind) for kind in KINDS}
-    counts |= {"bengali_dates": len(dates), "lunar_months": len(months)}
+    counts |= {
+        "bengali_dates": len(dates),
+        "lunar_months": len(months),
+        "body_positions": len(bodies),
+    }
 
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"{pack_id}.sqlite"
@@ -151,6 +166,10 @@ def build(
         conn.executemany(
             "INSERT INTO lunar_months VALUES (?, ?, ?, ?, ?, ?)",
             [(tradition, m.month_idx, int(m.is_adhik), m.start, m.end, pack_id) for m in months],
+        )
+        conn.executemany(
+            "INSERT INTO body_positions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [(tradition, b.date.isoformat(), b.start_utc, *b.blobs(), pack_id) for b in bodies],
         )
         conn.executemany("INSERT INTO names VALUES (?, ?, ?, ?, ?, ?, ?, ?)", names.rows(pack_id))
     conn.execute("VACUUM")  # canonical page layout

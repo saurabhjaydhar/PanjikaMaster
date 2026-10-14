@@ -15,7 +15,7 @@
 --   * Names and descriptions are required in both Bengali and English (FR-L10N-09).
 --   * Tables are STRICT (SQLite ≥ 3.37) so column types are enforced.
 
-PRAGMA user_version = 1;
+PRAGMA user_version = 2;
 
 CREATE TABLE packs (
   id                 TEXT PRIMARY KEY,
@@ -100,6 +100,28 @@ CREATE TABLE bengali_dates (
   bn_month_idx INTEGER NOT NULL CHECK (bn_month_idx BETWEEN 0 AND 11),
   bn_year      INTEGER NOT NULL,
   pack_id      TEXT NOT NULL REFERENCES packs(id),
+  PRIMARY KEY (tradition, date)
+) STRICT;
+
+-- Sun/Moon positions for rise and set on the phone at any place (spec §6.5.5, T-314;
+-- engine/positions.py). One row per IST day [start_utc, start_utc + 86400), one past
+-- covers_to so the last day has a next sunrise. Each BLOB is little-endian float64
+-- Chebyshev coefficients over the day mapped to [-1, 1], lowest order first; degree =
+-- length / 8 - 1. Apparent geocentric RA/Dec in radians (true equator and equinox of
+-- date; RA continuous within the row), distance in km, Greenwich apparent sidereal
+-- time in radians (continuous within the row).
+CREATE TABLE body_positions (
+  tradition TEXT NOT NULL,
+  date      TEXT NOT NULL,
+  start_utc INTEGER NOT NULL,
+  sun_ra    BLOB NOT NULL CHECK (length(sun_ra) >= 8 AND length(sun_ra) % 8 = 0),
+  sun_dec   BLOB NOT NULL CHECK (length(sun_dec) >= 8 AND length(sun_dec) % 8 = 0),
+  sun_dist  BLOB NOT NULL CHECK (length(sun_dist) >= 8 AND length(sun_dist) % 8 = 0),
+  moon_ra   BLOB NOT NULL CHECK (length(moon_ra) >= 8 AND length(moon_ra) % 8 = 0),
+  moon_dec  BLOB NOT NULL CHECK (length(moon_dec) >= 8 AND length(moon_dec) % 8 = 0),
+  moon_dist BLOB NOT NULL CHECK (length(moon_dist) >= 8 AND length(moon_dist) % 8 = 0),
+  gast      BLOB NOT NULL CHECK (length(gast) >= 8 AND length(gast) % 8 = 0),
+  pack_id   TEXT NOT NULL REFERENCES packs(id),
   PRIMARY KEY (tradition, date)
 ) STRICT;
 

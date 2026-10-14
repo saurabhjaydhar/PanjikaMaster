@@ -8,7 +8,7 @@
 
 The executable version of the pack tables is `data/pack/schema.sql` (STRICT tables, foreign keys and CHECK constraints for index ranges, statuses and both-language text). If this sketch and `schema.sql` ever disagree, `schema.sql` wins and this section is fixed. The app's Drift tables are generated from it (`scripts/sync_drift_schema.py` → `app/lib/data/db/pack_tables.drift`, checked in CI) and a test compares the live Drift database with `schema.sql` column by column.
 
-**Pending (decision 2026-10-13, any-place timings):** the sketch below already shows `body_positions` and no `city_days`; `schema.sql` changes with T-314 and T-316. Until then `schema.sql` is the current truth.
+**Pending (decision 2026-10-13, any-place timings):** the sketch below already shows no `city_days`; `schema.sql` drops it with T-316. Until then `schema.sql` is the current truth. (`body_positions` is in `schema.sql` since T-314, pack schema 2.)
 
 ```
 packs(id TEXT PK, tradition TEXT, kind TEXT,           -- 'global' | 'cities' (the place list) | 'observances'
@@ -33,11 +33,14 @@ cities(id TEXT PK, name_bn TEXT, name_en TEXT,          -- the place list (§6.2
        lat REAL, lon REAL, elevation_m INT, tz TEXT,
        popular INT, pack_id TEXT)                       -- popular = shown in onboarding list
 
-body_positions(...)                                     -- in the global pack: the pipeline's apparent geocentric
-                                                        -- Sun/Moon positions in a compact form, enough for
-                                                        -- OnDeviceRiseSet (§6.5.5) at any coordinates. Exact
-                                                        -- columns are fixed by T-314 in schema.sql; budget
-                                                        -- ≤ 200 KB per year compressed
+body_positions(tradition TEXT, date DATE,              -- global pack, one row per IST day (+1 past covers_to)
+               start_utc INT,                           -- IST midnight of `date`
+               sun_ra BLOB, sun_dec BLOB, sun_dist BLOB,
+               moon_ra BLOB, moon_dec BLOB, moon_dist BLOB,
+               gast BLOB, pack_id TEXT,                 -- Chebyshev coefficients (LE float64) over the day;
+               PRIMARY KEY(tradition, date))            -- apparent geocentric RA/Dec (rad, true of date),
+                                                        -- km, GAST (rad). Degrees: Sun 3, Moon 6, GAST 3.
+                                                        -- Feeds OnDeviceRiseSet (§6.5.5); ~106 KB a year
 
 -- city_days (per-city rise/set rows) is retired: rise/set is computed on the phone for
 -- any place. The pipeline's riseset.py stays as the reference and writes the shared fixture.

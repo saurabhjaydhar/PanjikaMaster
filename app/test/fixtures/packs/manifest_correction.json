@@ -13,8 +13,8 @@
         "2026-12-31"
       ],
       "url": "/v1/packs/sample-observances-drik-v2.sqlite.gz",
-      "size": 3970,
-      "sha256": "7667f93c0fd7068d2cdaa801de581641b7cbca4838aaa2097682f4c175f4f11e",
+      "size": 5889,
+      "sha256": "5084f1b32e6ac6fbe490f0c57357519fdeef98836965d591974307fcb00bcd05",
       "sig_url": "/v1/packs/sample-observances-drik-v2.sqlite.gz.sig"
     }
   ],

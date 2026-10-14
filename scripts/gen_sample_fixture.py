@@ -34,7 +34,7 @@ def literal(value: object) -> str:
 
 def statements() -> list[str]:
     out: list[str] = []
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:  # Windows
         paths = sample.build(Path(tmp))
         conns = [sqlite3.connect(p) for p in paths]
         for table in schema.PACK_TABLES:  # parents before children
@@ -52,7 +52,7 @@ def statements() -> list[str]:
 
 def verify(stmts: list[str]) -> None:
     """The statements must recreate exactly the rows of the sample packs."""
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:  # Windows
         expected: dict[str, int] = {}
         for p in sample.build(Path(tmp)):
             with sqlite3.connect(p) as conn:

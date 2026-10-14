@@ -2,7 +2,9 @@
 // Fixtures: SAMPLE packs signed with a test-only key (scripts/gen_test_packs.py).
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:cryptography/cryptography.dart';
 import 'package:drift/drift.dart' show Variable;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +14,7 @@ import 'package:panjika/data/packs/manifest.dart';
 import 'package:panjika/data/packs/pack_importer.dart';
 import 'package:panjika/data/repositories/panjika_repository.dart';
 import 'package:panjika/domain/usecases/get_day_panjika.dart';
+import 'package:sqlite3/sqlite3.dart' as raw;
 
 const dir = 'test/fixtures/packs';
 const drik = 'drik_bishuddha';
@@ -293,6 +296,93 @@ void main() {
     await importAll(manifest());
     expect(await count('names'), n);
     expect(await count('packs'), 3);
+  });
+
+  group('body_positions (T-314, pack schema 2)', () {
+    // Rewrites a fixture pack and re-signs it with the test key (the seed is bytes
+    // 0..31, as in scripts/gen_test_packs.py: TEST ONLY).
+    Future<(ManifestEntry, List<int>, List<int>)> repack(
+      ManifestEntry e,
+      void Function(raw.Database db, String packId) edit,
+    ) async {
+      final (gz, _) = files(e);
+      final tmp = await Directory.systemTemp.createTemp('repack');
+      addTearDown(() => tmp.delete(recursive: true));
+      final file = File('${tmp.path}/pack.sqlite')
+        ..writeAsBytesSync(gzip.decode(gz));
+      final conn = raw.sqlite3.open(file.path);
+      edit(conn, conn.select('SELECT id FROM packs').single['id'] as String);
+      conn.close();
+      final data = gzip.encode(file.readAsBytesSync());
+      final key = await Ed25519().newKeyPairFromSeed(
+        List.generate(32, (i) => i),
+      );
+      final sig = await Ed25519().sign(data, keyPair: key);
+      final hash = await Sha256().hash(data);
+      final entry = ManifestEntry(
+        id: e.id,
+        kind: e.kind,
+        tradition: e.tradition,
+        version: e.version,
+        coversFrom: e.coversFrom,
+        coversTo: e.coversTo,
+        url: e.url,
+        size: data.length,
+        sha256: hash.bytes
+            .map((b) => b.toRadixString(16).padLeft(2, '0'))
+            .join(),
+        sigUrl: e.sigUrl,
+      );
+      return (entry, data, sig.bytes);
+    }
+
+    ManifestEntry global() =>
+        manifest().packs.firstWhere((p) => p.kind == 'global');
+
+    test('its rows are copied with the rest of the pack', () async {
+      final (e, gz, sig) = await repack(global(), (db, id) {
+        db.execute(
+          'INSERT INTO body_positions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [
+            drik, '2026-10-12', 1791743400, //
+            // Sun ×3 and GAST: 4 coefficients; Moon ×3: 7 (engine/positions.py).
+            for (var i = 0; i < 7; i++)
+              Uint8List(8 * (i >= 3 && i < 6 ? 7 : 4)),
+            id,
+          ],
+        );
+      });
+      await importer.import(e, gz, sig);
+      final row = await db
+          .customSelect(
+            'SELECT date, length(moon_dec) AS n FROM body_positions',
+          )
+          .getSingle();
+      expect(row.read<String>('date'), '2026-10-12');
+      expect(row.read<int>('n'), 56);
+    });
+
+    test('a pack from before the table (schema 1) still imports', () async {
+      await importAll(manifest());
+      final (e, gz, sig) = await repack(
+        global(),
+        (db, _) => db.execute('DROP TABLE body_positions'),
+      );
+      await importer.import(e, gz, sig);
+      expect(await count('body_positions'), 0);
+      expect(await count('transitions'), greaterThan(0));
+    });
+
+    test('so does an old-format correction pack', () async {
+      await importAll(manifest());
+      final fix = manifest('manifest_correction.json').packs.single;
+      final (e, gz, sig) = await repack(
+        fix,
+        (db, _) => db.execute('DROP TABLE body_positions'),
+      );
+      await importer.import(e, gz, sig);
+      expect(await count('observance_dates'), greaterThan(0));
+    });
   });
 
   test('the table order matches the schema (parents first)', () {

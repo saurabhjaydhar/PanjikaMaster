@@ -74,7 +74,7 @@ def rows(db: Path) -> dict[str, list[tuple]]:
 def generate(out: Path) -> None:
     os.environ[builder.KEY_ENV] = base64.b64encode(TEST_SEED).decode()
     os.environ.setdefault("SOURCE_DATE_EPOCH", "1791763200")  # fixed, reproducible manifest
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:  # Windows
         tmp = Path(tmp)
         packs = sample.build(tmp / "src")
         builder.build(packs, out, allow_sample=True, allow_dev=True)
@@ -97,7 +97,7 @@ def generate(out: Path) -> None:
 def check() -> list[str]:
     errors = []
     key = Ed25519PrivateKey.from_private_bytes(TEST_SEED).public_key()
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:  # Windows
         expected = Path(tmp) / "expected"
         generate(expected)
         for manifest in ("manifest.json", "manifest_v2.json", "manifest_correction.json"):

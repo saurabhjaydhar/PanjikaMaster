@@ -13,8 +13,8 @@
         "2026-12-31"
       ],
       "url": "/v1/packs/sample-cities.sqlite.gz",
-      "size": 14149,
-      "sha256": "ea3c7efea9e8eed29943ecf87d1653f6e7eb78258a340d7a6b753ff876ae3c5b",
+      "size": 18941,
+      "sha256": "83df32700c1f7e02d2067ae5f98a5b4c3c06661a70541b6e1a62d5d39e631885",
       "sig_url": "/v1/packs/sample-cities.sqlite.gz.sig"
     },
     {
@@ -27,8 +27,8 @@
         "2026-12-31"
       ],
       "url": "/v1/packs/sample-global-drik.sqlite.gz",
-      "size": 31148,
-      "sha256": "c2be8641d2f40b10efbb0616038213a7fae921b1bb6140d446061f33716f3f78",
+      "size": 37655,
+      "sha256": "d2655796ddb80f327b0adaee916993243ed34b4e3d167cd8df95cee3d496cb07",
       "sig_url": "/v1/packs/sample-global-drik.sqlite.gz.sig"
     },
     {
@@ -41,8 +41,8 @@
         "2026-12-31"
       ],
       "url": "/v1/packs/sample-observances-drik.sqlite.gz",
-      "size": 3922,
-      "sha256": "358186b66ac8c065d288ba85e345594d4681ac8de3851c65ec89ff24cda6964f",
+      "size": 5981,
+      "sha256": "46c31ee8aa271c80d055ec8ff1d74139b1652c34a01b5a28810af6395d699165",
       "sig_url": "/v1/packs/sample-observances-drik.sqlite.gz.sig"
     }
   ],

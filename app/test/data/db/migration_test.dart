@@ -42,4 +42,29 @@ void main() {
       expect(version.data.values.single, db.schemaVersion);
     },
   );
+
+  test('v2 → v3 adds body_positions (T-314), keeping the data', () async {
+    final dir = await Directory.systemTemp.createTemp('migration');
+    addTearDown(() => dir.delete(recursive: true));
+    final file = File('${dir.path}/panjika.sqlite');
+
+    final v2 = AppDatabase(NativeDatabase(file));
+    await loadSamplePackIfEmpty(v2);
+    await v2.customStatement('DROP TABLE body_positions');
+    await v2.customStatement('PRAGMA user_version = 2');
+    await v2.close();
+
+    final db = AppDatabase(NativeDatabase(file));
+    addTearDown(db.close);
+    final rows = await db
+        .customSelect('SELECT count(*) AS n FROM body_positions')
+        .getSingle();
+    expect(rows.read<int>('n'), 0);
+    final packs = await db
+        .customSelect('SELECT count(*) AS n FROM packs')
+        .getSingle();
+    expect(packs.read<int>('n'), 3, reason: 'installed packs survive');
+    final version = await db.customSelect('PRAGMA user_version').getSingle();
+    expect(version.data.values.single, 3);
+  });
 }

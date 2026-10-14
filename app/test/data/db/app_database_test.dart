@@ -13,6 +13,7 @@ const packTables = [
   'cities',
   'city_days',
   'bengali_dates',
+  'body_positions',
   'names',
   'observances',
   'observance_dates',
