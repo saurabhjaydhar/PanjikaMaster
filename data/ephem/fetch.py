@@ -57,13 +57,15 @@ def download(url: str, dest: Path) -> None:
     partial download never looks like a complete one."""
     with tempfile.NamedTemporaryFile(dir=dest.parent, delete=False) as tmp:
         tmp_path = Path(tmp.name)
-        try:
-            with urllib.request.urlopen(url, timeout=120) as response:
-                for block in iter(lambda: response.read(1 << 20), b""):
-                    tmp.write(block)
-        except BaseException:
-            tmp_path.unlink(missing_ok=True)
-            raise
+    # Unlink only after the file is closed: Windows refuses to delete an open file, and
+    # that error would hide the download error.
+    try:
+        with tmp_path.open("wb") as out, urllib.request.urlopen(url, timeout=120) as response:
+            for block in iter(lambda: response.read(1 << 20), b""):
+                out.write(block)
+    except BaseException:
+        tmp_path.unlink(missing_ok=True)
+        raise
     tmp_path.replace(dest)
 
 
