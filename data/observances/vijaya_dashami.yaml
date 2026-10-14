@@ -1,6 +1,7 @@
 # DRAFT (T-502): not reviewed, so production packs refuse it.
 # Lunar months are amanta, named by the Sun's sign at the new moon. TODO(Q2)
-# Expert to confirm: udaya Dashami, or Dashami prevailing at aparahna.
+# Expert to confirm: Dashami prevailing at aparahna. Owner chose it over udaya on
+# 2026-10-13 (udaya gave 21 Oct 2026; Bengali panjikas give 20 Oct).
 id: vijaya_dashami
 name_bn: বিজয়া দশমী
 name_en: Vijaya Dashami
@@ -8,13 +9,17 @@ category: puja
 tier: 1
 traditions: [drik_bishuddha]
 decision:
-  type: udaya
+  type: prevails_at
   lunar_month: ashwin
   paksha: shukla
   tithi: dashami
-  on_vriddhi: first
+  moment: aparahna
+  location: reference   # TODO(Q1)
+  coverage: any
+  tie_breaker: earlier_day
+  if_none: udaya
   include_mala: false
-windows: [tithi_span]
+windows: [tithi_span, aparahna]
 # Written for this app (T-504); not reviewed yet (spec §13.8).
 description_bn: "বিজয়া দশমীতে দেবী দুর্গাকে বিদায় জানানো হয়। সকালে দর্পণ বিসর্জনের মধ্য দিয়ে প্রতীকী বিদায় হয়: জলভরা পাত্রে রাখা আয়নায় দেবীর প্রতিবিম্ব দেখে বিসর্জন দেওয়া হয়। বিবাহিত মহিলারা দেবীকে বরণ করে মিষ্টিমুখ করান এবং একে অপরকে সিঁদুর মাখিয়ে সিঁদুর খেলায় মাতেন। বিকেল থেকে ঢাকের তালে প্রতিমা নিয়ে শোভাযাত্রা করে নদী বা পুকুরে বিসর্জন দেওয়া হয়, আর সবার মুখে ধ্বনি: \"আসছে বছর আবার হবে\"। বিসর্জনের পর ছোটরা বড়দের প্রণাম করে, সমবয়সীরা কোলাকুলি করে \"শুভ বিজয়া\" জানায়। পরের কয়েক দিন আত্মীয়দের বাড়ি গিয়ে মিষ্টি বিনিময় চলে।"
 description_en: "On Vijaya Dashami the goddess Durga is bidden farewell. In the morning comes darpan bisarjan: her reflection is seen in a mirror placed in a bowl of water and then symbolically immersed. Married women bid her goodbye with sweets and vermilion and smear sindoor on one another in sindoor khela. From the afternoon the images are carried in processions to the beat of the dhak and immersed in rivers and ponds, to the cry of \"aschhe bochhor abar hobe\", it will happen again next year. Afterwards the young touch the feet of their elders, friends embrace and wish each other \"Shubho Bijoya\", and over the following days families visit relatives to exchange sweets."
