@@ -2,11 +2,12 @@
 library;
 
 import '../../core/time/civil_date.dart';
+import '../entities/body_positions.dart';
 import '../entities/name_table.dart';
 import '../entities/panjika.dart';
 
-/// Where panchanga data comes from. MVP: pack data in Drift. v1.1 may combine it with
-/// on-device astronomy for arbitrary coordinates.
+/// Where panchanga data comes from: pack data in Drift. Rise and set for any place come
+/// from [RiseSetCalculator] on the pack's Sun/Moon table; per-city rows go with T-318.
 abstract interface class PanjikaSource {
   /// Transitions of [kind] overlapping [fromUtc, toUtc), in start order.
   Future<List<Transition>> transitions(
@@ -64,6 +65,34 @@ abstract interface class PeriodCalculator {
     required DateTime nextSunriseUtc,
     required Weekday weekday,
     required List<PeriodRule> rules,
+  });
+}
+
+/// The first sunrise, sunset, moonrise and moonset inside one IST day; null when there
+/// is none (a moonless day, or abroad an event outside the IST day: Q16).
+class RiseSetTimes {
+  const RiseSetTimes({
+    required this.sunrise,
+    required this.sunset,
+    required this.moonrise,
+    required this.moonset,
+  });
+
+  final DateTime? sunrise;
+  final DateTime? sunset;
+  final DateTime? moonrise;
+  final DateTime? moonset;
+}
+
+/// Rise and set for any coordinates from the pack's Sun/Moon table (spec §6.5.5).
+/// Pure, synchronous, no I/O (spec §15.4).
+abstract interface class RiseSetCalculator {
+  /// Throws [ArgumentError] if [positions] do not cover [date] and the day after.
+  RiseSetTimes timesFor({
+    required double lat,
+    required double lon,
+    required CivilDate date,
+    required BodyPositions positions,
   });
 }
 

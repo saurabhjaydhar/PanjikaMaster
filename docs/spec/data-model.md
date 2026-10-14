@@ -160,7 +160,7 @@ final class OwnLocation extends Place { /* lat, lon, nearest ListedPlace for the
 
 /// Pure, synchronous, no I/O. Same definition flag as the pipeline (Q3).
 abstract interface class RiseSetCalculator {
-  SunMoonTimes timesFor(
+  RiseSetTimes timesFor(            // each event nullable: none in the IST day
       {required double lat,
       required double lon,
       required LocalDate date,          // civil date in IST (Q16)
