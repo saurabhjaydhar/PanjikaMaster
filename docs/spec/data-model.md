@@ -8,8 +8,10 @@
 
 The executable version of the pack tables is `data/pack/schema.sql` (STRICT tables, foreign keys and CHECK constraints for index ranges, statuses and both-language text). If this sketch and `schema.sql` ever disagree, `schema.sql` wins and this section is fixed. The app's Drift tables are generated from it (`scripts/sync_drift_schema.py` → `app/lib/data/db/pack_tables.drift`, checked in CI) and a test compares the live Drift database with `schema.sql` column by column.
 
+**Pending (decision 2026-10-13, any-place timings):** the sketch below already shows `body_positions` and no `city_days`; `schema.sql` changes with T-314 and T-316. Until then `schema.sql` is the current truth.
+
 ```
-packs(id TEXT PK, tradition TEXT, kind TEXT,           -- 'global' | 'cities' | 'observances'
+packs(id TEXT PK, tradition TEXT, kind TEXT,           -- 'global' | 'cities' (the place list) | 'observances'
       is_sample INT,                                    -- 1 = fixture pack (debug/test only, §6.8)
       covers_from DATE, covers_to DATE, version INT,
       generated_at DATETIME, engine_version TEXT, ephemeris_sha256 TEXT,
@@ -25,15 +27,20 @@ lunar_months(tradition TEXT, month_idx INT,             -- amanta naming per Q2
              starts_utc INT, ends_utc INT, pack_id TEXT,
              PRIMARY KEY(tradition, starts_utc))
 
-cities(id TEXT PK, name_bn TEXT, name_en TEXT,
+cities(id TEXT PK, name_bn TEXT, name_en TEXT,          -- the place list (§6.2, Q13): India + major cities abroad
        aliases TEXT,                                    -- both scripts + common romanisations, for search
-       district_bn TEXT, district_en TEXT, state TEXT,
+       district_bn TEXT, district_en TEXT, state TEXT,  -- state = country or Indian state
        lat REAL, lon REAL, elevation_m INT, tz TEXT,
        popular INT, pack_id TEXT)                       -- popular = shown in onboarding list
 
-city_days(city_id TEXT, date DATE, sunrise_utc INT, sunset_utc INT,
-          moonrise_utc INT NULL, moonset_utc INT NULL, pack_id TEXT,
-          PRIMARY KEY(city_id, date))
+body_positions(...)                                     -- in the global pack: the pipeline's apparent geocentric
+                                                        -- Sun/Moon positions in a compact form, enough for
+                                                        -- OnDeviceRiseSet (§6.5.5) at any coordinates. Exact
+                                                        -- columns are fixed by T-314 in schema.sql; budget
+                                                        -- ≤ 200 KB per year compressed
+
+-- city_days (per-city rise/set rows) is retired: rise/set is computed on the phone for
+-- any place. The pipeline's riseset.py stays as the reference and writes the shared fixture.
 
 bengali_dates(tradition TEXT, date DATE, bn_day INT, bn_month_idx INT, bn_year INT,
               pack_id TEXT, PRIMARY KEY(tradition, date))
@@ -70,7 +77,8 @@ reminders(id INT PK, target_kind TEXT, target_id TEXT, offset_minutes INT,
 
 settings(key TEXT PK, value TEXT)
   -- keys: locale (bn|en), numerals (beng|latn), names_both_scripts (0|1),
-  --       tradition, city_id, theme (system|light|dark), text_scale, time_format (12|24),
+  --       tradition, place (city:<id> | geo:<lat>,<lon>, rounded to 0.01°, never leaves the phone),
+  --       recent_places, theme (system|light|dark), text_scale, time_format (12|24),
   --       onboarding_done, last_manifest_check
 error_reports_queue(id INT PK, payload TEXT, created_at DATETIME)
 observance_corrections(tradition TEXT, observance_id TEXT, corrected_at DATETIME,
@@ -122,23 +130,38 @@ Importer: download → verify SHA-256 from manifest → verify signature → ope
 }
 ```
 
-The values above are illustrative of the shape, not real packs. `POST /v1/reports` (optional, Q6) accepts `{date, city_id, tradition, pack_versions, message, app_version}` and stores nothing else.
+The values above are illustrative of the shape, not real packs. `POST /v1/reports` (optional, Q6) accepts `{date, city_id, tradition, pack_versions, message, app_version}` and stores nothing else. For a user on their own location, `city_id` is the nearest listed city and `message` gets an `own_location: true` line; coordinates are never sent (FR-LOC-06).
 
 ### 15.4 Engine interfaces (Dart, domain layer)
 
 ```dart
-/// Where panchanga data comes from. MVP: DriftPanjikaSource (pack data).
-/// v1.1: may combine with OnDeviceAstronomy for arbitrary coordinates.
+/// Where panchanga data comes from: DriftPanjikaSource (pack data), with rise/set
+/// for any place computed by OnDeviceRiseSet from the pack's body_positions.
 abstract interface class PanjikaSource {
   Future<List<Transition>> transitions(
       TransitionKind kind, DateTime fromUtc, DateTime toUtc);
-  Future<SunMoonTimes?> sunMoonTimes(CityId city, LocalDate date);
+  Future<SunMoonTimes?> sunMoonTimes(Place place, LocalDate date);
   Future<BengaliDate?> bengaliDate(Tradition t, LocalDate date);
   Future<List<LunarMonth>> lunarMonths(
       Tradition t, DateTime fromUtc, DateTime toUtc); // incl. isAdhik (মলমাস)
   Future<List<ObservanceDate>> observances(
       Tradition t, LocalDate from, LocalDate to);
-  Future<DataCoverage> coverage(Tradition t, CityId city);
+  Future<DataCoverage> coverage(Tradition t);   // no longer per city
+}
+
+/// A listed city or the user's own coordinates (rounded to 0.01°). Equal places
+/// give equal results; the label is for display only.
+sealed class Place { double get lat; double get lon; }
+final class ListedPlace extends Place { /* CityId id, names, lat, lon */ }
+final class OwnLocation extends Place { /* lat, lon, nearest ListedPlace for the label */ }
+
+/// Pure, synchronous, no I/O. Same definition flag as the pipeline (Q3).
+abstract interface class RiseSetCalculator {
+  SunMoonTimes timesFor(
+      {required double lat,
+      required double lon,
+      required LocalDate date,          // civil date in IST (Q16)
+      required BodyPositions positions});
 }
 
 /// Pure, synchronous, fully unit-tested. No I/O.
@@ -162,4 +185,4 @@ final class NotDownloaded extends DataCoverage {}
 final class Stale extends DataCoverage { /* reason */ }
 ```
 
-`DayPanjika` carries `provenance` (tradition, city, tz, packIds, statuses) so the UI cannot render a value without its source.
+`DayPanjika` carries `provenance` (tradition, place with coordinates, tz, packIds, statuses) so the UI cannot render a value without its source.

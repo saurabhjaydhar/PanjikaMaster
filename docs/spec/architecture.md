@@ -77,9 +77,9 @@ No backend server is required for MVP: static files on your VPS/CDN cover packs,
 
 ### 14.4 Data flow for "open Today"
 
-1. `TodayScreen` watches `dayPanjikaProvider(today, cityId)`.
-2. Provider calls `GetDayPanjika` → `PanjikaRepository.dayPanjika(date, city, tradition)`.
-3. Repository reads from Drift: transitions overlapping the panjika day (sunrise→next sunrise), city rise/set row, Bengali date row, observance rows.
+1. `TodayScreen` watches `dayPanjikaProvider(today, place)`.
+2. Provider calls `GetDayPanjika` → `PanjikaRepository.dayPanjika(date, place, tradition)`.
+3. Repository reads from Drift: the `body_positions` rows for the day and the next, from which `OnDeviceRiseSet` computes the place's sunrise, sunset, moonrise and moonset (§6.5.5); then transitions overlapping the panjika day (sunrise→next sunrise), Bengali date row, observance rows.
 4. Domain computes periods (Rahu Kaal etc.) from sunrise/sunset + rule tables.
 5. A `clockProvider` ticks each minute and on next transition time; derived providers recompute "active period" and "current tithi".
 
@@ -89,7 +89,7 @@ No backend server is required for MVP: static files on your VPS/CDN cover packs,
 
 - Android 13+: request `POST_NOTIFICATIONS` only when the user enables a reminder.
 - Exact alarms: Android 14+ does not grant `SCHEDULE_EXACT_ALARM` by default to new installs. Default to **inexact** scheduling (a few minutes' variance is acceptable for "day before" reminders). Offer exact timing for tithi-start reminders only if granted. Check whether Play policy allows `USE_EXACT_ALARM` for a calendar app before declaring it (Q7).
-- Reschedule triggers: app start, pack import, city/tradition change, `BOOT_COMPLETED`, time-zone change.
+- Reschedule triggers: app start, pack import, place/tradition change, `BOOT_COMPLETED`, time-zone change.
 - Cap: 64 pending notifications (keeps iOS-compatible limits later).
 - Channel names in the UI language: "উৎসব অনুস্মারক" / "Festival reminders", "তিথি অনুস্মারক" / "Tithi reminders". Channel IDs stay fixed; on a language change the channels are re-registered under the same IDs so Android shows the new names.
 - Notification texts are generated at scheduling time in the UI language, so a language change triggers a reschedule (§16).
@@ -98,7 +98,7 @@ No backend server is required for MVP: static files on your VPS/CDN cover packs,
 
 ## 18. Offline & sync
 
-- First launch works fully offline using bundled packs (current + next 2 Bengali years for global data; cities in West Bengal + 10 metros).
+- First launch works fully offline using bundled packs (current + next 2 Bengali years for global data, incl. the Sun/Moon table; the whole place list). Every place, listed or not, works offline: there are no per-city packs.
 - Background: none. The manifest is checked on app open at most once per 24 h on Wi-Fi or mobile data.
 - If a newer pack exists: download silently if < 2 MB, else ask.
 - Corrections: a correction pack replaces only affected rows; the Day screen shows "সংশোধিত" (corrected) for 7 days on changed observances.

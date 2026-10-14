@@ -30,7 +30,7 @@ Because the day's tithi is judged at sunrise, a few minutes' difference in a tit
 | Default tradition | **Drik (Bishuddha-aligned)** | Reproducible from modern astronomy; validatable against Rashtriya Panchang; matches Belur Math | Yes: tradition is a data dimension from day 1 |
 | Second tradition | Surya Siddhanta (Gupta Press-aligned) in v1.1 | Large user base, but needs a separate computational model and a licensed or expert-verified reference | — |
 | Ayanamsa | Lahiri (Chitrapaksha) | Used by the Indian Astronomical Ephemeris and Rashtriya Panchang | Config value |
-| Time zone | IST (UTC+05:30), no DST | West Bengal | Per-city field |
+| Time zone | IST (UTC+05:30), no DST, also for places outside India until Q16 is decided | West Bengal | Per-place field |
 | Day boundary | Sunrise to sunrise for panchanga purposes; midnight to midnight for the civil date | Standard Hindu practice | — |
 | Reference location for festival decisions | **Open question Q1** (Kolkata vs. the publisher's own reference meridian) | Must match the panjika we validate against | — |
 | Bengali date rule | Bengal midnight rule (§6.5.6) | Documented regional practice | — |
@@ -63,12 +63,13 @@ Bangladesh's revised Bengali calendar (fixed month lengths, Poila Boishakh on 14
                                ▼
   PHONE         ┌──────────────────────────────────────────────┐
                 │ Drift DB ← pack importer (verify signature)   │
-                │ Light on-device math: Rahu Kaal etc. from     │
-                │ stored sunrise/sunset; formatting; reminders  │
+                │ Light on-device math: rise/set for the place  │
+                │ from the pack's Sun/Moon table (§6.5.5);      │
+                │ Rahu Kaal etc.; formatting; reminders         │
                 └──────────────────────────────────────────────┘
 ```
 
-Why not compute everything on the phone? Three reasons: (1) licensing of the best phone-ready libraries is restrictive (Swiss Ephemeris), (2) one validated dataset is easier to trust and to correct than millions of phones each computing, and (3) observance decisions (L3/L4) need human review anyway.
+Why not compute everything on the phone? Three reasons: (1) licensing of the best phone-ready libraries is restrictive (Swiss Ephemeris), (2) one validated dataset is easier to trust and to correct than millions of phones each computing, and (3) observance decisions (L3/L4) need human review anyway. The one exception is rise and set for the user's own place (§6.5.5): the phone does only the geometry (where is the horizon for these coordinates), and every Sun and Moon position it uses comes from the pipeline in the signed pack.
 ### 6.2 Global vs. location-dependent values
 
 This split keeps the data small.
@@ -78,13 +79,15 @@ This split keeps the data small.
 | Tithi, nakshatra, yoga, karana start/end moments | **No** (an instant in UTC, shown in IST) | One global table |
 | Sankranti (solar month ingress) moments | No | Global table |
 | New/full moon, eclipses | No (visibility of eclipses does) | Global table |
-| Sunrise, sunset, moonrise, moonset | **Yes** | Per city per day |
-| Rahu Kaal, Yamaganda, Gulika, বারবেলা, কালবেলা | Yes (derived from sunrise/sunset) | Computed on phone from stored sunrise/sunset |
-| Udaya tithi (tithi at sunrise) | Yes, slightly | Computed on phone from global transitions + city sunrise |
-| Bengali civil date | No (rule uses IST midnight) for West Bengal | Global table per tradition |
-| Festival date | Decided per tradition for a reference location, not per user city | Observance table per tradition |
+| Sunrise, sunset, moonrise, moonset | **Yes** | Computed on phone for the place's coordinates from the global Sun/Moon table (`body_positions`, §6.5.5) |
+| Rahu Kaal, Yamaganda, Gulika, বারবেলা, কালবেলা | Yes (derived from sunrise/sunset) | Computed on phone from the place's sunrise/sunset |
+| Udaya tithi (tithi at sunrise) | Yes, slightly | Computed on phone from global transitions + the place's sunrise |
+| Bengali civil date | No (rule uses IST midnight) | Global table per tradition |
+| Festival date | Decided per tradition for a reference location (Q1), not per user place | Observance table per tradition |
 
-**Size estimate.** Each year has roughly 371 tithi, 361 nakshatra (the Moon passes all 27 every 27.3 days), 388 yoga (Sun + Moon sum moves about 14.2° a day), 742 karana and 12 sankranti transitions: about 1,875 rows. 26 years (2020–2045) is about 49,000 rows, under 1 MB. Per-city rise/set data: 4 values × 366 days × 80 cities ≈ 117,000 values per year, about 0.5 MB per year compressed. Ship 3 years in the APK; download more on demand.
+A place is a listed city (the `cities` table: names, aliases, coordinates; source Q13) or the user's own coordinates. Both go through the same code; nothing is stored per city per day.
+
+**Size estimate.** Each year has roughly 371 tithi, 361 nakshatra (the Moon passes all 27 every 27.3 days), 388 yoga (Sun + Moon sum moves about 14.2° a day), 742 karana and 12 sankranti transitions: about 1,875 rows. 26 years (2020–2045) is about 49,000 rows, under 1 MB. The Sun/Moon table is budgeted at ≤ 200 KB per year compressed, whatever the number of places (the format is chosen in T-314 against that budget and the accuracy in §6.5.5). The place list is a few hundred rows, a few tens of KB. Ship 3 years in the APK; download more on demand.
 ### 6.4 Recommended pipeline (concrete)
 
 Location: `data/` folder of the monorepo (§28.1), Python 3.12, independent of the Flutter app.
@@ -137,6 +140,13 @@ Tithi length varies, roughly 19 to 27 hours. Tests assert every tithi length is 
 
 #### 6.5.5 Sunrise / sunset / moonrise / moonset
 Default definition: upper limb at the horizon with standard refraction (Sun altitude −0.8333°). Hindu panchangs sometimes use the centre of the disc; **this is a config flag validated against the reference panjika (Q3)**. Elevation ignored (cities ≤ 2,100 m; Darjeeling is the outlier — flag for review). Moonrise uses the Moon's topocentric position with parallax.
+
+**Where it is computed.** Two implementations of the same definition, kept in step by a shared fixture:
+
+- *Pipeline* (`engine/riseset.py`, Skyfield + DE440s): the reference. It is validated against the Rashtriya Panchang and the Indian Astronomical Ephemeris (§6.7) and writes the shared fixture: expected sunrise, sunset, moonrise and moonset for about 40 places worldwide (incl. high latitudes up to ±60°, both sides of IST) × 24 days.
+- *Phone* (`OnDeviceRiseSet`, pure Dart, no I/O): computes rise/set for any coordinates from the global pack's `body_positions` table, which holds the pipeline's apparent geocentric Sun and Moon positions (and whatever else the horizon geometry needs, e.g. Moon distance for parallax and the sidereal-time correction) in a compact form. It uses the same definition flag (Q3). It must match the fixture within **±5 s for the Sun and ±10 s for the Moon**; any larger difference fails CI.
+
+No astronomy library runs on the phone, so the pipeline stays the single source of positions. Places beyond ±60° latitude are refused (FR-LOC-07): there the Sun may not rise or set on some days and the panjika day is undefined.
 
 #### 6.5.6 Sankranti and the Bengali civil date
 Sankranti = moment λ_sun_sid crosses a multiple of 30°. Mesha (0°) starts বৈশাখ; Vrisha → জ্যৈষ্ঠ; … Meena → চৈত্র.
@@ -217,7 +227,8 @@ Tier list for MVP:
 | Tithi end times | Rashtriya Panchang (Bengali ed.) | Every tithi of 3 months spread over the year + all tithis near Durga Puja | ±2 min | Yes |
 | Nakshatra / yoga end times | Rashtriya Panchang | Same | ±2 min | Yes |
 | Sunrise / sunset Kolkata | Rashtriya Panchang + Indian Astronomical Ephemeris | 24 days (2 per month) | ±1 min | Yes |
-| Sunrise other cities | Independent computation (Astronomy Engine) | 10 cities × 12 days | ±1 min | Yes |
+| Sunrise other places (pipeline) | Independent computation (Astronomy Engine) | 40 places worldwide up to ±60° × 12 days | ±1 min | Yes |
+| Rise/set on the phone | Pipeline values in the shared fixture (§6.5.5) | 40 places × 24 days, Sun and Moon | ±5 s Sun, ±10 s Moon | Yes (CI) |
 | Bengali date | Printed Bishuddha panjika | **Every day** of 1433 and 1434 BS | Exact | Yes |
 | Month start days | Printed panjika | All 24 sankrantis | Exact | Yes |
 | Tier-1 festival dates | Printed panjika + expert | All | Exact | Yes |
@@ -262,6 +273,9 @@ Printed panjikas usually come out in Chaitra, ahead of Poila Boishakh. Plan:
 | Two tithis touch no sunrise (kshaya) | Second line "ক্ষয় তিথি: …" |
 | Same tithi at two sunrises (vriddhi) | Both days show it; day detail notes "বৃদ্ধি তিথি" |
 | No moonrise on a date | "চন্দ্রোদয় নেই" |
+| Place beyond ±60° latitude | Refused with an explanation; the previous place stays (FR-LOC-07) |
+| Place outside India | Times still in IST with the "IST" label until Q16; the place screen says so (FR-LOC-08) |
+| Own location changes slightly | Coordinates are rounded to 0.01°; a new fix within 0.01° changes nothing and does not reschedule reminders |
 | Sankranti near midnight | Bengal rule tested at ±1 s of 00:00 IST |
 | Bengali month of 32 days | Grid renders 5–6 rows correctly |
 | Bengali year change | Grid and header roll from চৈত্র to বৈশাখ; year +1 |

@@ -110,7 +110,7 @@ From step 2 onwards every screen is in the chosen language only. The same tradit
 
 - Steps: language → tradition → city → notifications (skippable). Progress dots at top.
 - The language step defaults to the device locale (FR-L10N-02) and choosing the other option re-renders the step immediately, so the user sees the result before continuing.
-- City step: search field, "আমার অবস্থান ব্যবহার করুন" button, list of popular cities.
+- City step: search field (any listed place in India or abroad), "আমার অবস্থান ব্যবহার করুন" button (timings for the exact coordinates, §11.12), list of popular cities.
 - Notifications step: explains value ("একাদশী ও পূজার আগে মনে করিয়ে দেব"), then requests permission only on "চালু করুন".
 
 ### 11.2 Today (আজ) — the hero screen
@@ -244,8 +244,10 @@ Wireframe: §11.11.
 Hero band in the festival's category colour; name in the UI language (display) with the other script below it (always shown here, regardless of FR-SET-06); date(s); relevant windows (e.g. সন্ধিপূজা ০০:০০–০০:৪৮, sample); tithi involved and its span; 80–150-word original description; verification card ("বিশুদ্ধ সিদ্ধান্ত পঞ্জিকার সঙ্গে মিলিয়ে দেখা হয়েছে, চৈত্র ১৪৩২"); buttons: মনে করিয়ে দিন, শেয়ার করুন.
 
 ### 11.7 City picker
-Wireframe: §11.12.
-Search field (Bengali/English, transliteration-tolerant: "bardhaman", "burdwan", "বর্ধমান"); "আমার অবস্থান" row; sections: সাম্প্রতিক (recent), পশ্চিমবঙ্গ (by district), অন্যান্য শহর (metros). Each row shows district and today's sunrise for that city, which helps users understand why city matters.
+Wireframe: §11.12. Title "স্থান বেছে নিন" / "Choose place" (the screen keeps its § number and route).
+Search field (Bengali/English, transliteration-tolerant: "bardhaman", "burdwan", "বর্ধমান", "nainital", "নৈনিতাল"); "আমার অবস্থান ব্যবহার করুন" row; sections: সাম্প্রতিক (recent, incl. own locations), পশ্চিমবঙ্গ (by district), ভারতের অন্যান্য শহর (by state), বিদেশ (abroad, by country). Each row shows district/state/country and today's sunrise for that place, computed on the phone, which helps users understand why the place matters.
+
+A note under the list, in both languages: "সূর্যোদয়, রাহুকাল ইত্যাদি আপনার স্থানের হিসাবে। তিথি ও উৎসবের তারিখ সব জায়গায় একই (কলকাতা মতে)।" / "Sunrise, Rahu Kaal and other timings are for your place. Tithis and festival dates are the same everywhere (as per Kolkata)." The reference place in that text comes from Q1.
 
 ### 11.8 Share card (image, 1080×1350)
 Festival name in display Bengali type, date in both calendars, a simple original motif (alpona-inspired linework, drawn by us), app name and small "বিশুদ্ধ সিদ্ধান্ত মতে". No QR code clutter; optional store link in the share text.
@@ -326,22 +328,30 @@ Multi-day festivals (Durga Puja) show a horizontal day selector (ষষ্ঠী
 
 ```
 ┌──────────────────────────────┐
-│ ‹ শহর বেছে নিন                 │
-│ [🔍 শহরের নাম লিখুন ………… ]      │
+│ ‹ স্থান বেছে নিন                │
+│ [🔍 শহর বা জায়গার নাম লিখুন …… ]  │
 │ ◎ আমার অবস্থান ব্যবহার করুন       │
 │ ── সাম্প্রতিক ─────────────── │
-│ কলকাতা           সূর্যোদয় ৫:৩৮ ✓ │
+│ কলকাতা           সূর্যোদয় ০:০০ ✓ │
+│ নৈনিতালের কাছে ◎    সূর্যোদয় ০:০০ │
 │ ── পশ্চিমবঙ্গ ─────────────── │
-│ হাওড়া   · হাওড়া    সূর্যোদয় ৫:৩৯ │
-│ বর্ধমান · পূর্ব বর্ধমান  সূর্যোদয় ৫:৪২│
-│ শিলিগুড়ি · দার্জিলিং  সূর্যোদয় ৫:৩৪ │
+│ হাওড়া   · হাওড়া    সূর্যোদয় ০:০০ │
+│ বর্ধমান · পূর্ব বর্ধমান  সূর্যোদয় ০:০০│
 │ …                            │
-│ ── অন্যান্য শহর ───────────── │
-│ দিল্লি · মুম্বই · বেঙ্গালুরু · চেন্নাই …  │
+│ ── ভারতের অন্যান্য শহর ─────── │
+│ দিল্লি · মুম্বই · বেঙ্গালুরু · নৈনিতাল … │
+│ ── বিদেশ ─────────────────── │
+│ ঢাকা · লন্ডন · দুবাই · নিউ ইয়র্ক …  │
+│ সময় আপনার স্থানের হিসাবে; তিথি ও  │
+│ উৎসবের তারিখ সব জায়গায় একই।     │
 └──────────────────────────────┘
 ```
-Location result sheet: "নিকটতম শহর: বর্ধমান (১২ কিমি)। [এটি বেছে নিন] [অন্য শহর]". If > 50 km: extra line "সময় কয়েক মিনিট আলাদা হতে পারে।"
-Permission denied: inline note "অবস্থানের অনুমতি দেওয়া হয়নি। তালিকা থেকে শহর বেছে নিন।" — no repeated prompts.
+Times in the wireframe are placeholders.
+
+Location result sheet: "আপনার অবস্থান: নৈনিতালের কাছে · ২৯.৩৮° উ, ৭৯.৪৬° পূ। সূর্যোদয়, রাহুকাল এই স্থানের হিসাবে। [এটি ব্যবহার করুন] [তালিকা থেকে বাছুন]" / "Your location: near Nainital · 29.38° N, 79.46° E. Sunrise and Rahu Kaal for this place. [Use this] [Pick from list]". No distance warning: the timings are for the coordinates themselves. "Near X" uses the nearest listed place, whatever the distance; beyond 100 km it shows only the coordinates and the country.
+Outside India (FR-LOC-08): an extra line "সময় ভারতীয় সময়ে (IST) দেখানো হচ্ছে।" / "Times are shown in Indian Standard Time (IST)." until Q16.
+Beyond ±60° latitude (FR-LOC-07): "এই অক্ষাংশে কোনো কোনো দিন সূর্য ওঠে না বা অস্ত যায় না, তাই পঞ্জিকার দিন হিসাব করা যায় না। তালিকা থেকে অন্য স্থান বাছুন।" / "At this latitude the Sun does not rise or set on some days, so the panjika day can't be worked out. Please pick another place from the list."
+Permission denied: inline note "অবস্থানের অনুমতি দেওয়া হয়নি। তালিকা থেকে স্থান বেছে নিন।" — no repeated prompts.
 
 ### 11.13 Reminders (অনুস্মারক) — wireframe
 
